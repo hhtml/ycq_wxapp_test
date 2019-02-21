@@ -2,7 +2,7 @@
 
 <view class="carImg">
   <!-- <image src='{{car.banner}}'  bindload="imageLoad" style="width:{{imgwidth}}rpx; height:{{imgheight }}rpx;"></image> -->
-  <image src='{{car.banner}}' mode=' '></image>
+  <image src='{{car.banner}}' mode='widthFix'></image>
 
 </view>
 
