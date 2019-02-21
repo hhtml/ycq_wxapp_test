@@ -33,7 +33,7 @@
 </view>
 
 <view class="carInfoList">
-  <block wx:for="{{carInfoList}}">
+  <block wx:for="{{carInfoList}}" wx:key="{{item.id}}">
     <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
       <view class="carImg">
         <view class="imgArea">

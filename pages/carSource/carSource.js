@@ -1,6 +1,7 @@
 // pages/carSource/carSource.js
 const app = getApp();
 var $http = require('../../utils/http.js');
+var models_name;
 Page({
 
   /**
@@ -129,13 +130,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.request_car_source(1);
+    var that = this
+    console.log(options)
+    if (options.models_name){ 
+      models_name = options.models_name
+      that.request_car_source(1, '', '',models_name)
+    } else if (options.name){ 
+      var name = options.name
+      that.request_car_source(1, '', name , '')
+    }else{
+      this.request_car_source(1);
+    }
+    // this.request_car_source(1);
     this.setData({
       city_id: '',
       brand_id: ''
     })
   },
-  request_car_source: function (screen,city, brand_id){
+  request_car_source: function (screen, city, brand_id, models_name){
     var $this=this;
     var carInfoList=new Array();
     var zimuList = new Array();
@@ -144,7 +156,8 @@ Page({
     $http.post('Carselect/index',{
       screen:screen,
       city:city,
-      brand_id: brand_id
+      brand_id: brand_id,
+      models_name: models_name
     })
       .then(res => {
         //成功回调
@@ -321,5 +334,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
 })

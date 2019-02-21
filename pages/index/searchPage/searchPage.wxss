@@ -1,0 +1,170 @@
+/* pages/index/searchPage/searchPage.wxss */
+
+page{
+  background-color: #f2f2f2;
+}
+.search-wrap{
+  width:100%;
+  display: flex;
+  align-items: center;
+  margin-top:20rpx;
+  position: relative;
+}
+.search-wrap image{
+  width:35rpx;
+  height:35rpx;
+  position: absolute;
+  left:45rpx;
+  top:15rpx;
+}
+.search{
+  border:1rpx solid #ccc;
+  width:500rpx;
+  height:50rpx;
+  background-color: #FFF;
+  margin-left:30rpx;
+  padding-left:40px;
+  font-size: 12px;
+  color:#000;
+  border-radius: 10rpx;
+}
+.cancel{
+  font-size: 14px;
+  color:#666;
+  margin-left:30rpx;
+}
+
+/* 搜索结果列表-买车 */
+.searchList-wrap{
+  width:100%;
+  background-color: #fff;
+}
+.searchList-wrap .carList{
+  width:710rpx;
+  border-top: 1rpx solid #ccc;
+  margin-left:40rpx;
+  color:#000;
+  font-size: 14px;
+  height:60rpx;
+  line-height: 60rpx;
+}
+.buy{
+  width:100%;
+  text-align: center;
+  color:#000;
+  font-size: 14px;
+  height:60rpx;
+  line-height: 60rpx;
+  border-bottom: 1rpx solid #ccc;
+  font-weight: bold;
+}
+.name{
+  width:100%;
+  text-align: center;
+  color:#000;
+  font-size: 14px;
+  height:60rpx;
+  line-height: 60rpx;
+  font-weight: bold;
+}
+
+
+/* 搜索结果列表-卖车 */
+.searchListSell-wrap{
+  width:100%;
+  background-color: #fff;
+}
+.searchListSell-wrap .carListSell{
+  width:710rpx;
+  border-top: 1rpx solid #ccc;
+  margin-left:40rpx;
+  color:#000;
+  font-size: 14px;
+  height:60rpx;
+  line-height: 60rpx;
+}
+.sell{
+  width:100%;
+  text-align: center;
+  color:#000;
+  font-size: 14px;
+  height:60rpx;
+  line-height: 60rpx;
+  border-bottom: 1rpx solid #ccc;
+  font-weight: bold;
+}
+.sellName{
+  width:100%;
+  text-align: center;
+  color:#000;
+  font-size: 14px;
+  height:60rpx;
+  line-height: 60rpx;
+  font-weight: bold;
+}
+
+/* 搜索记录 */
+
+.searchHistory-wrap{
+  width:100%;
+  background-color: #fff;
+  margin-top:20rpx;
+}
+.searchHistory-title{
+  display: flex;
+  justify-content: space-between;
+  width:690rpx;
+  margin:0 auto;
+  color:#000;
+  font-size: 12px;
+  padding-top:20rpx;
+}
+.searchHistoryContent{
+  width:100%;
+  padding:20rpx;
+  font-size: 14px;
+}
+.searchName{
+  background-color: #f2f2f2;
+  width:198rpx;
+  padding:10rpx;
+  border-radius: 20rpx;
+  margin:10rpx 10rpx;
+  display: inline-block;
+  text-overflow : ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
+  position: relative;
+}
+.delete{
+  /* width:30rpx;
+  height:30rpx; */
+  font-size: 10px;
+  position: absolute;
+  right:11rpx;
+  top:0rpx;
+}
+
+/* 暂无数据页面 */
+.noData{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top:20rpx;
+  position: relative;
+}
+.noData image{
+  display: block;
+  width: 290rpx;
+  margin-top:30%;
+}
+.noData .data{
+  color:#000;
+  font-size: 12px;
+  position: absolute;
+  left:50%;
+  bottom:0rpx;
+}
+
