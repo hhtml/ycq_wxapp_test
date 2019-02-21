@@ -69,7 +69,7 @@ Page({
    */
   onLoad: function (options) {
       //var user_id=wx.getStorageSync("user_id");
-    this.request_mine();
+    
   },
   request_mine(){
     var $this = this;
@@ -108,7 +108,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.request_mine();
   },
 
   /**
