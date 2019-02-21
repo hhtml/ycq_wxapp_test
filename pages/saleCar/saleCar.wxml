@@ -1,0 +1,238 @@
+<!--pages/saleCar/saleCar.wxml-->
+<form report-submit="{{true}}" bindsubmit='formSubmit'>
+<view class='uploadImgArea'>
+    <view class='addIcon' bindtap='chooseImg'>
+        <text>+</text>
+    </view>
+    <block wx:for="{{imgList}}">
+       <view class='imgItem'>
+         <view class="imgArea">
+           <image src='{{appImgUrl+item}}' mode='widthFix'></image>
+         </view>
+         <image class="imageIcon"src='../../images/delete.png' bindtap="deleteImg" data-index="{{index}}"></image>
+       </view>  
+    </block>
+    <view class="uploadTips">
+      <text>*至少上传6张以上车辆照片，横屏拍摄，第一张作为封面展示</text>
+    </view>
+</view>
+
+<view class="formArea">
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>车辆品牌</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
+            <view class="picker">
+              <text>{{brand.id ? brand.name :'请选择品牌'}}</text>
+            </view>
+          </picker>
+            </view>
+            
+        </view>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>车辆款型</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+                <input value='{{form.carType}}' bindinput='typeInput'></input>
+            </view>
+            <text class="formTip" bindtap='formTip'>提示</text>
+        </view>
+        <view class="tipLog" wx:if="{{formTipShow}}">
+          <text>2017款 1.6L 手动</text>
+        </view>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>车辆所在地</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <picker
+                mode="region"
+                bindchange="carRegionChange"
+                value="{{form.carRegion}}"
+                custom-item="{{customItem}}"
+              >
+                <view class="picker">
+                   <text>{{form.carRegion}}</text>
+                </view>
+              </picker>
+            </view>
+            <!--<text class="formTip">提示</text>-->
+        </view>
+    </view>
+    
+    <!-- <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>车牌所在地</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <picker
+                mode="region"
+                bindchange="listingRegionChange"
+                value="{{form.listingRegion}}"
+                custom-item="{{customItem}}"
+              >
+                <view class="picker">
+                   <text>{{form.listingRegion}}</text>
+                </view>
+              </picker>
+            </view> -->
+            <!--<text class="formTip">提示</text>-->
+        <!-- </view>
+    </view> -->
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>车辆批发价</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+              <input value="{{form.price}}" type='digit' placeholder='价格不得低于1000' bindinput='priceInput'></input>
+            </view>
+            <text class="formTip" style="color:#353535;">元</text>
+        </view>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>出厂日期</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <picker
+                  mode="date"
+                  value="{{form.productDate}}"
+                  start="2009-09-01"
+                  bindchange="productDateChange"
+                  fields="month"
+                >
+                  <view class="picker">
+                     <text>{{form.productDate}}</text>
+                  </view>
+                </picker>
+            </view>
+            <!--<text class="formTip">提示</text>-->
+        </view>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>上牌日期</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <picker
+                  mode="date"
+                  value="{{form.listingDate}}"
+                  start="2009-09-01"
+                  bindchange="listingDateChange"
+                  fields="month"
+                >
+                  <view class="picker">
+                     <text>{{form.listingDate}}</text>
+                  </view>
+                </picker>
+            </view>
+            <!--<text class="formTip">提示</text>-->
+        </view>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>行驶里程</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <input value="{{form.distance}}" type='digit' bindinput='distanceInput'></input>
+            </view>
+            <text class="formTip" style="color:#353535;">公里</text>
+        </view>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>过户次数</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+              <input value="{{form.emission}}" type='idcard' bindinput='emissionInput'></input>
+            </view>
+        </view>
+    </view>
+
+    <view class='formItem' bindtap='openLog'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>联系电话</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <text>{{form.phone}}</text>
+            </view>
+            
+        </view>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>车况描述</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+                <input placeholder="请如实描述车况，否则描述不准确将影响您的诚信" value="{{form.description}}" bindinput="descriptionInput"> </input>
+            </view>
+          
+        </view>
+    </view>
+</view>
+
+   <button class="formButton" form-type='submit'>发布车源</button>
+</form>
+
+<view class="backDiv" wx:if="{{phoneLogShow}}">
+    <view class="divCont">
+        <view class="topTitle">
+           <text>验证手机号</text>
+           <text bindtap='closeLog'>取消</text>
+        </view>
+        <view class="centerCont">
+             <view class="centerRow">
+                 <input type='idcard' value='{{form.phone}}' bindinput='phoneInput' cursor-spacing="130" placeholder='请输入手机号码' ></input>
+             </view>
+             <view class="centerRow">
+                 <input type='idcard' value='{{smscode}}' bindinput='bindMsglInput'cursor-spacing="80" placeholder='短信验证码' ></input>
+                 
+                <view class="smscode" wx-if="{{sentSms}}" style="color:#eee;">
+                   <text>已获取{{dtNUm}}</text><text></text>
+                </view>
+                <view class="smscode" bindtap='get_sms_code'  wx-if="{{!sentSms}}">
+                   <text>获取验证码</text>
+                 </view>
+             </view>
+        </view>
+
+        <view class="bottomButton">
+             <button bindtap='phoneAuth'>提交</button>
+        </view>
+    </view>
+</view>

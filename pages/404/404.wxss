@@ -1,0 +1,13 @@
+/* pages/404/404.wxss */
+image{
+  display: block;
+  width: 350rpx;
+  margin:152rpx auto;
+}
+text{
+  display: block;
+  text-align: center;
+  font-size: 32rpx;
+  text-decoration: underline;
+  color: #888;
+}

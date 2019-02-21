@@ -1,0 +1,131 @@
+/* pages/wantBuy/wantBuy.wxss */
+
+.carInfoList{
+  padding: 0 24rpx;
+}
+.carInfoItem{
+   overflow: hidden;
+   padding: 30rpx 0;
+   display: flex;
+}
+.carInfoItem:nth-child(1){
+  border-top: 1px solid #f3f3f3;
+}
+.carImg{
+  width: 256rpx;
+  height: 167rpx;
+  flex-basis:256rpx;
+  
+}
+.carImg image{
+  width:100%;
+  height: 100%;
+}
+.carInfoCont{
+  width: 444rpx;
+  padding-left: 28rpx;
+  box-sizing: border-box;
+}
+.carInfoContWord{
+  width: 100%;
+  height: 167rpx;
+  display: flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.carInfoContLine{
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #e5e5e5;
+  margin-top: 20rpx;
+}
+.carName {
+  overflow: hidden;
+  margin-bottom: 25rpx;
+  word-break:break-all;
+  word-wrap:break-word;
+}
+.carName text{
+  font-size: 30rpx;
+  color: #353535;
+  float: left;
+}
+.carInfoRow1 {
+  width:100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.carInfoRow1 text{
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 26rpx;
+  color: #888;
+  float: left;
+}
+.carInfoRow2{
+  overflow: hidden;
+  height: 30rpx;
+  display: flex;
+  align-items: center;
+}
+
+.carInfoRow2 text{
+  flex: 1;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  justify-content:flex-end;
+  color: #b2b2b2;
+  float: left;
+}
+.carInfoRow2 text:nth-child(1){
+  font-size: 28rpx;
+  color: #ff0000;
+  font-weight: bold;
+  margin-right: 100rpx;
+  flex: 1;
+  text-align: left;
+  align-items: center;
+  display:inline-block;
+  height: 35rpx;
+  line-height:35rpx;
+  position: absolute;
+  border-radius: 7rpx;
+}
+
+.putAndOff{
+  padding: 20rpx 0;
+  border-bottom: 1px dashed #e5e5e5;
+  display: flex;
+  flex-direction:row-reverse;
+
+}
+.putAndOff text{
+  display:block;
+  width: 90rpx;
+  height:40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
+.putAndOff text{
+  background-color: #fff;
+  color: #888;
+  border:1rpx solid #888;
+  border-radius: 6rpx;
+}
+.putAndOff text:nth-child(1){
+  
+  border-radius: 6rpx;
+  margin-left: 20rpx;
+}
+text.activePut{
+  background-color: #ef4631;
+  color: #fff;
+  border:1rpx solid #ef4631;
+
+}

@@ -1,0 +1,37 @@
+<!--pages/wantBuy/wantBuy.wxml-->
+<view class="noCont" wx:if="{{carInfoList.length==0}}">
+  <image src="../../images/404.png" mode='widthFix'></image>
+  <text>暂无数据</text>
+</view>
+<view class="carInfoList">
+       <block wx:for="{{carInfoList}}">
+        <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
+            <view class="carImg">
+                <image src='{{item.imgSrc}}' mode='widthFix'></image>
+            </view>
+            <view class="carInfoCont">
+              <view class="carInfoContWord">
+                  <view class="carName">
+                      <text>{{item.brand_name}}{{item.name}}</text>
+                  </view>
+                  
+                  <view class="carInfoRow1">
+                      <text>{{item.time ? item.time+'上牌/' : ''}} {{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
+                  </view>
+
+                  <view class="carInfoRow2">
+                      <text>心里价:{{item.priceArea}}</text>
+                      <text>浏览量:{{item.sale}}</text>
+                  </view>
+              </view>
+                
+
+                <view class="putAndOff">
+                   
+                   <text class=" {{item.shelfismenu == 0 ? 'activePut':''}}" catchtap="pullOff" data-index="{{index}}" data-id="{{item.id}}" >下架</text>
+                   <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" catchtap="putOn"  data-index="{{index}}"  data-id="{{item.id}}" >上架</text>
+                </view>
+            </view>
+        </view>
+        </block>
+    </view>

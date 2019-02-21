@@ -1,0 +1,41 @@
+<!--pages/myShop/myShop.wxml-->
+<view class="shopImg">
+   <image src='{{shop.banner}}'></image>
+</view>
+
+<view class='shopInfo'>
+   <view class="shopName">
+       <text>{{shop.name}}</text>
+       <text>详细地址：{{shop.addr}}</text>
+       <text class="tip">未实名认证</text>
+   </view>
+
+   <view class="shopCarType">
+       <view class="carTypeTitle">
+          <text>主营车型</text>
+       </view>
+       <view class='brandsList'>
+            <text wx:for="{{shop.brands}}" wx:key="{{index}}">{{item}}</text> 
+       </view>
+   </view>
+   <view class='detailTitle'>
+       <view class="detailTitleItem {{active_tab=='店铺特色' ?' detailActiveItem':''}} " bindtap="change_tab" data-title="店铺特色">
+           <text>店铺特色</text>
+           <text></text>
+       </view> 
+       <view class="detailTitleItem {{active_tab=='车型列表' ? 'detailActiveItem' : ''}} " bindtap='change_tab' data-title="车型列表">
+           <text>车型列表</text>
+           <text></text>
+       </view>   
+   </view>
+
+   <view class="detailCont">
+       <view class="detailContItem">
+           <view class='detailContItemImg'>
+               <block wx:for="{{detail_img_list}}">
+                   <image src='{{item}}' mode='widthFix'></image>
+               </block>
+           </view>
+       </view>
+   </view>
+</view>

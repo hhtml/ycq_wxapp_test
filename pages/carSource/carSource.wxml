@@ -1,0 +1,64 @@
+<!--pages/carSource/carSource.wxml-->
+<view class="selectArea">
+  <view class="selectList">
+    <view class='selectItem'>
+      <picker bindchange="bindAddrChange" value="{{index}}" range="{{cityList}}" range-key='name'>
+        <view class="picker">
+
+          <text style="color:{{city_id ? '#ef4631':'#353535'}};"> {{city_id ? city_id :'选择地区'}}</text>
+          <image src="{{city_id ? '../../images/choose-active-icon.png' : '../../images/choose-icon.png'}}" mode='widthFix'></image>
+        </view>
+      </picker>
+
+    </view>
+    <view class='selectItem'>
+      <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
+        <view class="picker">
+          <text style="color:{{brand_id ? '#ef4631':'#353535'}};">{{brand_id ? brandInfo[1][multiIndex[0]].name :'选择品牌'}}</text>
+          <image src="{{brand_id ? '../../images/choose-active-icon.png' : '../../images/choose-icon.png'}}" mode='widthFix'></image>
+        </view>
+      </picker>
+    </view>
+    <view class='selectItem'>
+      <picker bindchange="bindScreenChange" value="{{index}}" range="{{screenList}}" range-key='name'>
+        <view class="picker">
+          <text style="color:{{screen ? '#ef4631':'#353535'}};"> {{screen ? screen.name :'条件筛选'}}</text>
+          <image src="{{screen ? '../../images/choose-active-icon.png' : '../../images/choose-icon.png'}}" mode='widthFix'></image>
+        </view>
+      </picker>
+
+      <!--<image src='' mode='widthFix'></image>-->
+    </view>
+  </view>
+</view>
+
+<view class="carInfoList">
+  <block wx:for="{{carInfoList}}">
+    <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
+      <view class="carImg">
+        <view class="imgArea">
+          <image src='{{item.imgSrc}}' mode='widthFix'></image>
+        </view>
+        <text class='typeTip' wx:if="{{item.type == 'sell'}}">商家在售</text>
+        <text class='typeTipBuy' wx:else>有人想买</text>
+      </view>
+      <view class="carInfoCont">
+        <view class="carInfoContWord">
+          <view class="carName">
+            <text>{{item.brand_name}}{{item.name}}</text>
+          </view>
+
+          <view class="carInfoRow1">
+            <text>{{item.time ? item.time+'上牌/' : ''}} {{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
+          </view>
+          <view class="carInfoRow2">
+            <text>{{item.type == 'sell'?"批发价":"心里价"}} {{item.priceArea}}</text>
+            <text>浏览量:{{item.sale}}</text>
+          </view>
+        </view>
+        <view class="carInfoContLine">
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,53 @@
+/* pages/hitchHiking/hitchHiking.wxss */
+.switchButton{
+  display: flex;
+  width: 200rpx;
+  margin: 40rpx auto;
+}
+.switchItem{
+  flex:1;
+}
+
+.peopleList{
+  padding: 0 24rpx;
+}
+.listItem{
+  display: flex;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.itemLeft{
+  flex: 1;
+}
+.itemRight{
+  flex: 1;
+  border-left: 2px solid #f0f0f0;
+}
+.leftTop,.leftBottom{
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.leftTop image,.leftBottom image{
+  width: 34rpx;
+  height: 34rpx;
+}
+.leftTop text,.leftBottom text{
+  font-size: 28rpx;
+  color: #666;
+}
+
+
+.rightTop,.rightBottom{
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.rightTop image,.rightBottom image{
+  width: 34rpx;
+  height: 34rpx;
+}
+.rightTop text,.rightBottom text{
+  font-size: 28rpx;
+  color: #666;
+}

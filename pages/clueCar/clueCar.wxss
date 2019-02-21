@@ -1,0 +1,2 @@
+/* pages/clueCar/clueCar.wxss */
+@import '../saleCar/saleCar.wxss';

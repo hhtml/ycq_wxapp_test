@@ -1,0 +1,103 @@
+<!--pages/priceManage/priceManage.wxml-->
+<view class="selectArea">
+  <view class="selectList">
+    <view class="selectItem {{state == 0 ? 'activeItem' :''}} " data-state="0" bindtap='chooseState'>
+      <text>收到的报价</text>
+    </view>
+    <view class="selectItem  {{state == 1 ? 'activeItem' :''}}" data-state="1" bindtap='chooseState'>
+      <text>我的报价</text>
+    </view>
+  </view>
+</view>
+
+<view class="carInfoList" wx:if="{{state == 0}}">
+  <block wx:for="{{carSellList}}">
+    <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
+      <view class="carImg">
+        <view class="imgArea">
+          <image src='{{item.imgSrc}}' mode=''></image>
+        </view>
+        <text class='typeTip'>{{item.type == 'sell' ? '我在卖':'买车'}}</text>
+
+      </view>
+      <view class="carInfoCont">
+        <view class="carInfoContWord">
+          <view class="carName">
+            <text class=' '>{{item.brand_name}}{{item.name}}</text>
+          </view>
+
+          <view class="carInfoRow1">
+            <text>{{item.time ? item.time+'/' : ''}} {{item.miles ? item.miles+'/' : ''}}公里 /{{item.addr}}</text>
+
+          </view>
+          <view class="carInfoRow2">
+            <text>{{item.type == 'sell' ? '批发价':'求购价'}} {{item.priceArea}}万</text>
+            <text>浏览量:{{item.sale}}</text>
+          </view>
+          <view class="carInfoContLine">
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view class="floatArea">
+      <view class="floatImg">
+        <image src='{{item.userPic}}'></image>
+      </view>
+      <view class="floatName">
+        <text>{{item.userName}}</text>
+      </view>
+      <view class="floatMessage">
+        <text>用户的心里价{{item.price}}万，请您尽快联系</text>
+      </view>
+      <view class="floatIcon" bindtap='makePhoneCall' data-tel="{{item.mobile}}">
+        <image src='../../images/sf-call-icon.png'></image>
+      </view>
+    </view>
+  </block>
+</view>
+<view class="carInfoList" wx:if="{{state == 1}}">
+  <block wx:for="{{carBuyList}}">
+    <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
+      <view class="carImg">
+        <view class="imgArea">
+          <image src='{{item.imgSrc}}' mode=''></image>
+        </view>
+        <!-- <text class='typeTip'>{{item.type == 'sell' ? '卖车':'买车'}}</text> -->
+        <text class='typeTip'>我想买</text>
+
+      </view>
+      <view class="carInfoCont">
+        <view class="carInfoContWord">
+          <view class="carName">
+            <text>{{item.brand_name}}{{item.name}}</text>
+          </view>
+
+          <view class="carInfoRow1">
+            <text>{{item.time ? item.time+'/' : ''}} {{item.miles ? item.miles+'/' : ''}}公里/{{item.addr}}</text>
+          </view>
+          <view class="carInfoRow2">
+            <text>{{item.type == 'sell' ? '批发价':'求购价'}} {{item.priceArea}}万</text>
+            <text>浏览量:{{item.sale}}</text>
+          </view>
+        </view>
+        <view class="carInfoContLine">
+        </view>
+      </view>
+    </view>
+    <view class="floatArea">
+      <view class="floatImg">
+        <image src='{{item.userPic}}'></image>
+      </view>
+      <view class="floatName">
+        <text>{{item.userName}}</text>
+      </view>
+      <view class="floatMessage">
+        <text>您{{item.quotationtime}}报价为:{{item.price}}万，联系客服</text>
+      </view>
+      <view class="floatIcon" bindtap='makePhoneCall' data-tel="{{item.mobile}}">
+        <image src='../../images/sf-call-icon.png'></image>
+      </view>
+    </view>
+  </block>
+</view>

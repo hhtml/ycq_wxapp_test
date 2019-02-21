@@ -1,0 +1,45 @@
+/**app.wxss**/
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+text {
+  font-family: "黑体";
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.noCont {
+  margin: 60rpx auto;
+  text-align: center;
+}
+
+.noCont image {
+  width: 350rpx;
+}
+
+.noCont  text {
+  font-size: 30rpx;
+  color: #e5e5e5;
+  display: block;
+  text-align: center;
+  margin-top: 40rpx;
+}
+
+.hiddenText {
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 32rpx;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}

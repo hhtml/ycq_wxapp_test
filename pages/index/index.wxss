@@ -1,0 +1,424 @@
+/**index.wxss**/
+page{
+  position: relative;
+  z-index: 9999998;
+  background: #fff;
+}
+.searchArea{
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #fff;
+  color: #000;
+  z-index: 9999999;
+  box-sizing: border-box;
+}
+.searchBg{ 
+  background-color: #f0f0f0;
+  border-radius:32rpx;
+  width: calc(100vw - 310rpx);
+  height:32px;
+  display: flex;
+  align-items: center;
+  padding: 0 18rpx;
+}
+.searchBg image{
+   width: 34rpx;
+   margin-right: 20rpx;
+}
+.searchBg input{
+  font-size: 30rpx;
+  color: #b2b2b2;
+}
+.searchResult{
+  width: calc(100vw - 310rpx);
+  background-color: #f0f0f0;
+  padding: 0 18rpx;
+  border-radius: 8rpx;
+  position: fixed;
+  top: 32rpx;
+  left: 24rpx;
+}
+.searchResult text{
+  font-size: 30rpx;
+  height:60rpx;
+  line-height: 60rpx;
+  color: #666;
+  display: block;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.searchResult text:last-child{
+  border: none;
+}
+.bannerArea{
+  margin-top: 86px;
+  background-color: #fff;
+}
+.bannerImg{
+   height: 360rpx;
+}
+.bannerArea swiper{
+  height: 360rpx;
+}
+.bannerArea swiper swiper-item{
+  text-align: center;
+  
+}
+.bannerArea swiper swiper-item image{
+   width:100%;
+   height:100%; 
+   border-radius: 5rpx; 
+}
+
+.iconArea{
+  display: flex;
+  padding: 30rpx 0 15rpx 0;
+  border-bottom: 20rpx solid #f7f7f8;
+}
+.iconItem{
+  flex: 1;
+  text-align: center;
+}
+
+.iconItem image{
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+ 
+}
+.iconItem:nth-child(1) image{
+  box-shadow: 0 0 40rpx 0 #fed1d1;
+}
+.iconItem:nth-child(2) image{
+  box-shadow: 0 0 40rpx 0 #fecc8f;
+}
+.iconItem:nth-child(3) image{
+   box-shadow: 0 0 40rpx 0 #fdafbf;
+}
+.iconItem:nth-child(4) image{
+  box-shadow: 0 0 40rpx 0 #fdc3ae;
+}
+.iconItem text{
+  font-size: 26rpx;
+  color: #353535;
+  display: block;
+  margin: 10rpx 0 10rpx 0;
+}
+
+
+.shopArea{
+  
+  border-bottom: 20rpx solid #f7f7f8;
+}
+.shopAreaTitle{
+  display: flex;
+  height: 90rpx;
+  padding: 0 24rpx;
+}
+.titleLeft{
+  flex: 1;
+  float: left;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+.titleLeft image{
+   width: 36rpx;
+   height: 36rpx;
+   margin-right: 20rpx;
+}
+.titleLeft text{
+  font-size: 32rpx;
+  color: #353535;
+  font-weight: bold;
+}
+.titleRight{
+  float: right;
+  flex: 1;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+}
+.titleRight image{
+  width: 12rpx;
+  height: 24rpx;
+  margin-left: 20rpx;
+}
+.titleRight text{
+  font-size: 24rpx;
+  color: #b2b2b2;
+}
+.shopList{
+  overflow: hidden;
+  display:-webkit-box;
+  white-space: nowrap;
+  padding-bottom: 29rpx;
+  
+}
+.shopItem{
+  width: 460rpx;
+  height: 248rpx;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #fffbfb;
+  margin-left: 24rpx;
+  border-radius: 6rpx;
+  border: 1rpx solid #efefef;
+  box-shadow: 0 0 20rpx 0 #efefef;
+  box-sizing: border-box;
+  padding: 25rpx 30rpx;
+  
+}
+.shopItemRow1{
+  display: flex;
+  justify-content:space-between;
+}
+.shopItemRow1 text:nth-child(1){
+    font-size: 30rpx;
+    color: #353535;
+}
+.shopItemRow1 text:nth-child(2){
+    font-size:24rpx;
+    color: #ef4631;
+    padding: 4rpx 8rpx;
+    border: 1px solid #ef4631;
+    border-radius: 4rpx;
+}
+.shopItemRow2{
+  margin: 20rpx 0;
+  overflow: hidden;
+}
+.shopItemRow2 text{
+  font-size: 26rpx;
+  color: #888;
+
+}
+.shopItemRow3{
+  overflow: hidden;
+  white-space: normal!important;
+  display:-webkit-box;
+  text-overflow:ellipsis;
+  word-wrap:break-word;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  line-height: 26rpx;
+}
+.shopItemRow3 text{
+  font-size: 24rpx;
+  color: #b2b2b2;
+}
+.shopItem:last-child{
+  margin-right: 24rpx;
+}
+.switchAreaTitle{
+  display: flex;
+  height: 95rpx;
+  align-items: center;
+  padding: 0 24rpx;
+}
+.titleItem{
+  flex: 1;
+  text-align: center;
+  align-content:center;
+}
+.titleItem image{
+  width: 28rpx;
+  margin-right: 20rpx;
+  vertical-align: middle;
+}
+.titleItem text{
+  font-size: 30rpx;
+  color: #353535;
+  position: relative;
+  top: 4rpx;
+}
+.activeTitle text{
+  color: #f00;
+}
+.carInfoList{
+  padding: 0 24rpx 30rpx 24rpx;
+}
+.carInfoItem{
+   overflow: hidden;
+   padding: 30rpx 0;
+   display: flex;
+}
+.carInfoItem:nth-child(1){
+  border-top: 1px solid #f3f3f3;
+}
+.carImg{
+  width: 256rpx;
+  height: 167rpx;
+  float: left;
+}
+.imgArea{
+  width: 256rpx;
+  height: 167rpx;
+  overflow: hidden;
+}
+.carImg image{
+  width:100%;
+  height: 167rpx;
+  display: block;
+}
+.carInfoCont{
+  width: 444rpx;
+  padding-left: 28rpx;
+  box-sizing: border-box;
+  
+}
+.carInfoContWord{
+  width: 100%;
+  height: 167rpx;
+  display: flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.carInfoContLine{
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #e5e5e5;
+  margin-top: 20rpx;
+}
+.carName {
+  overflow: hidden;
+}
+.carName text{
+  font-size: 30rpx;
+  color: #353535;
+  float: left;
+  font-weight: bold
+}
+.carInfoRow1 {
+  width:100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.carInfoRow1 text{
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 26rpx;
+  color: #888;
+  float: left;
+}
+.carInfoRow2{
+  overflow: hidden;
+  height: 30rpx;
+  display: flex;
+  align-items: center;
+  
+}
+.carInfoRow2 text{
+  flex: 1;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  justify-content:flex-end;
+  color: #b2b2b2;
+  float: left;
+}
+/* .carInfoRow3 text{
+  font-size: 24rpx;
+  margin-left:36rpx;
+  color: #b2b2b2;
+  float: left;
+} */
+.carInfoRow2 text:nth-child(1){
+  font-size: 28rpx;
+  color: #ff0000;
+  font-weight: bold;
+  margin-right: 100rpx;
+  flex: 1;
+  text-align: left;
+  align-items: center;
+  display:inline-block;
+  height: 35rpx;
+  line-height:35rpx;
+  position: absolute;
+  border-radius: 7rpx;
+}
+
+.logAreaBg{
+  width: calc(100vw - 0rpx);
+  height: calc(100vh - 0rpx);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+}
+/* 更改 */
+.logArea{
+width:560rpx;
+height: 520rpx;
+background-color: #fff;
+border-radius: 8rpx;
+margin: 340rpx auto 0 auto;
+padding: 40rpx 0;
+position: relative;
+overflow: hidden;
+}
+/* 更改 */
+.logArea image{
+display: block;
+width: 26%;
+margin: 0 auto;
+}
+/* 更改 */
+.logArea text{
+display: block;
+text-align: center;
+font-size: 32rpx;
+font-weight: bold;
+color: #666;
+margin-top: 66rpx;
+}
+.logArea text:nth-child(1){
+  margin-top: 40rpx;
+}
+.logAreaButton{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80rpx;
+  
+}
+.logAreaButton text{
+  margin-top: 0!important;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  background-color: #d81e06;
+}
+.logAreaButton button{
+  width:100%;
+  height: 80rpx;
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.logCheck{
+  width:400rpx;
+  margin: 30rpx auto;
+}
+.logCheck switch{
+  transform:scale(0.55);
+  margin:0 10rpx;
+}
+.logCheck text{
+  font-size: 24rpx;
+  color: #fff;
+}
+.logCheck text:last-child{
+  display: block;
+  text-align: center;
+  text-decoration: underline;
+}

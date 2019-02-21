@@ -1,0 +1,38 @@
+<!--pages/hitchHiking/hitchHiking.wxml-->
+<view class="switchButton">
+     <view class="switchItem">
+         <text>寻人</text>
+     </view>
+     <view class="switchItem">
+         <text>寻车</text>
+     </view>
+</view>
+
+<view class="searchPeople">
+   <view class="peopleList">
+   <block wx:for="{{peopleList}}">
+       <view class="listItem">
+           <view class="itemLeft">
+               <view class="leftTop">
+                   <image src='' mode='widthFix'></image>
+                   <text>{{item.startAddr}}</text>
+               </view>
+               <view class="leftBottom">
+                   <image src='' mode='widthFix'></image>
+                   <text>{{item.endAddr}}</text>
+               </view>
+           </view>
+           <view class="itemRight">
+               <view class="rightTop">
+                   <image src='' mode='widthFix'></image>
+                   <text>{{item.startDate}}</text>
+               </view>
+               <view class="rightBottom">
+                   <image src='' mode='widthFix'></image>
+                   <text>{{item.startTime}}出发</text>
+               </view>
+           </view>
+       </view>
+    </block>
+   </view>
+</view>

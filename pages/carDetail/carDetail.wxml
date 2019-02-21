@@ -1,0 +1,167 @@
+<!--pages/carDetail/carDetail.wxml-->
+
+<view class="carImg">
+  <!-- <image src='{{car.banner}}'  bindload="imageLoad" style="width:{{imgwidth}}rpx; height:{{imgheight }}rpx;"></image> -->
+  <image src='{{car.banner}}' mode=' '></image>
+
+</view>
+
+<view class='carInfo'>
+  <view class="carName">
+    <text class='modelsName'>{{car.brand_name}}{{car.name}}</text>
+    <block wx:if="{{car.type=='sell'}}">
+      <text class='infos'>{{car.year ? car.year+'上牌/' : ''}}{{car.distance? car.distance+'/':''}}{{car.addr}}</text>
+      <text class='money'>批发价：{{car.price}}</text>
+    </block>
+    <block wx:else>
+      <text class='money'>心里价：{{car.price}}</text>
+      <view class='userInfo'>
+        <image src='{{car.userInfo.avatar}}' class='userInfoImg' mode=' '></image>
+        {{car.userInfo.nickname}} 在{{car.createtime}} 发布
+      </view>
+    </block>
+
+
+  </view>
+  <view class="shopCarType" wx:if="{{car.type=='sell'}}">
+    <view class="carTypeTitle">
+      <text>车辆档案</text>
+    </view>
+    <view class="carDetailList">
+      <view class="carDetailItem" wx:if="{{car.brand_name}}">
+        <text>车辆品牌</text>
+        <text>{{car.brand_name}}</text>
+      </view>
+      <view class="carDetailItem" wx:if="{{car.name}}">
+        <text>车辆款型</text>
+        <text>{{car.name}}</text>
+      </view>
+      <view class="carDetailItem" wx:if="{{car.addr}}">
+        <text>车辆所在地</text>
+        <text>{{car.addr}}</text>
+      </view>
+      <view class="carDetailItem" wx:if="{{car.year}}">
+        <text>上牌日期</text>
+        <text>{{car.year}}</text>
+      </view>
+
+      <view class="carDetailItem" wx:if="{{car.distance}}">
+        <text>实际里程</text>
+        <text>{{car.distance}}</text>
+      </view>
+      <view class="carDetailItem" wx:if="{{car.emission_standard}}">
+        <text>过户次数</text>
+        <text>{{car.emission_standard}}</text>
+      </view>
+      <view class="carDetailItem" wx:if="{{car.description}}">
+        <text>车况备注</text>
+        <text>{{car.description}}</text>
+      </view>
+
+    </view>
+  </view>
+  <view class="shopCarType" wx:else>
+    <view class="carTypeTitle">
+      <text>购买需求</text>
+    </view>
+    <view class="carDetailList">
+      <view class="carDetailItem">
+        <text>购入城市</text>
+        <text>{{car.addr}}</text>
+      </view>
+
+      <view class="carDetailItem" wx:if="{{car.description}}">
+        <text>买家备注</text>
+        <text>{{car.description}}</text>
+      </view>
+    </view>
+  </view>
+  <!--<view class="shopCarType">
+       <view class="carTypeTitle">
+          <text>物流估算</text>
+       </view>
+       <view class='logistic'>
+          <view class='loLeft'>
+              <text>车辆所在地</text>
+              <text>{{car.addr}}</text>
+          </view>
+          <view class='loCenter'>
+              <text>约6000元</text>
+              <text>全程400公里</text>
+          </view>
+          <view class='loRight'>
+             <text>车辆所在地</text>
+             <text>选择</text>
+          </view>
+       </view>
+   </view>-->
+  <view class="detailCont" wx:if='{{car.type=="sell"}}'>
+    <view class="carTypeTitle">
+      <text>车辆描述</text>
+    </view>
+    <!--<view class="detailTableIn">
+          <text>详细配置</text>
+      </view>-->
+    <view class='detailContItemImg'>
+      <block wx:for="{{detail_img_list}}" wx:key="detail_img_list">
+        <image src='{{item}}' mode='widthFix'></image>
+      </block>
+      <image src='{{car.defaultUrl}}{{car.default.details_default_picture}}' mode='widthFix'></image>
+    </view>
+
+  </view>
+  <view class='datailCont' wx:else>
+    <view class='detailContItemImg'>
+      <image src='{{car.defaultUrl}}{{car.default.details_default_picture}}' mode='widthFix'></image>
+
+    </view>
+  </view>
+
+</view>
+
+<view class="bottomArea">
+  <view class="iconArea">
+    <view class="iconItem" bindtap="nav_to_shop">
+      <image src='../../images/shop-icon.png'></image>
+      <text>店铺</text>
+    </view>
+    <view class="iconItem">
+      <image src='../../images/share-icon.png'></image>
+      <text>转发</text>
+      <button open-type='share'></button>
+    </view>
+  </view>
+  <view class='buttonArea'>
+    <view class='buttonItem' bindtap='priceLog'>
+      <text>报价</text>
+    </view>
+    <view class='buttonItem' bindtap='makePhoneCall'>
+      <text>电话联系</text>
+    </view>
+  </view>
+</view>
+
+<view class="backDiv" wx:if="{{priceLogShow}}">
+  <form report-submit="{{true}}" bindsubmit='priceSubmit'>
+    <view class="divCont">
+      <view class="topTitle">
+        <text>报价</text>
+        <text bindtap='closeLog'>取消</text>
+      </view>
+      <view class="centerCont">
+        <view class="centerRow">
+          <text>我的联系方式</text>
+          <input type='number' value='{{form.phone}}' bindinput='phoneInput' cursor-spacing="50"></input>
+        </view>
+        <view class="centerRow">
+          <text>我期望的价格(万元)</text>
+          <input type='digit' value='{{form.price}}' bindinput="priceInput"></input>
+        </view>
+      </view>
+
+      <view class="bottomButton">
+        <button form-type='submit'>提交</button>
+      </view>
+    </view>
+  </form>
+</view>
