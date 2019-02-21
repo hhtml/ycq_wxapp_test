@@ -31,6 +31,10 @@ page{
   font-size: 30rpx;
   color: #b2b2b2;
 }
+.search{
+  font-size: 30rpx;
+  color: #b2b2b2;
+}
 .searchResult{
   width: calc(100vw - 310rpx);
   background-color: #f0f0f0;

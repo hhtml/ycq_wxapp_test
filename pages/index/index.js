@@ -124,10 +124,10 @@ Page({
         currentInfo:info
       })
   },
-  searchInput(e){
-     this.setData({
-       searchInput:e.detail.value
-     })
+  searchPage:function(){
+    wx.navigateTo({
+      url: '/pages/index/searchPage/searchPage'
+    })
   },
   searchConfirm(e){
     /* var $this=this;
