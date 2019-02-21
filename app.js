@@ -36,7 +36,7 @@ App({
   globalData: {
     userInfo: null,
     url:'https://czz.junyiqiche.com/addons/cms/wxapp.',
-    imgUrl:'https://static-czz.junyiqiche.com/',  //此处不可修改
+    imgUrl:'https://static-czz.junyiqiche.com/',  //此处不可修改...
     localImgUrl: 'https://czz.junyiqiche.com',
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
   }
