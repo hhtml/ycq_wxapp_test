@@ -1,5 +1,19 @@
 <!--pages/carDetail/carDetail.wxml-->
 
+<!-- 自定义导航栏 -->
+<view class="nav-wrap">
+  <view class="nav-title" style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
+    <image class="return" bindtap='return'></image>
+    <view class="line"></view>
+    <view class="zhuye-wrap" bindtap='goHome'>
+      <image src="/images/home.png"></image>
+      <view>主页</view>
+    </view>
+    <view class="title">车系详情</view>
+  </view>
+</view>
+
+
 <view class="carImg">
   <!-- <image src='{{car.banner}}'  bindload="imageLoad" style="width:{{imgwidth}}rpx; height:{{imgheight }}rpx;"></image> -->
   <image src='{{car.banner}}' mode='widthFix'></image>

@@ -3,21 +3,32 @@
 <view class="search-wrap">
   <input class="search" bindinput="search" value='{{inputValue}}' focus="{{focus}}" bindblur="getHistory"></input>
   <image src="/images/search-icon.png"></image>
+  <view class="close" bindtap='close'>X</view>
   <view class="cancel" bindtap='cancel'>取消</view>
 </view>
 
 <!-- 搜索结果列表-买车 -->
 <view class="searchList-wrap" wx:for="{{searchList.buy}}" wx:key="{{item.id}}">
-  <view class='buy'>买车</view>
-  <view class="name" bindtap='buyCarName'>{{item.name}}</view>
-  <view class="carList" wx:for="{{item.carList}}" wx:key="{{item.id}}" bindtap='selectBuyCar'>{{item.models_name}}</view>
+  <view class="name" bindtap='buyCarName'>
+  <image src="/images/search-icon.png"></image>
+  {{item.name}}—买车
+  </view>
+  <view class="carList" wx:for="{{item.carList}}" wx:key="{{item.id}}" bindtap='selectBuyCar'>
+  <image src="/images/search-icon.png"></image>
+  {{item.models_name}}
+  </view>
 </view>
 
 <!-- 搜索结果列表-卖车 -->
 <view class="searchListSell-wrap" wx:for="{{searchList.sell}}" wx:key="{{item.id}}">
-  <view class='sell'>卖车</view>
-  <view class="sellName"bindtap="sellCarName">{{item.name}}</view>
-  <view class="carListSell" wx:for="{{item.carList}}" wx:key="{{item.index}}" bindtap='selectSellCar'>{{item.models_name}}</view>
+  <view class="sellName"bindtap="sellCarName">
+  <image src="/images/search-icon.png"></image>
+  {{item.name}}—卖车
+  </view>
+  <view class="carListSell" wx:for="{{item.carList}}" wx:key="{{item.index}}" bindtap='selectSellCar'>
+  <image src="/images/search-icon.png"></image>
+  {{item.models_name}}
+  </view>
 </view>
 
 
@@ -25,14 +36,17 @@
 <view class="searchHistory-wrap" wx:if="{{isHistory}}">
 
   <view class="searchHistory-title">
-  <view class="searchHistory">历史搜索</view>
+  <view class="searchHistory">
+  <image src="/images/switch-title-01.png"></image>
+  历史搜索
+  </view>
   <view class="clear" bindtap='clearHistory'>清空</view>
 </view>
 
 <view class="searchHistoryContent">
   <view class="searchName" wx:for="{{history}}" wx:key="{{item.index}}">
   {{item}}
-  <view class="delete">X</view>
+  <!-- <view class="delete">X</view> -->
   </view>
 </view>
   
@@ -42,3 +56,5 @@
   <image src="/images/404.png" mode='widthFix'></image>
   <!-- <view class="data">暂无数据</view> -->
 </view>
+
+<view class="data" wx:if="{{noData}}">暂无数据</view>

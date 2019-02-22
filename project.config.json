@@ -41,7 +41,7 @@
 				{
 					"id": 0,
 					"name": "单页编译",
-					"pathName": "pages/index/searchPage/searchPage",
+					"pathName": "pages/mine/carFriend/carFriend",
 					"query": "",
 					"scene": null
 				}

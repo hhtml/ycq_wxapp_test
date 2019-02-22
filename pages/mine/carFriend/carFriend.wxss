@@ -1,0 +1,29 @@
+/* pages/mine/carFriend/carFriend.wxss */
+
+.img1{
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+.img1 image{
+  width:96%;
+}
+.img2{
+  width:100%;
+  margin-top:20rpx;
+  display: flex;
+  justify-content: center;
+}
+.img2 image{
+  width:96%;
+}
+
+.img3{
+  width:100%;
+  margin-top:20rpx;
+  display: flex;
+  justify-content: center;
+}
+.img3 image{
+  width:96%;
+}
