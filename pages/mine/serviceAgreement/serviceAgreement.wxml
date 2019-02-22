@@ -1,0 +1,4 @@
+<!--pages/mine/serviceAgreement/serviceAgreement.wxml-->
+
+<rich-text nodes="{{data}}" bindtap="tap" class="data"></rich-text>
+

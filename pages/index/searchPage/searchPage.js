@@ -82,7 +82,9 @@ Page({
       
     }else{
       that.setData({
-        isHistory: true
+        isHistory: true,
+        noData: false,
+        searchList:''
       })
     }
     wx.request({
@@ -93,13 +95,14 @@ Page({
       method:"POST",
       success(res) {
         console.log(res.data)
-        if (res.data.data.buy.length == 0 || res.data.data.sell.length == 0){
+        if (res.data.data.buy.length == 0 && res.data.data.sell.length == 0){
           that.setData({
             noData:true
           })
         }else{
           that.setData({
-            searchList: res.data.data
+            searchList: res.data.data,
+            noData: false
           })
         }
         
@@ -107,12 +110,21 @@ Page({
     })
   },
 
-  //取消事件
-  cancel:function(){
+  //点击X取消输入框内容事件
+  close:function(){
     var that = this
     that.setData({
       inputValue:'',
-      searchList:''
+      searchList:'',
+      noData:false
+    })
+  },
+
+  //取消事件
+  cancel:function(){
+    var that = this
+    wx.switchTab({
+      url: '/pages/index/index'
     })
   },
   //选择买车事件

@@ -1,7 +1,12 @@
 <!--index.wxml-->
 <view class="searchArea" style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
+  <view class="share-nav">
+    <image src="/images/share-icon.png"></image>
+    <button open-type='share'></button>
+  </view>
   <view class="searchBg" bindtap='searchPage'>
     <image src='../../images/search-icon.png' mode='widthFix'></image>
+    搜索车辆
     <!-- <input value="{{searchInput}}" type='text' bindtap='searchInput' confirm-type="搜索" bindconfirm="searchConfirm"></input> -->
     <!-- <view class="search" bindtap='searchInput'></view> -->
   </view>
@@ -177,3 +182,6 @@
     <text>友车圈服务协议</text>
   </view>
 </view>
+
+<!-- 页面悬浮分享功能 -->
+<button class="share" open-type="share">分享</button>

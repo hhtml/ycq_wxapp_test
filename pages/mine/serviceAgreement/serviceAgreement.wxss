@@ -1,0 +1,5 @@
+/* pages/mine/serviceAgreement/serviceAgreement.wxss */
+
+.data{
+  width:100%;
+}

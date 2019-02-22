@@ -117,6 +117,11 @@ Page({
       wx.navigateTo({
         url: path,
       })
+
+    // wx.showToast({
+    //   title: '即将上线',
+    //   image: '../../images/warn.png'
+    // })
   },
   switchTitle:function(e){
       var info=e.currentTarget.dataset.info;
@@ -161,7 +166,7 @@ Page({
   },
   nav_to_shoplist:function(){
    wx.showToast({
-     title: '敬请期待',
+     title: '即将上线',
      image:'../../images/warn.png'
    })
   },
@@ -393,5 +398,33 @@ Page({
   onPullDownRefresh(){
     this.request_index_info();
     
+  },
+
+  // 分享功能
+  onShareAppMessage: function () {
+    let that = this;
+    return {
+      title: '友车圈圈', // 转发后 所显示的title
+      path: '/pages/index/index', // 相对的路径
+      success: (res) => {    // 成功后要做的事情
+        // console.log(res.shareTickets[0])
+
+        // wx.getShareInfo({
+        //   shareTicket: res.shareTickets[0],
+        //   success: (res) => {
+        //     that.setData({
+        //       isShow: true
+        //     })
+        //     console.log(that.setData.isShow)
+        //   },
+        //   fail: function (res) { console.log(res) },
+        //   complete: function (res) { console.log(res) }
+        // })
+      },
+      fail: function (res) {
+        // 分享失败
+        console.log(res)
+      }
+    }
   }
 })

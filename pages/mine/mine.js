@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showModal: false,
     navList:[
       {
         icon:'',
@@ -44,7 +45,7 @@ Page({
     var path=e.currentTarget.dataset.path;
     if (!path){
       wx.showToast({
-        title: '敬请期待',
+        title: '即将上线',
         image: '../../images/warn.png'
       })
     }else{
@@ -60,7 +61,7 @@ Page({
       url: '../myShop/myShop?shopId=' + shopId,
     })*/
     wx.showToast({
-      title: '敬请期待',
+      title: '即将上线',
       image:'../../images/warn.png'
     })
   },
@@ -85,8 +86,8 @@ Page({
             qrcode: data.userInfo.companystoreone.store_qrcode
           }
           var isNewOffer = data.userInfo.isNewOffer;
-          var isRealName = data.userInfo.isRealName;
-          $this.setData({ company, isRealName, isNewOffer});
+          // var isRealName = data.userInfo.isRealName;
+          $this.setData({ company, isNewOffer});
 
         } else {
           console.log('请求失败：', data.msg);
@@ -144,5 +145,47 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  //二维码点击事件
+  erWeiMa:function(){
+    var that = this
+    wx.showToast({
+      title: '即将上线',
+      image: '../../images/warn.png'
+    })
+
+    // that.setData({
+    //   showModal:true
+    // })
+  },
+
+  //关闭模态框
+  closeModalDlg:function(){
+    var that = this
+    that.setData({
+      showModal: false
+    })
+  },
+
+  //模态框中复制文本事件
+  copyText:function(){
+    // wx.setClipboardData({
+    //   data: this.data.name + '-' + this.data.authorname,
+    //   success(res) {
+    //     wx.getClipboardData({
+    //       success(res) {
+    //         console.log(res.data) 
+    //       }
+    //     })
+    //   }
+    // })
+  },
+
+  makePhoneCall() {
+    var tel = '028 - 84167417';
+    wx.makePhoneCall({
+      phoneNumber: tel // 仅为示例，并非真实的电话号码
+    })
+  },
 })

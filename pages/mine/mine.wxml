@@ -15,7 +15,7 @@
                 <!--<view class="writeIcon">
                     <image src='' mode='widthFix'></image>
                 </view>-->
-                <view class="ewmIcon">
+                <view class="ewmIcon" bindtap='erWeiMa'>
                     <image src='../../images/ewm-icon.png' mode='widthFix'></image>
                 </view>
             </view>  
@@ -70,7 +70,7 @@
     </view>
 
     <view class="navList">
-      <view class="navItem" bindtap='nav_to_page' data-path="">
+      <view class="navItem" bindtap='nav_to_page' data-path="/pages/mine/serviceAgreement/serviceAgreement">
           <image class="navIcon" src='../../images/mine-service.png' mode='widthFix'></image>
           <view class="navName">
                <text>服务协议</text>
@@ -79,7 +79,7 @@
                <image src='../../images/angle-right.png' mode='widthFix'></image>
           </view>
       </view>
-      <view class="navItem" bindtap='nav_to_page' data-path="">
+      <view class="navItem" bindtap='nav_to_page' data-path="/pages/mine/carFriend/carFriend">
           <image class="navIcon" src='../../images/mine-about.png' mode='widthFix'></image>
           <view class="navName">
                <text>关于车友</text>
@@ -88,15 +88,31 @@
                <image src='../../images/angle-right.png' mode='widthFix'></image>
           </view>
       </view>
-      <view class="navItem" bindtap='nav_to_page' data-path="">
+      <view class="navItem" bindtap='makePhoneCall' data-path="">
           <image class="navIcon" src='../../images/mine-call.png' mode='widthFix'></image>
           <view class="navName">
                <text>客服热线</text>
           </view>
-          <view class='navRight'>
+          <!-- <view class='navRight'>
                <image src='../../images/angle-right.png' mode='widthFix'></image>
-          </view>
+          </view> -->
       </view>
     </view>
 </view>
 
+<!-- 模态对话框 -->
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
+ 
+<view class="modalDlg" wx:if="{{showModal}}">
+    <view class="titleInfo">
+      <view class="wxHead"></view>
+      <view class="wxName"></view>
+    </view>
+    <view class="erweima"></view>
+    <view class="inviteCode-wrap" bindtap='copyText'>
+      <view class="inviteCode">您的邀请码：</view>
+      <view class="inviteCodeInfo"></view>
+      <view class="copy">复制</view>
+      <view class="share"></view>
+    </view>
+</view>

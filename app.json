@@ -4,6 +4,8 @@
     "pages/index/searchPage/searchPage",
     "pages/carSource/carSource",
     "pages/mine/mine",
+    "pages/mine/serviceAgreement/serviceAgreement",
+    "pages/mine/carFriend/carFriend",
     "pages/hitchHiking/hitchHiking",
     "pages/myShop/myShop",
     "pages/wantBuy/wantBuy",

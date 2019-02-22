@@ -2,21 +2,73 @@
 page{
   background-color: #f7f7f8;
 }
+/* 自定义导航栏 */
+.nav-wrap{
+  width:100%;
+  height:174rpx;
+  z-index: 999;
+  background-color: #fff;
+  position: fixed;
+  left:0rpx;
+  top:0rpx;
+}
+.nav-title{
+  width:100%;
+  display: flex;
+  align-items: center;
+}
+.return{
+  width:20rpx;
+  height:20rpx;
+  border-left:2rpx solid #000;
+  border-top:2rpx solid #000;
+  transform: rotate(-45deg);
+  margin-left: 25rpx;
+}
+.line{
+  width:4rpx;
+  height:30rpx;
+  background-color: #ccc;
+  margin-left:15rpx;
+}
+.zhuye-wrap{
+  width:80rpx;
+  height:80rpx;
+  font-size: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left:10rpx;
+  color:#000;
+}
+.zhuye-wrap image{
+  width:35rpx;
+  height:35rpx;
+}
+.title{
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 136rpx;
+}
+
+
 .carImg{
   width: 100%;
   height: 350rpx;
   position: absolute;
-  top: 0;
+  top: 174rpx;
   left: 0;
   z-index: 1;
 }
 .carImg image{
   width: 100%;
-  height: 390rpx;
+  height: 430rpx;
   display: block;
 }
 .carInfo{
-  margin-top:350rpx;
+  /* margin-top:378rpx; */
+  margin-top:552rpx;
   z-index: 2;
   padding: 0 24rpx;
 }
@@ -335,7 +387,6 @@ page{
 .carDetailItem{
   display: flex;
   line-height: 60rpx;
-  display: flex;
 
 }
 .carDetailItem text{
