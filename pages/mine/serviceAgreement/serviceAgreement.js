@@ -1,4 +1,5 @@
 // pages/mine/serviceAgreement/serviceAgreement.js
+var $http = require('../../../utils/http.js');
 Page({
 
   /**
@@ -13,6 +14,19 @@ Page({
    */
   onLoad: function (options) {
     this.getData()
+  },
+
+  /**
+   * 获取服务协议事件
+   */
+  getData: function () {
+    var that = this
+    $http.post('my/service_agreement').then(res => {
+      console.log(res.data)
+      that.setData({
+        data: res.data.data.agreement
+      })
+    })
   },
 
   /**
@@ -62,20 +76,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-
-  //获取服务协议事件
-  getData:function(){
-    var that = this
-    wx.request({
-      url: 'https://czz.junyiqiche.com/addons/cms/wxapp.my/service_agreement',
-      success(res) {
-        console.log(res.data)
-        that.setData({
-          data:res.data.data.agreement
-        })
-      }
-    })
   }
 })

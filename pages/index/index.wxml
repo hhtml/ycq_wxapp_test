@@ -1,4 +1,6 @@
 <!--index.wxml-->
+
+<!-- 自定义导航栏 -->
 <view class="searchArea" style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
   <view class="share-nav">
     <image src="/images/share-icon.png"></image>
@@ -17,12 +19,13 @@
   </view> -->
 </view>
 
-<view class="bannerArea">
+<!-- 轮播图区域 -->
+<view class="bannerArea" style="padding:{{statusBarHeight+5}}rpx 0rpx 0rpx 0rpx;">
   <swiper autoplay circular indicator-dots="{{true}}" indicator-color="rgb(136,136,136)" indicator-active-color="#fff" duration="500" current="0">
     <block wx:for="{{bannerUrls}}" wx:key="bannerUrls">
       <swiper-item>
         <view class="bannerImg" catchtap='nav_to_product_detail' data-id="{{item.id}}">
-          <image src="{{item.img}}" mode='aspectFill' lazy-load="{{true}}" class="slide-image" />
+          <image src="{{item.img}}" mode='scaleToFill' lazy-load="{{true}}" class="slide-image"/>
         </view>
       </swiper-item>
     </block>
@@ -179,7 +182,7 @@
   <view class="logCheck">
     <switch checked disabled bindchange="switch1Change" type="checkbox" />
     <text>登录即为默认同意并会遵守</text>
-    <text>友车圈服务协议</text>
+    <text bindtap='goServiceAgreement'>友车圈服务协议</text>
   </view>
 </view>
 

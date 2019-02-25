@@ -3,6 +3,8 @@
  */
 const apiHttp = "https://czz.junyiqiche.com/addons/cms/wxapp.";
 const socketHttp = "https://czz.junyiqiche.com/addons/cms/wxapp.";
+// const apiHttp = "https://ycq.ucuj.com.cn/addons/cms/wxapp.";
+// const socketHttp = "https://ycq.ucuj.com.cn/addons/cms/wxapp.";
 function fun(url, method, data, header) {
   data = data || {};
   header = header || { 'content-type': 'application/json'};

@@ -1,20 +1,45 @@
 // pages/mine/carFriend/carFriend.js
+var $http = require('../../../utils/http.js');
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    imgUrls:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getImg()
   },
 
+  /**
+   * 获取图片事件
+   */
+  getImg:function(){
+    var that = this
+    var imgUrls =[]
+    $http.post('my/about_riders').then(res=>{
+      console.log(res.data)
+      var resObj = res.data
+      if (resObj.code == 1){
+        var imgsCut = resObj.data.about_riders.split(',') //切割字符串
+        imgsCut.forEach((val, index) => {
+          var obj = {
+            imgUrl: app.globalData.imgUrl + val,
+          }
+          imgUrls[index] = obj;
+        })
+      }
+      that.setData({
+        imgUrls: imgUrls
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
