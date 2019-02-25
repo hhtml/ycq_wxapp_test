@@ -78,7 +78,7 @@ Page({
       console.log('车辆详情：', resObj);
       if (resObj.code == 1) {
         var data = resObj.data;
-        var himgUrl;
+        var himgUrl; 
         if (data.detail.type == 'sell') {
           himgUrl = app.globalData.localImgUrl;
         } else {

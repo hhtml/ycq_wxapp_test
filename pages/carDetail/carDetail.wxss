@@ -18,8 +18,8 @@ page{
   align-items: center;
 }
 .return{
-  width:20rpx;
-  height:20rpx;
+  width:26rpx;
+  height:26rpx;
   border-left:2rpx solid #000;
   border-top:2rpx solid #000;
   transform: rotate(-45deg);
@@ -49,7 +49,7 @@ page{
 .title{
   font-size: 16px;
   font-weight: bold;
-  margin-left: 136rpx;
+  margin-left: 126rpx;
 }
 
 

@@ -1,5 +1,5 @@
 /* pages/mine/serviceAgreement/serviceAgreement.wxss */
 
-.data{
-  width:100%;
+.MsoNormal{
+  padding:0rpx 20rpx;
 }

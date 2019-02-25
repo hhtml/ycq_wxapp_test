@@ -44,7 +44,7 @@
 </view>
 
 <view class="searchHistoryContent">
-  <view class="searchName" wx:for="{{history}}" wx:key="{{item.index}}">
+  <view class="searchName" wx:for="{{history}}" wx:key="{{item.index}}" bindtap='searchHistory'>
   {{item}}
   <!-- <view class="delete">X</view> -->
   </view>

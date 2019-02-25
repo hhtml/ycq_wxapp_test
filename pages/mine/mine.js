@@ -8,6 +8,7 @@ Page({
    */
   data: {
     showModal: false,
+    userInfo:[],
     navList:[
       {
         icon:'',
@@ -158,6 +159,14 @@ Page({
     // that.setData({
     //   showModal:true
     // })
+
+    // $http.post('my/index').then(res=>{
+    //   console.log(res.data.data)
+    //   that.setData({
+    //     userInfo: res.data.data.userInfo,
+    //     showModal: true,
+    //   })
+    // })
   },
 
   //关闭模态框
@@ -166,20 +175,6 @@ Page({
     that.setData({
       showModal: false
     })
-  },
-
-  //模态框中复制文本事件
-  copyText:function(){
-    // wx.setClipboardData({
-    //   data: this.data.name + '-' + this.data.authorname,
-    //   success(res) {
-    //     wx.getClipboardData({
-    //       success(res) {
-    //         console.log(res.data) 
-    //       }
-    //     })
-    //   }
-    // })
   },
 
   makePhoneCall() {

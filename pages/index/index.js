@@ -426,5 +426,12 @@ Page({
         console.log(res)
       }
     }
+  },
+
+  //登陆界面点击友车圈服务协议跳转到服务协议界面事件
+  goServiceAgreement:function(){
+    wx.navigateTo({
+      url: '../mine/serviceAgreement/serviceAgreement'
+    })
   }
 })
