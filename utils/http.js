@@ -2,9 +2,9 @@
  * wx.request、wx.uploadFile 封装
  */
 const apiHttp = "https://czz.junyiqiche.com/addons/cms/wxapp.";
-const socketHttp = "https://czz.junyiqiche.com/addons/cms/wxapp.";
+const socketHttp = "https://czz.junyiqiche.com/addons/cms/wxapp."; //测试版本域名
 // const apiHttp = "https://ycq.ucuj.com.cn/addons/cms/wxapp.";
-// const socketHttp = "https://ycq.ucuj.com.cn/addons/cms/wxapp.";
+// const socketHttp = "https://ycq.ucuj.com.cn/addons/cms/wxapp.";  //线上版本域名
 function fun(url, method, data, header) {
   data = data || {};
   header = header || { 'content-type': 'application/json'};

@@ -102,26 +102,8 @@
 
 <!-- 模态对话框 -->
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
- 
-<view class="modalDlg" wx:if="{{showModal}}">
-    <view class="titleInfo">
-      <view class="wxHead">
-        <image src="{{userInfo.avatar}}"></image>
-      </view>
-      <view class="wxName">
-      <view class="name">{{userInfo.nickname}}</view>
-      <view class="grade">黄金会员</view>
-      </view>
-    </view>
-    <view class="erweima">
-      <image src='{{userInfo.invitation_code_img}}'></image>
-    </view>
-    <view class="inviteCode-wrap">
-      <view class="inviteCode">邀请码：fgsdf</view>
-    </view>
-</view>
 
-<view class="shareBg" wx:if="{{showModal}}">
-  <view>分享朋友圈</view>
-  <view>分享给朋友</view>
-</view>
+<view class="canvas-box" hidden="{{showModal == false}}">
+      <canvas  style="width:600rpx;height:900rpx;position:fixed;top:60rpx;left:75rpx;" canvas-id="mycanvas"/>
+</view>  
+      <button class="btn" wx:if="{{showModal}}" bindtap='saveImg'>保存图片</button>

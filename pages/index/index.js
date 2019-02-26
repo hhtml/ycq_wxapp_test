@@ -167,7 +167,8 @@ Page({
   nav_to_shoplist:function(){
    wx.showToast({
      title: '即将上线',
-     image:'../../images/warn.png'
+     image:'../../images/warn.png',
+     duration: 500
    })
   },
   request_index_info: function () {
