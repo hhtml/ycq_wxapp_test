@@ -1,11 +1,13 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function (options) {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    //获取扫面二维码路径参数
+ 
+   
     // 登录
     wx.login({
       success: res => {
