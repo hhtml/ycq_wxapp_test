@@ -2,6 +2,8 @@
 //获取应用实例
 const app = getApp();
 var $http = require('../../utils/http.js');
+// var util =   require('../../utils/util.js');
+
 Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
@@ -427,4 +429,14 @@ Page({
       }
     }
   }
+  // , onLoad: function (options){
+  //   console.log("index 生命周期 onload" + JSON.stringify(options))
+  //   //在此函数中获取扫描普通链接二维码参数
+  //   let q = decodeURIComponent(options.q)
+  //   if (q) {
+  //     console.log("index 生命周期 onload url=" + q)
+  //     console.log("index 生命周期 onload 参数 user_id=" + util.getQueryString(q, 'user_id'))
+  //   }
+    
+  // }
 })

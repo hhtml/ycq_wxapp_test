@@ -39,10 +39,16 @@
 			"current": 0,
 			"list": [
 				{
+<<<<<<< Updated upstream
 					"id": 0,
 					"name": "单页编译",
 					"pathName": "pages/mine/carFriend/carFriend",
 					"query": "",
+=======
+					"id": -1,
+					"name": "单页",
+					"pathName": "pages/mine/mine",
+>>>>>>> Stashed changes
 					"scene": null
 				}
 			]
