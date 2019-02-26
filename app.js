@@ -35,6 +35,8 @@ App({
       }
     })
   },
+
+  //测试版本域名
   globalData: {
     userInfo: null,
     url: 'https://czz.junyiqiche.com/addons/cms/wxapp.', 
@@ -43,11 +45,13 @@ App({
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
   }
 
+
+//线上版本域名
   // globalData: {
   //   userInfo: null,
   //   url: 'https://ycq.ucuj.com.cn/addons/cms/wxapp.',
   //   imgUrl: 'https://static-czz.junyiqiche.com/',  //此处不可修改...
-  //   localImgUrl: 'https://czz.junyiqiche.com',
+  //   localImgUrl: 'https://ycq.ucuj.com.cn',
   //   statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
   // }
   
