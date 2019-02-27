@@ -1,23 +1,22 @@
 <!--index.wxml-->
-<view class="searchArea" style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
-  <view class="searchBg" bindtap='searchPage'>
-    <image src='../../images/search-icon.png' mode='widthFix'></image>
-    <!-- <input value="{{searchInput}}" type='text' bindtap='searchInput' confirm-type="搜索" bindconfirm="searchConfirm"></input> -->
-    <!-- <view class="search" bindtap='searchInput'></view> -->
-  </view>
-  <!-- <view class="searchResult" style="top:{{statusBarHeight+40}}px;" wx:if="{{searchResultShow}}">
-    <block wx:for="{{searchResult}}" wx:key="searchResult">
-      <text>{{item}}</text>
-    </block>
-  </view> -->
+<view class="searchArea"  style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
+    <!-- <view class="searchBg">
+        <image src='../../images/search-icon.png' mode='widthFix'></image> -->
+        <!-- <input value="{{searchInput}}" type='text' bindinput='searchInput' confirm-type="搜索" bindconfirm="searchConfirm"></input> -->
+    <!-- </view> -->
+    <view class="searchResult" style="top:{{statusBarHeight+40}}px;" wx:if="{{searchResultShow}}">
+        <block wx:for="{{searchResult}}" wx:key="searchResult">
+           <text>{{item}}</text>
+        </block>
+    </view>
 </view>
 
 <view class="bannerArea">
-  <swiper autoplay circular indicator-dots="{{true}}" indicator-color="rgb(136,136,136)" indicator-active-color="#fff" duration="500" current="0">
+  <swiper autoplay  circular indicator-dots="{{true}}" indicator-color="rgb(136,136,136)" indicator-active-color="#fff" duration="500" current="0" >
     <block wx:for="{{bannerUrls}}" wx:key="bannerUrls">
       <swiper-item>
         <view class="bannerImg" catchtap='nav_to_product_detail' data-id="{{item.id}}">
-          <image src="{{item.img}}" mode='aspectFill' lazy-load="{{true}}" class="slide-image" />
+           <image src="{{item.img}}" mode='aspectFill' lazy-load="{{true}}" class="slide-image"   />
         </view>
       </swiper-item>
     </block>
@@ -25,155 +24,155 @@
 </view>
 
 <view class="iconArea">
-  <block wx:for="{{iconList}}" wx:key="iconList">
-    <view class="iconItem" bindtap='nav_to_page' data-index="{{index}}">
-      <image src='{{item.iconUrl}}'></image>
-      <text>{{item.name}}</text>
-    </view>
-  </block>
+    <block wx:for="{{iconList}}" wx:key="iconList">
+        <view class="iconItem" bindtap='nav_to_page' data-index="{{index}}">
+            <image src='{{item.iconUrl}}'></image>
+            <text>{{item.name}}</text>
+        </view>
+    </block>
 </view>
 
 <view class="shopArea">
-  <view class='shopAreaTitle'>
-    <view class='titleLeft'>
-      <image src='../../images/good-icon.png' mode='widthFix'></image>
-      <text>店铺推荐</text>
-    </view>
-    <view class='titleRight' bindtap='nav_to_shoplist'>
-      <text>查看更多</text>
-      <image src='../../images/angle-right.png' mode='widthFix'></image>
-    </view>
-  </view>
-  <scroll-view scroll-x='{{scroll_x}}' class='shopList'>
-    <block wx:for="{{shopList}}" wx:key="shopList">
-      <view class="shopItem">
-        <view class="shopItemRow1">
-          <text>{{item.name}}</text>
-          <text>{{item.addr}}</text>
-        </view>
-        <view class="shopItemRow2">
-          <text>当前上线车型：{{item.typeCount}}辆</text>
-        </view>
-        <view class="shopItemRow3">
-          <text>{{item.brands}}</text>
-        </view>
+      <view class='shopAreaTitle'>
+          <view class='titleLeft'>
+               <image src='../../images/good-icon.png' mode='widthFix'></image>
+               <text>店铺推荐</text>
+          </view>
+          <view class='titleRight' bindtap='nav_to_shoplist'>
+               <text>查看更多</text>
+               <image src='../../images/angle-right.png' mode='widthFix'></image>
+          </view>
       </view>
-    </block>
-  </scroll-view>
+      <scroll-view scroll-x='{{scroll_x}}' class='shopList' wx:if="{{shopList.length!=0}}" >
+        <block wx:for="{{shopList}}" wx:key="shopList">
+            <view  class="shopItem">
+                <view class="shopItemRow1">
+                    <text>{{item.name}}</text>
+                    <text>{{item.addr}}</text>
+                </view>
+                <view class="shopItemRow2">
+                    <text>当前上线车型：{{item.typeCount}}辆</text>
+                </view>
+                <view class="shopItemRow3">
+                    <text>{{item.brands}}</text>
+                </view>
+            </view>
+        </block>
+      </scroll-view>
 </view>
 
 <view class="switchArea">
-  <view class="switchAreaTitle">
-    <block wx:for="{{switchTitle}}" wx:key="switchTitle">
-      <view class="titleItem {{item.info == currentInfo ? 'activeTitle' : ''}}" data-info="{{item.info}}" bindtap='switchTitle'>
-        <image src='{{item.icon}}' mode='widthFix'></image>
-        <text>{{item.name}}</text>
-      </view>
-    </block>
-  </view>
-
-  <view class="carInfoList" wx:if="{{currentInfo== 'sale'}}">
-    <block wx:for="{{saleInfoList}}" wx:key="saleInfoList">
-      <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
-        <view class="carImg">
-          <view class="imgArea">
-            <image src='{{item.imgSrc}}' mode=' '></image>
-          </view>
+    <view class="switchAreaTitle" >
+       <block wx:for="{{switchTitle}}" wx:key="switchTitle">
+        <view class="titleItem {{item.info == currentInfo ? 'activeTitle' : ''}}" data-info="{{item.info}}" bindtap='switchTitle'>
+           <image src='{{item.icon}}' mode='widthFix'></image>
+           <text>{{item.name}}</text>
         </view>
-        <view class="carInfoCont">
-          <view class="carInfoContWord">
-            <view class="carName">
-              <text>{{item.brand_name}}{{item.name}}</text>
-            </view>
+        </block>
+    </view>
 
-            <view class="carInfoRow1">
-              <text>{{item.time ? item.time+'/' : ''}}{{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
+    <view class="carInfoList" wx:if="{{currentInfo== 'sale'}}">
+       <block wx:for="{{saleInfoList}}" wx:key="saleInfoList">
+        <view class="carInfoItem" bindtap='nav_to_car_detail'data-id="{{item.id}}" data-type="{{item.type}}">
+            <view class="carImg">
+               <view class="imgArea">
+                   <image src='{{item.imgSrc}}' mode=' '></image>
+                </view>
             </view>
-            <view class="carInfoRow2">
-              <text>批发价:{{item.priceArea}}</text>
-              <text>浏览量:{{item.browse_volume}}</text>
+            <view class="carInfoCont">
+              <view class="carInfoContWord">
+                  <view class="carName">
+                    <text>{{item.brand_name}}{{item.name}}</text>
+                </view>
+                
+                <view class="carInfoRow1">
+                     <text>{{item.time ? item.time+'/' : ''}}{{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
+                </view>
+                <view class="carInfoRow2">
+                    <text>批发价:{{item.priceArea}}</text>
+                    <text>浏览量:{{item.browse_volume}}</text>
+                </view>
+              </view>
+              <view class="carInfoContLine">
+              </view> 
             </view>
-          </view>
-          <view class="carInfoContLine">
-          </view>
         </view>
-      </view>
-    </block>
-  </view>
+        </block>
+    </view>
 
-  <view class="carInfoList" wx:if="{{currentInfo== 'buy'}}">
-    <block wx:for="{{buyInfoList}}" wx:key="buyInfoList">
-      <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
-        <view class="carImg">
-          <view class="imgArea">
-            <image src='{{item.imgSrc}}' mode='widthFix'></image>
-          </view>
-        </view>
-        <view class="carInfoCont">
-          <view class="carInfoContWord">
-            <view class="carName">
-              <text>{{item.brand_name}}{{item.name}}</text>
+    <view class="carInfoList" wx:if="{{currentInfo== 'buy'}}">
+       <block wx:for="{{buyInfoList}}" wx:key="buyInfoList">
+        <view class="carInfoItem" bindtap='nav_to_car_detail'data-id="{{item.id}}" data-type="{{item.type}}">
+            <view class="carImg">
+                <view class="imgArea">
+                   <image src='{{item.imgSrc}}' mode='widthFix'></image>
+                </view>
             </view>
+            <view class="carInfoCont">
+              <view class="carInfoContWord">
+                  <view class="carName">
+                    <text>{{item.brand_name}}{{item.name}}</text>
+                </view>
+                
+                <view class="carInfoRow1">
+                     <text>{{item.time ? item.time+'/' : ''}}{{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
+                </view>
+                <view class="carInfoRow2">
+                    <text>心里价:{{item.priceArea}}</text>
+                    <text>浏览量:{{item.browse_volume}}</text>
+                </view>
+              </view>
+              <view class="carInfoContLine">
+              </view> 
+            </view>
+        </view>
+        </block>
+    </view>
 
-            <view class="carInfoRow1">
-              <text>{{item.time ? item.time+'/' : ''}}{{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
+    <view class="carInfoList" wx:if="{{currentInfo== 'clue'}}">
+       <block wx:for="{{clueInfoList}}" wx:key="clueInfoList">
+        <view class="carInfoItem" bindtap='nav_to_car_detail'data-id="{{item.id}}" data-type="{{item.type}}">
+            <view class="carImg">
+                <view class="imgArea">
+                   <image src='{{item.imgSrc}}' mode='widthFix'></image>
+                </view>
             </view>
-            <view class="carInfoRow2">
-              <text>心里价:{{item.priceArea}}</text>
-              <text>浏览量:{{item.browse_volume}}</text>
+            <view class="carInfoCont">
+              <view class="carInfoContWord">
+                  <view class="carName">
+                    <text>{{item.brand_name}}{{item.name}}</text>
+                </view>
+                
+                <view class="carInfoRow1">
+                     <text>{{item.time ? item.time+'上牌/' : ''}} {{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
+                </view>
+                <view class="carInfoRow2">
+                    <text>心里价{{item.priceArea}}</text>
+                    <!-- <text>浏览量：</text> -->
+                    <text>浏览量：{{item.browse_volume}}</text>
+                </view>
+              </view>
+              <view class="carInfoContLine">
+              </view> 
             </view>
-          </view>
-          <view class="carInfoContLine">
-          </view>
         </view>
-      </view>
-    </block>
-  </view>
-
-  <view class="carInfoList" wx:if="{{currentInfo== 'clue'}}">
-    <block wx:for="{{clueInfoList}}" wx:key="clueInfoList">
-      <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
-        <view class="carImg">
-          <view class="imgArea">
-            <image src='{{item.imgSrc}}' mode='widthFix'></image>
-          </view>
-        </view>
-        <view class="carInfoCont">
-          <view class="carInfoContWord">
-            <view class="carName">
-              <text>{{item.brand_name}}{{item.name}}</text>
-            </view>
-
-            <view class="carInfoRow1">
-              <text>{{item.time ? item.time+'上牌/' : ''}} {{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
-            </view>
-            <view class="carInfoRow2">
-              <text>心里价{{item.priceArea}}</text>
-              <!-- <text>浏览量：</text> -->
-              <text>浏览量：{{item.browse_volume}}</text>
-            </view>
-          </view>
-          <view class="carInfoContLine">
-          </view>
-        </view>
-      </view>
-    </block>
-  </view>
+        </block>
+    </view>
 </view>
 
-<view class="logAreaBg" wx:if="{{settingShow}}" bindtouchmove='bindtouchmove'>
-  <view class="logArea">
-    <image src='../../images/auth-icon.png' mode='widthFix'></image>
-    <text>您暂时未登录</text>
-    <text>登陆后才可以使用友车圈哦</text>
-    <view class="logAreaButton">
-      <text catchtap='request_pay'>登录授权</text>
-      <button open-type='getUserInfo' bindgetuserinfo="getuserinfo"></button>
+<view class="logAreaBg"  wx:if="{{settingShow}}"  bindtouchmove='bindtouchmove'>
+    <view class="logArea">
+      <image src='../../images/auth-icon.png' mode='widthFix'></image>
+      <text>您暂时未登录</text>
+      <text>登陆后才可以使用友车圈哦</text>
+      <view class="logAreaButton">
+          <text catchtap='request_pay' >登录授权</text>
+          <button open-type='getUserInfo' bindgetuserinfo="getuserinfo"></button>
+      </view>
     </view>
-  </view>
-  <view class="logCheck">
-    <switch checked disabled bindchange="switch1Change" type="checkbox" />
-    <text>登录即为默认同意并会遵守</text>
-    <text>友车圈服务协议</text>
-  </view>
+    <view class="logCheck">
+       <switch checked disabled bindchange="switch1Change" type="checkbox"/>
+       <text>登录即为默认同意并会遵守</text>
+       <text>友车圈服务协议</text>
+    </view>
 </view>

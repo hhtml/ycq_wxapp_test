@@ -33,7 +33,8 @@ Page({
         name: '关于友车',
         path: '../myShop/myShop'
       }
-    ]
+    ],
+    isRealName:0
   },
 
   /**
