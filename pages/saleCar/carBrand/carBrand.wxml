@@ -1,0 +1,30 @@
+<!--pages/saleCar/carBrand/carBrand.wxml-->
+
+<!-- 中间滑动区域 -->
+<scroll-view scroll-y="true" scroll-into-view="{{anchor}}"  scroll-with-animation="true" class="src">
+  <view id="{{index}}" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectIndex' class="wrap">
+    <view class="initial">{{index}}</view>
+    <view class="carName" wx:for-item="itemName" wx:for="{{item.brand}}" wx:key="{{itemName.id}}" bindtap='selectCar' id="{{index}}+{{itemName.id}}">
+    <text class="marker" wx:if="{{marker == itemName.id}}"></text>
+    {{itemName.name}}
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 右边锚点区域 -->
+<view class="anchor-wrap">
+  <view class="anchor" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectAnchor' id="{{index}}">{{index}}</view>
+</view>
+
+<!-- 遮罩层 -->
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'>
+  <image src="/images/carBrand-icon.png" class="carBrand_icon" wx:if="{{showModal}}" animation="{{iconMove}}"></image>
+</view>
+
+<!-- 具体车型区域 -->
+<scroll-view class="carList-wrap" wx:if="{{showModal}}" scroll-y="true" animation="{{moveData}}">
+  <view class="carList" wx:for="{{carType}}" wx:key="{{item.id}}" bindtap='selectCarType' id="{{item.name}}">{{item.name}}</view>
+</scroll-view>
+
+
+

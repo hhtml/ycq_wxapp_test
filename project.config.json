@@ -18,7 +18,7 @@
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -33,23 +33,16 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
-<<<<<<< Updated upstream
 					"id": 0,
 					"name": "单页编译",
-					"pathName": "pages/mine/mine",
+					"pathName": "pages/saleCar/carBrand/carBrand",
 					"query": "",
-=======
-					"id": -1,
-					"name": "单页",
-					"pathName": "pages/mine/mine",
->>>>>>> Stashed changes
 					"scene": null
 				}
 			]

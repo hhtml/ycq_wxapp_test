@@ -110,31 +110,31 @@ Page({
         console.log('请求失败', err);
       });
   },
-  bindPickerColumnChange(e) {
-    console.log('(e.detail.column:', e.detail.column)
-    var zimuList = this.data.zimuList;
-    if (e.detail.column == 0) {
-      var brands = this.getCitysByIndex(e.detail.value);
-      this.setData({
-        brandInfo: [zimuList, brands]
-      })
-    }
-  },
-  bindPickerChange(e) {
-    console.log(e.detail.value);
-    var brandList = this.getCitysByIndex(e.detail.value[0]);
-    var brand_id = brandList[e.detail.value[1]].id;
-    var brand_name = brandList[e.detail.value[1]].name;
-    console.log('brand_id:', brand_name);
-    var brand = {
-      id: brand_id,
-      name: brand_name
-    }
-    this.setData({
-      brand
-    })
+  // bindPickerColumnChange(e) {
+  //   console.log('(e.detail.column:', e.detail.column)
+  //   var zimuList = this.data.zimuList;
+  //   if (e.detail.column == 0) {
+  //     var brands = this.getCitysByIndex(e.detail.value);
+  //     this.setData({
+  //       brandInfo: [zimuList, brands]
+  //     })
+  //   }
+  // },
+  // bindPickerChange(e) {
+  //   console.log(e.detail.value);
+  //   var brandList = this.getCitysByIndex(e.detail.value[0]);
+  //   var brand_id = brandList[e.detail.value[1]].id;
+  //   var brand_name = brandList[e.detail.value[1]].name;
+  //   console.log('brand_id:', brand_name);
+  //   var brand = {
+  //     id: brand_id,
+  //     name: brand_name
+  //   }
+  //   this.setData({
+  //     brand
+  //   })
 
-  },
+  // },
 
   getCitysByIndex(index) {
     var zimuList = this.data.zimuList;
@@ -368,11 +368,21 @@ Page({
     }
     
   },
+
+  //选择车辆品牌
+  selectCar:function(){
+    wx.navigateTo({
+      url: '../saleCar/carBrand/carBrand'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.request_brand();
+    this.setData({
+      carType: app.globalData.carBrand
+    })
   },
   
   /**
@@ -386,21 +396,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      carType: app.globalData.carBrand
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    app.globalData.carType = '请选择车型'
+    app.globalData.carBrand = '选择品牌'
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    app.globalData.carType = '请选择车型'
+    app.globalData.carBrand = '选择品牌'
   },
 
   /**
