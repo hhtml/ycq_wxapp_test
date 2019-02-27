@@ -74,14 +74,16 @@ Page({
       var index=e.currentTarget.dataset.index;
       var iconList=this.data.iconList;
       var path = iconList[index].path;
+    if (path){
       wx.navigateTo({
         url: path,
       })
-
-    // wx.showToast({
-    //   title: '即将上线',
-    //   image: '../../images/warn.png'
-    // })
+    }else{
+      wx.showToast({
+      title: '即将上线',
+      image: '../../images/warn.png'
+    })
+    }
   },
   switchTitle:function(e){
       var info=e.currentTarget.dataset.info;

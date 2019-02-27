@@ -97,7 +97,7 @@ image.imageIcon{
   width: 100%;
   height: 95rpx;
   line-height: 95rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #666;
 }
 .itemCont text{
@@ -114,7 +114,7 @@ image.imageIcon{
   text-align: right;
 }
 .picker text{
-  font-size: 28rpx;
+  font-size: 26rpx;
   color: #666;
 }
 text.formTip{
