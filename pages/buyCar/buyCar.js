@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    multiIndex:[0,0],
+    multiIndex: [0, 0],
     form: {
       carType: '',
       carRegion: '',
@@ -45,12 +45,12 @@ Page({
       form: form
     })
   },
-  descriptionInput(e){
+  descriptionInput(e) {
     var form = this.data.form;
-    form.description=e.detail.value;
-     this.setData({
-       form: form
-     })
+    form.description = e.detail.value;
+    this.setData({
+      form: form
+    })
   },
   /**
    * 品牌相关
@@ -154,7 +154,7 @@ Page({
       formTipShow: true
     });
     var $this = this;
-    setTimeout(function () {
+    setTimeout(function() {
       $this.setData({
         formTipShow: false
       })
@@ -183,7 +183,7 @@ Page({
     })
   },
   //获取短信验证码
-  get_sms_code: function () {
+  get_sms_code: function() {
     var telInput = this.data.form.phone;
     if (!telInput) {
       wx.showToast({
@@ -195,8 +195,8 @@ Page({
       var dtNUm = this.data.dtNUm;
       var that = this;
       $http.post('index/sendMessage', {
-        'mobile': telInput
-      })
+          'mobile': telInput
+        })
         .then(res => {
           //成功回调
           var data = res.data;
@@ -206,9 +206,10 @@ Page({
               sentSms: true
             });
             /*****************定时器 ****/
-            var timer = setInterval(function () {
+            var timer = setInterval(function() {
               timeclock();
             }, 1000);
+
             function timeclock() {
               if (dtNUm == 0) {
                 clearInterval(timer);
@@ -219,7 +220,9 @@ Page({
                 return;
               } else {
                 dtNUm--;
-                that.setData({ dtNUm: dtNUm });
+                that.setData({
+                  dtNUm: dtNUm
+                });
                 console.log('dtNUm', dtNUm)
                 return dtNUm;
               }
@@ -251,9 +254,9 @@ Page({
     var smscode = this.data.smscode;
     var $this = this;
     $http.post('index/clickAppointment', {
-      mobile: phone,
-      code: smscode
-    })
+        mobile: phone,
+        code: smscode
+      })
       .then(res => {
         //成功回调
         var resObj = res.data;
@@ -283,7 +286,8 @@ Page({
       });
   },
   checkForm() {
-    var form = this.data.form;
+    var form = this.data.form; 
+    if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '有符合需求的卖家，第一时间联系我哦'; 
     for (var item in form) {
       if (!form[item]) {
         return false;
@@ -295,12 +299,12 @@ Page({
   cleanForm() {
     var form = this.data.form;
     for (var item in form) {
-      if(item == 'phone'){
+      if (item == 'phone') {
 
-      }else{
+      } else {
         form[item] = '';
       }
-      
+
     }
     this.setData({
       form: form
@@ -314,17 +318,16 @@ Page({
   },
   //发布
   formSubmit(e) {
-    var formId=e.detail.formId;
+    var formId = e.detail.formId;
     var form = this.data.form;
     var brand = this.data.brand;
-    var $this=this;
-    
+    var $this = this; 
     if (!this.checkForm() || !brand.id) {
       wx.showToast({
         title: '请将信息填写完整',
         image: '../../images/warn.png'
       })
-    } else{
+    } else {
       var carInfo = {
         brand_id: brand.id,
         models_name: form.carType,
@@ -334,9 +337,9 @@ Page({
         store_description: form.description
       }
       $http.post('index/wantBuyCar', {
-        carInfo: carInfo,
-        formId: formId
-      })
+          carInfo: carInfo,
+          formId: formId
+        })
         .then(res => {
           //成功回调
           var resObj = res.data;
@@ -366,7 +369,7 @@ Page({
           console.log('请求失败', err);
         });
     }
-    
+
   },
 
   //选择车辆品牌
@@ -378,63 +381,70 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.request_brand();
     this.setData({
       carType: app.globalData.carBrand
     })
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
+
   onShow: function () {
     this.setData({
       carType: app.globalData.carBrand
     })
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
+
   onHide: function () {
     app.globalData.carType = '请选择车型'
     app.globalData.carBrand = '选择品牌'
+
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
+
   onUnload: function () {
     app.globalData.carType = '请选择车型'
     app.globalData.carBrand = '选择品牌'
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

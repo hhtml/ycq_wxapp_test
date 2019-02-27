@@ -59,56 +59,14 @@ Page({
         info: 'buy',
         name: '有人想买',
         icon: '../../images/switch-title-02.png'
-      },
-      // {
-      //   info: 'clue',
-      //   name: '线索',
-      //   icon: '../../images/switch-title-03.png'
-      // },
-
+      } 
+      
     ],
-    saleInfoList:[
-     /*  {
-        id:0,
-        imgSrc:'../../images/car-test_03.png',
-        name:'2011款奥迪A6 2.0T自动舒适版',
-        priceArea:'10.5-30.5',
-        sale:'30',
-        time:'2011-03',
-        miles:'3万',
-        addr:'成都',
-        distance:'310'
-       }*/
-    ],
-    buyInfoList: [
-      /*{
-        id: 0,
-        imgSrc: '../../images/car-test_03.png',
-        name: '2011款奥迪A6 2.0T自动舒适版',
-        priceArea: '10.5-30.5',
-        sale: '30',
-        time: '2011-03',
-        miles: '3万',
-        addr: '成都',
-        distance: '310'
-      }*/
-    ],
-    clueInfoList: [
-      /*{
-        id: 0,
-        imgSrc: '../../images/car-test_03.png',
-        name: '2011款奥迪A6 2.0T自动舒适版',
-        priceArea: '10.5-30.5',
-        sale: '30',
-        time: '2011-03',
-        miles: '3万',
-        addr: '成都',
-        distance: '310'
-      }*/
-    ],
+  
     currentInfo:'sale',
     searchResultShow:true,
-    searchResult:[]
+    searchResult:[],
+    shareInfo:''
   },
   //事件处理函数
   
@@ -187,12 +145,15 @@ Page({
         //成功回调
         var resObj = res.data;
         console.log('首页数据：', resObj);
+
         if (resObj.code == 1) {
           var bannerList = resObj.data.bannerList;
           var storeList = resObj.data.storeList;
           var saleList = resObj.data.carModelList.modelsInfoList;
           var buyList = resObj.data.carModelList.buycarModelList;
           var clueList = resObj.data.carModelList.clueList;
+          //分享数据
+          $this.data.shareInfo = resObj.data.share;
           bannerList.forEach((val,index)=>{
              var obj={
                title:val.title,
@@ -409,27 +370,9 @@ Page({
   onShareAppMessage: function () {
     let that = this;
     return {
-      title: '友车圈圈', // 转发后 所显示的title
+      title: that.data.shareInfo.shares_title, // 转发后 所显示的title
       path: '/pages/index/index', // 相对的路径
-      success: (res) => {    // 成功后要做的事情
-        // console.log(res.shareTickets[0])
-
-        // wx.getShareInfo({
-        //   shareTicket: res.shareTickets[0],
-        //   success: (res) => {
-        //     that.setData({
-        //       isShow: true
-        //     })
-        //     console.log(that.setData.isShow)
-        //   },
-        //   fail: function (res) { console.log(res) },
-        //   complete: function (res) { console.log(res) }
-        // })
-      },
-      fail: function (res) {
-        // 分享失败
-        console.log(res)
-      }
+      imgPathimageUrl: that.data.shareInfo.shares_img
     }
   },
 
@@ -438,6 +381,9 @@ Page({
     wx.navigateTo({
       url: '../mine/serviceAgreement/serviceAgreement'
     })
+  },
+  onShow:function(){
+    this.request_index_info();
   }
   // , onLoad: function (options){
   //   console.log("index 生命周期 onload" + JSON.stringify(options))

@@ -196,7 +196,7 @@
 
     <view class='formItem'>
         <view class="itemLeft">
-           <text>*</text>
+           <text></text>
            <text>车况描述</text>
         </view>
         <view class="itemRight">
