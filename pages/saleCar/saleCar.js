@@ -300,6 +300,7 @@ Page({
   },
   checkForm(){
     var form=this.data.form;
+    if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '有符合需求的卖家，第一时间联系我哦'; 
     for(var item in form){
       if(!form[item]){
         return false;
@@ -334,18 +335,20 @@ Page({
     var form = this.data.form;
     var brand=this.data.brand;
     var $this=this;
-    var imgList = this.data.imgList;
+    var imgList = this.data.imgList; 
     if (!this.checkForm() || !brand.id){
       wx.showToast({
         title: '请将信息填写完整',
         image: '../../images/warn.png'
       })
-    } else if(imgList.length < 6){
-      wx.showToast({
-        title: '至少上传6张图片',
-        image: '../../images/warn.png'
-      })
-    } else if (this.data.form.price<1000){
+    } 
+    // else if(imgList.length < 6){
+    //   wx.showToast({
+    //     title: '至少上传6张图片',
+    //     image: '../../images/warn.png'
+    //   })
+    // } 
+    else if (this.data.form.price<1000){
       wx.showToast({
         title: '价格有误',
         image: '../../images/warn.png'
@@ -475,9 +478,9 @@ Page({
    */
   onLoad: function (options) {
     this.request_brand();
-    this.setData({
-      citys: $http.testCitys
-    })
+    // this.setData({
+    //   citys: $http.testCitys
+    // })
   },
 
   /**

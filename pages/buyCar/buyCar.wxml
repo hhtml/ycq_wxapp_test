@@ -87,7 +87,7 @@
 
     <view class='formItem note'>
         <view class="itemLeft">
-           <text>*</text>
+           <text></text>
            <text>备注</text>
         </view>
         <view class="itemRight">
