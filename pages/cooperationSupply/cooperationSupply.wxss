@@ -124,12 +124,14 @@ text.checkBrand{
   align-items: center;
 }
 .rowInput input{
+  width: 100%;
   height: 65rpx;
   line-height: 65rpx;
   color: #888;
   font-size: 30rpx;
   
 }
+
 .rowTextArea{
   width: 100%;
   background-color: #fff;
@@ -138,6 +140,7 @@ text.checkBrand{
   padding:0 20rpx 30rpx 20rpx;
   box-sizing:border-box;
 }
+
 .rowTextArea textarea{
   width: 100%;
   height: 150rpx;
@@ -146,6 +149,7 @@ text.checkBrand{
   background-color: #f2f2f2;
   font-size: 28rpx;
   color: #888;
+  border-radius: 8rpx;
 }
 .smscode{
   width: 245rpx;
@@ -170,7 +174,7 @@ text.checkBrand{
   display: block;
   padding: 20rpx 0;
 }
-.partnerItem checkbox{
+.partnerItem switch{
   margin: 0 20rpx;
 }
 .partnerItem text{
@@ -239,3 +243,35 @@ text.checkBrand{
   width: 100%;
   height: 100%;
 }
+.uploadShopImg{
+  padding: 0 24rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.uploadShopImg .uploadLeft {
+  height: 193rpx;
+  line-height: 193rpx;
+}
+.uploadShopImg .uploadRight{
+  height: 193rpx;
+  background-color: #f2f2f2;
+  border-radius: 8rpx;
+  text-align: center;
+  overflow: hidden;
+}
+
+.uploadId .uploadLeft {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.uploadId .uploadLeft .uploadLeftItem{
+  height: 193rpx;
+  line-height: 193rpx;
+  background-color: #f2f2f2;
+  border-radius: 8rpx;
+  overflow: hidden;
+  
+}
+
