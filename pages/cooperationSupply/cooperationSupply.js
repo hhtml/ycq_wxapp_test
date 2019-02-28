@@ -1,4 +1,6 @@
 // pages/cooperationSupply/cooperationSupply.js
+const app = getApp();
+var $http = require('../../utils/http.js');
 Page({
 
   /**
@@ -25,45 +27,41 @@ Page({
         }
         ],
     partnerList:[
-      {
+      /*{
         id:0,
-        value:'5A级合伙人 2万元 （邀请权限5A级5A以下均可）',
+        value:'铂金店铺 999元 （无限发布车源）',
         checked:false
       },
       {
         id: 1,
-        value: '3A级合伙人 2万元 （邀请权限3A级3A以下均可）',
+        value: '黄金店铺 399元 （可发布15次车源）',
         checked: false
       },
       {
         id: 2,
-        value: '2A级合伙人 2万元 （邀请权限2A级2A以下均可）',
+        value: '白银店铺 199元 （可发布7次车源）',
         checked: false
-      },
-      {
-        id: 3,
-        value: 'A级合伙人 2万元 （邀请权限A级A以下均可）',
-        checked: false
-      },
-      {
-        id: 4,
-        value: 'B级合伙人 2万元 （邀请权限B级B以下均可）',
-        checked: false
-      },
-      {
-        id: 5,
-        value: 'C级合伙人 2万元 （邀请权限C级C以下均可）',
-        checked: false
-      },
+      },*/
+      
     ],
     idCardSrc:[],
     form:{
       shopName:'',
       shopRegion:'',
       shopRegionDetail:'',
-      shopTel:''
+      context:'',//备注
+      time:'',
+      smscode:'',
+      inviteNumber:'',
+      shopTel:'',
+      shopImg:'',
+      idCard:'',
+      idCardFront:'',
+      idCardReverse:'',
+      regionImg:''
     },
-    dtNUm:60
+    dtNUm:60,
+    appImgUrl: app.globalData.localImgUrl
   },
   /***
    * 事件函数
@@ -73,16 +71,12 @@ Page({
         activeId:e.currentTarget.dataset.id
       })
   },
-  nameInput(e){
+  //表单input输入事件
+  formBindInput(e) {
+    console.log(e.currentTarget.dataset.name);
+    var keyName = e.currentTarget.dataset.name;
     var form = this.data.form;
-    form.shopName = e.detail.value;
-    this.setData({
-      form: form
-    })
-  },
-  regionDetailInput(e) {
-    var form = this.data.form;
-    form.shopRegionDetail = e.detail.value;
+    form[keyName] = e.detail.value;
     this.setData({
       form: form
     })
@@ -95,54 +89,137 @@ Page({
       form: form
     })
   },
-  telInput(e) {
-    var form = this.data.form;
-    form.shopTel = e.detail.value;
-    this.setData({
-      form: form
-    })
-  },
-  contextInput(e){
-    var form = this.data.form;
-    form.context = e.detail.value;
-    this.setData({
-      form: form
-    })
-  },
+  
   chooseBrand(e){
-     var index=e.currentTarget.dataset.index;
+    var index=e.currentTarget.dataset.index;
     var brandList = this.data.brandList;
     var check = brandList[index].check;
     brandList[index].check = !check;
     this.setData({ brandList: brandList})
   },
-  uploadId(e){
-    var $this=this;
-    var idCardSrc =this.data.idCardSrc;
+  
+  
+  uploadShopImg(e) {
+    var $this = this;
+    var form = this.data.form;
     wx.chooseImage({
-      count: 2,
+      count: 1,
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
-        for (var item in tempFilePaths){
-          idCardSrc.push(tempFilePaths[item]);
-        }
+        console.log('tupian:', tempFilePaths)
+        wx.uploadFile({
+          url: app.globalData.url + 'index/upModelImg',
+          filePath: tempFilePaths[0],
+          name: 'file',
+          formData: null,
+          success: function (res) {
+            wx.hideLoading()
+            //上传成功后的图片地址imgUrl，需要与服务器地址（app.js全局设置）做拼接, setData出去做预览
+            console.log(JSON.parse(res.data));
+            let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
+            form.shopImg = imgUrl;
+            $this.setData({ form: form });
+          },
+          fail: function (err) {
+            console.log('上传失败：', err)
+          }
+        });  
+      }
+    });
+  },
+  uploadIdFront(e){
+    var $this=this;
+    var form = this.data.form;
+    wx.chooseImage({
+      count: 1,
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
+        wx.uploadFile({
+          url: app.globalData.url + 'index/upModelImg',
+          filePath: tempFilePaths[0],
+          name: 'file',
+          formData: null,
+          success: function (res) {
+            wx.hideLoading()
+            //上传成功后的图片地址imgUrl，需要与服务器地址（app.js全局设置）做拼接, setData出去做预览
+            console.log(JSON.parse(res.data));
+            let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
+            form.idCardFront = imgUrl;
+            $this.setData({ form: form });
+          },
+          fail: function (err) {
+            console.log('上传失败：', err)
+          }
+        });  
         
-        $this.setData({idCardSrc});
+      }
+    });
+  },
+  uploadIdReverse(e) {
+    var $this = this;
+    var form = this.data.form;
+    wx.chooseImage({
+      count: 1,
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
+        wx.chooseImage({
+          count: 1,
+          success(res) {
+            // tempFilePath可以作为img标签的src属性显示图片
+            var tempFilePaths = res.tempFilePaths;
+            wx.uploadFile({
+              url: app.globalData.url + 'index/upModelImg',
+              filePath: tempFilePaths[0],
+              name: 'file',
+              formData: null,
+              success: function (res) {
+                wx.hideLoading()
+                //上传成功后的图片地址imgUrl，需要与服务器地址（app.js全局设置）做拼接, setData出去做预览
+                console.log(JSON.parse(res.data));
+                let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
+                form.idCardReverse = imgUrl;
+                $this.setData({ form: form });
+              },
+              fail: function (err) {
+                console.log('上传失败：', err)
+              }
+            });
+
+          }
+        });
+        
       }
     });
   },
   uploadRegion(e) {
     var $this = this;
-  
+    var form = this.data.form;
     wx.chooseImage({
       count:1,
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
+        wx.uploadFile({
+          url: app.globalData.url + 'index/upModelImg',
+          filePath: tempFilePaths[0],
+          name: 'file',
+          formData: null,
+          success: function (res) {
+            wx.hideLoading()
+            //上传成功后的图片地址imgUrl，需要与服务器地址（app.js全局设置）做拼接, setData出去做预览
+            console.log(JSON.parse(res.data));
+            let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
+            form.regionImg = imgUrl;
+            $this.setData({ form: form });
+          },
+          fail: function (err) {
+            console.log('上传失败：', err)
+          }
+        });
         
-
-        $this.setData({ regionSrc: tempFilePaths });
       }
     });
   },
@@ -209,12 +286,201 @@ Page({
     }
 
   },
+  partnerChange(e){
+    var index = e.currentTarget.dataset.index;
+    
+    var check=e.detail.value;
+    var partnerList = this.data.partnerList;
+    var shop_level_id;
+    //console.log('index:', partnerList[index].checked);
+    //console.log('check:', check)
+    if (check){
+      for (var i = 0; i < partnerList.length; i++) {
+        partnerList[i].checked =false;
+      }
+      partnerList[index].checked = true;
+      shop_level_id = partnerList[index].id;
+    }else{
+      for (var i = 0; i < partnerList.length; i++) {
+        partnerList[i].checked = false;
+      }
+    }
+    console.log('shop_level_id:', shop_level_id)
+    this.setData({
+      partnerList: partnerList,
+      shop_level_id: shop_level_id
+    })
+    
+    
+  },
+  come_in_page(){
+    var $this=this;
+    var form = this.data.form;
+    var partnerList=new Array();
+    $http.post('Shop/index')
+      .then(res => {
+        //成功回调
+        var resObj = res.data;
+        console.log('进入店铺申请：', resObj);
+        if (resObj.code == 1) {
+          var data=resObj.data;
+          
+          var submit_type = data.submit_type;
+          form.inviteNumber = data.inviter_code;
+          var store_level_list = data.store_level_list;
+          if (store_level_list){
+            store_level_list.forEach((val,index)=>{
+                 var obj={
+                   id: val.id,
+                   partner_rank: val.partner_rank,
+                   money: val.money,
+                   explain: val.explain,
+                   checked: false
+                 }
+              partnerList[index]=obj;
+            });
+          }
+          $this.setData({
+            submit_type: submit_type,
+            form: form,
+            partnerList: partnerList
+          })
+
+        } else {
+          wx.showToast({
+            title: resObj.msg,
+            image: '../../images/warn.png'
+          });
+          console.log('请求失败：', resObj.msg);
+        }
+      }).catch(err => {
+        //异常回调
+        console.log('请求失败', err);
+      });
+  },
+  
+  checkForm() {
+    var form = this.data.form;
+    for (var item in form) {
+      if (!form[item]&&item!='inviteNumber') {
+        return false;
+      }
+    }
+    console.log('true');
+    return true;
+  },
+  cleanForm() {
+    var form = this.data.form;
+    for (var item in form) {
+      if (item == 'phone') {
+
+      } else {
+        form[item] = '';
+      }
+
+    }
+    this.setData({
+      form: form
+    })
+  },
+  checkBrand(){
+    var brandList=this.data.brandList;
+    for (var i = 0; i < brandList.length;i++){
+      if (brandList[i].check){
+        return true;
+      }
+    }
+    return false;
+  },
+  getBrand(){
+    var checkBrands=new Array();
+    var brandList = this.data.brandList;
+    for (var i = 0; i < brandList.length; i++) {
+      if (brandList[i].check) {
+        checkBrands.push(brandList[i].name);
+      }
+    }
+    return checkBrands;
+  },
+  formSubmit(e){
+    var formId=e.detail.formId;
+    var shop_level_id = this.data.shop_level_id;
+    var form=this.data.form;
+    if (!this.checkForm()){
+      wx.showToast({
+        title: '请将信息填写完整',
+        image: '../../images/warn.png'
+      })
+    } else if (!this.checkBrand()){
+      wx.showToast({
+        title: '请选择主营车系',
+        image: '../../images/warn.png'
+      });
+    } else if (!shop_level_id){
+      wx.showToast({
+        title: '请选择合伙人等级',
+        image: '../../images/warn.png'
+      })
+     }else{
+      var checkBrands=this.getBrand();
+      var checkBrandStr = checkBrands.join(',');//主营品牌名称，用,连接
+      console.log("formId,checkBrandStr:", formId, checkBrandStr);
+      var submit_type = this.data.submit_type;
+      var auditInfo={
+        store_name: form.shopName,
+        cities_name: form.shopRegion,
+        store_address: form.shopRegionDetail,
+        store_description: form.context,
+        phone:form.shopTel,
+        login_code:form.smscode,
+        store_img: form.shopImg,
+        business_life:form.time,
+        main_camp: checkBrandStr,
+        bank_card: form.idCard,
+        id_card_positive: form.idCardFront,
+        id_card_opposite: form.idCardReverse,
+        business_licenseimages:form.regionImg,
+        level_id: shop_level_id,
+        code: form.inviteNumber
+      }
+      
+      $http.post('shop/submit_audit',{
+        submit_type: submit_type,
+        auditInfo: auditInfo
+      })
+        .then(res => {
+          //成功回调
+          var resObj = res.data;
+          console.log('表单提交：', resObj);
+          if (resObj.code == 1) {
+            var data = resObj.data;
+            wx.showToast({
+              title: resObj.msg,
+              icon: 'success'
+            });
+            wx.navigateTo({
+              url: '../order/order',
+            })
+          } else {
+            wx.showToast({
+              title: resObj.msg,
+              image: '../../images/warn.png'
+            });
+            console.log('请求失败：', resObj.msg);
+          }
+        }).catch(err => {
+          //异常回调
+          console.log('请求失败', err);
+        });
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.come_in_page();
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成
