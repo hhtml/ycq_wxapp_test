@@ -122,7 +122,10 @@ Page({
         //获取邀请码
         $this.data.posterInfo.invite_code = resObj.data.userInfo.invite_code
         //获取背景图片
-        $this.data.posterInfo.bgImg = app.globalData.imgUrl + resObj.data.userInfo.invite_bg_img
+        if (resObj.data.userInfo.invite_bg_img){
+          $this.data.posterInfo.bgImg = app.globalData.imgUrl + resObj.data.userInfo.invite_bg_img
+        }
+        
         if (typeof $this.data.posterInfo.bgImg === 'string') {
 
           wx.getImageInfo({   //  小程序获取图片信息API
@@ -139,7 +142,10 @@ Page({
           })
         }
         //获取二维码图片地址
-        $this.data.posterInfo.ewmCode = app.globalData.localImgUrl + resObj.data.userInfo.invitation_code_img
+        if (resObj.data.userInfo.invitation_code_img){
+          $this.data.posterInfo.ewmCode = app.globalData.localImgUrl + resObj.data.userInfo.invitation_code_img
+        }
+        
         if (typeof $this.data.posterInfo.ewmCode === 'string') {
 
           wx.getImageInfo({   //  小程序获取图片信息API
