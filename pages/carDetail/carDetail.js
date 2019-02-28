@@ -104,7 +104,7 @@ Page({
           // nickname =  $this.cutStr(data.detail.user.nickname, 6),
           createtime: data.detail.createtime,
           default: data.detail.default,
-          defaultUrl: app.globalData.imgUrl
+          defaultUrl: app.globalData.imgUrl,
         }
         form.phone = data.detail.user.mobile;
         var detailImages = data.detail.modelsimages;
