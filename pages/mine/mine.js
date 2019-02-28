@@ -108,6 +108,7 @@ Page({
             }
           })
         }
+
         // //获取背景图片
         $this.data.userInfo.invite_bg_img = app.globalData.imgUrl + $this.data.userInfo.invite_bg_img
         if (typeof $this.data.userInfo.invite_bg_img === 'string') {
@@ -132,6 +133,7 @@ Page({
             success: function(res) {
               $this.data.switch3 = 1
               $this.data.userInfo.invitation_code_img = res.path
+
             },
             fail(err) {
               console.log($this.data.userInfo.invitation_code_img)

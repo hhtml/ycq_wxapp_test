@@ -36,12 +36,10 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "单页编译",
-					"pathName": "pages/saleCar/carBrand/carBrand",
 					"query": "",
 					"scene": null
 				},
