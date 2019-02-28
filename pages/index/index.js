@@ -74,14 +74,16 @@ Page({
       var index=e.currentTarget.dataset.index;
       var iconList=this.data.iconList;
       var path = iconList[index].path;
+    if (path){
       wx.navigateTo({
         url: path,
       })
-
-    // wx.showToast({
-    //   title: '即将上线',
-    //   image: '../../images/warn.png'
-    // })
+    }else{
+      wx.showToast({
+      title: '即将上线',
+      image: '../../images/warn.png'
+    })
+    }
   },
   switchTitle:function(e){
       var info=e.currentTarget.dataset.info;
@@ -167,7 +169,8 @@ Page({
                 name: val.store_name,
                 addr: val.cities_name,
                 typeCount: val.modelsinfo_count,
-                brands: val.main_camp
+                brands: val.main_camp,
+                factorytime: val.factorytime
               }
               shopList[index] = obj;
             });
@@ -184,7 +187,8 @@ Page({
                 miles: val.kilometres,
                 addr: val.parkingposition,
                 type:val.type,
-                browse_volume: val.browse_volume
+                browse_volume: val.browse_volume,
+                factorytime: val.factorytime
               }
               saleInfoList[index] = obj;
             });
@@ -201,8 +205,8 @@ Page({
                 miles: val.kilometres,
                 addr: val.parkingposition,
                 type: val.type,
-                browse_volume: val.browse_volume
-
+                browse_volume: val.browse_volume,
+                factorytime: val.factorytime
               }
               buyInfoList[index] = obj;
             });
@@ -219,8 +223,8 @@ Page({
                 miles: val.kilometres,
                 addr: val.parkingposition,
                 type: val.type,
-                browse_volume: val.browse_volume
-
+                browse_volume: val.browse_volume,
+                factorytime: val.factorytime
               }
               clueInfoList[index] = obj;
             });

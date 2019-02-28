@@ -39,6 +39,8 @@ App({
   //测试版本域名
   globalData: {
     userInfo: null,
+    carType:'请选择车型',
+    carBrand:'选择品牌',
     url: 'https://czz.junyiqiche.com/addons/cms/wxapp.', 
     imgUrl:'https://static-czz.junyiqiche.com/',  //此处不可修改...
     localImgUrl: 'https://czz.junyiqiche.com',
@@ -46,9 +48,11 @@ App({
   }
 
 
-//线上版本域名
+// 线上版本域名
   // globalData: {
   //   userInfo: null,
+  //   carType: '请选择车型',
+  //   carBrand: '选择品牌',
   //   url: 'https://ycq.ucuj.com.cn/addons/cms/wxapp.',
   //   imgUrl: 'https://static-czz.junyiqiche.com/',  //此处不可修改...
   //   localImgUrl: 'https://ycq.ucuj.com.cn',
