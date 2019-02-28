@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -36,12 +36,10 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
 			"list": [
 				{
 					"id": 0,
 					"name": "单页编译",
-					"pathName": "pages/mine/carFriend/carFriend",
 					"query": "",
 					"scene": null
 				},

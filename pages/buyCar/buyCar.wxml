@@ -4,7 +4,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>车辆品牌</text>
+           <text>意向品牌</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -33,11 +33,35 @@
           <text>2017款 1.6L 手动</text>
         </view>
     </view> -->
+    
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>求购年份</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <picker
+                  mode="date"
+                  value="{{form.productDate}}"
+                  start="2009-09-01"
+                  bindchange="productDateChange"
+                  fields="month"
+                >
+                  <view class="picker">
+                     <text>{{form.productDate}}</text>
+                  </view>
+                </picker>
+            </view>
+            <!--<text class="formTip">提示</text>-->
+        </view>
+    </view>
+
 
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>排量</text>
+           <text>意向排量</text>
         </view>
         <view>
               <view class="itemCont-displacement">
@@ -72,33 +96,11 @@
         </picker>
     </view>
 
-    <view class='formItem'>
-        <view class="itemLeft">
-           <text>*</text>
-           <text>出厂日期</text>
-        </view>
-        <view class="itemRight">
-            <view class="itemCont">
-               <picker
-                  mode="date"
-                  value="{{form.productDate}}"
-                  start="2009-09-01"
-                  bindchange="productDateChange"
-                  fields="month"
-                >
-                  <view class="picker">
-                     <text>{{form.productDate}}</text>
-                  </view>
-                </picker>
-            </view>
-            <!--<text class="formTip">提示</text>-->
-        </view>
-    </view>
 
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>车辆所在地</text>
+           <text>求购城市</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">

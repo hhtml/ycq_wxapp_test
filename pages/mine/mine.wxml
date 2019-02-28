@@ -136,6 +136,7 @@
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
 
 <view class="canvas-box" hidden="{{showModal == false}}">
-      <canvas  style="width:600rpx;height:900rpx;position:fixed;top:60rpx;left:75rpx;" canvas-id="mycanvas"/>
+      <canvas  style="width:600rpx;height:980rpx;position:fixed;top:40rpx;left:75rpx;" canvas-id="mycanvas"/>
 </view>  
       <button class="btn" wx:if="{{showModal}}" bindtap='saveImg'>保存图片</button>
+      

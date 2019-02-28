@@ -265,6 +265,7 @@ Page({
           $this.setData({
             transmission: transmission
           })
+          console.log($this.data.transmission)
           form.phone = data.mobile;
           for (var item in brandList){
             //console.log('item:',item);

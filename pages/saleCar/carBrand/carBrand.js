@@ -46,6 +46,7 @@ Page({
 
   //选择车型事件
   selectCar:function(e){
+    console.log(e)
     var that = this
     console.log(e.target.id)
     that.setData({
@@ -53,13 +54,13 @@ Page({
       carIndex:e.target.id.split('+')[0], 
       marker: e.target.id.split('+')[1]
     })
+    app.globalData.brand_id = e.target.id.split('+')[1]
     // console.log(that.data.carBrand['A'].brand[0].series)
   },
 
   // 对外暴露出id事件
   selectIndex:function(e){
     var that = this
-    console.log(e)
     console.log(e._relatedInfo.anchorTargetText)
     var carName = e._relatedInfo.anchorTargetText
     var carType = that.data.carBrand[e.currentTarget.id].brand[that.data.carIndex].series

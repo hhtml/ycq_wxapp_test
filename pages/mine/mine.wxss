@@ -209,6 +209,6 @@ image.navIcon{
   width:600rpx;
   position: fixed;
   left:75rpx;
-  top:1000rpx;
+  bottom:13%;
   z-index:9999;
 }
