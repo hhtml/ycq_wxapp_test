@@ -58,5 +58,5 @@ App({
   //   localImgUrl: 'https://ycq.ucuj.com.cn',
   //   statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
   // }
-  
+  //、现在的域名改成下面这些了,这个是上线的时候 后台设置的是哪个啊？这个你不用担心，不用操作好的，我给你微信了。。。。。
 })

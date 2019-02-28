@@ -35,14 +35,13 @@
 		"game": {
 			"list": []
 		},
-		"miniprogram":  
-			"current": 2, 
-			"current": 0 
+		"miniprogram": {
+			"current": -1,
 			"list": [
 				{
 					"id": 0,
 					"name": "单页编译",
-					"pathName": "pages/buyCar/buyCar",
+					"pathName": "pages/mine/carFriend/carFriend",
 					"query": "",
 					"scene": null
 				},
@@ -50,13 +49,7 @@
 					"id": -1,
 					"name": "单页-买车",
 					"pathName": "pages/buyCar/buyCar",
-					"query": "", 
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "单页-买车",
-					"pathName": "pages/mine/mine", 
+					"query": "",
 					"scene": null
 				}
 			]
