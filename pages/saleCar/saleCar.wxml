@@ -7,7 +7,7 @@
     <block wx:for="{{imgList}}">
        <view class='imgItem'>
          <view class="imgArea">
-           <image src='{{appImgUrl+item}}' mode='widthFix'></image>
+           <image src='{{appImgUrl+item}}' mode='widthFix' bindtap='previewImage'></image>
          </view>
          <image class="imageIcon"src='../../images/delete.png' bindtap="deleteImg" data-index="{{index}}"></image>
        </view>  

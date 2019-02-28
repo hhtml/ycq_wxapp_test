@@ -37,6 +37,9 @@ Page({
     wx.chooseImage({
       count: 9,
       success: function ({ tempFilePaths }) {
+        wx.showLoading({
+          title: '加载中',
+        })
         var promise = Promise.all(tempFilePaths.map((tempFilePath, index) => {
           return new Promise(function (resolve, reject) {
             wx.uploadFile({
@@ -45,6 +48,7 @@ Page({
               name: 'file',
               formData: null,
               success: function (res) {
+                wx.hideLoading()
                 //上传成功后的图片地址imgUrl，需要与服务器地址（app.js全局设置）做拼接, setData出去做预览
                 let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
                 console.log(JSON.parse(res.data));
@@ -59,6 +63,9 @@ Page({
         promise.then(function (results) {
           console.log(results);
           var newList = imgList.concat(results);
+          // for(var i in newList){
+          //   newList[i] = app.globalData.localImgUrl+newList[i]
+          // } 
           console.log('newList:', newList);
           $this.setData({
             imgList: newList
@@ -69,6 +76,13 @@ Page({
       }
     });
   },
+  //上传图片后点击预览
+  // previewImage(){
+  //   wx.previewImage({
+  //     current: '', // 当前显示图片的http链接
+  //     urls: this.data.imgList // 需要预览的图片http链接列表
+  //   })
+  // },
   deleteImg(e){
       var index=e.currentTarget.dataset.index;
       var imgList=this.data.imgList;

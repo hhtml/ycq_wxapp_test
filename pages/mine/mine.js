@@ -86,6 +86,14 @@ Page({
       //var user_id=wx.getStorageSync("user_id");
     
   },
+  //支付
+  // formSubmit(e){
+  //   var 
+  //   console.log(e.detail.formId);
+
+  //   console.log(e.detail.value);
+  // },
+
   request_mine(){
     var $this = this;
     $http.post('my/index')
@@ -99,7 +107,7 @@ Page({
           wx.getImageInfo({   //  小程序获取图片信息API
             src: $this.data.posterInfo.avatarImg,
             success: function (res) {
-              console.log(res.path)
+              // console.log(res.path)
               $this.data.posterInfo.avatarImg = res.path
             },
             fail(err) {
@@ -117,7 +125,7 @@ Page({
           wx.getImageInfo({   //  小程序获取图片信息API
             src: $this.data.posterInfo.bgImg,
             success: function (res) {
-              console.log(res.path)
+              // console.log(res.path)
               $this.data.posterInfo.bgImg = res.path
             },
             fail(err) {
@@ -133,7 +141,7 @@ Page({
           wx.getImageInfo({   //  小程序获取图片信息API
             src: $this.data.posterInfo.ewmCode,
             success: function (res) {
-              console.log(res.path)
+              // console.log(res.path)
               $this.data.posterInfo.ewmCode = res.path
             },
             fail(err) {
@@ -168,7 +176,7 @@ Page({
   erWeiMa:function(){
 
     var $this = this;
-    console.log($this.data.posterInfo.nickname);
+    // console.log($this.data.posterInfo.nickname);
     // wx.showToast({
     //   title: '即将上线',
     //   image: '../../images/warn.png',
