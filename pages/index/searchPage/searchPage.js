@@ -1,6 +1,7 @@
 // pages/index/searchPage/searchPage.js
 var models_name;
 var history = [];
+var $http = require('../../../utils/http.js');
 Page({
 
   /**
@@ -10,7 +11,7 @@ Page({
     inputValue:'', //输入框value值
     searchList:[], //搜索结果
     focus:true,
-    isHistory:true,
+    isHistory:false,
     history:[],
     noData:false
   },
@@ -82,37 +83,43 @@ Page({
       
     }else{
       that.setData({
-        isHistory: true
+        isHistory: true,
+        noData: false,
+        searchList:''
       })
     }
-    wx.request({
-      url: 'https://czz.junyiqiche.com/addons/cms/wxapp.index/search', 
-      data: {
-        query_criteria: e.detail.value
-      },
-      method:"POST",
-      success(res) {
-        console.log(res.data)
-        if (res.data.data.buy.length == 0 || res.data.data.sell.length == 0){
+    $http.post('index/search',{
+      query_criteria: e.detail.value
+    }).then(res=>{
+      console.log(res.data)
+        if (res.data.data.buy.length == 0 && res.data.data.sell.length == 0){
           that.setData({
             noData:true
           })
         }else{
           that.setData({
-            searchList: res.data.data
+            searchList: res.data.data,
+            noData: false
           })
         }
-        
-      }
+    })
+  },
+
+  //点击X取消输入框内容事件
+  close:function(){
+    var that = this
+    that.setData({
+      inputValue:'',
+      searchList:'',
+      noData:false
     })
   },
 
   //取消事件
   cancel:function(){
     var that = this
-    that.setData({
-      inputValue:'',
-      searchList:''
+    wx.switchTab({
+      url: '/pages/index/index'
     })
   },
   //选择买车事件
@@ -170,10 +177,11 @@ Page({
     wx.getStorage({
       key: 'history',
       success(res) {
-        console.log(res.data)
+        console.log(res)
         history = res.data
         that.setData({
-          history: res.data
+          history: history,
+          isHistory:true
         })
       }
     })
@@ -182,10 +190,33 @@ Page({
   //清除历史记录缓存事件
   clearHistory:function(){
     var that = this
-    wx.clearStorage('history')
+    wx.clearStorageSync('history')
     that.setData({
       history:''
     })
+  },
+
+  //点击历史记录搜索事件
+  searchHistory:function(e){
+    var that = this
+    that.setData({
+      inputValue:e._relatedInfo.anchorTargetText
+    })
+    $http.post('index/search', {
+      query_criteria: e._relatedInfo.anchorTargetText
+    }).then(res => {
+      console.log(res.data)
+      if (res.data.data.buy.length == 0 && res.data.data.sell.length == 0) {
+        that.setData({
+          noData: true
+        })
+      } else {
+        that.setData({
+          searchList: res.data.data,
+          noData: false
+        })
+      }
+      })
   }
 
 })

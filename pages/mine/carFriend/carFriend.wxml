@@ -1,0 +1,22 @@
+<!--pages/mine/carFriend/carFriend.wxml-->
+
+
+<!-- <view class="img1">
+  <image src="/images/img1.png" mode="widthFix"></image>
+</view>
+
+<view class="img2">
+  <image src="/images/img2.png" mode="widthFix"></image>
+</view>
+
+<view class="img3">
+  <image src="/images/img3.png" mode="widthFix"></image>
+</view> -->
+
+
+<!-- <rich-text nodes="{{carImg}}"></rich-text> -->
+
+
+<view class="img1" wx:for="{{imgUrls}}" wx:key="{{item.index}}">
+  <image src="{{item.imgUrl}}" mode="widthFix"></image>
+</view>

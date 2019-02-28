@@ -11,7 +11,7 @@ Page({
     screenHeight: 0,
     imgwidth: 0,
     imgheight: 0,
-
+    statusBarHeight: app.globalData.statusBarHeight,
     car: {
       /*banner: '../../images/car-test_03.png',
       name: '2011款奥迪A6 2.0T自动舒适版',
@@ -78,7 +78,7 @@ Page({
       console.log('车辆详情：', resObj);
       if (resObj.code == 1) {
         var data = resObj.data;
-        var himgUrl;
+        var himgUrl; 
         if (data.detail.type == 'sell') {
           himgUrl = app.globalData.localImgUrl;
         } else {
@@ -156,7 +156,7 @@ Page({
     })
   },
   makePhoneCall() {
-    var tel = this.data.car.tel;
+    var tel = '028 - 84167417';
     wx.makePhoneCall({
       phoneNumber: tel // 仅为示例，并非真实的电话号码
     })
@@ -316,5 +316,19 @@ Page({
       title: car.name,
       path: '/pages/carDetail/carDetail?carId=' + carId + '&type=' + type
     }
+  },
+
+  // 自定义nav 返回事件
+  return:function(){
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
+  //自定义nav返回主页事件
+  goHome:function(){
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
   }
 })

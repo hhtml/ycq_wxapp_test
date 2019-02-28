@@ -3,8 +3,11 @@
     
     "pages/index/index",
     "pages/index/searchPage/searchPage",
+    "pages/saleCar/carBrand/carBrand",
     "pages/carSource/carSource",
     "pages/mine/mine",
+    "pages/mine/serviceAgreement/serviceAgreement",
+    "pages/mine/carFriend/carFriend",
     "pages/hitchHiking/hitchHiking",
     "pages/myShop/myShop",
     "pages/wantBuy/wantBuy",

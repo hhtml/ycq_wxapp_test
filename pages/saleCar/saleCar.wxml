@@ -21,15 +21,17 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>车辆品牌</text>
+           <text>车型名称</text>
         </view>
         <view class="itemRight">
-            <view class="itemCont">
-               <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
+            <view class="itemCont"> 
+               <!-- <view mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}"> -->
+               <view bindtap='selectCar'>
             <view class="picker">
-              <text>{{brand.id ? brand.name :'请选择品牌'}}</text>
+              <!-- <text>{{brand.id ? brand.name :'请选择车型'}}</text> -->
+              <text>{{carType}}</text>
             </view>
-          </picker>
+          </view>
             </view>
             
         </view>
@@ -38,16 +40,16 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>车辆款型</text>
+           <text>车辆配置</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
-                <input value='{{form.carType}}' bindinput='typeInput'></input>
+                <input value='{{form.carType}}' bindinput='typeInput' placeholder='格式如：2017款1.6L手动豪华'></input>
             </view>
-            <text class="formTip" bindtap='formTip'>提示</text>
+            <!-- <text class="formTip" bindtap='formTip'>提示</text> -->
         </view>
         <view class="tipLog" wx:if="{{formTipShow}}">
-          <text>2017款 1.6L 手动</text>
+          <text>2017款1.6L手动豪华</text>
         </view>
     </view>
 
@@ -194,7 +196,7 @@
 
     <view class='formItem'>
         <view class="itemLeft">
-           <text>*</text>
+           <text></text>
            <text>车况描述</text>
         </view>
         <view class="itemRight">

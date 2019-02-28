@@ -18,9 +18,10 @@ Page({
       distance:'',
       emission:'',
       phone:'',
-      description:''
+      description:'',
+      carType: '',
     },
-    multiIndex: [0, 0],
+    // multiIndex: [0, 0],
     phoneLogShow:false,
     dtNUm: 60,
     appImgUrl: app.globalData.localImgUrl
@@ -253,31 +254,31 @@ Page({
         console.log('请求失败',err);
       });
   },
-  bindPickerColumnChange(e) {
-    console.log('(e.detail.column:', e.detail.column)
-    var zimuList = this.data.zimuList;
-    if (e.detail.column == 0) {
-      var brands = this.getCitysByIndex(e.detail.value);
-      this.setData({
-        brandInfo: [zimuList, brands]
-      })
-    }
-  },
-  bindPickerChange(e) {
-    console.log(e.detail.value);
-    var brandList = this.getCitysByIndex(e.detail.value[0]);
-    var brand_id = brandList[e.detail.value[1]].id;
-    var brand_name = brandList[e.detail.value[1]].name;
-    console.log('brand_id:', brand_name);
-    var brand={
-      id: brand_id,
-      name: brand_name
-    }
-    this.setData({
-      brand
-    })
+  // bindPickerColumnChange(e) {
+  //   console.log('(e.detail.column:', e.detail.column)
+  //   var zimuList = this.data.zimuList;
+  //   if (e.detail.column == 0) {
+  //     var brands = this.getCitysByIndex(e.detail.value);
+  //     this.setData({
+  //       brandInfo: [zimuList, brands]
+  //     })
+  //   }
+  // },
+  // bindPickerChange(e) {
+  //   console.log(e.detail.value);
+  //   var brandList = this.getCitysByIndex(e.detail.value[0]);
+  //   var brand_id = brandList[e.detail.value[1]].id;
+  //   var brand_name = brandList[e.detail.value[1]].name;
+  //   console.log('brand_id:', brand_name);
+  //   var brand={
+  //     id: brand_id,
+  //     name: brand_name
+  //   }
+  //   this.setData({
+  //     brand
+  //   })
 
-  },
+  // },
   descriptionInput(e){
     var form=this.data.form;
     form.description=e.detail.value;
@@ -300,6 +301,7 @@ Page({
   },
   checkForm(){
     var form=this.data.form;
+    if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '有符合需求的卖家，第一时间联系我哦'; 
     for(var item in form){
       if(!form[item]){
         return false;
@@ -334,18 +336,20 @@ Page({
     var form = this.data.form;
     var brand=this.data.brand;
     var $this=this;
-    var imgList = this.data.imgList;
+    var imgList = this.data.imgList; 
     if (!this.checkForm() || !brand.id){
       wx.showToast({
         title: '请将信息填写完整',
         image: '../../images/warn.png'
       })
-    } else if(imgList.length < 6){
-      wx.showToast({
-        title: '至少上传6张图片',
-        image: '../../images/warn.png'
-      })
-    } else if (this.data.form.price<1000){
+    } 
+    // else if(imgList.length < 6){
+    //   wx.showToast({
+    //     title: '至少上传6张图片',
+    //     image: '../../images/warn.png'
+    //   })
+    // } 
+    else if (this.data.form.price<1000){
       wx.showToast({
         title: '价格有误',
         image: '../../images/warn.png'
@@ -469,14 +473,22 @@ Page({
 
   },
 
+  // 选择品牌点击事件
+  selectCar:function(){
+    wx.navigateTo({
+      url: './carBrand/carBrand'
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     this.request_brand();
     this.setData({
-      citys: $http.testCitys
+      carType: app.globalData.carType
     })
   },
 
@@ -491,21 +503,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      carType: app.globalData.carType
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    app.globalData.carType = '请选择车型'
+    app.globalData.carBrand = '选择品牌'
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    app.globalData.carType = '请选择车型'
+    app.globalData.carBrand = '选择品牌'
   },
 
   /**

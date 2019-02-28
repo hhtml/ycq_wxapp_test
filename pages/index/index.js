@@ -2,6 +2,8 @@
 //获取应用实例
 const app = getApp();
 var $http = require('../../utils/http.js');
+// var util =   require('../../utils/util.js');
+
 Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
@@ -37,6 +39,8 @@ Page({
         // path: '../clueCar/clueCar'
       } 
     ],
+    ///你是不是写了店铺的啊写了合作申请 订单 但是刚刚替换了mine 入口不见了，，，那你加一下调换链接就行
+
     scroll_x:true,
     shopList: [
      /*{
@@ -57,56 +61,14 @@ Page({
         info: 'buy',
         name: '有人想买',
         icon: '../../images/switch-title-02.png'
-      },
-      // {
-      //   info: 'clue',
-      //   name: '线索',
-      //   icon: '../../images/switch-title-03.png'
-      // },
-
+      } 
+      
     ],
-    saleInfoList:[
-     /*  {
-        id:0,
-        imgSrc:'../../images/car-test_03.png',
-        name:'2011款奥迪A6 2.0T自动舒适版',
-        priceArea:'10.5-30.5',
-        sale:'30',
-        time:'2011-03',
-        miles:'3万',
-        addr:'成都',
-        distance:'310'
-       }*/
-    ],
-    buyInfoList: [
-      /*{
-        id: 0,
-        imgSrc: '../../images/car-test_03.png',
-        name: '2011款奥迪A6 2.0T自动舒适版',
-        priceArea: '10.5-30.5',
-        sale: '30',
-        time: '2011-03',
-        miles: '3万',
-        addr: '成都',
-        distance: '310'
-      }*/
-    ],
-    clueInfoList: [
-      /*{
-        id: 0,
-        imgSrc: '../../images/car-test_03.png',
-        name: '2011款奥迪A6 2.0T自动舒适版',
-        priceArea: '10.5-30.5',
-        sale: '30',
-        time: '2011-03',
-        miles: '3万',
-        addr: '成都',
-        distance: '310'
-      }*/
-    ],
+  
     currentInfo:'sale',
     searchResultShow:true,
-    searchResult:[]
+    searchResult:[],
+    shareInfo:''
   },
   //事件处理函数
   
@@ -117,6 +79,11 @@ Page({
       wx.navigateTo({
         url: path,
       })
+
+    // wx.showToast({
+    //   title: '即将上线',
+    //   image: '../../images/warn.png'
+    // })
   },
   switchTitle:function(e){
       var info=e.currentTarget.dataset.info;
@@ -124,10 +91,10 @@ Page({
         currentInfo:info
       })
   },
-  searchInput(e){
-     this.setData({
-       searchInput:e.detail.value
-     })
+  searchPage:function(){
+    wx.navigateTo({
+      url: '/pages/index/searchPage/searchPage'
+    })
   },
   searchConfirm(e){
     /* var $this=this;
@@ -161,8 +128,9 @@ Page({
   },
   nav_to_shoplist:function(){
    wx.showToast({
-     title: '敬请期待',
-     image:'../../images/warn.png'
+     title: '即将上线',
+     image:'../../images/warn.png',
+     duration: 500
    })
   },
   request_index_info: function () {
@@ -177,12 +145,15 @@ Page({
         //成功回调
         var resObj = res.data;
         console.log('首页数据：', resObj);
+
         if (resObj.code == 1) {
           var bannerList = resObj.data.bannerList;
           var storeList = resObj.data.storeList;
           var saleList = resObj.data.carModelList.modelsInfoList;
           var buyList = resObj.data.carModelList.buycarModelList;
           var clueList = resObj.data.carModelList.clueList;
+          //分享数据
+          $this.data.shareInfo = resObj.data.share;
           bannerList.forEach((val,index)=>{
              var obj={
                title:val.title,
@@ -393,5 +364,35 @@ Page({
   onPullDownRefresh(){
     this.request_index_info();
     
+  },
+
+  // 分享功能
+  onShareAppMessage: function () {
+    let that = this;
+    return {
+      title: that.data.shareInfo.shares_title, // 转发后 所显示的title
+      path: '/pages/index/index', // 相对的路径
+      imgPathimageUrl: that.data.shareInfo.shares_img
+    }
+  },
+
+  //登陆界面点击友车圈服务协议跳转到服务协议界面事件
+  goServiceAgreement:function(){
+    wx.navigateTo({
+      url: '../mine/serviceAgreement/serviceAgreement'
+    })
+  },
+  onShow:function(){
+    this.request_index_info();
   }
+  // , onLoad: function (options){
+  //   console.log("index 生命周期 onload" + JSON.stringify(options))
+  //   //在此函数中获取扫描普通链接二维码参数
+  //   let q = decodeURIComponent(options.q)
+  //   if (q) {
+  //     console.log("index 生命周期 onload url=" + q)
+  //     console.log("index 生命周期 onload 参数 user_id=" + util.getQueryString(q, 'user_id'))
+  //   }
+    
+  // }
 })

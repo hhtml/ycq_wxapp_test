@@ -4,6 +4,7 @@ page{
   z-index: 9999998;
   background: #fff;
 }
+/* 自定义导航栏 */
 .searchArea{
   position: fixed;
   width: 100%;
@@ -13,15 +14,38 @@ page{
   color: #000;
   z-index: 9999999;
   box-sizing: border-box;
+  display: flex;
+}
+.share-nav{
+  width:47rpx;
+  height:47rpx;
+  margin-right:20rpx;
+  position: relative;
+  padding:10rpx;
+}
+.share-nav image{
+  width:116%;
+  height:116%
+}
+.share-nav button{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top:0;
+  left: 0;
+  opacity: 0;
 }
 .searchBg{ 
   background-color: #f0f0f0;
   border-radius:32rpx;
-  width: calc(100vw - 310rpx);
-  height:32px;
+  width: calc(100vw - 350rpx);
+  height:28px;
   display: flex;
   align-items: center;
   padding: 0 18rpx;
+  font-size: 14px;
+  color:rgb(189, 189, 189);
+  margin-top:10rpx;
 }
 .searchBg image{
    width: 34rpx;
@@ -51,15 +75,17 @@ page{
 .searchResult text:last-child{
   border: none;
 }
+
+/* 轮播图区域 */
 .bannerArea{
-  margin-top: 86px;
+  margin-top: 121rpx;
   background-color: #fff;
 }
 .bannerImg{
-   height: 360rpx;
+   height: 450rpx;
 }
 .bannerArea swiper{
-  height: 360rpx;
+  height: 450rpx;
 }
 .bannerArea swiper swiper-item{
   text-align: center;
@@ -73,12 +99,13 @@ page{
 
 .iconArea{
   display: flex;
-  padding: 30rpx 0 15rpx 0;
+  padding: 30rpx 0rpx 0rpx 0rpx;
   border-bottom: 20rpx solid #f7f7f8;
 }
 .iconItem{
   flex: 1;
   text-align: center;
+  /* padding-left:26rpx; */
 }
 
 .iconItem image{
@@ -421,4 +448,22 @@ margin-top: 66rpx;
   display: block;
   text-align: center;
   text-decoration: underline;
+}
+
+/* 页面悬浮分享功能 */
+.share{
+  font-size: 14px;
+  border-radius: 50%;
+  color:#fff;
+  width:80rpx;
+  height:80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right:27rpx;
+  top:787rpx;
+  z-index: 999;
+  background-color: rgba(243, 85, 65,0.81);
+  padding:0rpx;
 }

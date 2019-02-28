@@ -138,7 +138,7 @@ Page({
       });
   },
   makePhoneCall(e){
-     var tel=e.currentTarget.dataset.tel;
+    var tel = '028 - 84167417';
      wx.makePhoneCall({
        phoneNumber: tel,
      })

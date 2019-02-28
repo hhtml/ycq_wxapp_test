@@ -1,0 +1,4 @@
+<!--pages/mine/serviceAgreement/serviceAgreement.wxml-->
+
+<rich-text nodes="{{data}}" class="agreement"></rich-text>
+

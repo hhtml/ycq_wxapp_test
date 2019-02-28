@@ -1,0 +1,5 @@
+/* pages/mine/serviceAgreement/serviceAgreement.wxss */
+
+.MsoNormal{
+  padding:0rpx 20rpx;
+}
