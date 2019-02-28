@@ -47,7 +47,7 @@ Page({
         nickname:'',
         ewmCode:' ',
         invite_code:'',
-        bgImg:''
+        bgImg:'',
       }
     
   },
@@ -114,6 +114,8 @@ Page({
         }
         //获取昵称
         $this.data.posterInfo.nickname = resObj.data.userInfo.nickname
+        //获取邀请码
+        $this.data.posterInfo.invite_code = resObj.data.userInfo.invite_code
         //获取背景图片
         $this.data.posterInfo.bgImg = app.globalData.imgUrl + resObj.data.userInfo.invite_bg_img
         if (typeof $this.data.posterInfo.bgImg === 'string') {
@@ -173,28 +175,47 @@ Page({
   //二维码点击事件
   erWeiMa:function(){
     var $this = this;
-    if ($this.store_has_many){
-      if ($this.store_has_many.auditstatus == 'paid_the_money'){
-        if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
-          $this.createNewImg()
-          $this.setData({
-            showModal: true
-          })
-        } else {
-          wx.showToast({
-            title: '生成中',
-            icon: 'loading',
-            duration: 1000
-          })
-        }
-      }
-    }else{
-      wx.showToast({
-      title: '店铺未认证',
+    wx.showToast({
+      title: '即将上线',
       image: '../../images/warn.png',
-      duration: 1000
+      duration: 500
     })
-    }
+    // if ($this.store_has_many){
+    //   if ($this.store_has_many.auditstatus == 'paid_the_money'){
+    //     if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
+    //       $this.createNewImg()
+    //       $this.setData({
+    //         showModal: true
+    //       })
+    //     } else {
+    //       wx.showToast({
+    //         title: '生成中',
+    //         icon: 'loading',
+    //         duration: 1000
+    //       })
+    //     }
+    //   }
+    // }else{
+    //   wx.showToast({
+    //   title: '店铺未认证',
+    //   image: '../../images/warn.png',
+    //   duration: 1000
+    // })
+    // }
+
+    // if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
+    //   $this.createNewImg()
+    //   $this.setData({
+    //     showModal: true
+    //   })
+    // } else {
+    //   wx.showToast({
+    //     title: '生成中',
+    //     icon: 'loading',
+    //     duration: 1000
+    //   })
+    // }
+  
     
   },
 
@@ -218,14 +239,21 @@ Page({
     var that = this
     var ctx = wx.createCanvasContext('mycanvas');
     var path = that.data.posterInfo.bgImg; //底板图片
+    var pathBg = '/images/haibaoBg.png' //本地海报底板图片
     var path2 = that.data.posterInfo.avatarImg //头像图片
     var name = that.data.posterInfo.nickname
-    ctx.drawImage(path, 0, 0, 300, 450);  //绘制图片模板的底图
+    var invite_code = that.data.posterInfo.invite_code
+    ctx.drawImage(pathBg, 0, 0, 300, 450);  //绘制图片模板的底图
     ctx.drawImage(path2, 30, 20, 60, 60); // 绘制头像
     //绘制昵称
     ctx.setFontSize(16);
     ctx.setFillStyle('#fff');
     ctx.fillText(name, 110, 35);
+    ctx.stroke();
+    //绘制邀请码
+    ctx.setFontSize(18);
+    ctx.setFillStyle('#000');
+    ctx.fillText(invite_code, 80, 370);
     ctx.stroke();
     var path1 = that.data.posterInfo.ewmCode //二维码图片
     ctx.drawImage(path1, 205, 330, 80, 80);   //绘制图片模板的二维码

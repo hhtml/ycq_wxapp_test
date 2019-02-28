@@ -13,8 +13,17 @@ Page({
       carRegion: '',
       price: '',
       phone: '',
-      description: ''
+      description: '',
+      displacementUnit:'',
+      carDisplacement:'',
+      productDate:'',
+      transmissionData: '', //变速箱
     },
+    transmission: ["手动变速", "自动变速", "无极变速", "双离合变速"], //变速箱
+    radioArray: [
+      { name: 'L', checked: 'true' },
+      { name: 'T' }
+    ],
     dtNUm: 60,
   },
   typeInput(e) {
@@ -52,6 +61,36 @@ Page({
       form: form
     })
   },
+  displacementInput(e) {
+    var form = this.data.form;
+    form.displacement = e.detail.value
+    this.setData({
+      form: form
+    })
+  },
+  radioChange(e) {
+    var form = this.data.form
+    form.displacementUnit = e.detail.value
+    this.setData({
+      form: form
+    })
+    console.log(form)
+  },
+  productDateChange(e){
+    var form = this.data.form
+    form.productDate = e.detail.value
+    this.setData({
+    form: form
+  })
+  },
+  transmissionDataChange(e) {
+    var index = e.detail.value
+    var form = this.data.form
+    form.transmissionData = this.data.transmission[index]
+    this.setData({
+      form: form
+    })
+  },
   /**
    * 品牌相关
    */
@@ -68,6 +107,13 @@ Page({
         if (resObj.code == 1) {
           var data = resObj.data;
           var brandList = data.brand;
+          var transmission = new Array()
+          for (var i in resObj.data.transmission) {
+            transmission.push(resObj.data.transmission[i]);
+          }
+          $this.setData({
+            transmission: transmission
+          })
           form.phone = data.mobile;
           for (var item in brandList) {
             //console.log('item:',item);
@@ -91,14 +137,14 @@ Page({
             zimuList.push(obj);
             brandsList.push(obj2);
           }
-          var brandInfo = [zimuList, brandsList[0].brands];
+          // var brandInfo = [zimuList, brandsList[0].brands];
           console.log('zimuList:', zimuList);
           console.log('brandsList:', brandsList);
-          console.log('brandInfo:', brandInfo);
+          // console.log('brandInfo:', brandInfo);
           $this.setData({
             zimuList,
             brandsList,
-            brandInfo,
+            // brandInfo,
             form
           })
 
@@ -334,7 +380,10 @@ Page({
         parkingposition: form.carRegion,
         guide_price: form.price,
         phone: form.phone,
-        store_description: form.description
+        store_description: form.description,
+        carDisplacement: form.carDisplacement + form.displacementUnit,
+        productDate: form.productDate,
+        transmissionData: form.transmissionData,
       }
       $http.post('index/wantBuyCar', {
           carInfo: carInfo,
