@@ -9,30 +9,30 @@ Page({
   data: {
     multiIndex: [0, 0],
     form: {
-      carType: '',
+      // carType: '',
       carRegion: '',
       price: '',
       phone: '',
       description: '',
-      displacementUnit:'',
-      carDisplacement:'',
+      displacementUnit:'L',
+      displacement:'',
       productDate:'',
       transmissionData: '', //变速箱
     },
-    transmission: ["手动变速", "自动变速", "无极变速", "双离合变速"], //变速箱
+    transmission: [], //变速箱
     radioArray: [
       { name: 'L', checked: 'true' },
       { name: 'T' }
     ],
     dtNUm: 60,
   },
-  typeInput(e) {
-    var form = this.data.form;
-    form.carType = e.detail.value;
-    this.setData({
-      form: form
-    })
-  },
+  // typeInput(e) {
+  //   var form = this.data.form;
+  //   form.carType = e.detail.value;
+  //   this.setData({
+  //     form: form
+  //   })
+  // },
   priceInput(e) {
     var form = this.data.form;
     form.price = e.detail.value;
@@ -68,13 +68,12 @@ Page({
       form: form
     })
   },
-  radioChange(e) {
-    var form = this.data.form
-    form.displacementUnit = e.detail.value
+  radioChange(e) { 
+    this.data.form.displacementUnit = e.detail.value
     this.setData({
-      form: form
+      displacementUnit: this.data.form.displacementUnit
     })
-    console.log(form)
+    console.log(e.detail.value)
   },
   productDateChange(e){
     var form = this.data.form
@@ -108,12 +107,15 @@ Page({
           var data = resObj.data;
           var brandList = data.brand;
           var transmission = new Array()
+          var defaultTransmission = '';
           for (var i in resObj.data.transmission) {
             transmission.push(resObj.data.transmission[i]);
           }
+          console.log(defaultTransmission)
           $this.setData({
-            transmission: transmission
+            transmission: transmission,
           })
+          $this.data.form.transmissionData = transmission[0]
           form.phone = data.mobile;
           for (var item in brandList) {
             //console.log('item:',item);
@@ -366,22 +368,23 @@ Page({
   formSubmit(e) {
     var formId = e.detail.formId;
     var form = this.data.form;
-    var brand = this.data.brand;
     var $this = this; 
-    if (!this.checkForm() || !brand.id) {
+    console.log(form)
+    return;
+    if (!this.checkForm()) {
       wx.showToast({
         title: '请将信息填写完整',
         image: '../../images/warn.png'
       })
     } else {
       var carInfo = {
-        brand_id: brand.id,
-        models_name: form.carType,
+        brand_id: app.globalData.brand_id,
+        models_name: app.globalData.carBrand + form.productDate + form.displacement + form.displacementUnit + form.transmissionData,
         parkingposition: form.carRegion,
         guide_price: form.price,
         phone: form.phone,
         store_description: form.description,
-        carDisplacement: form.carDisplacement + form.displacementUnit,
+        displacement: form.displacement + form.displacementUnit,
         productDate: form.productDate,
         transmissionData: form.transmissionData,
       }
