@@ -39,6 +39,8 @@ Page({
         // path: '../clueCar/clueCar'
       } 
     ],
+    ///你是不是写了店铺的啊写了合作申请 订单 但是刚刚替换了mine 入口不见了，，，那你加一下调换链接就行
+
     scroll_x:true,
     shopList: [
      /*{
@@ -74,16 +76,14 @@ Page({
       var index=e.currentTarget.dataset.index;
       var iconList=this.data.iconList;
       var path = iconList[index].path;
-    if (path){
       wx.navigateTo({
         url: path,
       })
-    }else{
-      wx.showToast({
-      title: '即将上线',
-      image: '../../images/warn.png'
-    })
-    }
+
+    // wx.showToast({
+    //   title: '即将上线',
+    //   image: '../../images/warn.png'
+    // })
   },
   switchTitle:function(e){
       var info=e.currentTarget.dataset.info;

@@ -1,0 +1,47 @@
+<!--pages/order/order.wxml-->
+<view class="switchTitle">
+    <view class="titleItem {{activeId ==0 ? 'activeItem':''}}"  data-id="0" bindtap='switchTitle'>
+       <text>待支付</text>
+       <text></text>
+    </view>
+    <view class="titleItem {{activeId ==1 ? 'activeItem':''}}"  data-id="1" bindtap='switchTitle'>
+       <text>已支付</text>
+       <text></text>
+    </view>
+    <view class="titleItem {{activeId ==2 ? 'activeItem':''}}"  data-id="2" bindtap='switchTitle'>
+       <text>已完成</text>
+       <text></text>
+    </view>
+</view>
+
+<view class="orderList">
+    <block wx:for="{{orderList}}">
+        <view class="orderItem"  data-id="{{item.id}}">
+            <view class='orderInfo'>
+                <view class="infoImg">
+                    <image src='{{item.img}}'></image>
+                </view>
+                <view class="infoName">
+                    <text>{{item.name}}</text>
+                </view>
+                <view class="infoPrice">
+                    <text>店铺认证费：￥{{item.price}}</text>
+                </view>
+            </view>
+            <view class="orderDomainBg">
+                <view class="orderDomain">
+                    <view class="orderSchedule">   
+                        <text class="activeSche">待审</text>
+                        <text>审核中</text>
+                        <text>完成</text>
+                    </view>
+                    <view class="orderHandle">
+                        <text>取消订单</text>
+                        <text>去支付</text>
+                    </view>
+               </view>
+            </view>
+            
+        </view>
+    </block>
+</view>

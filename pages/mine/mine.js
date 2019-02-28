@@ -8,10 +8,7 @@ Page({
    */
   data: {
     showModal: false,
-    switch1:0, //绘制海报开关
-    switch2: 0,//绘制海报开关
-    switch3: 0,//绘制海报开关
-    myData:[],
+    userInfo:[],
     haibaoImg:'',
     userName:' ',
     navList:[
@@ -103,16 +100,15 @@ Page({
       .then(res => {
         //成功回调
         var resObj = res.data;
-        $this.data.myData =res.data.data.userInfo
-        //转化头像图片地址
+        //转化二维码头像图片地址
         $this.data.posterInfo.avatarImg = resObj.data.userInfo.avatar;
         if (typeof $this.data.posterInfo.avatarImg === 'string') {
+         
           wx.getImageInfo({   //  小程序获取图片信息API
-            src: $this.data.posterInfo.avatarImg,
+            src: $this.data.posterInfo.avatarImg, 
             success: function (res) { 
               console.log(res.path)
-              $this.data.switch1 = 1
- 
+              $this.data.switch1 = 1 
               $this.data.posterInfo.avatarImg = res.path
             },
             fail(err) {
@@ -130,10 +126,10 @@ Page({
         if (typeof $this.data.posterInfo.bgImg === 'string') {
 
           wx.getImageInfo({   //  小程序获取图片信息API
-            src: $this.data.posterInfo.bgImg,
+            src: $this.data.posterInfo.bgImg, 
             success: function (res) { 
               console.log(res.path)
-              $this.data.switch2 = 1 
+              $this.data.switch2 = 1  
               $this.data.posterInfo.bgImg = res.path
             },
             fail(err) {
@@ -147,7 +143,7 @@ Page({
         if (typeof $this.data.posterInfo.ewmCode === 'string') {
 
           wx.getImageInfo({   //  小程序获取图片信息API
-            src: $this.data.posterInfo.ewmCode,
+            src: $this.data.posterInfo.ewmCode, 
             success: function (res) { 
               console.log(res.path)
               $this.data.switch3 = 1 
@@ -167,7 +163,7 @@ Page({
             qrcode: data.userInfo.store_has_many.store_qrcode
           }
           var isNewOffer = data.userInfo.isNewOffer;
-          // var isRealName = data.userInfo.isRealName;
+          // var isRealName = data.userInfo.isRealName、、//这个 isRealName不要了
           $this.setData({ company, isNewOffer});
 
         } else {
@@ -182,7 +178,22 @@ Page({
 
 
   //二维码点击事件
-  erWeiMa:function(){
+  erWeiMa:function(){ 
+    var $this = this;
+    // console.log($this.data.posterInfo.nickname);
+    // wx.showToast({
+    //   title: '即将上线',
+    //   image: '../../images/warn.png',
+    //   duration: 500
+    // })
+
+    $this.createNewImg()
+    $this.setData({
+      showModal:true
+    })
+
+    
+ 
     var $this = this; 
     // console.log($this.data.posterInfo.nickname);
     // wx.showToast({
@@ -227,8 +238,7 @@ Page({
     //     duration: 1000
     //   })
     // }
-  
-    
+   
   },
 
   //关闭模态框
@@ -260,6 +270,7 @@ Page({
     //绘制昵称
     ctx.setFontSize(16);
     ctx.setFillStyle('#fff');
+    // ctx.setTextAlign('center');
     ctx.fillText(name, 110, 35);
     ctx.stroke();
     //绘制邀请码
@@ -270,12 +281,20 @@ Page({
     var path1 = that.data.posterInfo.ewmCode //二维码图片
     ctx.drawImage(path1, 205, 330, 80, 80);   //绘制图片模板的二维码
     ctx.draw(true,() =>{
-      wx.canvasToTempFilePath({
-        canvasId: 'mycanvas',
-        success: res => {
-          that.data.haibaoImg = res.tempFilePath
-        }
-      })
+      // wx.canvasToTempFilePath({
+      //   canvasId: 'mycanvas',
+      //   success: res => {
+      //     that.data.haibaoImg = res.tempFilePath
+      //   }
+      // })
+      setTimeout(function () {
+        wx.canvasToTempFilePath({
+          canvasId: 'mycanvas',
+          success: res => {
+            that.data.haibaoImg = res.tempFilePath
+          }
+        })
+      }, 500);
     })
     
   },
@@ -283,6 +302,25 @@ Page({
   // 保存图片事件
   saveImg:function(){
     var that = this
+    // wx.canvasToTempFilePath({
+    //   canvasId: 'mycanvas',
+    //   fileType: 'jpg',
+    //   success: function (res) {
+    //     console.log(res)
+    //     wx.saveImageToPhotosAlbum({
+    //       filePath: res.tempFilePath,
+    //       success(res) {
+    //         wx.showToast({
+    //           title: '保存成功',
+    //         });
+    //       },
+    //       fail() {
+
+    //       }
+    //     })
+    //   }
+    // })
+
     wx.saveImageToPhotosAlbum({
           filePath: that.data.haibaoImg,
           success(res) {

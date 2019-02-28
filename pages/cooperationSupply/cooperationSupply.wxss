@@ -1,0 +1,241 @@
+/* pages/cooperationSupply/cooperationSupply.wxss */
+page{
+  background-color: #f7f7f8;
+}
+.switchTitle{
+  display: flex;
+  background-color: #fff;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+.titleItem{
+  flex: 1;
+  box-sizing: border-box;
+  padding: 0 24rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.titleItem text{
+  font-size:32rpx;
+  color:#353535;
+  display: block;
+  text-align: center;
+  height:86rpx;
+  line-height: 86rpx;
+  border-bottom: 4rpx solid #fff;
+}
+.activeItem text{
+  font-size:32rpx;
+  color:#ef4631;
+  border-bottom: 4rpx solid #ef4631;
+}
+.shopArea{
+  padding: 0 24rpx;
+}
+.content{
+  background-color: #fff;
+}
+
+.formRow{
+  display: flex;
+  height: 90rpx;
+  padding: 0 24rpx;
+  align-items: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.formBlock .formRow{
+  border: none;
+}
+.formInfo{
+  width: 225rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.formInfo text{
+  font-size: 32rpx;
+}
+.formInfo text:nth-child(1){
+  color: #ef4631;
+  margin-right: 15rpx;
+}
+.formInfo text:nth-child(2){
+  color: #212121;
+}
+.formInput{
+  padding-left: 15rpx;
+}
+.formInput input{
+  font-size: 30rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #888;
+}
+.formInput .picker text{
+  font-size: 30rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #888;
+}
+.placeholder{
+  color: #b2b2b2;
+}
+.regionTitle{
+  padding: 30rpx  24rpx;
+}
+.regionTitle text{
+  display: block;
+  border-left:10rpx solid #ef4631;
+  padding-left: 25rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+.operateArea{
+  padding: 0 24rpx;
+}
+text.infoTip{
+   font-size: 22rpx;
+   color: #b2b2b2;
+}
+.brandArea{
+  padding: 0 24rpx;
+}
+.brandArea text{
+  display: inline-block;
+  height: 45rpx;
+  line-height: 45rpx;
+  padding: 0 12rpx;
+  font-size: 28rpx;
+  background-color: #f2f2f2;
+  color: #353535;
+  border-radius: 20rpx;
+  margin:0 25rpx 20rpx 0;
+}
+text.checkBrand{
+  color: #ef4631;
+}
+.rowInput{
+  margin: 20rpx 24rpx;
+  border: 1px solid #b2b2b2;
+  border-radius:10rpx;
+  padding: 0 15rpx;
+  display: flex;
+  align-items: center;
+}
+.rowInput input{
+  height: 65rpx;
+  line-height: 65rpx;
+  color: #888;
+  font-size: 30rpx;
+  
+}
+.rowTextArea{
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8rpx;
+  overflow: hidden;
+  padding:0 20rpx 30rpx 20rpx;
+  box-sizing:border-box;
+}
+.rowTextArea textarea{
+  width: 100%;
+  height: 150rpx;
+  padding:20rpx;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  font-size: 28rpx;
+  color: #888;
+}
+.smscode{
+  width: 245rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-left: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  padding-left: 20rpx;
+  text-align: center;
+}
+.smscode text{
+  display: block;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 26rpx;
+  color: #888;
+}
+.partnerArea{
+  padding: 0 24rpx;
+}
+.partnerItem{
+  display: block;
+  padding: 20rpx 0;
+}
+.partnerItem checkbox{
+  margin: 0 20rpx;
+}
+.partnerItem text{
+  font-size:28rpx;
+  color: #353535;
+  
+}
+.formButtom{
+  padding:60rpx 24rpx;
+}
+.formButtom button{
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  background-color: #ef4631;
+  color: #fff;
+  font-size: 34rpx;
+}
+.uploadId{
+  padding: 0 24rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.uploadLeft{
+  width: 317rpx;
+  height: 407rpx;
+  background-color: #f2f2f2;
+  border-radius: 8rpx;
+  text-align: center;
+  line-height: 407rpx;
+}
+.uploadLeft text{
+  color: #ef4631;
+  font-size:170rpx;
+
+}
+.uploadRight{
+  width:316rpx;
+  height: 407rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.uploadRightItem{
+  height: 193rpx;
+  background-color: #f2f2f2;
+  border-radius: 8rpx;
+  text-align: center;
+  overflow: hidden;
+}
+.uploadRightItem image{
+   width: 100%;
+   height: 100%;
+}
+.uploadRegion{
+  display: flex;
+  padding: 0 24rpx 30rpx 24rpx;
+  justify-content: space-between;
+}
+.uploadRegion .uploadRight{
+  background-color: #f2f2f2;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+.uploadRight image{
+  width: 100%;
+  height: 100%;
+}

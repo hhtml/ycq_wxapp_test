@@ -1,5 +1,6 @@
 {
   "pages":[
+    
     "pages/index/index",
     "pages/index/searchPage/searchPage",
     "pages/saleCar/carBrand/carBrand",
@@ -10,8 +11,9 @@
     "pages/hitchHiking/hitchHiking",
     "pages/myShop/myShop",
     "pages/wantBuy/wantBuy",
-    "pages/infomation/infomation",
+    "pages/cooperationSupply/cooperationSupply",
     "pages/priceManage/priceManage",
+    "pages/order/order",
     "pages/saleCar/saleCar",
     "pages/buyCar/buyCar",
     "pages/clueCar/clueCar",
