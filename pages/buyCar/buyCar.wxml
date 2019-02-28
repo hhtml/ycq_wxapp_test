@@ -18,7 +18,7 @@
         </view>
     </view>
 
-    <view class='formItem'>
+    <!-- <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
            <text>车辆款型</text>
@@ -27,10 +27,71 @@
             <view class="itemCont">
                 <input value='{{form.carType}}' bindinput='typeInput' placeholder='格式如：2017款1.6L手动豪华'></input>
             </view>
-            <!-- <text class="formTip" bindtap='formTip'>提示</text> -->
+            <text class="formTip" bindtap='formTip'>提示</text>
         </view>
         <view class="tipLog" wx:if="{{formTipShow}}">
           <text>2017款 1.6L 手动</text>
+        </view>
+    </view> -->
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>排量</text>
+        </view>
+        <view>
+              <view class="itemCont-displacement">
+                <input class="displacement" 
+                value='{{form.displacement}}' 
+                bindinput='displacementInput' 
+                type="digit" 
+                placeholder='格式如：1.6'></input>
+                <radio-group class="radio-group" bindchange="radioChange">
+                    <label class="radio" wx:for="{{radioArray}}">
+                      <radio value="{{item.name}}" checked="{{item.checked}}">{{item.name}}</radio>
+                    </label>
+                </radio-group>
+            </view>
+            </view>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>变速箱类型</text>
+        </view>
+        <picker  class="itemRight"
+                 value="{{form.transmissionData}}"
+                 bindchange="transmissionDataChange"
+                 range="{{transmission}}"
+                 mode="selector"
+        >
+            <view class="itemCont">
+                <text>{{form.transmissionData}}</text>
+            </view>
+        </picker>
+    </view>
+
+    <view class='formItem'>
+        <view class="itemLeft">
+           <text>*</text>
+           <text>出厂日期</text>
+        </view>
+        <view class="itemRight">
+            <view class="itemCont">
+               <picker
+                  mode="date"
+                  value="{{form.productDate}}"
+                  start="2009-09-01"
+                  bindchange="productDateChange"
+                  fields="month"
+                >
+                  <view class="picker">
+                     <text>{{form.productDate}}</text>
+                  </view>
+                </picker>
+            </view>
+            <!--<text class="formTip">提示</text>-->
         </view>
     </view>
 

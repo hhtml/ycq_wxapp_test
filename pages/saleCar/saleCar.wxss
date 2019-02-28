@@ -99,6 +99,32 @@ image.imageIcon{
   line-height: 95rpx;
   font-size: 24rpx;
   color: #666;
+  padding-left: 20rpx;
+}
+/* 排量输入框样式 */
+.itemCont-displacement{
+  width: 400rpx;
+  height:95rpx;
+  display: flex;
+}
+.itemCont-displacement .displacement{
+  width: 40%;
+  height: 95rpx;
+  line-height: 95rpx;
+  font-size: 24rpx;
+  color: #666;
+  padding-left: 20rpx;
+}
+.radio-group{
+  display: flex;
+}
+.itemCont-displacement .radio{
+  line-height: 95rpx;
+  font-size: 28rpx;
+  padding-left: 40rpx;
+}
+.itemCont-displacement .radio radio{
+  transform:scale(0.7);
 }
 .itemCont text{
  font-size: 28rpx;

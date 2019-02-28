@@ -169,7 +169,8 @@ Page({
                 name: val.store_name,
                 addr: val.cities_name,
                 typeCount: val.modelsinfo_count,
-                brands: val.main_camp
+                brands: val.main_camp,
+                factorytime: val.factorytime
               }
               shopList[index] = obj;
             });
@@ -186,7 +187,8 @@ Page({
                 miles: val.kilometres,
                 addr: val.parkingposition,
                 type:val.type,
-                browse_volume: val.browse_volume
+                browse_volume: val.browse_volume,
+                factorytime: val.factorytime
               }
               saleInfoList[index] = obj;
             });
@@ -203,8 +205,8 @@ Page({
                 miles: val.kilometres,
                 addr: val.parkingposition,
                 type: val.type,
-                browse_volume: val.browse_volume
-
+                browse_volume: val.browse_volume,
+                factorytime: val.factorytime
               }
               buyInfoList[index] = obj;
             });
@@ -221,8 +223,8 @@ Page({
                 miles: val.kilometres,
                 addr: val.parkingposition,
                 type: val.type,
-                browse_volume: val.browse_volume
-
+                browse_volume: val.browse_volume,
+                factorytime: val.factorytime
               }
               clueInfoList[index] = obj;
             });

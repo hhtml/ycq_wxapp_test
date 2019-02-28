@@ -53,7 +53,7 @@
 
 <view class="navListBg">
     <view class="navList">
-      <view class="navItem" bindtap='nav_to_myshop' data-path="../myShop/myShop">
+      <view class="navItem" bindtap='nav_to_page' data-path="../myShop/myShop">
           <image class="navIcon" src='../../images/mine-shop.png' mode='widthFix'></image>
           <view class="navName">
                <text>我的店铺</text>

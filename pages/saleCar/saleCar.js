@@ -20,7 +20,15 @@ Page({
       phone:'',
       description:'',
       carType: '',
+      carDisplacement:'',
+      displacementUnit:'',
+      transmissionData: '', //变速箱
     },
+    transmission: ["手动变速","自动变速","无极变速","双离合变速"], //变速箱
+    radioArray:[ //单选框
+      {name:'L',checked:'true'},
+      {name:'T'}
+    ],
     // multiIndex: [0, 0],
     phoneLogShow:false,
     dtNUm: 60,
@@ -38,6 +46,9 @@ Page({
     wx.chooseImage({
       count: 9,
       success: function ({ tempFilePaths }) {
+        wx.showLoading({
+          title: '加载中',
+        })
         var promise = Promise.all(tempFilePaths.map((tempFilePath, index) => {
           return new Promise(function (resolve, reject) {
             wx.uploadFile({
@@ -46,6 +57,7 @@ Page({
               name: 'file',
               formData: null,
               success: function (res) {
+                wx.hideLoading()
                 //上传成功后的图片地址imgUrl，需要与服务器地址（app.js全局设置）做拼接, setData出去做预览
                 let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
                 console.log(JSON.parse(res.data));
@@ -60,6 +72,9 @@ Page({
         promise.then(function (results) {
           console.log(results);
           var newList = imgList.concat(results);
+          // for(var i in newList){
+          //   newList[i] = app.globalData.localImgUrl+newList[i]
+          // } 
           console.log('newList:', newList);
           $this.setData({
             imgList: newList
@@ -70,6 +85,13 @@ Page({
       }
     });
   },
+  //上传图片后点击预览
+  // previewImage(){
+  //   wx.previewImage({
+  //     current: '', // 当前显示图片的http链接
+  //     urls: this.data.imgList // 需要预览的图片http链接列表
+  //   })
+  // },
   deleteImg(e){
       var index=e.currentTarget.dataset.index;
       var imgList=this.data.imgList;
@@ -129,6 +151,30 @@ Page({
     this.setData({
       form:form
     })
+  },
+
+  displacementInput(e){
+    var form = this.data.form;
+    form.displacement = e.detail.value
+    this.setData({
+      form: form
+    })
+  },
+  radioChange(e){
+    var form = this.data.form
+    form.displacementUnit = e.detail.value
+    this.setData({
+      form: form
+    })
+  },
+  transmissionDataChange(e){
+    var index = e.detail.value
+    var form = this.data.form
+    form.transmissionData = this.data.transmission[index]
+    this.setData({
+      form: form
+    })
+    console.log(this.data.form)
   },
   // listingRegionChange(e) {
   //   var form = this.data.form;
@@ -212,6 +258,13 @@ Page({
         if (resObj.code == 1) {
           var data = resObj.data;
           var brandList = data.brand;
+          var transmission = new Array()
+          for (var i in resObj.data.transmission){
+            transmission.push(resObj.data.transmission[i]);
+          }
+          $this.setData({
+            transmission: transmission
+          })
           form.phone = data.mobile;
           for (var item in brandList){
             //console.log('item:',item);
@@ -235,14 +288,14 @@ Page({
             zimuList.push(obj);
             brandsList.push(obj2);
           }
-          var brandInfo = [zimuList, brandsList[0].brands];
+          // var brandInfo = [zimuList, brandsList[0].brands];
           console.log('zimuList:', zimuList);
           console.log('brandsList:', brandsList);
-          console.log('brandInfo:', brandInfo);
+          // console.log('brandInfo:', brandInfo);
           $this.setData({
             zimuList,
             brandsList,
-            brandInfo,
+            // brandInfo,
             form
           })
 
@@ -368,7 +421,9 @@ Page({
         emission_standard: form.emission,
         phone: form.phone,
         store_description: form.description,
-        modelsimages: modelsimages
+        modelsimages: modelsimages,
+        carDisplacement: form.carDisplacement + form.displacementUnit,
+        transmissionData: form.transmissionData
       }
       $http.post('index/uploadModels',{
         carInfo: carInfo
