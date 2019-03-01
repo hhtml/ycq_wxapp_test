@@ -7,11 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    year:'',
     imgList:[],
     form:{
-      // carType:'',
       carRegion:'',
-      // listingRegion:'',
       productDate:'',
       listingDate:'',
       price:'',
@@ -19,12 +18,11 @@ Page({
       emission:'',
       phone:'',
       description:'',
-      carType: '',
-      carDisplacement:'',
-      displacementUnit:'',
+      displacement:'',
+      displacementUnit:'L',
       transmissionData: '', //变速箱
     },
-    transmission: ["手动变速","自动变速","无极变速","双离合变速"], //变速箱
+    transmission: [], //变速箱
     radioArray:[ //单选框
       {name:'L',checked:'true'},
       {name:'T'}
@@ -77,7 +75,8 @@ Page({
           // } 
           console.log('newList:', newList);
           $this.setData({
-            imgList: newList
+            imgList: newList,
+            carType: app.globalData.carType
           })
         }).catch(function (err) {
           console.log(err);
@@ -100,13 +99,13 @@ Page({
         imgList:imgList
       })
   },
-  typeInput(e){
-    var form = this.data.form;
-    form.carType = e.detail.value;
-    this.setData({
-      form: form
-    })
-  },
+  // typeInput(e){
+  //   var form = this.data.form;
+  //   form.carType = e.detail.value;
+  //   this.setData({
+  //     form: form
+  //   })
+  // },
   priceInput(e) {
     var form = this.data.form;
     form.price = e.detail.value;
@@ -205,6 +204,21 @@ Page({
       phoneLogShow:false
     })
   },
+
+  //获取当前年份
+  getYear:function(){
+    var that = this
+    var date = new Date();
+    var year = date.getFullYear(); 
+    var month = date.getMonth()+1;
+    var day = date.getDate()
+    month = month<10?'0'+month:month;
+    day = day<10?'0'+day:day;
+    console.log(year+'-'+month+'-'+day)
+    that.setData({
+      year: year + '-' + month + '-' + day
+    })
+  },
   phoneAuth(){
     var form=this.data.form;
     var phone=form.phone;
@@ -265,7 +279,7 @@ Page({
           $this.setData({
             transmission: transmission
           })
-          console.log($this.data.transmission)
+          $this.data.form.transmissionData = transmission[0]
           form.phone = data.mobile;
           for (var item in brandList){
             //console.log('item:',item);
@@ -355,7 +369,7 @@ Page({
   },
   checkForm(){
     var form=this.data.form;
-    if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '有符合需求的卖家，第一时间联系我哦'; 
+    if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系'; 
     for(var item in form){
       if(!form[item]){
         return false;
@@ -390,8 +404,8 @@ Page({
     var form = this.data.form;
     var brand=this.data.brand;
     var $this=this;
-    var imgList = this.data.imgList; 
-    if (!this.checkForm() || !brand.id){
+    var imgList = this.data.imgList;
+    if (!this.checkForm()){
       wx.showToast({
         title: '请将信息填写完整',
         image: '../../images/warn.png'
@@ -411,10 +425,9 @@ Page({
     } else{
       var modelsimages = imgList.join(',');
       var carInfo = {
-        brand_id: brand.id,
-        models_name:form.carType,
+        brand_id: app.globalData.brand_id,
+        models_name: app.globalData.carType + ' ' + form.productDate +'款'+' ' + form.displacement + form.displacementUnit + ' ' + form.transmissionData,
         parkingposition: form.carRegion,
-        // license_plate: form.listingRegion,
         guide_price: form.price,
         factorytime: form.productDate,
         car_licensetime: form.listingDate,
@@ -423,7 +436,7 @@ Page({
         phone: form.phone,
         store_description: form.description,
         modelsimages: modelsimages,
-        carDisplacement: form.carDisplacement + form.displacementUnit,
+        displacement: form.displacement + form.displacementUnit,
         transmissionData: form.transmissionData
       }
       $http.post('index/uploadModels',{
@@ -542,6 +555,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    that.getYear()
     this.request_brand();
     this.setData({
       carType: app.globalData.carType
@@ -568,8 +582,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    app.globalData.carType = '请选择车型'
-    app.globalData.carBrand = '选择品牌'
+    
   },
 
   /**
@@ -578,6 +591,7 @@ Page({
   onUnload: function () {
     app.globalData.carType = '请选择车型'
     app.globalData.carBrand = '选择品牌'
+    app.globalData.brand_id = ''
   },
 
   /**

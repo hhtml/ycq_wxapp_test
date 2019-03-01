@@ -91,7 +91,7 @@
         <view class="carInfoCont">
           <view class="carInfoContWord">
             <view class="carName">
-              <text>{{item.brand_name}}{{item.factorytime}}款</text>
+              <text>{{item.name}}</text>
             </view>
 
             <view class="carInfoRow1">
@@ -120,7 +120,7 @@
         <view class="carInfoCont">
           <view class="carInfoContWord">
             <view class="carName">
-              <text>{{item.brand_name}}{{item.factorytime}}款</text>
+              <text>{{item.name}}</text>
             </view>
 
             <view class="carInfoRow1">
@@ -149,7 +149,7 @@
         <view class="carInfoCont">
           <view class="carInfoContWord">
             <view class="carName">
-              <text>{{item.brand_name}}{{item.factorytime}}款</text>
+              <text>{{item.name}}</text>
             </view>
 
             <view class="carInfoRow1">

@@ -100,7 +100,7 @@ page{
 .carList{
   width:80%;
   height:80rpx;
-  font-size: 14px;
+  font-size: 24rpx;
   margin: 0 auto;
   line-height: 80rpx;
   border-bottom: 1rpx solid #e4e4e4;

@@ -1,4 +1,8 @@
 <!--pages/buyCar/buyCar.wxml-->
+
+<import src="/utils/template/template.wxml" />
+
+
 <form report-submit="{{true}}" bindsubmit='formSubmit'>
 <view class="formArea">
     <view class='formItem'>
@@ -37,16 +41,17 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>求购年份</text>
+           <text>车辆年份</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
                <picker
                   mode="date"
                   value="{{form.productDate}}"
-                  start="2009-09-01"
+                  start="2005-01-01"
+                  end="{{year}}"
                   bindchange="productDateChange"
-                  fields="month"
+                  fields="year"
                 >
                   <view class="picker">
                      <text>{{form.productDate}}</text>
@@ -61,9 +66,9 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>意向排量</text>
+           <text>输入排量</text>
         </view>
-        <view>
+        <view class="itemRight">
               <view class="itemCont-displacement">
                 <input class="displacement" 
                 value='{{form.displacement}}' 
@@ -100,7 +105,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>求购城市</text>
+           <text>意向城市</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -151,7 +156,7 @@
     <view class='formItem note'>
         <view class="itemLeft">
            <text></text>
-           <text>备注</text>
+           <text class="beizhuBuyPage">备注</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -166,7 +171,7 @@
    
 </form>
 
-<view class="backDiv" wx:if="{{phoneLogShow}}">
+<!-- <view class="backDiv" wx:if="{{phoneLogShow}}">
     <view class="divCont">
         <view class="topTitle">
            <text>验证手机号</text>
@@ -192,4 +197,6 @@
              <button bindtap='phoneAuth'>提交</button>
         </view>
     </view>
-</view>
+</view> -->
+
+<template is="verificationCode" wx:if="{{phoneLogShow}}"></template>

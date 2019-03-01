@@ -20,6 +20,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.getStorage({
+      key: 'carBrand',
+      success(res) {
+        console.log(res.data)
+        that.setData({
+          carBrand: res.data
+        })
+      }
+    })
     this.getCarTypeList()
   },
 
@@ -31,7 +41,10 @@ Page({
       that.setData({
         carBrand:res.data.data.brandList
       })
-      console.log(that.data.carBrand)
+      wx.setStorage({
+        key: 'carBrand',
+        data: res.data.data.brandList
+      })
     })
   },
 
@@ -75,12 +88,12 @@ Page({
       carType: carType
     })
     var animation = wx.createAnimation({
-      duration: 300,
+      duration: 400,
       delay: 0,
       timingFunction: "ease",
     });
 
-    animation.translateX(-262).step({ duration: 500 })
+    animation.translateX(-222).step({ duration: 400 })
     that.setData({ moveData: animation.export() })
 
     that.iconMove()
@@ -89,24 +102,24 @@ Page({
   iconMove:function(){
     var that = this
     var animation = wx.createAnimation({
-      duration: 500,
+      duration: 400,
       delay: 0,
       timingFunction: "ease",
     });
 
-    animation.translateX(-246).step({ duration: 510 })
+    animation.translateX(-206).step({ duration: 410 })
     that.setData({ iconMove: animation.export() })
   },
 
   qxiconMove:function(){
     var that = this
     var animation = wx.createAnimation({
-      duration: 500,
+      duration: 400,
       delay: 0,
       timingFunction: "ease",
     });
 
-    animation.translateX(246).step({ duration: 500 })
+    animation.translateX(206).step({ duration: 400 })
     that.setData({ iconMove: animation.export() })
   },
 
@@ -129,12 +142,12 @@ Page({
       marker:-1
     })
     var animation = wx.createAnimation({
-      duration: 500,
+      duration: 400,
       delay: 0,
       timingFunction: "ease",
     });
 
-    animation.translateX(262).step({ duration: 500 })
+    animation.translateX(222).step({ duration: 400 })
     that.setData({ moveData: animation.export() })
     that.qxiconMove()
   },

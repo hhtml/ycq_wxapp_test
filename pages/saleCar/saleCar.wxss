@@ -79,6 +79,16 @@ image.imageIcon{
 .itemLeft text:nth-child(2){
   font-size: 30rpx;
 }
+/* 车辆备注样式 */
+.carDis{ 
+  margin-left: 8rpx;
+}
+.itemCont .beizhu{
+  padding-left: 28rpx;
+}
+.beizhuBuyPage{
+  padding-left: 16rpx;
+}
 .itemRight{
   width: 500rpx;
   display: flex;
@@ -103,12 +113,13 @@ image.imageIcon{
 }
 /* 排量输入框样式 */
 .itemCont-displacement{
-  width: 400rpx;
+  width: 500rpx;
   height:95rpx;
   display: flex;
+  justify-content: space-between;
 }
 .itemCont-displacement .displacement{
-  width: 40%;
+  width:40%;
   height: 95rpx;
   line-height: 95rpx;
   font-size: 24rpx;

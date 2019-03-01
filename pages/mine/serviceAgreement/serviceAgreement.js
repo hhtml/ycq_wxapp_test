@@ -13,6 +13,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.getStorage({
+      key: 'serviceAgreement',
+      success(res) {
+        console.log(res.data)
+        that.setData({
+          data:res.data
+        })
+      }
+    })
     this.getData()
   },
 
@@ -24,6 +34,10 @@ Page({
     $http.post('my/service_agreement').then(res => {
       console.log(res.data)
       that.setData({
+        data: res.data.data.agreement
+      })
+      wx.setStorage({
+        key: 'serviceAgreement',
         data: res.data.data.agreement
       })
     })

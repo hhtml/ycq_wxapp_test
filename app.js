@@ -1,4 +1,5 @@
 //app.js
+var $http = require('./utils/http.js');
 App({
   onLaunch: function (options) {
     // 展示本地存储能力
@@ -54,6 +55,7 @@ App({
   //   userInfo: null,
   //   carType: '请选择车型',
   //   carBrand: '选择品牌',
+  //   brand_id: '',
   //   url: 'https://ycq.ucuj.com.cn/addons/cms/wxapp.',
   //   imgUrl: 'https://static-czz.junyiqiche.com/',  //此处不可修改...
   //   localImgUrl: 'https://ycq.ucuj.com.cn',
