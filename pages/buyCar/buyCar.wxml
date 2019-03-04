@@ -200,5 +200,4 @@
 </view> -->
 
 <!-- 引入验证码组件 -->
-<!-- <template is="verificationCode" wx:if="{{phoneLogShow}}"></template> -->
-<identifyingCode name="easy" wx:if="{{phoneLogShow}}"/>
+<identifyingCode name="easy" wx:if="{{phoneLogShow}}" paramAtoB="{{phoneLogShow}}"/>

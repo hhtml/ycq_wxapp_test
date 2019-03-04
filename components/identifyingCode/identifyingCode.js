@@ -6,7 +6,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    paramAtoB:String
   },
 
   /**
@@ -14,28 +14,19 @@ Component({
    */
   data: {
     sentSms:false,
-    form: {
-      // carType: '',
-      carRegion: '',
-      price: '',
-      phone: '',
-      description: '',
-      displacementUnit: 'L',
-      displacement: '',
-      productDate: '',
-      transmissionData: '', //变速箱
-    },
-    phoneLogShow:false,
+    phone:'',
     dtNUm: 60,
+    smscode:''
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+
     //获取短信验证码
     get_sms_code: function () {
-      var telInput = this.data.form.phone;
+      var telInput = this.data.phone;
       if (!telInput) {
         wx.showToast({
           title: '请先填写手机号',
@@ -99,23 +90,34 @@ Component({
       }
 
     },
-    closeLog:function() {
+
+    // 关闭验证手机号输入框
+    closeLog:function(e) {
       var that = this
-      console.log(1)
-      that.setData({
+      var pages = getCurrentPages();
+      var prevPage = pages[pages.length - 1];  //当前页面
+      prevPage.setData({
         phoneLogShow: false
       })
     },
+
+    // 手机号码输入框
     phoneInput:function(e){
-      var form = this.data.form;
-      form.phone = e.detail.value;
       this.setData({
-        form: form
+        phone: e.detail.value
       })
     },
+
+    // 验证码输入框
+    bindMsglInput(e) {
+      this.setData({
+        smscode: e.detail.value
+      })
+    },
+
+    // 点击提交事件
     phoneAuth() {
-      var form = this.data.form;
-      var phone = form.phone;
+      var phone = this.data.phone;
       var smscode = this.data.smscode;
       var $this = this;
       $http.post('index/clickAppointment', {
@@ -130,13 +132,17 @@ Component({
             wx.showToast({
               title: '验证成功',
             });
-            $this.setData({
-              phoneLogShow: false
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 1];  //当前页面
+            prevPage.setData({
+              phoneLogShow: false,
+              phone:phone
             })
+            console.log(prevPage)
           } else {
-            form.phone = '';
+            phone = '';
             $this.setData({
-              form: form,
+              phone: phone,
               phoneLogShow: false
             })
             wx.showToast({
@@ -151,6 +157,6 @@ Component({
         });
     },
 
-    
+
   }
 })

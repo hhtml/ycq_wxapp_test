@@ -253,7 +253,7 @@
    <button class="formButton" form-type='submit'>发布车源</button>
 </form>
 
-<view class="backDiv" wx:if="{{phoneLogShow}}">
+<!-- <view class="backDiv" wx:if="{{phoneLogShow}}">
     <view class="divCont">
         <view class="topTitle">
            <text>验证手机号</text>
@@ -279,4 +279,7 @@
              <button bindtap='phoneAuth'>提交</button>
         </view>
     </view>
-</view>
+</view> -->
+
+<!-- 引入验证码组件 -->
+<identifyingCode name="easy" wx:if="{{phoneLogShow}}" paramAtoB="{{phoneLogShow}}"/>
