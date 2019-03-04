@@ -199,4 +199,6 @@
     </view>
 </view> -->
 
-<template is="verificationCode" wx:if="{{phoneLogShow}}"></template>
+<!-- 引入验证码组件 -->
+<!-- <template is="verificationCode" wx:if="{{phoneLogShow}}"></template> -->
+<identifyingCode name="easy" wx:if="{{phoneLogShow}}"/>
