@@ -8,24 +8,7 @@ Page({
    */
   data: {
     activeId:2,
-    brandList:[
-      {
-      name:'奔驰',
-      check:false
-      },
-      { 
-        name:'宝马',
-        check:false
-      },
-      {
-        name:'奥迪',
-        check: false
-        },
-      {
-        name:'雷克萨斯',
-        check: false
-        }
-        ],
+    brandCheckList:[],
     partnerList:[
       /*{
         id:0,
@@ -61,7 +44,8 @@ Page({
       regionImg:''
     },
     dtNUm:60,
-    appImgUrl: app.globalData.localImgUrl
+    appImgUrl: app.globalData.localImgUrl,
+    multiIndex: [0, 0],
   },
   /***
    * 事件函数
@@ -81,6 +65,66 @@ Page({
       form: form
     })
   },
+
+  //邀请码验证
+  checkInviteNumber(e){
+    var invite=e.detail.value;
+    var partnerList=new Array();
+    var form=this.data.form;
+    var $this=this;
+    if (invite){
+      $http.post('Shop/check_the_invitation_code', {
+        code: invite
+      }).then(res => {
+        //成功回调
+        //成功回调
+        var resObj = res.data;
+        console.log('邀请码验证：', resObj);
+        if (resObj.code == 1) {
+          var data = resObj.data;
+          wx.showToast({
+            title: resObj.msg,
+            icon: 'success',
+            duration: 3000
+          });
+          var store_level_list = data.store_level_list;
+          if (store_level_list) {
+            store_level_list.forEach((val, index) => {
+              if (val.condition == 'visible') {
+                var obj = {
+                  id: val.id,
+                  partner_rank: val.partner_rank,
+                  money: val.money,
+                  explain: val.explain,
+                  checked: false
+                }
+                partnerList.push(obj);
+              }
+            });
+          }
+          
+          $this.setData({
+            partnerList: partnerList
+          })
+        } else {
+          wx.showToast({
+            title: resObj.msg,
+            image: '../../images/warn.png',
+            duration: 3000
+          });
+          form.inviteNumber = '';
+          $this.setData({
+            form: form
+          })
+          console.log('请求失败：', resObj.msg);
+        }
+      }).catch(err => {
+        //异常回调
+        console.log('请求失败', err);
+      });
+    }
+    
+  },
   shopRegionChange(e){
     console.log('picker发送选择改变，携带值为', e.detail.value);
     var form=this.data.form;
@@ -92,10 +136,10 @@ Page({
   
   chooseBrand(e){
     var index=e.currentTarget.dataset.index;
-    var brandList = this.data.brandList;
-    var check = brandList[index].check;
-    brandList[index].check = !check;
-    this.setData({ brandList: brandList})
+    var brandCheckList = this.data.brandCheckList;
+    var check = brandCheckList[index].check;
+    brandCheckList[index].check = !check;
+    this.setData({ brandCheckList: brandCheckList})
   },
   
   
@@ -317,6 +361,8 @@ Page({
     var $this=this;
     var form = this.data.form;
     var partnerList=new Array();
+    var zimuList = new Array();
+    var brandsList = new Array();
     $http.post('Shop/index')
       .then(res => {
         //成功回调
@@ -324,27 +370,59 @@ Page({
         console.log('进入店铺申请：', resObj);
         if (resObj.code == 1) {
           var data=resObj.data;
-          
           var submit_type = data.submit_type;
           form.inviteNumber = data.inviter_code;
           var store_level_list = data.store_level_list;
+          var brandList = data.brand_list;
           if (store_level_list){
             store_level_list.forEach((val,index)=>{
-                 var obj={
-                   id: val.id,
-                   partner_rank: val.partner_rank,
-                   money: val.money,
-                   explain: val.explain,
-                   checked: false
-                 }
-              partnerList[index]=obj;
+              if (val.condition =='visible'){
+                var obj = {
+                  id: val.id,
+                  partner_rank: val.partner_rank,
+                  money: val.money,
+                  explain: val.explain,
+                  checked: false
+                }
+                partnerList.push(obj);
+              } 
             });
           }
+          if (brandList){
+            for (var item in brandList){
+              var obj = {
+                index:item,
+                name:item
+              }
+              var brand_list = brandList[item];
+              var arr = new Array();
+              brand_list.forEach((el, i) => {
+                var sObj = {
+                  id: el.id,
+                  name: el.name
+                }
+                arr[i] = sObj;
+              })
+              var obj2 = {
+                index: item,
+                brands: arr
+              }
+              zimuList.push(obj);
+              brandsList.push(obj2);
+            }  
+          }
+          
+
+          console.log('zimuList:', zimuList);
+          console.log('brandsList:', brandsList);
           $this.setData({
             submit_type: submit_type,
             form: form,
-            partnerList: partnerList
-          })
+            partnerList: partnerList,
+            zimuList,
+            brandsList,
+            brandInfo: [zimuList, brandsList[0].brands]
+          });
 
         } else {
           wx.showToast({
@@ -357,6 +435,43 @@ Page({
         //异常回调
         console.log('请求失败', err);
       });
+  },
+  bindPickerColumnChange(e) {
+    var zimuList = this.data.zimuList;
+    if (e.detail.column == 0) {
+      var brands = this.getCitysByIndex(e.detail.value);
+      this.setData({
+        brandInfo: [zimuList, brands]
+      })
+    }
+  },
+  bindPickerChange(e) {
+    console.log(e.detail.value);
+    var brandList = this.getCitysByIndex(e.detail.value[0]);
+    var brandCheckList = this.data.brandCheckList;
+    var obj={
+      id: brandList[e.detail.value[1]].id,
+      name: brandList[e.detail.value[1]].name,
+      check: false
+    }
+    brandCheckList.push(obj);
+    this.setData({
+      brandCheckList: brandCheckList
+    })
+
+  },
+  getCitysByIndex(index) {
+    var zimuList = this.data.zimuList;
+    var brandsList = this.data.brandsList;
+    let zimuIndex = zimuList[index].index;
+    var tempObj = [];
+    for (let i = 0; i < brandsList.length; i++) {
+      if (brandsList[i].index == zimuIndex) {
+        tempObj = brandsList[i].brands;
+        break;
+      }
+    }
+    return tempObj;
   },
   
   checkForm() {
@@ -384,9 +499,9 @@ Page({
     })
   },
   checkBrand(){
-    var brandList=this.data.brandList;
-    for (var i = 0; i < brandList.length;i++){
-      if (brandList[i].check){
+    var brandCheckList = this.data.brandCheckList;
+    for (var i = 0; i < brandCheckList.length;i++){
+      if (brandCheckList[i].check){
         return true;
       }
     }
@@ -394,10 +509,10 @@ Page({
   },
   getBrand(){
     var checkBrands=new Array();
-    var brandList = this.data.brandList;
-    for (var i = 0; i < brandList.length; i++) {
-      if (brandList[i].check) {
-        checkBrands.push(brandList[i].name);
+    var brandCheckList = this.data.brandCheckList;
+    for (var i = 0; i < brandCheckList.length; i++) {
+      if (brandCheckList[i].check) {
+        checkBrands.push(brandCheckList[i].name);
       }
     }
     return checkBrands;

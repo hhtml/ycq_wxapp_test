@@ -112,6 +112,12 @@ text.infoTip{
   border-radius: 20rpx;
   margin:0 25rpx 20rpx 0;
 }
+.brandArea picker{
+  display: inline-block;
+  width: 100rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+}
 text.checkBrand{
   color: #ef4631;
 }

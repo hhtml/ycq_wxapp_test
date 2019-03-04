@@ -14,31 +14,106 @@
     </view>
 </view>
 
-<view class="orderList">
-    <block wx:for="{{orderList}}">
+
+<view class="orderList" wx:if="{{activeId==0}}">
+    <block wx:for="{{toBePaidList}}">
         <view class="orderItem"  data-id="{{item.id}}">
             <view class='orderInfo'>
                 <view class="infoImg">
-                    <image src='{{item.img}}'></image>
+                    <image src='{{item.avatar}}'></image>
                 </view>
                 <view class="infoName">
-                    <text>{{item.name}}</text>
+                    <text>{{item.nickname}}</text>
                 </view>
                 <view class="infoPrice">
-                    <text>店铺认证费：￥{{item.price}}</text>
+                    <text>店铺认证费：￥{{item.certification_fee}}</text>
                 </view>
             </view>
             <view class="orderDomainBg">
                 <view class="orderDomain">
-                 
                     <view class="orderSchedule">   
-                        <text class="activeSche">待审</text>
-                        <text>审核中</text>
-                        <text>完成</text>
+                        <text class="{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review'||item.auditstatus=='wait_for_review' ? 'activeSche' : ''}}">待审</text>
+                        <text class="{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review' ? 'activeSche' : ''}}">审核中</text>
+                        <text class="{{item.auditstatus=='pass_the_audit' ? 'activeSche' : ''}}">完成</text>
                     </view>
-                    <view class="orderHandle">
+                    <view class="orderHandle" wx:if="{{item.auditstatus=='paid_the_money'}}">
+                        <text>升级</text>
+                    </view>
+                    <view class="orderHandle" wx:else>
                         <text>取消订单</text>
                         <text>去支付</text>
+                    </view>
+               </view>
+            </view>
+            
+        </view>
+    </block>
+</view>
+
+<view class="orderList" wx:if="{{activeId==1}}">
+    <block wx:for="{{paidList}}">
+        <view class="orderItem"  data-id="{{item.id}}">
+            <view class='orderInfo'>
+                <view class="infoImg">
+                    <image src='{{item.avatar}}'></image>
+                </view>
+                <view class="infoName">
+                    <text>{{item.nickname}}</text>
+                </view>
+                <view class="infoPrice">
+                    <text>店铺认证费：￥{{item.certification_fee}}</text>
+                </view>
+            </view>
+            <view class="orderDomainBg">
+                <view class="orderDomain">
+                    <view class="orderSchedule">   
+                        <text class="{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review'||item.auditstatus=='wait_for_review' ? 'activeSche' : ''}}">待审</text>
+                        <text class="{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review' ? 'activeSche' : ''}}">审核中</text>
+                        <text class="{{item.auditstatus=='pass_the_audit' ? 'activeSche' : ''}}">完成</text>
+                    </view>
+                    <view class="orderHandle" wx:if="{{item.auditstatus=='paid_the_money'}}">
+                        <text>升级</text>
+                    </view>
+                    <view class="orderHandle" wx:else>
+                        <text>取消订单</text>
+                        <text>去支付</text>
+                    </view>
+               </view>
+            </view>
+            
+        </view>
+    </block>
+</view>
+
+<view class="orderList" wx:if="{{activeId==2}}">
+    <block wx:for="{{toBePaidList}}">
+        <view class="orderItem"  data-id="{{item.id}}">
+            <view class='orderInfo'>
+                <view class="infoImg">
+                    <image src='{{item.avatar}}'></image>
+                </view>
+                <view class="infoName">
+                    <text>{{item.nickname}}</text>
+                </view>
+                <view class="infoPrice">
+                    <text>店铺认证费：￥{{item.certification_fee}}</text>
+                </view>
+            </view>
+            <view class="orderDomainBg">
+                <view class="orderDomain">
+                    <view class="orderSchedule">   
+                        <text class="{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review'||item.auditstatus=='wait_for_review' ? 'activeSche' : ''}}">待审</text>
+                        <text class="{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review' ? 'activeSche' : ''}}">审核中</text>
+                        <text class="{{item.auditstatus=='pass_the_audit' ? 'activeSche' : ''}}">完成</text>
+                    </view>
+                    <view class="orderHandle" wx:if="{{item.auditstatus=='paid_the_money'}}">
+                        <text wx:if="{{item.can_upgrade=='1'}}" class="activeButton" bindtap='upgradeOrder'>升级</text>
+                        <text wx:else>升级</text>
+                    </view>
+                    <view class="orderHandle" wx:else>
+                        <text bindtap='cancelOrder' data-store="{{item.companystore_id}}">取消订单</text>
+                        <text wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton' bindtap='payOrder'>去支付</text>
+                        <text wx:else>去支付</text>
                     </view>
                </view>
             </view>

@@ -25,36 +25,69 @@ Page({
         active_tab: title
       })
   },
+  request_shop_detail(shopId){
+    var $this=this;
+    var carList=new Array();
+    $http.post('shop/store_detail', {
+      store_id: shopId
+    }).then(res => {
+      //成功回调
+      var resObj = res.data;
+      console.log('店铺详情：', resObj);
+      if (resObj.code == 1) {
+        var data=resObj.data;
+        var brandStr=data.detail.main_camp;
+        var brandList = brandStr.split(',');
+        var carList = data.detail.car_list;
+        
+        var shop = {
+          banner: '../../images/car-test_03.png',
+          name: data.detail.store_name,
+          addr: data.detail.store_address,
+          brands: brandList
+        };
+        if (carList){
+          carList.forEach((val,index)=>{
+              var obj={
+                id: val.id,
+                models_name: val.models_name,//"奥迪Q3 20192.0L手动变速",
+                guide_price: val.guide_price,// "100万",
+                car_licensetime: val.car_licensetime,// "2019-03",
+                kilometres: val.kilometres,// "0.1万公里",
+                parkingposition: val.parkingposition,// "北京市 北京市",
+                browse_volume: val.browse_volume,//5750,
+                //createtime: val.car_licensetime,// 1551410619,
+                store_description: val.store_description,// "车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系",
+                factorytime: val.factorytime,//"1970",
+                modelsimages: val.modelsimages,//"/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
+              }
+              carList[index]=obj;
+          });
+        }
+        this.setData({
+          shop, carList
+        })
+      } else {
+        wx.showToast({
+          title: resObj.msg,
+          image: '../../images/warn.png'
+        });
+        console.log('请求失败：', resObj.msg);
+      }
+    }).catch(err => {
+      //异常回调
+      console.log('请求失败', err);
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
       var shopId=options.shopId;
       console.log('shopId:',shopId);
+      this.request_shop_detail(shopId);
   },
-  request_shop_detail(shopId){
-    var $this = this;
-    $http.post('my/index')
-      .then(res => {
-        //成功回调
-        var resObj = res.data;
-        console.log('我的数据：', resObj);
-        if (resObj.code == 1) {
-          var data = resObj.data;
-          var company = {
-            id: data.userInfo.companystoreone.id,
-            qrcode: data.userInfo.companystoreone.store_qrcode
-          }
-          $this.setData({ company });
-
-        } else {
-          console.log('请求失败：', data.msg);
-        }
-      }).catch(err => {
-        //异常回调
-        console.log('请求失败');
-      });
-  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

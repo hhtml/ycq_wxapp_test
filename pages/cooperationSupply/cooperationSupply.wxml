@@ -94,10 +94,16 @@
               <text class="infoTip">(没有符合的品牌可以自行添加)</text>
           </view>
           <view class="brandArea">
-               <block wx:for="{{brandList}}">
+               <block wx:for="{{brandCheckList}}">
                    <text class="{{item.check? 'checkBrand':''}}" bindtap='chooseBrand' data-index="{{index}}">{{item.name}}</text>
                </block>
-               <text style="font-size:40rpx;padding:0 40rpx;color:#ef4631;">+</text>
+               <!--<text style="color:{{brand_id ? '#ef4631':'#353535'}};">{{brand_id ? brandInfo[1][multiIndex[0]].name :'选择品牌'}}</text>-->
+               <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
+                  <view class="picker">
+                    <text style="font-size:40rpx;padding:0 40rpx;color:#ef4631;">+</text>
+                    
+                  </view>
+                </picker>
           </view>
       </view>
 
@@ -110,7 +116,7 @@
               <text class="infoTip">(请输入邀请人的邀请码，没有可不填)</text>
           </view>
           <view class="rowInput">
-             <input type='text' value="{{form.inviteNumber}}" bindinput='formBindInput' data-name="inviteNumber"></input>
+             <input type='text' value="{{form.inviteNumber}}" bindinput='formBindInput' bindblur='checkInviteNumber' bindconfirm='checkInviteNumber'data-name="inviteNumber"></input>
           </view>
       </view>
 
