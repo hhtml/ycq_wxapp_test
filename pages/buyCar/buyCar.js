@@ -8,6 +8,7 @@ Page({
    */
   data: {
     multiIndex: [0, 0],
+    year:'',
     form: {
       // carType: '',
       carRegion: '',
@@ -88,6 +89,20 @@ Page({
     form.transmissionData = this.data.transmission[index]
     this.setData({
       form: form
+    })
+  },
+  //获取当前年份
+  getYear: function () {
+    var that = this
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate()
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+    console.log(year + '-' + month + '-' + day)
+    that.setData({
+      year: year + '-' + month + '-' + day
     })
   },
   /**
@@ -369,8 +384,7 @@ Page({
     var formId = e.detail.formId;
     var form = this.data.form;
     var $this = this; 
-    console.log(form)
-    return;
+   
     if (!this.checkForm()) {
       wx.showToast({
         title: '请将信息填写完整',
@@ -379,7 +393,7 @@ Page({
     } else {
       var carInfo = {
         brand_id: app.globalData.brand_id,
-        models_name: app.globalData.carBrand + form.productDate + form.displacement + form.displacementUnit + form.transmissionData,
+        models_name: app.globalData.carBrand +' '+ form.productDate+'款' + ' ' + form.displacement + form.displacementUnit + ' ' + form.transmissionData,
         parkingposition: form.carRegion,
         guide_price: form.price,
         phone: form.phone,
@@ -402,9 +416,9 @@ Page({
               icon: 'success'
             });
             $this.cleanForm();
-            brand = {
+            // brand = {
 
-            };
+            // };
             $this.setData({
               form: form,
               brand: brand
@@ -434,6 +448,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.getYear()
     this.request_brand();
     this.setData({
       carType: app.globalData.carBrand
@@ -465,8 +480,7 @@ Page({
   onHide: function () {
     app.globalData.carType = '请选择车型'
     app.globalData.carBrand = '选择品牌'
-
-
+    app.globalData.brand_id = ''
   },
 
   /**
@@ -476,7 +490,7 @@ Page({
   onUnload: function () {
     app.globalData.carType = '请选择车型'
     app.globalData.carBrand = '选择品牌'
-
+    app.globalData.brand_id = ''
   },
 
   /**

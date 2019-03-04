@@ -12,6 +12,7 @@ Page({
     imgwidth: 0,
     imgheight: 0,
     statusBarHeight: app.globalData.statusBarHeight,
+    showModal:false,
     car: {
       /*banner: '../../images/car-test_03.png',
       name: '2011款奥迪A6 2.0T自动舒适版',
@@ -87,6 +88,7 @@ Page({
         // console.log(this.cut_str(data.detail.user.nickname, 6));
         var car = {
           id: data.detail.id,
+          is_authentication: data.is_authentication,
           banner: himgUrl + data.detail.modelsimages[0],
           brand_name: data.detail.brand.name,
           name: data.detail.models_name,
@@ -137,24 +139,49 @@ Page({
     })*/
   },
   priceLog() {
+    var that = this
     var isOffer = this.data.car.isOffer;
-    if (isOffer == 1) {
-      wx.showToast({
-        title: '您已报过价',
-        image: '../../images/warn.png'
+    var is_authentication = this.data.car.is_authentication
+    if (is_authentication == 0){
+      that.setData({
+        showModal:true
       })
-    } else {
-      this.setData({
-        priceLogShow: true
-      })
+    }else{
+      if (isOffer == 1) {
+        wx.showToast({
+          title: '您已报过价',
+          image: '../../images/warn.png'
+        })
+      } else {
+        this.setData({
+          priceLogShow: true
+        })
+      }
     }
-
+  },
+  // 取消报价弹出提示框
+  cancelShowModal:function(){
+    var that = this
+    that.setData({
+      showModal:false
+    })
   },
   closeLog() {
     this.setData({
       priceLogShow: false
     })
   },
+  //报价提示框 点击确认事件
+  goAuthentication:function(){
+    var that = this
+    wx.navigateTo({
+      url: '../cooperationSupply/cooperationSupply'
+    })
+    that.setData({
+      showModal:false
+    })
+  },
+  //点击电话联系事件
   makePhoneCall() {
     var tel = '028 - 84167417';
     wx.makePhoneCall({

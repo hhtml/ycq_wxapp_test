@@ -93,7 +93,7 @@ Page({
         //成功回调
         var resObj = res.data;
         $this.data.userInfo = resObj.data.userInfo;
-        //转化二维码头像图片地址
+        //转化头像图片地址
         if (typeof $this.data.userInfo.avatar === 'string') {
           wx.getImageInfo({ //  小程序获取图片信息API
             src: $this.data.userInfo.avatar,
@@ -126,20 +126,22 @@ Page({
           })
         }
         //获取二维码图片地址
-        $this.data.userInfo.invitation_code_img = app.globalData.localImgUrl + $this.data.userInfo.invitation_code_img
-        if (typeof $this.data.userInfo.invitation_code_img === 'string') {
-          wx.getImageInfo({ //  小程序获取图片信息API
-            src: $this.data.userInfo.invitation_code_img,
-            success: function(res) {
-              $this.data.switch3 = 1
-              $this.data.userInfo.invitation_code_img = res.path
+        if ($this.data.userInfo.invitation_code_img) {
+          $this.data.userInfo.invitation_code_img = app.globalData.localImgUrl + $this.data.userInfo.invitation_code_img  
+          if (typeof $this.data.userInfo.invitation_code_img === 'string') {
+            wx.getImageInfo({ //  小程序获取图片信息API
+              src: $this.data.userInfo.invitation_code_img,
+              success: function(res) {
+                $this.data.switch3 = 1
+                $this.data.userInfo.invitation_code_img = res.path
 
-            },
-            fail(err) {
-              console.log($this.data.userInfo.invitation_code_img)
-              console.log(err)
-            }
-          })
+              },
+              fail(err) {
+                console.log($this.data.userInfo.invitation_code_img)
+                console.log(err)
+              }
+            })
+          }
         }
         console.log('我的数据：', resObj);
         if (resObj.code == 1) {

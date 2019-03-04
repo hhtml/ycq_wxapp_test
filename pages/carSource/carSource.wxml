@@ -45,7 +45,7 @@
       <view class="carInfoCont">
         <view class="carInfoContWord">
           <view class="carName">
-            <text>{{item.brand_name}}{{item.name}}</text>
+            <text>{{item.name}}</text>
           </view>
 
           <view class="carInfoRow1">

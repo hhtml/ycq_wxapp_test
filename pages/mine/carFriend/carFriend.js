@@ -14,6 +14,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.getStorage({
+      key: 'carFriendImg',
+      success(res) {
+        console.log(res.data)
+        that.setData({
+          imgUrls:res.data
+        })
+      }
+    })
     this.getImg()
   },
 
@@ -38,7 +48,12 @@ Page({
       that.setData({
         imgUrls: imgUrls
       })
+      wx.setStorage({
+        key: 'carFriendImg',
+        data: that.data.imgUrls
+      })
     })
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

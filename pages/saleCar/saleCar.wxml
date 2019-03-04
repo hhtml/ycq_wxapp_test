@@ -13,7 +13,7 @@
        </view>  
     </block>
     <view class="uploadTips">
-      <text>*至少上传6张以上车辆照片，横屏拍摄，第一张作为封面展示</text>
+      <text>*至少上传3张以上车辆照片，横屏拍摄，第一张作为封面展示</text>
     </view>
 </view>
 
@@ -113,13 +113,16 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>排量</text>
+           <text>输入排量</text>
         </view>
-        <!-- <picker > -->
-            <view>
+
+            <view class="itemRight">
               <view class="itemCont-displacement">
-                <!-- <text>{{form.productDate}}</text> -->
-                <input class="displacement" value='{{form.displacement}}' bindinput='displacementInput' type="digit" placeholder='格式如：1.6'></input>
+                <input class="displacement" 
+                value='{{form.displacement}}' 
+                bindinput='displacementInput' 
+                type="digit" 
+                placeholder='格式如：1.6'></input>
                 <radio-group class="radio-group" bindchange="radioChange">
                     <label class="radio" wx:for="{{radioArray}}">
                       <radio value="{{item.name}}" checked="{{item.checked}}">{{item.name}}</radio>
@@ -127,11 +130,6 @@
                 </radio-group>
             </view>
             </view>
-            <!-- <text class="formTip" bindtap='formTip'>提示</text> -->
-        <!-- </picker> -->
-        <!-- <view class="tipLog" wx:if="{{formTipShow}}">
-          <text>2017款1.6L手动豪华</text>
-        </view> -->
     </view>
 
     <view class='formItem'>
@@ -155,16 +153,17 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>出厂日期</text>
+           <text>车辆年份</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
                <picker
                   mode="date"
                   value="{{form.productDate}}"
-                  start="2009-09-01"
+                  start="2005-01-01"
+                  end="{{year}}"
                   bindchange="productDateChange"
-                  fields="month"
+                  fields="year"
                 >
                   <view class="picker">
                      <text>{{form.productDate}}</text>
@@ -240,11 +239,11 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text></text>
-           <text>车况描述</text>
+           <text class="carDis">车况描述</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
-                <input placeholder="请如实描述车况，否则描述不准确将影响您的诚信" value="{{form.description}}" bindinput="descriptionInput"> </input>
+                <input placeholder="请如实描述车况，否则描述不准确将影响您的诚信" value="{{form.description}}" bindinput="descriptionInput" class="beizhu"> </input>
             </view>
           
         </view>
