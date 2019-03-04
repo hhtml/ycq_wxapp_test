@@ -1,6 +1,9 @@
 // pages/mine/mine.js
 const app = getApp();
 var $http = require('../../utils/http.js');
+var util = require('../../utils/md5.js') // 引入md5.js文件
+
+
 Page({
 
   /**
@@ -61,10 +64,10 @@ Page({
 
   },
   nav_to_myshop: function() {
-    /***var shopId=this.data.company.id;
-    wx.navigateTo({
-      url: '../myShop/myShop?shopId=' + shopId,
-    })*/
+    // var shopId=this.data.company.id;
+    // wx.navigateTo({
+    //   url: '../myShop/myShop?shopId=' + shopId,
+    // })
     wx.showToast({
       title: '即将上线',
       image: '../../images/warn.png',
@@ -77,7 +80,43 @@ Page({
   onLoad: function(options) {
     //var user_id=wx.getStorageSync("user_id");
 
-  }, 
+  },
+  //测试支付
+  pay: function(e) {
+    var $this = this;
+    $http.post('Wxpay/index', {
+      order: new Date().getTime(),
+      money: 0.01,
+      // formId:e.detail.formId
+    }).then(res => {
+      console.log(res);
+      var timeStamp = (Date.parse(new Date()) / 1000).toString();
+      var pkg = 'prepay_id=' + res.data.prepay_id;
+      var nonceStr = res.data.nonce_str;
+      var appid = res.data.appid;
+      var key = res.data.key;
+      var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件
+      // console.log(paySign);
+      // return;
+      //发起支付
+      wx.requestPayment({
+        'timeStamp': timeStamp,
+        'nonceStr': nonceStr,
+        'package': pkg,
+        'signType': 'MD5',
+        'paySign': paySign,
+        'success': function(res) {
+          console.log('支付成功');
+          //支付成功之后的操作
+
+        }
+      });
+
+    });
+    console.log(util.hexMD5('asa' + 2342 + '萨芬大苏打'));
+
+
+  },
   request_mine() {
     var $this = this;
     $http.post('my/index')
@@ -119,7 +158,7 @@ Page({
         }
         //获取二维码图片地址
         if ($this.data.userInfo.invitation_code_img) {
-          $this.data.userInfo.invitation_code_img = app.globalData.localImgUrl + $this.data.userInfo.invitation_code_img  
+          $this.data.userInfo.invitation_code_img = app.globalData.localImgUrl + $this.data.userInfo.invitation_code_img
           if (typeof $this.data.userInfo.invitation_code_img === 'string') {
             wx.getImageInfo({ //  小程序获取图片信息API
               src: $this.data.userInfo.invitation_code_img,
@@ -192,7 +231,7 @@ Page({
           image: '../../images/warn.png',
           duration: 1000
         })
-      } else if ($this.store_has_many.auditstatus == 'wait_for_review'){
+      } else if ($this.store_has_many.auditstatus == 'wait_for_review') {
         wx.showToast({
           title: '店铺未认证',
           image: '../../images/warn.png',
@@ -252,10 +291,10 @@ Page({
     //绘制邀请码
     ctx.setFontSize(18);
     ctx.setFillStyle('#000');
-    ctx.fillText(invite_code, 0.8 * width * 0.25, 0.72 * height*0.82);
+    ctx.fillText(invite_code, 0.8 * width * 0.25, 0.72 * height * 0.82);
     ctx.stroke();
     var path1 = $this.data.userInfo.invitation_code_img //二维码图片
-    ctx.drawImage(path1, 0.8 * width*0.7, 0.72 * height*0.72, 0.8 * width*0.25, 0.8 * width*0.25); //绘制图片模板的二维码
+    ctx.drawImage(path1, 0.8 * width * 0.7, 0.72 * height * 0.72, 0.8 * width * 0.25, 0.8 * width * 0.25); //绘制图片模板的二维码
     ctx.draw(true, () => {
       var that = this
       wx.canvasToTempFilePath({

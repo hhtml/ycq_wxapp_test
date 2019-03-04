@@ -2,125 +2,128 @@
 <view class="headBg">
 </view>
 <view class='head'>
-    <view class="bgImg">
-        <image src='../../images/mine-bg.png'></image>
+  <view class="bgImg">
+    <image src='../../images/mine-bg.png'></image>
+  </view>
+  <view class="headCont">
+    <view class="userImg">
+      <open-data type="userAvatarUrl"></open-data>
     </view>
-    <view class="headCont">
-        <view class="userImg">
-            <open-data  type="userAvatarUrl"></open-data>
-        </view>
-        <view class='userInfo'>
-            <view class="userName">
-                <open-data type="userNickName"></open-data>
-                <!--<view class="writeIcon">
+    <view class='userInfo'>
+      <view class="userName">
+        <open-data type="userNickName"></open-data>
+        <!--<view class="writeIcon">
                     <image src='' mode='widthFix'></image>
                 </view>-->
-                <view class="ewmIcon" bindtap='erWeiMa'>
-                    <image src='../../images/ewm-icon.png' mode='widthFix'></image>
-                </view>
-            </view>  
+        <view class="ewmIcon" bindtap='erWeiMa'>
+          <image src='../../images/ewm-icon.png' mode='widthFix'></image>
         </view>
+      </view>
     </view>
-    
-    <view class="userTips" >
-        <view class="userTipsText">
-            <text>您暂未实名认证哦!</text>
-            <text>赶紧去实名认证</text>
-        </view>
-        
-        <view class="nav_to_auth"  bindtap='nav_to_page' data-path="../cooperationSupply/cooperationSupply"> 
-        <!-- data-path="../cooperationSupply/cooperationSupply" -->
-           <image src='../../images/right-angle.png' mode='widthFix'></image>
-        </view>
+  </view>
+
+  <view class="userTips">
+    <view class="userTipsText">
+      <text>您暂未实名认证哦!</text>
+      <text>赶紧去实名认证</text>
     </view>
-</view> 
+
+    <view class="nav_to_auth" bindtap='nav_to_page' data-path="../cooperationSupply/cooperationSupply">
+      <!-- data-path="../cooperationSupply/cooperationSupply" -->
+      <image src='../../images/right-angle.png' mode='widthFix'></image>
+    </view>
+  </view>
+</view>
 <view class="navListBg">
-    <view class="navList">
-      <view class="navItem" bindtap='nav_to_page' data-path="../myShop/myShop">
+  <view class="navList">
+    <view class="navItem" bindtap='nav_to_page' data-path="../myShop/myShop">
       <!-- data-path="../myShop/myShop" -->
-          <image class="navIcon" src='../../images/mine-shop.png' mode='widthFix'></image>
-          <view class="navName">
-               <text>我的店铺</text>
-          </view>
-          <view class='navRight'>
-               <image src='../../images/angle-right.png' mode='widthFix'></image>
-          </view>
+      <image class="navIcon" src='../../images/mine-shop.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>我的店铺</text>
+      </view>
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="navList">
+    <view class="navItem" bindtap='nav_to_page' data-path="../wantBuy/wantBuy">
+      <image class="navIcon" src='../../images/mine-buy.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>我想买的</text>
+      </view>
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
     </view>
 
-    <view class="navList">
-      <view class="navItem" bindtap='nav_to_page' data-path="../wantBuy/wantBuy">
-          <image class="navIcon" src='../../images/mine-buy.png' mode='widthFix'></image>
-          <view class="navName">
-               <text>我想买的</text>
-          </view>
-          <view class='navRight'>
-               <image src='../../images/angle-right.png' mode='widthFix'></image>
-          </view>
+
+    <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage">
+      <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>报价管理</text>
+      </view>
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
 
-      
-      <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage">
-          <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
-          <view class="navName">
-               <text>报价管理</text>
-          </view>
-          <view class='navRight'>
-               <image src='../../images/angle-right.png' mode='widthFix'></image>
-          </view>
-
-          <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
-      </view>
-
-      <view class="navItem" bindtap='nav_to_page' data-path="../order/order">
-          <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
-          <view class="navName">
-               <text>订单中心</text>
-          </view>
-          <view class='navRight'>
-               <image src='../../images/angle-right.png' mode='widthFix'></image>
-          </view>
-
-          <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
-      </view>
+      <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
     </view>
 
-    <view class="navList">
-      <view class="navItem" bindtap='nav_to_page' data-path="/pages/mine/serviceAgreement/serviceAgreement">
-          <image class="navIcon" src='../../images/mine-service.png' mode='widthFix'></image>
-          <view class="navName">
-               <text>服务协议</text>
-          </view>
-          <view class='navRight'>
-               <image src='../../images/angle-right.png' mode='widthFix'></image>
-          </view>
+    <view class="navItem" bindtap='nav_to_page' data-path="../order/order">
+      <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>订单中心</text>
       </view>
-      <view class="navItem" bindtap='nav_to_page' data-path="/pages/mine/carFriend/carFriend">
-          <image class="navIcon" src='../../images/mine-about.png' mode='widthFix'></image>
-          <view class="navName">
-               <text>关于车友</text>
-          </view>
-          <view class='navRight'>
-               <image src='../../images/angle-right.png' mode='widthFix'></image>
-          </view>
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
-      <view class="navItem" bindtap='makePhoneCall' data-path="">
-          <image class="navIcon" src='../../images/mine-call.png' mode='widthFix'></image>
-          <view class="navName">
-               <text>客服热线</text>
-          </view>
-          <!-- <view class='navRight'>
+
+      <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
+    </view>
+  </view>
+
+  <view class="navList">
+    <view class="navItem" bindtap='nav_to_page' data-path="/pages/mine/serviceAgreement/serviceAgreement">
+      <image class="navIcon" src='../../images/mine-service.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>服务协议</text>
+      </view>
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
+      </view>
+    </view>
+    <view class="navItem" bindtap='nav_to_page' data-path="/pages/mine/carFriend/carFriend">
+      <image class="navIcon" src='../../images/mine-about.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>关于车友</text>
+      </view>
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
+      </view>
+    </view>
+    <view class="navItem" bindtap='makePhoneCall' data-path="">
+      <image class="navIcon" src='../../images/mine-call.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>客服热线</text>
+      </view>
+      <!-- <view class='navRight'>
                <image src='../../images/angle-right.png' mode='widthFix'></image>
           </view> -->
-      </view>
     </view>
+  </view>
 </view>
-
+<form bindsubmit='pay' bindreset='' report-submit>
+  <view class="btn-area">
+    <button form-type="submit">测试支付</button>
+  </view>
+</form>
 <!-- 模态对话框 -->
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
 
 <view class="canvas-box" hidden="{{showModal == false}}">
-      <canvas  style="width:600rpx;height:980rpx;position:fixed;top:40rpx;left:75rpx;" canvas-id="mycanvas"/>
-</view>  
-      <button class="btn" wx:if="{{showModal}}" bindtap='saveImg'>保存图片</button>
-      
+  <canvas style="width:600rpx;height:980rpx;position:fixed;top:40rpx;left:75rpx;" canvas-id="mycanvas" />
+</view>
+<button class="btn" wx:if="{{showModal}}" bindtap='saveImg'>保存图片</button>
