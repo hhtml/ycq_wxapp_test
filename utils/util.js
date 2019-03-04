@@ -13,10 +13,6 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
-module.exports = {
-  formatTime: formatTime
-}
 let getQueryString = function(url, name) {
   console.log("url = " + url)
   console.log("name = " + name)
@@ -30,5 +26,8 @@ let getQueryString = function(url, name) {
   return null;
 }
 module.exports = {
-  getQueryString: getQueryString,
+  formatTime: formatTime,
+  getQueryString: getQueryString
 }
+
+ 
