@@ -77,15 +77,7 @@ Page({
   onLoad: function(options) {
     //var user_id=wx.getStorageSync("user_id");
 
-  },
-  //支付
-  // formSubmit(e){
-  //   var 
-  //   console.log(e.detail.formId);
-
-  //   console.log(e.detail.value);
-  // },
-
+  }, 
   request_mine() {
     var $this = this;
     $http.post('my/index')

@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp();
 var $http = require('../../utils/http.js');
-// var util =   require('../../utils/util.js');
+var util =   require('../../utils/util.js');
 
 Page({
   data: {
@@ -39,7 +39,7 @@ Page({
         // path: '../clueCar/clueCar'
       } 
     ],
-    ///你是不是写了店铺的啊写了合作申请 订单 但是刚刚替换了mine 入口不见了，，，那你加一下调换链接就行
+    
 
     scroll_x:true,
     shopList: [
@@ -387,14 +387,14 @@ Page({
   onShow:function(){
     this.request_index_info();
   }
-  // , onLoad: function (options){
-  //   console.log("index 生命周期 onload" + JSON.stringify(options))
-  //   //在此函数中获取扫描普通链接二维码参数
-  //   let q = decodeURIComponent(options.q)
-  //   if (q) {
-  //     console.log("index 生命周期 onload url=" + q)
-  //     console.log("index 生命周期 onload 参数 user_id=" + util.getQueryString(q, 'user_id'))
-  //   }
+  , onLoad: function (options){
+    console.log("index 生命周期 onload" + JSON.stringify(options))
+    //在此函数中获取扫描普通链接二维码参数
+    let q = decodeURIComponent(options.q)
+    if (q) {
+      console.log("index 生命周期 onload url=" + q)
+      console.log("index 生命周期 onload 参数 user_id=" + util.getQueryString(q, 'user_id'))
+    }
     
-  // }
+  }
 })

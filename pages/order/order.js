@@ -30,7 +30,7 @@ Page({
     this.setData({
       activeId: e.currentTarget.dataset.id
     })
-  },
+  }, 
   /***
    * 事件函数
    */
@@ -123,7 +123,14 @@ Page({
         //异常回调
         console.log('请求失败', err);
       });
-  },
+  }, 
+  //测试支付
+  formSubmit(e) {
+
+    console.log(e.detail.formId);
+
+    console.log(e.detail.value);
+  }, 
   /**
    * 生命周期函数--监听页面加载
    */
