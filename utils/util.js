@@ -25,9 +25,10 @@ let getQueryString = function(url, name) {
   }
   return null;
 }
+
 module.exports = {
   formatTime: formatTime,
-  getQueryString: getQueryString
+  getQueryString: getQueryString 
 }
 
  
