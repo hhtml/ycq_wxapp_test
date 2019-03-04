@@ -36,17 +36,12 @@
 			"list": []
 		},
 		"miniprogram": {
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "单页编译",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "单页-买车",
-					"pathName": "pages/buyCar/buyCar",
+					"pathName": "pages/saleCar/saleCar",
 					"query": "",
 					"scene": null
 				}

@@ -230,7 +230,7 @@
         </view>
         <view class="itemRight">
             <view class="itemCont">
-               <text>{{form.phone}}</text>
+               <text>{{phone}}</text>
             </view>
             
         </view>
@@ -282,4 +282,4 @@
 </view> -->
 
 <!-- 引入验证码组件 -->
-<identifyingCode name="easy" wx:if="{{phoneLogShow}}" paramAtoB="{{phoneLogShow}}"/>
+<identifyingCode name="easy" wx:if="{{phoneLogShow}}"/>

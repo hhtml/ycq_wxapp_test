@@ -73,7 +73,6 @@
   color: #fff;
   font-size: 30rpx;
 }
-
 .smscode{
   width: 140rpx;
   height: 80rpx;

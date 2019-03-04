@@ -175,6 +175,26 @@ Page({
     })
     console.log(this.data.form)
   },
+  openLog() { //弹出手机号验证码区域
+    this.setData({
+      phoneLogShow: true
+    })
+  },
+  //获取当前年份
+  getYear: function () {
+    var that = this
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate()
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+    console.log(year + '-' + month + '-' + day)
+    that.setData({
+      year: year + '-' + month + '-' + day
+    })
+  },
+
   // listingRegionChange(e) {
   //   var form = this.data.form;
   //   form.listingRegion = e.detail.value[0] + ' ' + e.detail.value[1];
@@ -182,80 +202,129 @@ Page({
   //     form: form
   //   })
   // },
-  phoneInput(e) {
-    var form = this.data.form;
-    form.phone = e.detail.value;
-    this.setData({
-      form: form
-    })
-  },
-  bindMsglInput(e){
-    this.setData({
-      smscode:e.detail.value
-    })
-  },
-  openLog(){
-    this.setData({
-      phoneLogShow: true
-    })
-  },
-  closeLog(){
-    this.setData({
-      phoneLogShow:false
-    })
-  },
 
-  //获取当前年份
-  getYear:function(){
-    var that = this
-    var date = new Date();
-    var year = date.getFullYear(); 
-    var month = date.getMonth()+1;
-    var day = date.getDate()
-    month = month<10?'0'+month:month;
-    day = day<10?'0'+day:day;
-    console.log(year+'-'+month+'-'+day)
-    that.setData({
-      year: year + '-' + month + '-' + day
-    })
-  },
-  phoneAuth(){
-    var form=this.data.form;
-    var phone=form.phone;
-    var smscode=this.data.smscode;
-    var $this = this;
-    $http.post('index/clickAppointment',{
-      mobile:phone,
-      code:smscode
-    })
-      .then(res => {
-        //成功回调
-        var resObj = res.data;
-        console.log('验证：', resObj);
-        if (resObj.code == 1) {
-          wx.showToast({
-            title: '验证成功',
-          });
-          $this.setData({
-            phoneLogShow: false
-          })
-        } else {
-          form.phone='';
-          $this.setData({
-             form:form,
-            phoneLogShow:false
-          })
-          wx.showToast({
-            title: resObj.msg,
-            image:'../../images/warn.png'
-          })
-          console.log('请求失败：', data.msg);
-        }
-      }).catch(err => {
-        //异常回调
-        console.log('请求失败',err);
-      });
-  },
+
+
+  // phoneInput(e) {
+  //   var form = this.data.form;
+  //   form.phone = e.detail.value;
+  //   this.setData({
+  //     form: form
+  //   })
+  // },
+  // bindMsglInput(e){
+  //   this.setData({
+  //     smscode:e.detail.value
+  //   })
+  // },
+ 
+  // closeLog(){
+  //   this.setData({
+  //     phoneLogShow:false
+  //   })
+  // },
+
+  // phoneAuth(){
+  //   var form=this.data.form;
+  //   var phone=form.phone;
+  //   var smscode=this.data.smscode;
+  //   var $this = this;
+  //   $http.post('index/clickAppointment',{
+  //     mobile:phone,
+  //     code:smscode
+  //   })
+  //     .then(res => {
+  //       //成功回调
+  //       var resObj = res.data;
+  //       console.log('验证：', resObj);
+  //       if (resObj.code == 1) {
+  //         wx.showToast({
+  //           title: '验证成功',
+  //         });
+  //         $this.setData({
+  //           phoneLogShow: false
+  //         })
+  //       } else {
+  //         form.phone='';
+  //         $this.setData({
+  //            form:form,
+  //           phoneLogShow:false
+  //         })
+  //         wx.showToast({
+  //           title: resObj.msg,
+  //           image:'../../images/warn.png'
+  //         })
+  //         console.log('请求失败：', data.msg);
+  //       }
+  //     }).catch(err => {
+  //       //异常回调
+  //       console.log('请求失败',err);
+  //     });
+  // },
+
+  //获取短信验证码
+  // get_sms_code: function () {
+  //   var telInput = this.data.form.phone;
+  //   if (!telInput) {
+  //     wx.showToast({
+  //       title: '请先填写手机号',
+  //       image: '/images/warn.png',
+  //       duration: 2000
+  //     });
+  //   } else {
+  //     var dtNUm = this.data.dtNUm;
+  //     var that = this;
+  //     $http.post('index/sendMessage', {
+  //       'mobile': telInput
+  //     })
+  //       .then(res => {
+  //         //成功回调
+  //         var data = res.data;
+  //         if (data.code == 1) {
+  //           console.log(data);
+  //           that.setData({
+  //             sentSms: true
+  //           });
+  //           /*****************定时器 ****/
+  //           var timer = setInterval(function () {
+  //             timeclock();
+  //           }, 1000);
+  //           function timeclock() {
+  //             if (dtNUm == 0) {
+  //               clearInterval(timer);
+  //               that.setData({
+  //                 sentSms: false,
+  //                 dtNUm: 60
+  //               })
+  //               return;
+  //             } else {
+  //               dtNUm--;
+  //               that.setData({ dtNUm: dtNUm });
+  //               console.log('dtNUm', dtNUm)
+  //               return dtNUm;
+  //             }
+  //           }
+  //           console.log('timeclock', timeclock())
+  //         } else {
+  //           wx.showToast({
+  //             title: data.msg,
+  //             image: '../../images/warn.png',
+  //             duration: 2000
+  //           });
+  //           that.setData({
+  //             sentSms: false
+  //           });
+  //         }
+  //       }).catch(err => {
+  //         //异常回调
+  //         console.log('请求失败');
+  //       });
+
+  //   }
+
+  // },
+
+
   /**
    * 品牌相关
    */
@@ -439,8 +508,6 @@ Page({
         displacement: form.displacement + form.displacementUnit,
         transmissionData: form.transmissionData
       }
-      console.log(carInfo)
-      return;
       $http.post('index/uploadModels',{
         carInfo: carInfo
       })
@@ -479,69 +546,6 @@ Page({
           formTipShow:false
         })
       },3000)
-  },
-  //获取短信验证码
-  get_sms_code: function () {
-    var telInput = this.data.form.phone;
-    if (!telInput) {
-      wx.showToast({
-        title: '请先填写手机号',
-        image: '/images/warn.png',
-        duration: 2000
-      });
-    } else {
-      var dtNUm = this.data.dtNUm;
-      var that = this;
-      $http.post('index/sendMessage', {
-        'mobile': telInput
-      })
-        .then(res => {
-          //成功回调
-          var data = res.data;
-          if (data.code == 1) {
-            console.log(data);
-            that.setData({
-              sentSms: true
-            });
-            /*****************定时器 ****/
-            var timer = setInterval(function () {
-              timeclock();
-            }, 1000);
-            function timeclock() {
-              if (dtNUm == 0) {
-                clearInterval(timer);
-                that.setData({
-                  sentSms: false,
-                  dtNUm: 60
-                })
-                return;
-              } else {
-                dtNUm--;
-                that.setData({ dtNUm: dtNUm });
-                console.log('dtNUm', dtNUm)
-                return dtNUm;
-              }
-            }
-            console.log('timeclock', timeclock())
-
-
-          } else {
-            wx.showToast({
-              title: data.msg,
-              image: '../../images/warn.png',
-              duration: 2000
-            });
-            that.setData({
-              sentSms: false
-            });
-          }
-        }).catch(err => {
-          //异常回调
-          console.log('请求失败');
-        });
-
-    }
-
   },
 
   // 选择品牌点击事件

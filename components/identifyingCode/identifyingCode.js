@@ -6,7 +6,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    paramAtoB:String
+
   },
 
   /**
@@ -120,41 +120,50 @@ Component({
       var phone = this.data.phone;
       var smscode = this.data.smscode;
       var $this = this;
-      $http.post('index/clickAppointment', {
-        mobile: phone,
-        code: smscode
-      })
-        .then(res => {
-          //成功回调
-          var resObj = res.data;
-          console.log('验证：', resObj);
-          if (resObj.code == 1) {
-            wx.showToast({
-              title: '验证成功',
-            });
-            var pages = getCurrentPages();
-            var prevPage = pages[pages.length - 1];  //当前页面
-            prevPage.setData({
-              phoneLogShow: false,
-              phone:phone
-            })
-            console.log(prevPage)
-          } else {
-            phone = '';
-            $this.setData({
-              phone: phone,
-              phoneLogShow: false
-            })
-            wx.showToast({
-              title: resObj.msg,
-              image: '../../images/warn.png'
-            })
-            console.log('请求失败：', data.msg);
-          }
-        }).catch(err => {
-          //异常回调
-          console.log('请求失败', err);
-        });
+      if(!/^1(3|4|5|7|8)\d{9}$/.test(phone)){
+        wx.showToast({
+          title: '手机号格式错误',
+          image: '../../images/warn.png'
+        })
+      } else if (smscode == ''){
+        wx.showToast({
+          title: '请填写验证码',
+          image: '../../images/warn.png'
+        })
+      }else{
+        $http.post('index/clickAppointment', {
+          mobile: phone,
+          code: smscode
+        })
+          .then(res => {
+            //成功回调
+            var resObj = res.data;
+            console.log('验证：', resObj);
+            if (resObj.code == 1) {
+              wx.showToast({
+                title: '验证成功',
+              });
+              var pages = getCurrentPages();
+              var prevPage = pages[pages.length - 1];  //当前页面
+              prevPage.setData({
+                phoneLogShow: false,
+                phone: phone
+              })
+            } else {
+              $this.setData({
+                smscode: '',
+              })
+              wx.showToast({
+                title: resObj.msg,
+                image: '../../images/warn.png'
+              })
+              console.log('请求失败：', data.msg);
+            }
+          }).catch(err => {
+            //异常回调
+            console.log('请求失败', err);
+          });
+      }
     },
 
 
