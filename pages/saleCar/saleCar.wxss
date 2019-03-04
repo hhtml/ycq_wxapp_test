@@ -1,4 +1,5 @@
 /* pages/saleCar/saleCar.wxss */
+
 .uploadImgArea{
   padding: 30rpx 24rpx;
   overflow: hidden;
@@ -225,7 +226,7 @@ text.formTip{
   text-align: left;
 }
 
-.backDiv{
+ .backDiv{
   width: calc(100vw - 0rpx);
   height: calc(100vh - 0rpx);
   background: rgba(0, 0, 0, 0.7);
@@ -315,4 +316,4 @@ text.formTip{
   color: #666;
   font-size: 24rpx;
   margin: 0;
-}
+} 

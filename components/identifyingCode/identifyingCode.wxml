@@ -1,5 +1,6 @@
-<template name="verificationCode">
-  <view class="backDiv" >
+<!--components/identifyingCode.wxml-->
+
+<view class="backDiv">
     <view class="divCont">
         <view class="topTitle">
            <text>验证手机号</text>
@@ -26,4 +27,3 @@
         </view>
     </view>
 </view>
-</template>
