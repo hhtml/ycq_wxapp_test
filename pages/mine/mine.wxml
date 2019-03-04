@@ -28,7 +28,7 @@
             <text>赶紧去实名认证</text>
         </view>
         
-        <view class="nav_to_auth"  bindtap='nav_to_page' > 
+        <view class="nav_to_auth"  bindtap='nav_to_page' data-path="../cooperationSupply/cooperationSupply"> 
         <!-- data-path="../cooperationSupply/cooperationSupply" -->
            <image src='../../images/right-angle.png' mode='widthFix'></image>
         </view>
@@ -36,7 +36,7 @@
 </view> 
 <view class="navListBg">
     <view class="navList">
-      <view class="navItem" bindtap='nav_to_page' >
+      <view class="navItem" bindtap='nav_to_page' data-path="../myShop/myShop">
       <!-- data-path="../myShop/myShop" -->
           <image class="navIcon" src='../../images/mine-shop.png' mode='widthFix'></image>
           <view class="navName">
@@ -72,7 +72,7 @@
           <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
       </view>
 
-      <!-- <view class="navItem" bindtap='nav_to_page' data-path="../order/order">
+      <view class="navItem" bindtap='nav_to_page' data-path="../order/order">
           <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
           <view class="navName">
                <text>订单中心</text>
@@ -82,7 +82,7 @@
           </view>
 
           <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
-      </view> -->
+      </view>
     </view>
 
     <view class="navList">

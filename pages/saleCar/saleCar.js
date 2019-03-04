@@ -16,12 +16,12 @@ Page({
       price:'',
       distance:'',
       emission:'',
-      phone:'',
       description:'',
       displacement:'',
       displacementUnit:'L',
       transmissionData: '', //变速箱
     },
+    phone:'', //手机号
     transmission: [], //变速箱
     radioArray:[ //单选框
       {name:'L',checked:'true'},
@@ -433,12 +433,14 @@ Page({
         car_licensetime: form.listingDate,
         kilometres: form.distance,
         emission_standard: form.emission,
-        phone: form.phone,
+        phone: $this.data.phone,
         store_description: form.description,
         modelsimages: modelsimages,
         displacement: form.displacement + form.displacementUnit,
         transmissionData: form.transmissionData
       }
+      console.log(carInfo)
+      return;
       $http.post('index/uploadModels',{
         carInfo: carInfo
       })
