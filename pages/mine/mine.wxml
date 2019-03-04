@@ -33,25 +33,7 @@
            <image src='../../images/right-angle.png' mode='widthFix'></image>
         </view>
     </view>
-</view>
-
-
-
-<!--测试支付-->
-<!-- <form bindsubmit="formSubmit" bindreset="formReset" report-submit="true">
- <view class="section">
-    <view class="section__title">input</view>
-    <input name="input" placeholder="please input here" />
-  </view>
-  <view class="btn-area">
-    <button form-type="submit">Submit</button>
-    <button form-type="reset">Reset</button>
-  </view>
-</form> -->
-
-
-
-
+</view> 
 <view class="navListBg">
     <view class="navList">
       <view class="navItem" bindtap='nav_to_page' >
