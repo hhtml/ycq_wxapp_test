@@ -7,21 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    activeId:1,
-    orderList:[
-      {
-        id:0,
-        img:'',
-        name:'sososo',
-        price:'50000'
-      },
-      {
-        id: 0,
-        img: '',
-        name: 'sososo',
-        price: '50000'
-      }
-    ]
+    activeId:0,
+    completeList:[]
   },
   /***
    * 事件函数
@@ -50,6 +37,7 @@ Page({
           var paid_the_money = data.paid_the_money;
           if (to_be_paid){
             to_be_paid.forEach((val,index)=>{
+              console.log(val.companystoreone.auditstatus);
                 var obj={
                   id: val.id,
                   nickname: val.nickname,
@@ -99,30 +87,44 @@ Page({
   },
   //取消订单
   cancelOrder(e){
+    var $this=this;
     var store_id=e.currentTarget.dataset.store;
-    $http.post('shop/cancellation_order',{
-      store_id: store_id
-    }).then(res => {
-        //成功回调
-        //成功回调
-        var resObj = res.data;
-        console.log('取消订单：', resObj);
-        if (resObj.code == 1) {
-          wx.showToast({
-            title: resObj.msg,
-            icon: 'success'
+    wx.showModal({
+      title: '提示',
+      content: '确定删除该订单？',
+      success(res) {
+        if (res.confirm) {
+          $http.post('shop/cancellation_order', {
+            store_id: store_id
+          }).then(res => {
+            //成功回调
+            var resObj = res.data;
+            console.log('取消订单：', resObj);
+            if (resObj.code == 1) {
+              wx.showToast({
+                title: resObj.msg,
+                icon: 'success'
+              });
+              //重新加载列表刷新
+              $this.request_order_list();
+            } else {
+              wx.showToast({
+                title: resObj.msg,
+                image: '../../images/warn.png'
+              });
+              console.log('请求失败：', resObj.msg);
+            }
+          }).catch(err => {
+            //异常回调
+            console.log('请求失败', err);
           });
-        } else {
-          wx.showToast({
-            title: resObj.msg,
-            image: '../../images/warn.png'
-          });
-          console.log('请求失败：', resObj.msg);
+        } else if (res.cancel) {
+          console.log('用户点击取消');
         }
-      }).catch(err => {
-        //异常回调
-        console.log('请求失败', err);
-      });
+      }
+
+    })
+    
   }, 
   //测试支付
   formSubmit(e) {

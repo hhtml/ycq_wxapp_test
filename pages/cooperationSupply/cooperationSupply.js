@@ -9,6 +9,7 @@ Page({
   data: {
     activeId:2,
     brandCheckList:[],
+    year:['1年以下','1年','2年','3年','3年以上'],
     partnerList:[
       /*{
         id:0,
@@ -33,7 +34,7 @@ Page({
       shopRegion:'',
       shopRegionDetail:'',
       context:'',//备注
-      time:'',
+      time:'1年以下',
       smscode:'',
       inviteNumber:'',
       shopTel:'',
@@ -46,6 +47,7 @@ Page({
     dtNUm:60,
     appImgUrl: app.globalData.localImgUrl,
     multiIndex: [0, 0],
+    timeIndex:0
   },
   /***
    * 事件函数
@@ -65,7 +67,14 @@ Page({
       form: form
     })
   },
-
+  //经营年限选择
+  bindYearChange(e){
+      var index=e.detail.value;
+      var form=this.data.form;
+      var year=this.data.year;
+      form.time=year[index];
+      this.setData({form:form});
+  },
   //邀请码验证
   checkInviteNumber(e){
     var invite=e.detail.value;
@@ -357,6 +366,7 @@ Page({
     
     
   },
+  //进入页面，首次请求
   come_in_page(){
     var $this=this;
     var form = this.data.form;
@@ -436,6 +446,7 @@ Page({
         console.log('请求失败', err);
       });
   },
+  //品牌相关
   bindPickerColumnChange(e) {
     var zimuList = this.data.zimuList;
     if (e.detail.column == 0) {
@@ -473,7 +484,7 @@ Page({
     }
     return tempObj;
   },
-  
+  //表单判空
   checkForm() {
     var form = this.data.form;
     for (var item in form) {
@@ -484,6 +495,7 @@ Page({
     console.log('true');
     return true;
   },
+  //清空表单
   cleanForm() {
     var form = this.data.form;
     for (var item in form) {

@@ -81,7 +81,13 @@
                <text>经营年限</text>
            </view>
            <view class="formInput">
-               <input type='text' placeholder-class='placeholder' placeholder="如：一年以下" value="{{form.time}}" bindinput='formBindInput' data-name="time"></input>
+              <picker bindchange="bindYearChange" value="{{timeIndex}}" range="{{year}}">
+                <view class="picker">
+                  <text>{{form.time}}</text>
+                </view>
+              </picker>
+
+               <!--<input type='text' placeholder-class='placeholder' placeholder="如：一年以下" value="{{form.time}}" bindinput='formBindInput' data-name="time"></input>-->
            </view>
       </view>
 
@@ -101,7 +107,6 @@
                <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
                   <view class="picker">
                     <text style="font-size:40rpx;padding:0 40rpx;color:#ef4631;">+</text>
-                    
                   </view>
                 </picker>
           </view>
