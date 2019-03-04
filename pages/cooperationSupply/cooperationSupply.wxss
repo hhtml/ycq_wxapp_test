@@ -224,6 +224,7 @@ text.checkBrand{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
 }
 .uploadRightItem{
   height: 193rpx;
@@ -231,6 +232,13 @@ text.checkBrand{
   border-radius: 8rpx;
   text-align: center;
   overflow: hidden;
+}
+.uploadRightItem text{
+  font-size: 34rpx;
+  color: #ef4631;
+  display: block;
+  height: 193rpx;
+  line-height: 193rpx;
 }
 .uploadRightItem image{
    width: 100%;
