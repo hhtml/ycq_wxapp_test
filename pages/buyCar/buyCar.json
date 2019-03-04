@@ -3,5 +3,6 @@
     "identifyingCode":"/components/identifyingCode/identifyingCode"
   },
   "navigationBarTitleText": "我想买车",
-  "backgroundColor": "#ffffff"
+  "backgroundColor": "#ffffff",
+  "enablePullDownRefresh": false
 }

@@ -57,6 +57,7 @@ image.imageIcon{
 }
 .formArea{
   padding-bottom: 140rpx;
+  overflow: hidden;
 }
 .formItem{
   display: flex;

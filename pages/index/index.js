@@ -68,22 +68,67 @@ Page({
     currentInfo:'sale',
     searchResultShow:true,
     searchResult:[],
-    shareInfo:''
+    shareInfo:'',
+    sell_car_condition:{},
+    buy_car_condition:{},
+    msg:'',
+    showModal:false
   },
   //事件处理函数
   
   nav_to_page:function(e){
+    var that = this
       var index=e.currentTarget.dataset.index;
       var iconList=this.data.iconList;
       var path = iconList[index].path;
-      wx.navigateTo({
-        url: path,
-      })
-
-    // wx.showToast({
-    //   title: '即将上线',
-    //   image: '../../images/warn.png'
-    // })
+      if(index == 0){
+        if (that.data.sell_car_condition.status == 'error'){
+          that.setData({
+            msg: that.data.sell_car_condition.msg,
+            showModal:true
+          })
+        }else{
+          wx.navigateTo({
+            url: path,
+          })
+        }
+      } else if (index == 1){
+        if (that.data.buy_car_condition.status == 'error') {
+          that.setData({
+            msg: that.data.buy_car_condition.msg,
+            showModal: true
+          })
+        } else {
+          wx.navigateTo({
+            url: path,
+          })
+        }
+      }else{
+        // wx.navigateTo({
+        //   url: path,
+        // })
+        wx.showToast({
+          title: '即将上线',
+          image: '../../images/warn.png'
+        })
+      }
+  },
+  // 取消弹出提示框
+  cancelShowModal: function () {
+    var that = this
+    that.setData({
+      showModal: false
+    })
+  },
+  //提示框 点击确认事件
+  goAuthentication: function () {
+    var that = this
+    wx.navigateTo({
+      url: '../cooperationSupply/cooperationSupply'
+    })
+    that.setData({
+      showModal: false
+    })
   },
   switchTitle:function(e){
       var info=e.currentTarget.dataset.info;
@@ -152,6 +197,10 @@ Page({
           var saleList = resObj.data.carModelList.modelsInfoList;
           var buyList = resObj.data.carModelList.buycarModelList;
           var clueList = resObj.data.carModelList.clueList;
+          $this.setData({
+            buy_car_condition: resObj.data.buy_car_condition,
+            sell_car_condition: resObj.data.sell_car_condition,
+          })
           //分享数据
           $this.data.shareInfo = resObj.data.share;
           bannerList.forEach((val,index)=>{
@@ -366,6 +415,12 @@ Page({
   },
   onPullDownRefresh(){
     this.request_index_info();
+    
+  },
+  /**
+  * 页面上拉触底事件的处理函数
+  */
+  onReachBottom: function () {
     
   },
 

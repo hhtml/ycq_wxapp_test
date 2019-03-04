@@ -446,51 +446,54 @@ page{
 }
 
 .toast-wrap{
-  width:600rpx;
-  height:300rpx;
+  width:550rpx;
+  height:290rpx;
   background-color: #fff;
   position: fixed;
-  left:10%;
+  left:13%;
   top:40%;
   z-index: 9999;
+  border-radius: 10rpx;
 }
 .toast-title{
   width:100%;
   height:80rpx;
-  line-height: 80rpx;
   text-align: center;
+  line-height: 80rpx;
   color: #000;
   font-size: 32rpx;
   font-weight: bold;
+  margin-top:30rpx;
 }
 .toast-content{
   width:100%;
-  height:110rpx;
-  line-height: 110rpx;
-  font-size: 28rpx;
+  height:90rpx;
+  line-height: 90rpx;
+  font-size: 30rpx;
   color:#ccc;
   text-align: center;
 }
 .click-wrap{
   width:100%;
-  height:110rpx;
-  line-height: 110rpx;
+  height:90rpx;
+  line-height: 90rpx;
   display: flex;
   font-size: 32rpx;
-  border-top:2rpx solid rgb(189, 189, 189);
+  border-top:2rpx solid #f2f2f2;
   box-sizing: border-box;
 }
 .click-wrap .cancel{
   width:50%;
   height:100%;
-  line-height: 110rpx;
+  line-height: 90rpx;
   text-align: center;
-  border-right:2rpx solid rgb(189, 189, 189);
+  border-right:2rpx solid #f2f2f2;
   box-sizing: border-box;
 }
 .click-wrap .sure{
   width:50%;
   height:100%;
-  line-height: 110rpx;
+  line-height: 90rpx;
   text-align: center;
+  color:#ef4631;
 }

@@ -36,19 +36,6 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
-			"list": [
-				{
-					"id": -1,
-					"name": "单页-买车",
-					"pathName": "pages/buyCar/buyCar",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "单页-我的",
-					"pathName": "pages/mine/mine",
 					"scene": null
 				}
 			]
