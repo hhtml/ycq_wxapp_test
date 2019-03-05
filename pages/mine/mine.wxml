@@ -63,7 +63,7 @@
     <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage">
       <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
       <view class="navName">
-        <text>报价管理</text>
+        <text>砍价中心</text>
       </view>
       <view class='navRight'>
         <image src='../../images/angle-right.png' mode='widthFix'></image>
@@ -73,7 +73,7 @@
     </view>
 
     <view class="navItem" bindtap='nav_to_page' data-path="../order/order">
-      <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
+      <image class="navIcon" src='../../images/order.png' mode='widthFix'></image>
       <view class="navName">
         <text>订单中心</text>
       </view>
@@ -81,8 +81,21 @@
         <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
 
-      <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
+      <!-- <view class="offertip" wx:if="{{isNewOffer==1}}"></view> -->
     </view>
+
+    <view class="navItem" bindtap='nav_to_page' data-path="./news/news">
+      <image class="navIcon" src='../../images/mine-news.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>消息列表</text>
+      </view>
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
+      </view>
+
+      <view class="offertip" wx:if="{{isNewOffer==0}}"></view>
+    </view>
+
   </view>
 
   <view class="navList">
@@ -124,6 +137,27 @@
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
 
 <view class="canvas-box" hidden="{{showModal == false}}">
-  <canvas style="width:600rpx;height:980rpx;position:fixed;top:40rpx;left:75rpx;" canvas-id="mycanvas" />
+  <canvas style=" width:600rpx;height:980rpx;position:fixed;top:40rpx;left:75rpx; " canvas-id="mycanvas" />
 </view>
-<button class="btn" wx:if="{{showModal}}" bindtap='saveImg'>保存图片</button>
+<view class="share-wrap" wx:if="{{showModal}}">
+  <view class="shareFriendsCircle" bindtap='saveImg'>分享朋友圈</view>
+  <button class="shareFriends" open-type="share">分享给朋友</button>
+</view>
+
+<!-- 登录 -->
+<view class="logAreaBg" wx:if="{{settingShow}}" bindtouchmove='bindtouchmove'>
+  <view class="logArea">
+    <image src='../../images/auth-icon.png' mode='widthFix'></image>
+    <text>您暂时未登录</text>
+    <text>登陆后才可以使用友车圈哦</text>
+    <view class="logAreaButton">
+      <text catchtap='request_pay'>登录授权</text>
+      <button open-type='getUserInfo' bindgetuserinfo="getuserinfo"></button>
+    </view>
+  </view>
+  <view class="logCheck">
+    <switch checked disabled bindchange="switch1Change" type="checkbox" />
+    <text>登录即为默认同意并会遵守</text>
+    <text bindtap='goServiceAgreement'>友车圈服务协议</text>
+  </view>
+</view>

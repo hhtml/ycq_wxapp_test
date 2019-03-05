@@ -134,6 +134,9 @@
               <text class="infoTip">(将作为提取收益的收款账户)</text>
           </view>
           <view class="rowInput">
+             <input type='text' placeholder-class='placeholder' placeholder="请输入您的姓名" value="{{form.name}}" bindinput='formBindInput' data-name="name"></input>
+          </view>
+          <view class="rowInput">
              <input type='text' placeholder-class='placeholder' placeholder="请输入您的银行卡号" value="{{form.idCard}}" bindinput='formBindInput' data-name="idCard"></input>
           </view>
           <view class="rowInput">
@@ -198,7 +201,7 @@
       <view class="formBlock">
           <view class="formRow">
               <view class="formInfo">
-                  <text>*</text>
+                  <text></text>
                   <text>上传营业执照</text>
               </view>
           </view>
@@ -207,7 +210,7 @@
                    <text>+</text>
               </view>
               <view class='uploadRight'>
-                   <image src='{{appImgUrl+form.regionImg}}'></image>  
+                   <image src='{{appImgUrl+regionImg}}'></image>  
               </view>
           </view>
       </view>
@@ -222,7 +225,7 @@
     <view class='content'>
           <label class="partnerItem" wx:for="{{partnerList}}">
              <switch bindchange="partnerChange" data-index="{{index}}" value="{{item.name}}" checked="{{item.checked}}" type="checkbox"/>
-              <text>{{item.partner_rank}} {{item.money}}元 （{{item.explain}}）</text>
+              <text>{{item.partner_rank}} {{item.money}}元/年 （{{item.explain}}）</text>
           </label>
 
     </view>

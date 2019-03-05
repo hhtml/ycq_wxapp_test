@@ -3,24 +3,18 @@
 <!-- 自定义导航栏 -->
 <view class="searchArea" style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
   <view class="share-nav">
-    <image src="/images/share-icon.png"></image>
-    <button open-type='share'></button>
+    <image src="/images/mine-news.png" bindtap='goNews'></image>
+    <view class="tips"></view>
   </view>
   <view class="searchBg" bindtap='searchPage'>
     <image src='../../images/search-icon.png' mode='widthFix'></image>
     搜索车辆
-    <!-- <input value="{{searchInput}}" type='text' bindtap='searchInput' confirm-type="搜索" bindconfirm="searchConfirm"></input> -->
-    <!-- <view class="search" bindtap='searchInput'></view> -->
   </view>
-  <!-- <view class="searchResult" style="top:{{statusBarHeight+40}}px;" wx:if="{{searchResultShow}}">
-    <block wx:for="{{searchResult}}" wx:key="searchResult">
-      <text>{{item}}</text>
-    </block>
-  </view> -->
 </view>
 
+
 <!-- 轮播图区域 -->
-<view class="bannerArea" style="padding:{{statusBarHeight+5}}rpx 0rpx 0rpx 0rpx;">
+<view class="bannerArea" style="padding:{{statusBarHeight+132}}rpx 0 0px 0rpx;">
   <swiper autoplay circular indicator-dots="{{true}}" indicator-color="rgb(136,136,136)" indicator-active-color="#fff" duration="500" current="0">
     <block wx:for="{{bannerUrls}}" wx:key="bannerUrls">
       <swiper-item>
@@ -201,3 +195,4 @@
     <view class="sure" bindtap='goAuthentication'>去认证</view>
   </view>
 </view>
+

@@ -12,15 +12,13 @@ page{
   z-index:0;
 }
 .head{
-  
   padding: 40rpx 30rpx;
   background-color: #fff;
   border-radius: 10rpx;
   overflow: hidden;
   position: relative;
   z-index: 1;
-  margin: 24rpx;
-  
+  margin: 24rpx; 
 }
 .bgImg{
   width: 100%;
@@ -164,8 +162,8 @@ image.navIcon{
   background-color: #ff0000;
   border-radius: 50%;
   position: absolute;
-  top: 35rpx;
-  right:20rpx;
+  top: 43rpx;
+  right:30rpx;
 }
 
 /* 模态框 */
@@ -205,10 +203,124 @@ image.navIcon{
   bottom:30rpx;
   z-index: 9999;
 }
-.btn{
+.share-wrap{
   width:600rpx;
+  height:70rpx;
   position: fixed;
   left:75rpx;
-  bottom:13%;
+  bottom:15%;
   z-index:9999;
+  display: flex;
+  justify-content: space-between;
+  color:#fff;
+}
+.shareFriendsCircle{
+  width:220rpx;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:1rpx solid #fff;
+  border-radius: 10rpx;
+  font-size: 32rpx;
+}
+.shareFriends{
+  width:220rpx;
+  height:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:1rpx solid #fff;
+  border-radius: 10rpx;
+  font-size: 32rpx;
+}
+button{
+  margin:0rpx;
+  padding:0rpx;
+  background-color: rgba(0, 0, 0, 0);
+  color:#fff;
+}
+.button-hover{
+  color:#fff;
+  background-color:rgba(0, 0, 0, 0);
+}
+
+/* 登录 */
+.logAreaBg{
+  width: calc(100vw - 0rpx);
+  height: calc(100vh - 0rpx);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+}
+/* 更改 */
+.logArea{
+width:560rpx;
+height: 520rpx;
+background-color: #fff;
+border-radius: 8rpx;
+margin: 340rpx auto 0 auto;
+padding: 40rpx 0;
+position: relative;
+overflow: hidden;
+}
+/* 更改 */
+.logArea image{
+display: block;
+width: 26%;
+margin: 0 auto;
+}
+/* 更改 */
+.logArea text{
+display: block;
+text-align: center;
+font-size: 32rpx;
+font-weight: bold;
+color: #666;
+margin-top: 66rpx;
+}
+.logArea text:nth-child(1){
+  margin-top: 40rpx;
+}
+.logAreaButton{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80rpx;
+  
+}
+.logAreaButton text{
+  margin-top: 0!important;
+  height: 80rpx;
+  line-height: 80rpx;
+  color: #fff;
+  background-color: #d81e06;
+}
+.logAreaButton button{
+  width:100%;
+  height: 80rpx;
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+.logCheck{
+  width:400rpx;
+  margin: 30rpx auto;
+}
+.logCheck switch{
+  transform:scale(0.55);
+  margin:0 10rpx;
+}
+.logCheck text{
+  font-size: 24rpx;
+  color: #fff;
+}
+.logCheck text:last-child{
+  display: block;
+  text-align: center;
+  text-decoration: underline;
 }

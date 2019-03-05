@@ -13,7 +13,7 @@ Page({
     partnerList:[
       /*{
         id:0,
-        value:'铂金店铺 999元 （无限发布车源）',
+        value:'铂金店铺 999元/年 （无限发布车源）',
         checked:false
       },
       {
@@ -42,8 +42,9 @@ Page({
       idCard:'',
       idCardFront:'',
       idCardReverse:'',
-      regionImg:''
+      name:''
     },
+    regionImg: '',//营业执照
     dtNUm:60,
     appImgUrl: app.globalData.localImgUrl,
     multiIndex: [0, 0],
@@ -265,7 +266,7 @@ Page({
             //上传成功后的图片地址imgUrl，需要与服务器地址（app.js全局设置）做拼接, setData出去做预览
             console.log(JSON.parse(res.data));
             let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
-            form.regionImg = imgUrl;
+            $this.data.regionImg = imgUrl;
             $this.setData({ form: form });
           },
           fail: function (err) {
@@ -530,6 +531,7 @@ Page({
     return checkBrands;
   },
   formSubmit(e){
+    var that = this
     var formId=e.detail.formId;
     var shop_level_id = this.data.shop_level_id;
     var form=this.data.form;
@@ -566,11 +568,11 @@ Page({
         bank_card: form.idCard,
         id_card_positive: form.idCardFront,
         id_card_opposite: form.idCardReverse,
-        business_licenseimages:form.regionImg,
+        business_licenseimages:that.data.regionImg,
         level_id: shop_level_id,
-        code: form.inviteNumber
+        code: form.inviteNumber,
+        name:form.name
       }
-      
       $http.post('shop/submit_audit',{
         submit_type: submit_type,
         auditInfo: auditInfo
