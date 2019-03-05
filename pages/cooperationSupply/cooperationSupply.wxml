@@ -186,9 +186,11 @@
               
               <view class='uploadRight'>
                    <view class="uploadRightItem">
+                      <text wx:if="{{!form.idCardFront}}">正面</text>
                        <image src='{{appImgUrl+form.idCardFront}}'></image>
                    </view>
                    <view class="uploadRightItem">
+                       <text wx:if="{{!form.idCardReverse}}">反面</text>
                        <image src='{{appImgUrl+form.idCardReverse}}'></image>
                    </view>
               </view>
@@ -229,6 +231,6 @@
 </view>
 
 <view class='formButtom'>
-    <button form-type='submit'>支付</button>
+    <button form-type='submit'>提交</button>
 </view>
 </form>

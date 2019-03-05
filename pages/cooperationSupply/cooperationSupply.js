@@ -52,6 +52,106 @@ Page({
   /***
    * 事件函数
    */
+  //进入页面，首次请求
+  come_in_page() {
+    var $this = this;
+    var form = this.data.form;
+    var partnerList = new Array();
+    var zimuList = new Array();
+    var brandsList = new Array();
+    $http.post('Shop/index')
+      .then(res => {
+        //成功回调
+        var resObj = res.data;
+        console.log('进入店铺申请：', resObj);
+        if (resObj.code == 1) {
+          var data = resObj.data;
+          var submit_type = data.submit_type;
+          form.inviteNumber = data.inviter_code;
+          var store_level_list = data.store_level_list;
+          var brandList = data.brand_list;
+          var fail_default_value = data.fail_default_value;
+          if (store_level_list) {
+            store_level_list.forEach((val, index) => {
+              if (val.condition == 'visible') {
+                var obj = {
+                  id: val.id,
+                  partner_rank: val.partner_rank,
+                  money: val.money,
+                  explain: val.explain,
+                  checked: false
+                }
+                partnerList.push(obj);
+              }
+            });
+          }
+          if (brandList) {
+            for (var item in brandList) {
+              var obj = {
+                index: item,
+                name: item
+              }
+              var brand_list = brandList[item];
+              var arr = new Array();
+              brand_list.forEach((el, i) => {
+                var sObj = {
+                  id: el.id,
+                  name: el.name
+                }
+                arr[i] = sObj;
+              })
+              var obj2 = {
+                index: item,
+                brands: arr
+              }
+              zimuList.push(obj);
+              brandsList.push(obj2);
+            }
+          }
+
+
+          console.log('zimuList:', zimuList);
+          console.log('brandsList:', brandsList);
+          if (fail_default_value){
+           form = {
+              shopName: fail_default_value.store_name,
+              shopRegion: fail_default_value.cities_name,
+              shopRegionDetail: fail_default_value.store_address,
+              context: fail_default_value.store_description,//备注
+              time: fail_default_value.business_life,
+              smscode: '',
+              inviteNumber: data.inviter_code,
+              shopTel: fail_default_value.phone,
+              shopImg: fail_default_value.store_img,
+              idCard: fail_default_value.bank_card,
+              idCardFront: fail_default_value.id_card_positive,
+              idCardReverse: fail_default_value.id_card_opposite,
+              regionImg: fail_default_value.business_licenseimages
+            }
+          }
+          
+          $this.setData({
+            submit_type: submit_type,
+            form: form,
+            partnerList: partnerList,
+            zimuList,
+            brandsList,
+            brandInfo: [zimuList, brandsList[0].brands]
+          });
+
+        } else {
+          wx.showToast({
+            title: resObj.msg,
+            image: '../../images/warn.png'
+          });
+          console.log('请求失败：', resObj.msg);
+        }
+      }).catch(err => {
+        //异常回调
+        console.log('请求失败', err);
+      });
+  },
+  //切换标题
   switchTitle(e){
       this.setData({
         activeId:e.currentTarget.dataset.id
@@ -214,11 +314,6 @@ Page({
     var $this = this;
     var form = this.data.form;
     wx.chooseImage({
-      count: 1,
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths;
-        wx.chooseImage({
           count: 1,
           success(res) {
             // tempFilePath可以作为img标签的src属性显示图片
@@ -240,10 +335,6 @@ Page({
                 console.log('上传失败：', err)
               }
             });
-
-          }
-        });
-        
       }
     });
   },
@@ -366,86 +457,7 @@ Page({
     
     
   },
-  //进入页面，首次请求
-  come_in_page(){
-    var $this=this;
-    var form = this.data.form;
-    var partnerList=new Array();
-    var zimuList = new Array();
-    var brandsList = new Array();
-    $http.post('Shop/index')
-      .then(res => {
-        //成功回调
-        var resObj = res.data;
-        console.log('进入店铺申请：', resObj);
-        if (resObj.code == 1) {
-          var data=resObj.data;
-          var submit_type = data.submit_type;
-          form.inviteNumber = data.inviter_code;
-          var store_level_list = data.store_level_list;
-          var brandList = data.brand_list;
-          if (store_level_list){
-            store_level_list.forEach((val,index)=>{
-              if (val.condition =='visible'){
-                var obj = {
-                  id: val.id,
-                  partner_rank: val.partner_rank,
-                  money: val.money,
-                  explain: val.explain,
-                  checked: false
-                }
-                partnerList.push(obj);
-              } 
-            });
-          }
-          if (brandList){
-            for (var item in brandList){
-              var obj = {
-                index:item,
-                name:item
-              }
-              var brand_list = brandList[item];
-              var arr = new Array();
-              brand_list.forEach((el, i) => {
-                var sObj = {
-                  id: el.id,
-                  name: el.name
-                }
-                arr[i] = sObj;
-              })
-              var obj2 = {
-                index: item,
-                brands: arr
-              }
-              zimuList.push(obj);
-              brandsList.push(obj2);
-            }  
-          }
-          
-
-          console.log('zimuList:', zimuList);
-          console.log('brandsList:', brandsList);
-          $this.setData({
-            submit_type: submit_type,
-            form: form,
-            partnerList: partnerList,
-            zimuList,
-            brandsList,
-            brandInfo: [zimuList, brandsList[0].brands]
-          });
-
-        } else {
-          wx.showToast({
-            title: resObj.msg,
-            image: '../../images/warn.png'
-          });
-          console.log('请求失败：', resObj.msg);
-        }
-      }).catch(err => {
-        //异常回调
-        console.log('请求失败', err);
-      });
-  },
+ 
   //品牌相关
   bindPickerColumnChange(e) {
     var zimuList = this.data.zimuList;
