@@ -12,8 +12,16 @@ Page({
   data: {
     showModal: false,
     userInfo: [],
+    store_has_many:[],
     haibaoImg: '',
     userName: ' ',
+    unread:'', //消息列表提示
+    authentication:false, //是否实名认证
+    authenticationList:'',//认证提示消息
+    dataPath:'', //实名认证按钮点击路径
+    goldShop: true, //达到黄金店铺级别 隐藏认证区域
+    nickname:'',
+    store_level:'', //店铺等级
     navList: [{
         icon: '',
         name: '我的店铺',
@@ -48,6 +56,61 @@ Page({
    * 事件函数
    */
 
+  // 店铺认证 实名认证
+  isAuthentication:function(){
+    var that = this
+    var store_has_many = that.data.store_has_many[0]
+    console.log(store_has_many)
+    if (store_has_many){
+      if (store_has_many.auditstatus == "wait_the_review"){
+        that.setData({
+          authentication:false,
+          authenticationList:'店铺待审核',
+          dataPath:'../cooperationSupply/cooperationSupply',
+        })
+      } else if (store_has_many.auditstatus == "in_the_review"){
+        that.setData({
+          authentication: false,
+          authenticationList: '店铺审核中',
+          dataPath: '../cooperationSupply/cooperationSupply',
+        })
+      } else if (store_has_many.auditstatus == "paid_the_money"){
+        if (store_has_many.storelevel.partner_rank == '铂金店铺'){
+          that.setData({
+            goldShop:false
+          })
+        }else{
+        that.setData({
+          authentication: false,
+          authenticationList: '升级店铺',
+          nickname: store_has_many.store_name,
+          store_level: store_has_many.storelevel.partner_rank,
+          dataPath: './upgrade/upgrade',
+        })
+        }
+      } else if (store_has_many.auditstatus == "audit_failed"){
+        that.setData({
+          authentication: false,
+          authenticationList: '店铺审核没有通过 查看详情',
+          dataPath: '../cooperationSupply/cooperationSupply'
+        })
+      } else if (store_has_many.auditstatus == "pass_the_audit"){
+        that.setData({
+          authentication: false,
+          authenticationList: '店铺审核已通过 去支付',
+          dataPath: '../order/order',
+          nickname: store_has_many.store_name,
+          store_level: store_has_many.storelevel.partner_rank
+        })
+      }
+    }else{
+      //店铺还没有实名认证,提示用户去实名认证
+      that.setData({
+        authentication:true,
+        dataPath: '../cooperationSupply/cooperationSupply',
+      })
+    }
+  },
   nav_to_page: function(e) {
     var path = e.currentTarget.dataset.path;
     if (!path) {
@@ -80,7 +143,7 @@ Page({
   onLoad: function(options) {
     //var user_id=wx.getStorageSync("user_id");
     this.check();
-
+    this.request_mine();
   },
   //测试支付
   pay: function(e) {
@@ -125,6 +188,12 @@ Page({
         //成功回调
         var resObj = res.data;
         $this.data.userInfo = resObj.data.userInfo;
+        $this.setData({
+          nickname: resObj.data.userInfo.nickname,
+          unread: resObj.data.userInfo.unread,
+        })
+        $this.data.store_has_many = resObj.data.userInfo.store_has_many
+        $this.isAuthentication()
         //转化头像图片地址
         if (typeof $this.data.userInfo.avatar === 'string') {
           wx.getImageInfo({ //  小程序获取图片信息API

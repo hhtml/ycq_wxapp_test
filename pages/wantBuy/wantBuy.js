@@ -54,7 +54,7 @@ Page({
           carList.forEach((val, index) => {
             var obj = {
               id: val.id,
-              imgSrc: app.globalData.imgUrl + val.modelsimages,
+              imgSrc: app.globalData.imgUrl + (val.brand.brand_default_images ? val.brand.brand_default_images:val.modelsimages),
               brand_name:val.brand.name,
               name: val.models_name,
               shelfismenu: val.shelfismenu,

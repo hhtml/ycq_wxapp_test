@@ -1,6 +1,7 @@
-<!--pages/cooperationSupply/cooperationSupply.wxml-->
+<!--pages/mine/upgrade/upgrade.wxml-->
+
 <form report-submit='{{true}}' bindsubmit='formSubmit'>
-<view class="switchTitle">
+<!-- <view class="switchTitle">
     <view class="titleItem {{activeId ==0 ? 'activeItem':''}}" data-id="0" bindtap='switchTitle'>
        <text>合作价值</text>
     </view>
@@ -10,7 +11,7 @@
     <view class="titleItem {{activeId == 2 ? 'activeItem':''}}" data-id="2"  bindtap='switchTitle'>
        <text>合作意向申请</text>
     </view>
-</view>
+</view> -->
 
 <!--店铺信息-->
 <view class=" shopArea">
@@ -21,7 +22,7 @@
                <text>店铺名称</text>
            </view>
            <view class="formInput">
-               <input type='text' placeholder-class='placeholder' placeholder="请输入店铺名称 " value="{{form.shopName}}"  bindinput='formBindInput' data-name="shopName"></input>
+               <input type='text' placeholder-class='placeholder' placeholder="{{store.store_name}}" disabled></input>
            </view>
        </view>
 
@@ -31,15 +32,7 @@
                <text>店铺所在地</text>
            </view>
            <view class="formInput">
-               <picker
-                mode="region"
-                bindchange="shopRegionChange"
-                value="{{form.shopRegion}}"
-              >
-                <view class="picker">
-                   <text>{{form.shopRegion ? form.shopRegion: '请选择店铺所在地'}}</text>
-                </view>
-              </picker>
+               <input type='text' placeholder-class='placeholder' placeholder="{{store.cities_name}}" disabled></input>
            </view>
        </view>
 
@@ -49,7 +42,7 @@
                <text>店铺详细地址</text>
            </view>
            <view class="formInput">
-               <input type='text' placeholder-class='placeholder' placeholder="请输入店铺详细地址" value="{{form.shopRegionDetail}}"   bindinput='formBindInput' data-name="shopRegionDetail"></input>
+               <input type='text' placeholder-class='placeholder' placeholder="{{store.store_address}}" disabled></input>
            </view>
        </view>
 
@@ -63,7 +56,7 @@
               </view>
           </view>
           <view class="rowTextArea">
-             <textarea value="{{form.context}}" bindinput='formBindInput' data-name="context"></textarea>
+             <textarea value="{{store.store_description}}" disabled></textarea>
           </view>
       </view>
    </view>
@@ -81,13 +74,12 @@
                <text>经营年限</text>
            </view>
            <view class="formInput">
-              <picker bindchange="bindYearChange" value="{{timeIndex}}" range="{{year}}">
+              <!-- <picker bindchange="bindYearChange" value="{{timeIndex}}" range="{{year}}"> -->
                 <view class="picker">
-                  <text>{{form.time}}</text>
+                  <text>{{store.business_life}}</text>
                 </view>
-              </picker>
+              <!-- </picker> -->
 
-               <!--<input type='text' placeholder-class='placeholder' placeholder="如：一年以下" value="{{form.time}}" bindinput='formBindInput' data-name="time"></input>-->
            </view>
       </view>
 
@@ -97,22 +89,21 @@
                   <text>*</text>
                   <text>主营品牌车系</text>
               </view>
-              <text class="infoTip">(没有符合的品牌可以自行添加)</text>
+              <!-- <text class="infoTip">(没有符合的品牌可以自行添加)</text> -->
           </view>
           <view class="brandArea">
-               <block wx:for="{{brandCheckList}}">
-                   <text class="{{item.check? 'checkBrand':''}}" bindtap='chooseBrand' data-index="{{index}}">{{item.name}}</text>
+               <block wx:for="{{store.main_camp}}">
+                   <text class="checkBrand">{{item}}</text>
                </block>
-               <!--<text style="color:{{brand_id ? '#ef4631':'#353535'}};">{{brand_id ? brandInfo[1][multiIndex[0]].name :'选择品牌'}}</text>-->
-               <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
+               <!-- <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
                   <view class="picker">
                     <text style="font-size:40rpx;padding:0 40rpx;color:#ef4631;">+</text>
                   </view>
-                </picker>
+                </picker> -->
           </view>
       </view>
 
-      <view class="formBlock">
+      <!-- <view class="formBlock">
           <view class="formRow">
               <view class="formInfo">
                   <text style="opacity:0;">*</text>
@@ -121,9 +112,9 @@
               <text class="infoTip">(请输入邀请人的邀请码，没有可不填)</text>
           </view>
           <view class="rowInput">
-             <input type='text' value="{{form.inviteNumber}}" bindinput='formBindInput' bindblur='checkInviteNumber' bindconfirm='checkInviteNumber'data-name="inviteNumber"></input>
+             <input type='text' disabled></input>
           </view>
-      </view>
+      </view> -->
 
       <view class="formBlock">
           <view class="formRow">
@@ -134,15 +125,15 @@
               <text class="infoTip">(将作为提取收益的收款账户)</text>
           </view>
           <view class="rowInput">
-             <input type='text' placeholder-class='placeholder' placeholder="请输入您的姓名" value="{{form.name}}" bindinput='formBindInput' data-name="name"></input>
+             <input type='text' placeholder-class='placeholder' placeholder="{{store.real_name}}" disabled></input>
           </view>
           <view class="rowInput">
-             <input type='text' placeholder-class='placeholder' placeholder="请输入您的银行卡号" value="{{form.idCard}}" bindinput='formBindInput' data-name="idCard"></input>
+             <input type='text' placeholder-class='placeholder' placeholder="{{store.bank_card}}" disabled></input>
           </view>
           <view class="rowInput">
-             <input type='number' placeholder-class='placeholder' placeholder="请输入与银行卡号绑定的手机号" value="{{form.shopTel}}" bindinput='formBindInput' data-name="shopTel"></input>
+             <input type='number' placeholder-class='placeholder' placeholder="{{store.phone}}" disabled></input>
           </view>
-          <view class="rowInput">
+          <!-- <view class="rowInput">
               <input type='text'bindinput='formBindInput' data-name="smscode" value="{{form.smscode}}"></input>
               <view class="smscode" wx-if="{{sentSms}}" style="color:#eee;">
                 <text>{{dtNUm}}已获取</text><text></text>
@@ -150,7 +141,7 @@
               <view class="smscode" bindtap='get_sms_code'  wx-if="{{!sentSms}}">
                 <text>获取验证码</text>
               </view>
-          </view>
+          </view> -->
       </view>
       
       <view class="formBlock">
@@ -161,11 +152,11 @@
               </view>
           </view>
           <view class="uploadShopImg">
-              <view class="uploadLeft" bindtap='uploadShopImg'>
+              <view class="uploadLeft">
                  <text>+</text>
               </view>
               <view class='uploadRight'>
-                   <image src='{{appImgUrl+form.shopImg}}'></image>  
+                   <image src='{{appImgUrl+store.store_img}}'></image>  
               </view>
           </view>
       </view>
@@ -179,22 +170,22 @@
           </view>
           <view class="uploadId">
               <view class="uploadLeft">
-                  <view class="uploadLeftItem"  bindtap='uploadIdFront'>
+                  <view class="uploadLeftItem">
                       <text>+</text>
                   </view>
-                  <view class="uploadLeftItem"  bindtap='uploadIdReverse'>
+                  <view class="uploadLeftItem">
                       <text>+</text>
                   </view>
               </view>
               
               <view class='uploadRight'>
                    <view class="uploadRightItem">
-                      <text wx:if="{{!form.idCardFront}}">正面</text>
-                       <image src='{{appImgUrl+form.idCardFront}}'></image>
+                      <text wx:if="{{!store.id_card_images[0]}}">正面</text>
+                       <image src='{{appImgUrl+store.id_card_images[0]}}'></image>
                    </view>
                    <view class="uploadRightItem">
-                       <text wx:if="{{!form.idCardReverse}}">反面</text>
-                       <image src='{{appImgUrl+form.idCardReverse}}'></image>
+                       <text wx:if="{{!store.id_card_images[1]}}">反面</text>
+                       <image src='{{appImgUrl+store.id_card_images[1]}}'></image>
                    </view>
               </view>
           </view>
@@ -208,11 +199,11 @@
               </view>
           </view>
           <view class="uploadRegion">
-              <view class="uploadLeft" bindtap='uploadRegion'>
+              <view class="uploadLeft">
                    <text>+</text>
               </view>
               <view class='uploadRight'>
-                   <image src='{{appImgUrl+regionImg}}'></image>  
+                   <image src='{{appImgUrl+store.business_licenseimages}}'></image>  
               </view>
           </view>
       </view>
@@ -226,10 +217,15 @@
 <view class="partnerArea">
     <view class='content'>
           <label class="partnerItem" wx:for="{{partnerList}}">
-             <switch bindchange="partnerChange" data-index="{{index}}" value="{{item.name}}" checked="{{item.checked}}" type="checkbox"/>
+             <switch bindchange="partnerChange" 
+             data-index="{{index}}" 
+             value="{{item.name}}" 
+             checked="{{item.checked}}" 
+             type="checkbox" 
+             id="{{item.id}}"
+             disabled="{{item.id == store.level_id}}"/>
               <text>{{item.partner_rank}} {{item.money}}元/年 （{{item.explain}}）</text>
           </label>
-
     </view>
 </view>
 

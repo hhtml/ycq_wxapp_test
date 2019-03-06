@@ -4,7 +4,7 @@
 <view class="searchArea" style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
   <view class="share-nav">
     <image src="/images/mine-news.png" bindtap='goNews'></image>
-    <view class="tips"></view>
+    <view class="tips" wx:if="{{unread == 1}}"></view>
   </view>
   <view class="searchBg" bindtap='searchPage'>
     <image src='../../images/search-icon.png' mode='widthFix'></image>

@@ -7,6 +7,7 @@ var util =   require('../../utils/util.js');
 Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
+    unread:'', //消息提示红点显示
     bannerUrls:[
       /*{
         id:0,
@@ -212,6 +213,7 @@ Page({
           $this.setData({
             buy_car_condition: resObj.data.buy_car_condition,
             sell_car_condition: resObj.data.sell_car_condition,
+            unread: resObj.data.unread
           })
           //分享数据
           $this.data.shareInfo = resObj.data.share;
