@@ -85,12 +85,18 @@ Page({
   //测试支付
   pay: function(e) {
     var $this = this;
-    $http.post('Wxpay/index', {
-      order: new Date().getTime(),
+    var payInfo = {
+      formId: e.detail.formId,
+      out_trade_no: new Date().getTime(),
       money: 0.01,
-      // formId:e.detail.formId
-    }).then(res => {
-      console.log(res);
+      store_id: 26
+    }
+
+    payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no
+    console.log(payInfo.formId);return;
+    $http.post('Wxpay/certification_wxPay', payInfo).then(res => {
+      // console.log(res);
+      // return;
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;
       var nonceStr = res.data.nonce_str;
@@ -107,14 +113,29 @@ Page({
         'signType': 'MD5',
         'paySign': paySign,
         'success': function(res) {
-          console.log('支付成功');
+          //支付成功回调
+          console.log(res);
+          // console.log(timeStamp);
+
+          // payInfo.pay_time = timeStamp;
+          // payInfo.pay_type = 'certification'; 
+          // $http.post('Wxpay/wxOrder').then(res => {
+          //     console.log(res);
+          // });
           //支付成功之后的操作
 
+        },
+        'fail': function(res) {
+          console.log('用户取消支付,需要重载页面');
+
+        },
+        'complete': function(res) {
+          // console.log(res)
         }
       });
 
     });
-    console.log(util.hexMD5('asa' + 2342 + '萨芬大苏打'));
+
 
 
   },
@@ -197,8 +218,9 @@ Page({
   //二维码点击事件
   erWeiMa: function() {
     var $this = this;
-    if ($this.store_has_many) {
-      if ($this.store_has_many[0].auditstatus == 'paid_the_money') {
+    var store_has_many = $this.data.userInfo.store_has_many;
+    if (store_has_many) {
+      if (store_has_many[0].auditstatus == 'paid_the_money') {
         if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
           if ($this.data.userInfo.invitation_code_img == '') { //没有生成二维码
             $http.post('my/setQrcode')
@@ -220,19 +242,20 @@ Page({
             duration: 1000
           })
         }
-      } else if ($this.store_has_many[0].auditstatus == 'in_the_review') {
+
+      } else if (store_has_many[0].auditstatus == 'in_the_review') {
         wx.showToast({
           title: '审核中',
           image: '../../images/warn.png',
           duration: 1000
         })
-      } else if ($this.store_has_many[0].auditstatus == 'wait_for_review') {
+      } else if (store_has_many[0].auditstatus == 'wait_for_review') {
         wx.showToast({
           title: '待审核',
           image: '../../images/warn.png',
           duration: 1000
         })
-      } else if ($this.store_has_many[0].auditstatus == 'wait_for_review') {
+      } else if (store_has_many[0].auditstatus == 'wait_for_review') {
         wx.showToast({
           title: '店铺未认证',
           image: '../../images/warn.png',
@@ -318,7 +341,7 @@ Page({
           title: '保存成功',
         });
       },
-      fail(res){
+      fail(res) {
         console.log(res)
       }
     })
@@ -329,29 +352,29 @@ Page({
    * 
    * 登录相关
    */
-  close_the_log: function () {
+  close_the_log: function() {
     this.check();
   },
   //显示登录或授权提示
-  showLoginModal: function () {
+  showLoginModal: function() {
     this.setData({
       settingShow: true
     });
     wx.hideTabBar();
   },
   //判断是否登录
-  check: function () {
+  check: function() {
 
     var that = this;
     wx.getSetting({
-      success: function (res) {
+      success: function(res) {
         if (res.authSetting['scope.userInfo']) {
 
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           console.log('已经授权');
           wx.getUserInfo({
             withCredentials: true,
-            success: function (res) {
+            success: function(res) {
               that.setData({
                 settingShow: false
               })
@@ -359,7 +382,7 @@ Page({
 
               that.login();
             },
-            fail: function () {
+            fail: function() {
               that.showLoginModal();
 
             }
@@ -369,23 +392,23 @@ Page({
 
         }
       },
-      fail: function () {
+      fail: function() {
         that.showLoginModal();
       }
     });
     // this.login(cb);
 
   },
-  login: function () {
+  login: function() {
     var that = this;
     var token = wx.getStorageSync('token') || '';
     //调用登录接口
     wx.login({
-      success: function (res) {
+      success: function(res) {
         if (res.code) {
           //发起网络请求
           wx.getUserInfo({
-            success: function (ures) {
+            success: function(ures) {
               wx.request({
                 url: app.globalData.url + 'user/login',
                 data: {
@@ -397,7 +420,7 @@ Page({
                 header: {
                   "Content-Type": "application/x-www-form-urlencoded",
                 },
-                success: function (lres) {
+                success: function(lres) {
                   var response = lres.data
                   if (response.code == 1) {
                     that.data.userInfo = response.data.userInfo;
@@ -412,7 +435,7 @@ Page({
                 }
               });
             },
-            fail: function (res) {
+            fail: function(res) {
               that.showLoginModal();
             }
           });
@@ -422,7 +445,7 @@ Page({
       }
     });
   },
-  getuserinfo: function (e) {
+  getuserinfo: function(e) {
     if (!e.detail.userInfo) {
 
     } else {
