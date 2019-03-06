@@ -59,7 +59,7 @@ page{
   padding: 0 18rpx;
   font-size: 14px;
   color:rgb(189, 189, 189);
-  margin-top:10rpx;
+  margin-top:4rpx;
 }
 .searchBg image{
    width: 34rpx;

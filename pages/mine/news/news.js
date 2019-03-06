@@ -23,14 +23,16 @@ Page({
   // 请求消息列表数据
   getNewsData:function(){
     var that = this
-    $http.post('my/message_list').then(res=>{
+    $http.post('my/message_details',{
+      isRead:1
+    }).then(res=>{
       console.log(res)
       var resObj = res.data
       if (resObj.code == 1){ //请求成功
-        var newsList = resObj.data.message_list
+        var newsList = resObj.data.message_details
         newsList.forEach(item => { //将时间戳转换成日期格式
-          var date = new Date(item.createtime);
-          // var Y = date.getFullYear() + '-';
+          var date = new Date(item.createtime*1000);
+          var Y = date.getFullYear() + '年';
           var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '月';
           var D = date.getDate();
           D = D<10?'0'+D+ '日'+' ':D+ '日'+' '
@@ -38,7 +40,7 @@ Page({
           h = h < 10 ? '0' + h + ':' : h + ':'
           var m = date.getMinutes();
           m = m < 10 ? '0' + m : m
-          item.createtime = M + D + h + m
+          item.createtime =Y + M + D + h + m
         })
         that.setData({
           newsList: newsList

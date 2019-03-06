@@ -1,0 +1,6 @@
+/* pages/mine/upgrade/upgrade.wxss */
+
+@import '/pages/cooperationSupply/cooperationSupply.wxss'; 
+page{
+  padding:20rpx 0rpx;
+}

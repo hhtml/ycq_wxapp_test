@@ -11,7 +11,11 @@
     </view>
     <view class='userInfo'>
       <view class="userName">
-        <open-data type="userNickName"></open-data>
+        <!-- <open-data type="userNickName"></open-data> -->
+        <view class="nickName">
+          <view>{{nickname}}</view>
+          <view class="storeLevel">{{store_level}}</view>
+        </view>
         <!--<view class="writeIcon">
                     <image src='' mode='widthFix'></image>
                 </view>-->
@@ -22,13 +26,16 @@
     </view>
   </view>
 
-  <view class="userTips">
+  <view class="userTips" wx:if="{{goldShop}}">
     <view class="userTipsText">
-      <text>您暂未实名认证哦!</text>
-      <text>赶紧去实名认证</text>
+      <view wx:if="{{authentication}}">
+        <text>您暂未实名认证哦!</text>
+        <text>赶紧去实名认证</text>
+      </view>
+      <view wx:else class="userTipsView">{{authenticationList}}</view>
     </view>
 
-    <view class="nav_to_auth" bindtap='nav_to_page' data-path="../cooperationSupply/cooperationSupply">
+    <view class="nav_to_auth" bindtap='nav_to_page' data-path="{{dataPath}}">
       <!-- data-path="../cooperationSupply/cooperationSupply" -->
       <image src='../../images/right-angle.png' mode='widthFix'></image>
     </view>
@@ -93,7 +100,7 @@
         <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
 
-      <view class="offertip" wx:if="{{isNewOffer==0}}"></view>
+      <view class="offertip" wx:if="{{unread == 1}}"></view>
     </view>
 
   </view>

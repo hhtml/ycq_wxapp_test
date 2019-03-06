@@ -1,0 +1,235 @@
+<!--pages/mine/upgrade/upgrade.wxml-->
+
+<form report-submit='{{true}}' bindsubmit='formSubmit'>
+<!-- <view class="switchTitle">
+    <view class="titleItem {{activeId ==0 ? 'activeItem':''}}" data-id="0" bindtap='switchTitle'>
+       <text>合作价值</text>
+    </view>
+    <view class="titleItem {{activeId == 1 ? 'activeItem':''}}" data-id="1"  bindtap='switchTitle'>
+       <text>合作成果</text>
+    </view>
+    <view class="titleItem {{activeId == 2 ? 'activeItem':''}}" data-id="2"  bindtap='switchTitle'>
+       <text>合作意向申请</text>
+    </view>
+</view> -->
+
+<!--店铺信息-->
+<view class=" shopArea">
+   <view class="content">
+       <view class="formRow">
+           <view class="formInfo">
+               <text>*</text>
+               <text>店铺名称</text>
+           </view>
+           <view class="formInput">
+               <input type='text' placeholder-class='placeholder' placeholder="{{store.store_name}}" disabled></input>
+           </view>
+       </view>
+
+       <view class="formRow">
+           <view class="formInfo">
+               <text>*</text>
+               <text>店铺所在地</text>
+           </view>
+           <view class="formInput">
+               <input type='text' placeholder-class='placeholder' placeholder="{{store.cities_name}}" disabled></input>
+           </view>
+       </view>
+
+       <view class="formRow">
+           <view class="formInfo">
+               <text>*</text>
+               <text>店铺详细地址</text>
+           </view>
+           <view class="formInput">
+               <input type='text' placeholder-class='placeholder' placeholder="{{store.store_address}}" disabled></input>
+           </view>
+       </view>
+
+      
+
+       <view class="formBlock">
+          <view class="formRow">
+              <view class="formInfo">
+                  <text>*</text>
+                  <text>店铺介绍</text>
+              </view>
+          </view>
+          <view class="rowTextArea">
+             <textarea value="{{store.store_description}}" disabled></textarea>
+          </view>
+      </view>
+   </view>
+</view>
+
+<!--经营信息-->
+<view class="regionTitle">
+    <text>经营信息</text>
+</view>
+<view class="operateArea">
+   <view class="content">
+      <view class="formRow">
+           <view class="formInfo">
+               <text>*</text>
+               <text>经营年限</text>
+           </view>
+           <view class="formInput">
+              <!-- <picker bindchange="bindYearChange" value="{{timeIndex}}" range="{{year}}"> -->
+                <view class="picker">
+                  <text>{{store.business_life}}</text>
+                </view>
+              <!-- </picker> -->
+
+           </view>
+      </view>
+
+      <view class="formBlock">
+          <view class="formRow">
+              <view class="formInfo">
+                  <text>*</text>
+                  <text>主营品牌车系</text>
+              </view>
+              <!-- <text class="infoTip">(没有符合的品牌可以自行添加)</text> -->
+          </view>
+          <view class="brandArea">
+               <block wx:for="{{store.main_camp}}">
+                   <text class="checkBrand">{{item}}</text>
+               </block>
+               <!-- <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
+                  <view class="picker">
+                    <text style="font-size:40rpx;padding:0 40rpx;color:#ef4631;">+</text>
+                  </view>
+                </picker> -->
+          </view>
+      </view>
+
+      <!-- <view class="formBlock">
+          <view class="formRow">
+              <view class="formInfo">
+                  <text style="opacity:0;">*</text>
+                  <text>邀请码</text>
+              </view>
+              <text class="infoTip">(请输入邀请人的邀请码，没有可不填)</text>
+          </view>
+          <view class="rowInput">
+             <input type='text' disabled></input>
+          </view>
+      </view> -->
+
+      <view class="formBlock">
+          <view class="formRow">
+              <view class="formInfo">
+                  <text>*</text>
+                  <text>绑定银行卡</text>
+              </view>
+              <text class="infoTip">(将作为提取收益的收款账户)</text>
+          </view>
+          <view class="rowInput">
+             <input type='text' placeholder-class='placeholder' placeholder="{{store.real_name}}" disabled></input>
+          </view>
+          <view class="rowInput">
+             <input type='text' placeholder-class='placeholder' placeholder="{{store.bank_card}}" disabled></input>
+          </view>
+          <view class="rowInput">
+             <input type='number' placeholder-class='placeholder' placeholder="{{store.phone}}" disabled></input>
+          </view>
+          <!-- <view class="rowInput">
+              <input type='text'bindinput='formBindInput' data-name="smscode" value="{{form.smscode}}"></input>
+              <view class="smscode" wx-if="{{sentSms}}" style="color:#eee;">
+                <text>{{dtNUm}}已获取</text><text></text>
+              </view>
+              <view class="smscode" bindtap='get_sms_code'  wx-if="{{!sentSms}}">
+                <text>获取验证码</text>
+              </view>
+          </view> -->
+      </view>
+      
+      <view class="formBlock">
+          <view class="formRow">
+              <view class="formInfo" style="width:100%;">
+                  <text>*</text>
+                  <text>上传门面照</text>
+              </view>
+          </view>
+          <view class="uploadShopImg">
+              <view class="uploadLeft">
+                 <text>+</text>
+              </view>
+              <view class='uploadRight'>
+                   <image src='{{appImgUrl+store.store_img}}'></image>  
+              </view>
+          </view>
+      </view>
+
+      <view class="formBlock">
+          <view class="formRow">
+              <view class="formInfo" style="width:100%;">
+                  <text>*</text>
+                  <text>上传身份证（正反面）</text>
+              </view>
+          </view>
+          <view class="uploadId">
+              <view class="uploadLeft">
+                  <view class="uploadLeftItem">
+                      <text>+</text>
+                  </view>
+                  <view class="uploadLeftItem">
+                      <text>+</text>
+                  </view>
+              </view>
+              
+              <view class='uploadRight'>
+                   <view class="uploadRightItem">
+                      <text wx:if="{{!store.id_card_images[0]}}">正面</text>
+                       <image src='{{appImgUrl+store.id_card_images[0]}}'></image>
+                   </view>
+                   <view class="uploadRightItem">
+                       <text wx:if="{{!store.id_card_images[1]}}">反面</text>
+                       <image src='{{appImgUrl+store.id_card_images[1]}}'></image>
+                   </view>
+              </view>
+          </view>
+      </view>
+
+      <view class="formBlock">
+          <view class="formRow">
+              <view class="formInfo">
+                  <text></text>
+                  <text>上传营业执照</text>
+              </view>
+          </view>
+          <view class="uploadRegion">
+              <view class="uploadLeft">
+                   <text>+</text>
+              </view>
+              <view class='uploadRight'>
+                   <image src='{{appImgUrl+store.business_licenseimages}}'></image>  
+              </view>
+          </view>
+      </view>
+   </view>
+</view>
+
+<!--选择合伙人级别-->
+<view class="regionTitle">
+    <text>选择合伙人级别</text>
+</view>
+<view class="partnerArea">
+    <view class='content'>
+          <label class="partnerItem" wx:for="{{partnerList}}">
+             <switch bindchange="partnerChange" 
+             data-index="{{index}}" 
+             value="{{item.name}}" 
+             checked="{{item.checked}}" 
+             type="checkbox" 
+             id="{{item.id}}"
+             disabled="{{item.id == store.level_id}}"/>
+              <text>{{item.partner_rank}} {{item.money}}元/年 （{{item.explain}}）</text>
+          </label>
+    </view>
+</view>
+
+<view class='formButtom'>
+    <button form-type='submit'>提交</button>
+</view>
+</form>
