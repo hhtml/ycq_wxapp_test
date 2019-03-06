@@ -82,18 +82,23 @@ Page({
       var iconList=this.data.iconList;
       var path = iconList[index].path;
       if(index == 0){
-        if (that.data.sell_car_condition.status == 'error'){
-          that.setData({
-            msg: that.data.sell_car_condition.msg,
-            showModal:true
-          })
-        }else{
+        if (that.data.sell_car_condition.code == 0){
           wx.navigateTo({
             url: path,
           })
+        } else if (that.data.sell_car_condition.code == 1){
+          that.setData({
+            msg: that.data.sell_car_condition.msg,
+            showModal: true
+          })
+        }else{
+          wx.showToast({
+            title: that.data.sell_car_condition.msg,
+            image: '../../images/warn.png'
+          })
         }
       } else if (index == 1){
-        if (that.data.buy_car_condition.status == 'error') {
+        if (that.data.buy_car_condition.code == 1) {
           that.setData({
             msg: that.data.buy_car_condition.msg,
             showModal: true
@@ -112,6 +117,13 @@ Page({
           image: '../../images/warn.png'
         })
       }
+  },
+
+  //消息图标点击事件
+  goNews:function(){
+    wx.navigateTo({
+      url: '/pages/mine/news/news'
+    })
   },
   // 取消弹出提示框
   cancelShowModal: function () {
@@ -246,7 +258,7 @@ Page({
             buyList.forEach((val, index) => {
               var obj = {
                 id: val.id,
-                imgSrc: app.globalData.imgUrl + val.modelsimages,
+                imgSrc: app.globalData.imgUrl + (val.brand.brand_default_images ? val.brand.brand_default_images : val.modelsimages),
                 brand_name: val.brand.name,
                 name: val.models_name,
                 priceArea: val.guide_price,

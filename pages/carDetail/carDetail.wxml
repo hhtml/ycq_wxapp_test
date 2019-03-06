@@ -18,9 +18,7 @@
 
 
 <view class="carImg">
-  <!-- <image src='{{car.banner}}'  bindload="imageLoad" style="width:{{imgwidth}}rpx; height:{{imgheight }}rpx;"></image> -->
-  <image src='{{car.banner}}' mode='widthFix'></image>
-
+  <image src='{{car.banner}}' mode='aspectFill'></image>
 </view>
 
 <view class='carInfo'>
@@ -150,7 +148,7 @@
   </view>
   <view class='buttonArea'>
     <view class='buttonItem' bindtap='priceLog'>
-      <text>报价</text>
+      <text>砍价</text>
     </view>
     <view class='buttonItem' bindtap='makePhoneCall'>
       <text>电话联系</text>
@@ -162,7 +160,7 @@
   <form report-submit="{{true}}" bindsubmit='priceSubmit'>
     <view class="divCont">
       <view class="topTitle">
-        <text>报价</text>
+        <text>砍价</text>
         <text bindtap='closeLog'>取消</text>
       </view>
       <view class="centerCont">
@@ -189,7 +187,7 @@
 
 <view class="toast-wrap" wx:if="{{showModal}}">
   <view class="toast-title">提示</view>
-  <view class="toast-content">还没认证，暂不能报价</view>
+  <view class="toast-content">还没认证，暂不能砍价</view>
   <view class="click-wrap">
     <view class="cancel" bindtap='cancelShowModal'>取消</view>
     <view class="sure" bindtap='goAuthentication'>去认证</view>

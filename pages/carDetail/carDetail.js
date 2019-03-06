@@ -89,7 +89,7 @@ Page({
         var car = {
           id: data.detail.id,
           is_authentication: data.is_authentication,
-          banner: himgUrl + data.detail.modelsimages[0],
+          banner: himgUrl + (data.detail.brand.brand_default_images ? data.detail.brand.brand_default_images : data.detail.modelsimages[0]),
           brand_name: data.detail.brand.name,
           name: data.detail.models_name,
           year: data.detail.car_licensetime,

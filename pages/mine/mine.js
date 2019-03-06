@@ -79,6 +79,7 @@ Page({
    */
   onLoad: function(options) {
     //var user_id=wx.getStorageSync("user_id");
+    this.check();
 
   },
   //测试支付
@@ -197,7 +198,7 @@ Page({
   erWeiMa: function() {
     var $this = this;
     if ($this.store_has_many) {
-      if ($this.store_has_many.auditstatus == 'paid_the_money') {
+      if ($this.store_has_many[0].auditstatus == 'paid_the_money') {
         if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
           if ($this.data.userInfo.invitation_code_img == '') { //没有生成二维码
             $http.post('my/setQrcode')
@@ -219,19 +220,19 @@ Page({
             duration: 1000
           })
         }
-      } else if ($this.store_has_many.auditstatus == 'in_the_review') {
+      } else if ($this.store_has_many[0].auditstatus == 'in_the_review') {
         wx.showToast({
           title: '审核中',
           image: '../../images/warn.png',
           duration: 1000
         })
-      } else if ($this.store_has_many.auditstatus == 'wait_for_review') {
+      } else if ($this.store_has_many[0].auditstatus == 'wait_for_review') {
         wx.showToast({
           title: '待审核',
           image: '../../images/warn.png',
           duration: 1000
         })
-      } else if ($this.store_has_many.auditstatus == 'wait_for_review') {
+      } else if ($this.store_has_many[0].auditstatus == 'wait_for_review') {
         wx.showToast({
           title: '店铺未认证',
           image: '../../images/warn.png',
@@ -316,9 +317,125 @@ Page({
         wx.showToast({
           title: '保存成功',
         });
+      },
+      fail(res){
+        console.log(res)
       }
     })
   },
+
+
+  /***
+   * 
+   * 登录相关
+   */
+  close_the_log: function () {
+    this.check();
+  },
+  //显示登录或授权提示
+  showLoginModal: function () {
+    this.setData({
+      settingShow: true
+    });
+    wx.hideTabBar();
+  },
+  //判断是否登录
+  check: function () {
+
+    var that = this;
+    wx.getSetting({
+      success: function (res) {
+        if (res.authSetting['scope.userInfo']) {
+
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          console.log('已经授权');
+          wx.getUserInfo({
+            withCredentials: true,
+            success: function (res) {
+              that.setData({
+                settingShow: false
+              })
+              wx.showTabBar();
+
+              that.login();
+            },
+            fail: function () {
+              that.showLoginModal();
+
+            }
+          });
+        } else {
+          that.showLoginModal();
+
+        }
+      },
+      fail: function () {
+        that.showLoginModal();
+      }
+    });
+    // this.login(cb);
+
+  },
+  login: function () {
+    var that = this;
+    var token = wx.getStorageSync('token') || '';
+    //调用登录接口
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          //发起网络请求
+          wx.getUserInfo({
+            success: function (ures) {
+              wx.request({
+                url: app.globalData.url + 'user/login',
+                data: {
+                  code: res.code,
+                  rawData: ures.rawData,
+                  token: token
+                },
+                method: 'post',
+                header: {
+                  "Content-Type": "application/x-www-form-urlencoded",
+                },
+                success: function (lres) {
+                  var response = lres.data
+                  if (response.code == 1) {
+                    that.data.userInfo = response.data.userInfo;
+
+                    wx.setStorageSync('userInfo', response.data.userInfo);
+                    wx.setStorageSync('user_id', response.data.userInfo.user_id);
+                  } else {
+                    wx.setStorageSync('token', '');
+                    console.log("用户登录失败")
+                    that.showLoginModal();
+                  }
+                }
+              });
+            },
+            fail: function (res) {
+              that.showLoginModal();
+            }
+          });
+        } else {
+          that.showLoginModal();
+        }
+      }
+    });
+  },
+  getuserinfo: function (e) {
+    if (!e.detail.userInfo) {
+
+    } else {
+      console.log('userInfo:', e.detail.userInfo);
+      this.setData({
+        settingShow: false
+      });
+      this.check();
+    }
+
+  },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -2,10 +2,10 @@
 <view class="selectArea">
   <view class="selectList">
     <view class="selectItem {{state == 0 ? 'activeItem' :''}} " data-state="0" bindtap='chooseState'>
-      <text>收到的报价</text>
+      <text>买家的砍价</text>
     </view>
     <view class="selectItem  {{state == 1 ? 'activeItem' :''}}" data-state="1" bindtap='chooseState'>
-      <text>我的报价</text>
+      <text>我的砍价</text>
     </view>
   </view>
 </view>

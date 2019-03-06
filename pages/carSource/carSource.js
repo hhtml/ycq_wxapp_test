@@ -177,7 +177,7 @@ Page({
             }
              var obj={
                id: val.id,
-               imgSrc: himgUrl+ val.modelsimages,
+               imgSrc: himgUrl + (val.brand.brand_default_images ? val.brand.brand_default_images : val.modelsimages),
                brand_name: val.brand.name,
                name: val.models_name,
                priceArea: val.guide_price,
@@ -256,7 +256,7 @@ Page({
             }
             var obj = {
               id: val.id,
-              imgSrc: himgUrl+ val.modelsimages,
+              imgSrc: himgUrl + (val.brand.brand_default_images ? val.brand.brand_default_images : val.modelsimages),
               brand_name: val.brand.name,
               name: val.models_name,
               priceArea: val.guide_price,
