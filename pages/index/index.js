@@ -126,23 +126,6 @@ Page({
       url: '/pages/mine/news/news'
     })
   },
-  // 取消弹出提示框
-  cancelShowModal: function () {
-    var that = this
-    that.setData({
-      showModal: false
-    })
-  },
-  //提示框 点击确认事件
-  goAuthentication: function () {
-    var that = this
-    wx.navigateTo({
-      url: '../cooperationSupply/cooperationSupply'
-    })
-    that.setData({
-      showModal: false
-    })
-  },
   switchTitle:function(e){
       var info=e.currentTarget.dataset.info;
       this.setData({
@@ -153,26 +136,6 @@ Page({
     wx.navigateTo({
       url: '/pages/index/searchPage/searchPage'
     })
-  },
-  searchConfirm(e){
-    /* var $this=this;
-    $http.post('',{
-
-    })
-      .then(res => {
-        //成功回调
-        var resObj = res.data;
-        console.log('搜索数据：', resObj);
-        if (resObj.code == 1) {
-          
-
-        } else {
-          console.log('请求失败：', resObj.msg);
-        }
-      }).catch(err => {
-        //异常回调
-        console.log('请求失败',err);
-      });*/
   },
 
   onLoad: function () {
@@ -457,14 +420,4 @@ Page({
   onShow:function(){
     this.request_index_info();
   }
-  // , onLoad: function (options){
-  //   console.log("index 生命周期 onload" + JSON.stringify(options))
-  //   //在此函数中获取扫描普通链接二维码参数
-  //   let q = decodeURIComponent(options.q)
-  //   if (q) {
-  //     console.log("index 生命周期 onload url=" + q)
-  //     console.log("index 生命周期 onload 参数 user_id=" + util.getQueryString(q, 'user_id'))
-  //   }
-    
-  // }
 })

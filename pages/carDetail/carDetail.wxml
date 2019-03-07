@@ -3,11 +3,6 @@
 <!-- 自定义导航栏 -->
 <view class="nav-wrap">
   <view class="nav-title" style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
-    <!-- <view class="return-wrap">
-      <view class="dianji" bindtap='return'></view>
-      <image class="return"></image>
-    </view>
-    <view class="line"></view> -->
     <view class="zhuye-wrap" bindtap='goHome'>
       <image src="/images/home.png"></image>
       <view>主页</view>
@@ -181,15 +176,5 @@
   </form>
 </view>
 
-<!-- 点击报价弹出层 -->
-<!-- 模态对话框 -->
-<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
-
-<view class="toast-wrap" wx:if="{{showModal}}">
-  <view class="toast-title">提示</view>
-  <view class="toast-content">还没认证，暂不能砍价</view>
-  <view class="click-wrap">
-    <view class="cancel" bindtap='cancelShowModal'>取消</view>
-    <view class="sure" bindtap='goAuthentication'>去认证</view>
-  </view>
-</view>
+<!-- 引入提示框组件 -->
+<tips wx:if="{{showModal}}" paramAtoB="{{msg}}"></tips>

@@ -24,7 +24,7 @@ page{
 }
 .news-title{
   width:100%;
-  font-size: 36rpx;
+  font-size: 34rpx;
   font-weight: bold;
   color:#000;
   padding-bottom: 20rpx;

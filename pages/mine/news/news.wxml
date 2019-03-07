@@ -5,7 +5,7 @@
   <view class="news-content">
     <view class="news-title">{{item.title}}</view>
     <view class="news" wx:if="{{ item.analysis == 1 }}">
-      <rich-text nodes="{{item.content}}"></rich-text>
+      <rich-text class="news-rich" nodes="{{item.content}}"></rich-text>
     </view>
     <view class="news" wx:else>{{item.content}}</view>
   </view>

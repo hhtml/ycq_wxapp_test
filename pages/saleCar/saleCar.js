@@ -99,13 +99,6 @@ Page({
         imgList:imgList
       })
   },
-  // typeInput(e){
-  //   var form = this.data.form;
-  //   form.carType = e.detail.value;
-  //   this.setData({
-  //     form: form
-  //   })
-  // },
   priceInput(e) {
     var form = this.data.form;
     form.price = e.detail.value;
@@ -194,14 +187,6 @@ Page({
       year: year + '-' + month + '-' + day
     })
   },
-
-  // listingRegionChange(e) {
-  //   var form = this.data.form;
-  //   form.listingRegion = e.detail.value[0] + ' ' + e.detail.value[1];
-  //   this.setData({
-  //     form: form
-  //   })
-  // },
 
 
 

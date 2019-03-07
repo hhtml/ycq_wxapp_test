@@ -1,4 +1,7 @@
-{
+{ 
+  "usingComponents": {
+    "tips": "/components/tips/tips"
+  },
   "navigationBarBackgroundColor":"#fff",
   "navigationStyle":"custom"
 }

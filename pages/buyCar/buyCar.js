@@ -10,10 +10,8 @@ Page({
     multiIndex: [0, 0],
     year:'',
     form: {
-      // carType: '',
       carRegion: '',
       price: '',
-      // phone: '',
       description: '',
       displacementUnit:'L',
       displacement:'',
@@ -29,13 +27,6 @@ Page({
     dtNUm: 60,
     phoneLogShow:false
   },
-  // typeInput(e) {
-  //   var form = this.data.form;
-  //   form.carType = e.detail.value;
-  //   this.setData({
-  //     form: form
-  //   })
-  // },
   priceInput(e) {
     var form = this.data.form;
     form.price = e.detail.value;
@@ -135,7 +126,6 @@ Page({
           $this.data.form.transmissionData = transmission[0]
           form.phone = data.mobile;
           for (var item in brandList) {
-            //console.log('item:',item);
             var brands = new Array();
             var obj = {
               zimu: item,
@@ -175,31 +165,6 @@ Page({
         console.log('请求失败', err);
       });
   },
-  // bindPickerColumnChange(e) {
-  //   console.log('(e.detail.column:', e.detail.column)
-  //   var zimuList = this.data.zimuList;
-  //   if (e.detail.column == 0) {
-  //     var brands = this.getCitysByIndex(e.detail.value);
-  //     this.setData({
-  //       brandInfo: [zimuList, brands]
-  //     })
-  //   }
-  // },
-  // bindPickerChange(e) {
-  //   console.log(e.detail.value);
-  //   var brandList = this.getCitysByIndex(e.detail.value[0]);
-  //   var brand_id = brandList[e.detail.value[1]].id;
-  //   var brand_name = brandList[e.detail.value[1]].name;
-  //   console.log('brand_id:', brand_name);
-  //   var brand = {
-  //     id: brand_id,
-  //     name: brand_name
-  //   }
-  //   this.setData({
-  //     brand
-  //   })
-
-  // },
 
   getCitysByIndex(index) {
     var zimuList = this.data.zimuList;
