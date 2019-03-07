@@ -126,7 +126,7 @@ Page({
    */
   onLoad: function(options) {
     //var user_id=wx.getStorageSync("user_id");
-    this.check();
+    // this.check();
     this.request_mine();
   },
   //测试支付
@@ -137,21 +137,17 @@ Page({
       out_trade_no: new Date().getTime(),
       money: 0.01,
       store_id: 26
-    }
-
-    payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no
-    console.log(payInfo.formId);return;
-    $http.post('Wxpay/certification_wxPay', payInfo).then(res => {
-      // console.log(res);
-      // return;
+    } 
+    
+    payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no ;
+    $http.post('Wxpay/certification_wxPay', payInfo).then(res => { 
+      console.log(res);return;
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;
       var nonceStr = res.data.nonce_str;
       var appid = res.data.appid;
       var key = res.data.key;
-      var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件
-      // console.log(paySign);
-      // return;
+      var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
       //发起支付
       wx.requestPayment({
         'timeStamp': timeStamp,
@@ -166,9 +162,9 @@ Page({
 
           // payInfo.pay_time = timeStamp;
           // payInfo.pay_type = 'certification'; 
-          // $http.post('Wxpay/wxOrder').then(res => {
-          //     console.log(res);
-          // });
+          $http.post('Wxpay/after_successful_payment',payInfo).then(res => {
+              console.log(res);
+          });
           //支付成功之后的操作
 
         },
@@ -404,7 +400,7 @@ Page({
    * 
    * 登录相关
    */
-  close_the_log: function() {
+  /*close_the_log: function() {
     this.check();
   },
   //显示登录或授权提示
@@ -508,7 +504,7 @@ Page({
       this.check();
     }
 
-  },
+  },*/
 
 
   /**
