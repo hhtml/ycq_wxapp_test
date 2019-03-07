@@ -41,6 +41,7 @@ Page({
           var m = date.getMinutes();
           m = m < 10 ? '0' + m : m
           item.createtime =Y + M + D + h + m
+          item.content = that.formatRichText(item.content) //富文本解析 修改图片自适应样式
         })
         that.setData({
           newsList: newsList
@@ -49,6 +50,23 @@ Page({
         console.log('请求失败:' + resObj.msg)
       }
     })
+  },
+
+
+  formatRichText: function (html) { //富文本解析 修改图片自适应样式
+    let newContent = html.replace(/<img[^>]*>/gi, function (match, capture) {
+      match = match.replace(/style="[^"]+"/gi, '').replace(/style='[^']+'/gi, '');
+      match = match.replace(/width="[^"]+"/gi, '').replace(/width='[^']+'/gi, '');
+      match = match.replace(/height="[^"]+"/gi, '').replace(/height='[^']+'/gi, '');
+      return match;
+    });
+    newContent = newContent.replace(/style="[^"]+"/gi, function (match, capture) {
+      match = match.replace(/width:[^;]+;/gi, 'max-width:100%;').replace(/width:[^;]+;/gi, 'max-width:100%;');
+      return match;
+    });
+      newContent = newContent.replace(/<br[^>]*\/>/gi, '');
+      newContent = newContent.replace(/\<img/gi, '<img style="width:100%;height:auto;display:block;margin-top:0px;margin-bottom:0;"');
+    return newContent;
   },
 
   /**

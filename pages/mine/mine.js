@@ -48,8 +48,6 @@ Page({
         path: '../myShop/myShop'
       }
     ],
-
-
   },
 
   /**
@@ -60,7 +58,6 @@ Page({
   isAuthentication:function(){
     var that = this
     var store_has_many = that.data.store_has_many[0]
-    console.log(store_has_many)
     if (store_has_many){
       if (store_has_many.auditstatus == "wait_the_review"){
         that.setData({
@@ -99,8 +96,6 @@ Page({
           authentication: false,
           authenticationList: '店铺审核已通过 去支付',
           dataPath: '../order/order',
-          nickname: store_has_many.store_name,
-          store_level: store_has_many.storelevel.partner_rank
         })
       }
     }else{
@@ -124,19 +119,8 @@ Page({
         url: path,
       })
     }
-
   },
-  nav_to_myshop: function() {
-    // var shopId=this.data.company.id;
-    // wx.navigateTo({
-    //   url: '../myShop/myShop?shopId=' + shopId,
-    // })
-    wx.showToast({
-      title: '即将上线',
-      image: '../../images/warn.png',
-      duration: 500
-    })
-  },
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -210,13 +194,12 @@ Page({
           unread: resObj.data.userInfo.unread,
         })
         $this.data.store_has_many = resObj.data.userInfo.store_has_many
-        $this.isAuthentication()
+        $this.isAuthentication() //店铺认证 实名认证
         //转化头像图片地址
         if (typeof $this.data.userInfo.avatar === 'string') {
           wx.getImageInfo({ //  小程序获取图片信息API
             src: $this.data.userInfo.avatar,
             success: function(res) {
-              // console.log(res.path)
               $this.data.switch1 = 1
               $this.data.userInfo.avatar = res.path
             },
@@ -283,7 +266,7 @@ Page({
   //二维码点击事件
   erWeiMa: function() {
     var $this = this;
-    var store_has_many = $this.data.userInfo.store_has_many;
+    var store_has_many = $this.data.store_has_many;
     if (store_has_many) {
       if (store_has_many[0].auditstatus == 'paid_the_money') {
         if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
@@ -314,15 +297,15 @@ Page({
           image: '../../images/warn.png',
           duration: 1000
         })
-      } else if (store_has_many[0].auditstatus == 'wait_for_review') {
+      } else if (store_has_many[0].auditstatus == 'wait_the_review') {
         wx.showToast({
           title: '待审核',
           image: '../../images/warn.png',
           duration: 1000
         })
-      } else if (store_has_many[0].auditstatus == 'wait_for_review') {
+      } else if (store_has_many[0].auditstatus == 'pass_the_audit') {
         wx.showToast({
-          title: '店铺未认证',
+          title: '审核通过',
           image: '../../images/warn.png',
           duration: 1000
         })

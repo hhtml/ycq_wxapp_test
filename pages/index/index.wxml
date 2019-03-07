@@ -183,16 +183,6 @@
 <!-- 页面悬浮分享功能 -->
 <button class="share" open-type="share">分享</button>
 
-<!-- 点击买车卖车弹出层 -->
-<!-- 模态对话框 -->
-<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
-
-<view class="toast-wrap" wx:if="{{showModal}}">
-  <view class="toast-title">提示</view>
-  <view class="toast-content">{{msg}}</view>
-  <view class="click-wrap">
-    <view class="cancel" bindtap='cancelShowModal'>取消</view>
-    <view class="sure" bindtap='goAuthentication'>去认证</view>
-  </view>
-</view>
+<!-- 提示框组件 -->
+<tips wx:if="{{showModal}}" paramAtoB="{{msg}}"></tips>
 

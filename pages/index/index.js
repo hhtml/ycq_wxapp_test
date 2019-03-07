@@ -125,6 +125,7 @@ Page({
       url: '/pages/mine/news/news'
     })
   },
+
   // 取消弹出提示框
   cancelShowModal: function() {
     var that = this
@@ -484,3 +485,4 @@ Page({
 
   // }
 })
+

@@ -1,6 +1,7 @@
 // pages/order/order.js
 const app = getApp();
 var $http = require('../../utils/http.js');
+var util = require('../../utils/md5.js') // 引入md5.js文件
 Page({
 
   /**
@@ -126,6 +127,58 @@ Page({
     })
     
   }, 
+  //去支付点击事件
+  payOrder:function(e){
+    var $this = this;
+    var money = e.target.id.split('+')[0]
+    var store_id = e.target.id.split('+')[1]
+    var payInfo = {
+      formId: e.detail.formId,
+      out_trade_no: new Date().getTime(),
+      money: money,
+      store_id: store_id
+    }
+
+    payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no
+    console.log(payInfo.formId);
+    $http.post('Wxpay/certification_wxPay', payInfo).then(res => {
+      var timeStamp = (Date.parse(new Date()) / 1000).toString();
+      var pkg = 'prepay_id=' + res.data.prepay_id;
+      var nonceStr = res.data.nonce_str;
+      var appid = res.data.appid;
+      var key = res.data.key;
+      var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件
+      //发起支付
+      wx.requestPayment({
+        'timeStamp': timeStamp,
+        'nonceStr': nonceStr,
+        'package': pkg,
+        'signType': 'MD5',
+        'paySign': paySign,
+        'success': function (res) {
+          //支付成功回调
+          console.log(res);
+          // console.log(timeStamp);
+
+          // payInfo.pay_time = timeStamp;
+          // payInfo.pay_type = 'certification'; 
+          // $http.post('Wxpay/wxOrder').then(res => {
+          //     console.log(res);
+          // });
+          //支付成功之后的操作
+
+        },
+        'fail': function (res) {
+          console.log('用户取消支付,需要重载页面');
+
+        },
+        'complete': function (res) {
+          // console.log(res)
+        }
+      });
+
+    });
+  },
   //测试支付
   formSubmit(e) {
 

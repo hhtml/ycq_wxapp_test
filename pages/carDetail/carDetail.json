@@ -1,4 +1,7 @@
 {
+  "usingComponents": {
+    "tips": "/components/tips/tips"
+  },
   "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "车系详情",

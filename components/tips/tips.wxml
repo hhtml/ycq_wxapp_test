@@ -1,0 +1,13 @@
+<!--components/tips/tips.wxml-->
+
+<!-- 模态对话框 -->
+<view class="mask" catchtouchmove="preventTouchMove"></view>
+
+<view class="toast-wrap">
+  <view class="toast-title">提示</view>
+  <view class="toast-content">{{paramAtoB}}</view> <!-- {{paramAtoB}} 父组件向子组件中传入的参数-->
+  <view class="click-wrap">
+    <view class="cancel" bindtap='cancelShowModal'>取消</view>
+    <view class="sure" bindtap='goAuthentication'>去认证</view>
+  </view>
+</view>

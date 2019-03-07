@@ -186,7 +186,6 @@ image.navIcon{
     z-index: 9000;
     opacity: 0.7;
 }
- 
 .modalDlg{
     width: 500rpx;
     height: 620rpx;

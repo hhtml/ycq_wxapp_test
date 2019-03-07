@@ -24,11 +24,9 @@
            <text>车型名称</text>
         </view>
         <view class="itemRight">
-            <view class="itemCont"> 
-               <!-- <view mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}"> -->
+            <view class="itemCont">
                <view bindtap='selectCar'>
             <view class="picker">
-              <!-- <text>{{brand.id ? brand.name :'请选择车型'}}</text> -->
               <text>{{carType}}</text>
             </view>
           </view>
@@ -37,21 +35,6 @@
         </view>
     </view>
 
-    <!-- <view class='formItem'>
-        <view class="itemLeft">
-           <text>*</text>
-           <text>车辆配置</text>
-        </view>
-        <view class="itemRight">
-            <view class="itemCont">
-                <input value='{{form.carType}}' bindinput='typeInput' placeholder='格式如：2017款1.6L手动豪华'></input>
-            </view>
-            <text class="formTip" bindtap='formTip'>提示</text>
-        </view>
-        <view class="tipLog" wx:if="{{formTipShow}}">
-          <text>2017款1.6L手动豪华</text>
-        </view>
-    </view> -->
 
     <view class='formItem'>
         <view class="itemLeft">
@@ -71,31 +54,9 @@
                 </view>
               </picker>
             </view>
-            <!--<text class="formTip">提示</text>-->
         </view>
     </view>
     
-    <!-- <view class='formItem'>
-        <view class="itemLeft">
-           <text>*</text>
-           <text>车牌所在地</text>
-        </view>
-        <view class="itemRight">
-            <view class="itemCont">
-               <picker
-                mode="region"
-                bindchange="listingRegionChange"
-                value="{{form.listingRegion}}"
-                custom-item="{{customItem}}"
-              >
-                <view class="picker">
-                   <text>{{form.listingRegion}}</text>
-                </view>
-              </picker>
-            </view> -->
-            <!--<text class="formTip">提示</text>-->
-        <!-- </view>
-    </view> -->
 
     <view class='formItem'>
         <view class="itemLeft">
@@ -144,7 +105,6 @@
                  mode="selector"
         >
             <view class="itemCont">
-                <!-- <input value='{{form.carDisplacement}}' bindinput='typeInput'></input> -->
                 <text>{{form.transmissionData}}</text>
             </view>
         </picker>
@@ -170,7 +130,6 @@
                   </view>
                 </picker>
             </view>
-            <!--<text class="formTip">提示</text>-->
         </view>
     </view>
 
@@ -253,33 +212,6 @@
    <button class="formButton" form-type='submit'>发布车源</button>
 </form>
 
-<!-- <view class="backDiv" wx:if="{{phoneLogShow}}">
-    <view class="divCont">
-        <view class="topTitle">
-           <text>验证手机号</text>
-           <text bindtap='closeLog'>取消</text>
-        </view>
-        <view class="centerCont">
-             <view class="centerRow">
-                 <input type='idcard' value='{{form.phone}}' bindinput='phoneInput' cursor-spacing="130" placeholder='请输入手机号码' ></input>
-             </view>
-             <view class="centerRow">
-                 <input type='idcard' value='{{smscode}}' bindinput='bindMsglInput'cursor-spacing="80" placeholder='短信验证码' ></input>
-                 
-                <view class="smscode" wx-if="{{sentSms}}" style="color:#eee;">
-                   <text>已获取{{dtNUm}}</text><text></text>
-                </view>
-                <view class="smscode" bindtap='get_sms_code'  wx-if="{{!sentSms}}">
-                   <text>获取验证码</text>
-                 </view>
-             </view>
-        </view>
-
-        <view class="bottomButton">
-             <button bindtap='phoneAuth'>提交</button>
-        </view>
-    </view>
-</view> -->
 
 <!-- 引入验证码组件 -->
 <identifyingCode name="easy" wx:if="{{phoneLogShow}}"/>

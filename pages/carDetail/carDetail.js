@@ -8,6 +8,7 @@ Page({
    */
   data: {
     screenWidth: 0,
+    msg:'还未认证,暂不能砍价',//向提示框组件中传入的参数
     screenHeight: 0,
     imgwidth: 0,
     imgheight: 0,
@@ -159,26 +160,9 @@ Page({
       }
     }
   },
-  // 取消报价弹出提示框
-  cancelShowModal:function(){
-    var that = this
-    that.setData({
-      showModal:false
-    })
-  },
   closeLog() {
     this.setData({
       priceLogShow: false
-    })
-  },
-  //报价提示框 点击确认事件
-  goAuthentication:function(){
-    var that = this
-    wx.navigateTo({
-      url: '../cooperationSupply/cooperationSupply'
-    })
-    that.setData({
-      showModal:false
     })
   },
   //点击电话联系事件
@@ -344,14 +328,7 @@ Page({
       path: '/pages/carDetail/carDetail?carId=' + carId + '&type=' + type
     }
   },
-
-  // 自定义nav 返回事件
-  return:function(){
-    wx.navigateBack({
-      delta: 1
-    })
-  },
-
+  
   //自定义nav返回主页事件
   goHome:function(){
     wx.switchTab({

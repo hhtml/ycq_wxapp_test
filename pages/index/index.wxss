@@ -27,19 +27,11 @@ page{
   width:116%;
   height:116%
 }
-.share-nav button{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top:0;
-  left: 0;
-  opacity: 0;
-}
-.news{
+/* .news{
   width:65rpx;
   height:65rpx;
   padding:10rpx;
-}
+} */
 .tips{
   width:15rpx;
   height:15rpx;
@@ -65,49 +57,6 @@ page{
    width: 34rpx;
    margin-right: 20rpx;
 }
-.searchBg input{
-  font-size: 30rpx;
-  color: #b2b2b2;
-}
-
-/* .searchBg{ 
-  background-color: #f0f0f0;
-  border-radius:32rpx;
-  width: 100%;
-  height:28px;
-  display: flex;
-  align-items: center;
-  padding:0rpx  18rpx;
-  font-size: 14px;
-  color:rgb(189, 189, 189);
-  box-sizing: border-box;
-}
-.searchBg image{
-  width: 30rpx;
-  margin-right: 10rpx;
-} */
-
-
-/* .searchResult{
-  width: calc(100vw - 310rpx);
-  background-color: #f0f0f0;
-  padding: 0 18rpx;
-  border-radius: 8rpx;
-  position: fixed;
-  top: 32rpx;
-  left: 24rpx;
-}
-.searchResult text{
-  font-size: 30rpx;
-  height:60rpx;
-  line-height: 60rpx;
-  color: #666;
-  display: block;
-  border-bottom: 1rpx solid #e5e5e5;
-}
-.searchResult text:last-child{
-  border: none;
-} */
 
 /* 轮播图区域 */
 .bannerArea{
@@ -499,86 +448,4 @@ margin-top: 66rpx;
   z-index: 999;
   background-color: rgba(243, 85, 65,0.81);
   padding:0rpx;
-}
-
-/* 点击买车卖车弹出层 */
-
-/* 模态框 */
-.mask{
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: #000;
-    z-index: 9000;
-    opacity: 0.7;
-}
- 
-.modalDlg{
-    width: 500rpx;
-    height: 620rpx;
-    position: fixed;
-    top: 50%;
-    left: 5%;
-    z-index: 99;
-    margin: -370rpx 85rpx;
-    background-color: #fff;
-    border-radius: 8rpx;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.toast-wrap{
-  width:550rpx;
-  height:290rpx;
-  background-color: #fff;
-  position: fixed;
-  left:13%;
-  top:40%;
-  z-index: 9999;
-  border-radius: 10rpx;
-}
-.toast-title{
-  width:100%;
-  height:80rpx;
-  text-align: center;
-  line-height: 80rpx;
-  color: #000;
-  font-size: 32rpx;
-  font-weight: bold;
-  margin-top:30rpx;
-}
-.toast-content{
-  width:100%;
-  height:90rpx;
-  line-height: 90rpx;
-  font-size: 30rpx;
-  color:#ccc;
-  text-align: center;
-}
-.click-wrap{
-  width:100%;
-  height:90rpx;
-  line-height: 90rpx;
-  display: flex;
-  font-size: 32rpx;
-  border-top:2rpx solid #f2f2f2;
-  box-sizing: border-box;
-}
-.click-wrap .cancel{
-  width:50%;
-  height:100%;
-  line-height: 90rpx;
-  text-align: center;
-  border-right:2rpx solid #f2f2f2;
-  box-sizing: border-box;
-}
-.click-wrap .sure{
-  width:50%;
-  height:100%;
-  line-height: 90rpx;
-  text-align: center;
-  color:#ef4631;
 }

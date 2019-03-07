@@ -105,12 +105,12 @@ page{
   height: 0;
 }
 .orderSchedule text.activeSche{
-  background-color: #ef4631;
-  border: 1px solid #ef4631;
+  background-color: #39c03f;
+  border: 1px solid #39c03f;
   color: #fff;
 }
 .orderSchedule text.activeSche::after{
-  background-color: #ef4631;
+  background-color: #39c03f;
 }
 .orderHandle{
   display: flex;
@@ -130,8 +130,32 @@ page{
 .orderHandle text:last-child{
    margin-right: 0;
 }
-text.activeButton{
-   border: 1px solid #ef4631!important;
-   background-color:#ef4631!important;
-   color: #fff!important;
+button{
+   padding:0rpx;
+   margin:0rpx;
+   line-height: 1;
+   background-color: #fff;
+   font-size: 24rpx;
+   position: none;
+   display: inline-block;
+}
+button::after{
+  border:none;
+}
+input{
+outline:none;
+border:none;
+list-style: none;
+}
+.activeButton{
+  border: 1px solid #ef4631!important;
+  background-color:#ef4631!important;
+  color: #fff!important;
+  display: inline-block;
+  height: 43rpx;
+  line-height: 43rpx;
+  padding: 0 8rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  margin-right: 0rpx;
 }

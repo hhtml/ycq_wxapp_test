@@ -42,8 +42,12 @@
                     </view>
                     <view class="orderHandle" wx:else>
                         <text bindtap='cancelOrder' data-store="{{item.companystore_id}}">取消订单</text>
-                        <text wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton' bindtap='payOrder'>去支付</text>
-                        <text wx:else>去支付</text>
+                        <form bindsubmit='payOrder' bindreset='' report-submit id="{{item.certification_fee}}+{{item.companystore_id}}">
+                          <button form-type="submit"  wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton'>去支付</button>
+                          <text wx:else>去支付</text>
+                        </form>
+                        <!-- <text wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton' bindtap='payOrder'>去支付</text>
+                        <text wx:else>去支付</text> -->
                     </view>
                </view>
             </view>
@@ -79,8 +83,10 @@
                     </view>
                     <view class="orderHandle" wx:else>
                         <text bindtap='cancelOrder' data-store="{{item.companystore_id}}">取消订单</text>
-                        <text wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton' bindtap='payOrder'>去支付</text>
-                        <text wx:else>去支付</text>
+                        <form bindsubmit='payOrder' bindreset='' report-submit id="{{item.certification_fee}}+{{item.companystore_id}}">
+                          <button form-type="submit"  wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton'>去支付</button>
+                          <text wx:else>去支付</text>
+                        </form>
                     </view>
                </view>
             </view>
