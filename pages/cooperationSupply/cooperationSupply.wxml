@@ -1,6 +1,6 @@
 <!--pages/cooperationSupply/cooperationSupply.wxml-->
 <form report-submit='{{true}}' bindsubmit='formSubmit'>
-<view class="switchTitle">
+<!-- <view class="switchTitle">
     <view class="titleItem {{activeId ==0 ? 'activeItem':''}}" data-id="0" bindtap='switchTitle'>
        <text>合作价值</text>
     </view>
@@ -10,7 +10,7 @@
     <view class="titleItem {{activeId == 2 ? 'activeItem':''}}" data-id="2"  bindtap='switchTitle'>
        <text>合作意向申请</text>
     </view>
-</view>
+</view> -->
 
 <!--店铺信息-->
 <view class=" shopArea">
@@ -134,10 +134,10 @@
               <text class="infoTip">(将作为提取收益的收款账户)</text>
           </view>
           <view class="rowInput">
-             <input type='text' placeholder-class='placeholder' placeholder="请输入您的姓名" value="{{form.name}}" bindinput='formBindInput' data-name="name"></input>
+             <input type='text' placeholder-class='placeholder' placeholder="输入您的姓名或公司名称" value="{{form.name}}" bindinput='formBindInput' data-name="name"></input>
           </view>
           <view class="rowInput">
-             <input type='text' placeholder-class='placeholder' placeholder="请输入您的银行卡号" value="{{form.idCard}}" bindinput='formBindInput' data-name="idCard"></input>
+             <input type='text' placeholder-class='placeholder' placeholder="请输入您的银行卡号或对公帐户" value="{{form.idCard}}" bindinput='formBindInput' data-name="idCard"></input>
           </view>
           <view class="rowInput">
              <input type='number' placeholder-class='placeholder' placeholder="请输入与银行卡号绑定的手机号" value="{{form.shopTel}}" bindinput='formBindInput' data-name="shopTel"></input>
@@ -226,10 +226,14 @@
 <view class="partnerArea">
     <view class='content'>
           <label class="partnerItem" wx:for="{{partnerList}}">
-             <switch bindchange="partnerChange" data-index="{{index}}" value="{{item.name}}" checked="{{item.checked}}" type="checkbox"/>
-              <text>{{item.partner_rank}} {{item.money}}元/年 （{{item.explain}}）</text>
+            <view>
+              <switch bindchange="partnerChange" data-index="{{index}}" value="{{item.name}}" checked="{{item.checked}}" type="checkbox"/>
+              <text>{{item.partner_rank}} {{item.money}}元/年</text>
+            </view>
+            <view>
+              <text class="times">（{{item.explain}}）</text>
+            </view>
           </label>
-
     </view>
 </view>
 

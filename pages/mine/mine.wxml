@@ -1,4 +1,5 @@
 <!--pages/mine/mine.wxml-->
+
 <view class="headBg">
 </view>
 <view class='head'>
@@ -87,8 +88,6 @@
       <view class='navRight'>
         <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
-
-      <!-- <view class="offertip" wx:if="{{isNewOffer==1}}"></view> -->
     </view>
 
     <view class="navItem" bindtap='nav_to_page' data-path="./news/news">
@@ -99,11 +98,11 @@
       <view class='navRight'>
         <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
-
       <view class="offertip" wx:if="{{unread == 1}}"></view>
     </view>
 
   </view>
+
 
   <view class="navList">
     <view class="navItem" bindtap='nav_to_page' data-path="/pages/mine/serviceAgreement/serviceAgreement">

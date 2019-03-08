@@ -423,6 +423,7 @@ Page({
   },
   checkForm(){
     var form=this.data.form;
+    form.phone = this.data.phone
     if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系'; 
     for(var item in form){
       if(!form[item]){

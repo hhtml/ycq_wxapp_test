@@ -37,8 +37,6 @@ page{
   font-weight: bold;
   margin-left: 126rpx;
 }
-
-
 .carImg{
   width: 100%;
   height: 390rpx;
@@ -360,6 +358,7 @@ page{
   text-align: center;
 }
 .bottomButton button{
+  width:100%;
   height: 90rpx;
   line-height: 90rpx;
   border-radius: 0;

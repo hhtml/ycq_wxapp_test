@@ -82,6 +82,9 @@ Page({
     var iconList = this.data.iconList;
     var path = iconList[index].path;
     if (index == 0) {
+      // wx.navigateTo({
+      //   url: path,
+      // })
       if (that.data.sell_car_condition.code == 0) {
         wx.navigateTo({
           url: path,
@@ -98,6 +101,9 @@ Page({
         })
       }
     } else if (index == 1) {
+      // wx.navigateTo({
+      //   url: path,
+      // })
       if (that.data.buy_car_condition.code == 1) {
         that.setData({
           msg: that.data.buy_car_condition.msg,
@@ -123,24 +129,6 @@ Page({
   goNews: function() {
     wx.navigateTo({
       url: '/pages/mine/news/news'
-    })
-  },
-
-  // 取消弹出提示框
-  cancelShowModal: function() {
-    var that = this
-    that.setData({
-      showModal: false
-    })
-  },
-  //提示框 点击确认事件
-  goAuthentication: function() {
-    var that = this
-    wx.navigateTo({
-      url: '../cooperationSupply/cooperationSupply'
-    })
-    that.setData({
-      showModal: false
     })
   },
   switchTitle: function(e) {
