@@ -140,8 +140,7 @@ Page({
     } 
     
     payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no ;
-    $http.post('Wxpay/certification_wxPay', payInfo).then(res => { 
-      console.log(res);return;
+    $http.post('Wxpay/certification_wxPay', payInfo).then(res => {
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;
       var nonceStr = res.data.nonce_str;
@@ -159,7 +158,6 @@ Page({
           //支付成功回调
           console.log(res);
           // console.log(timeStamp);
-
           // payInfo.pay_time = timeStamp;
           // payInfo.pay_type = 'certification'; 
           $http.post('Wxpay/after_successful_payment',payInfo).then(res => {

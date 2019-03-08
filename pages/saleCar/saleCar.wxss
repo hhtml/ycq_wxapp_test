@@ -87,6 +87,7 @@ image.imageIcon{
 }
 .itemCont .beizhu{
   padding-left: 28rpx;
+  width:100%;
 }
 .beizhuBuyPage{
   padding-left: 16rpx;
@@ -99,7 +100,7 @@ image.imageIcon{
 }
 .itemCont{
   width: 400rpx;
-  height:95rpx;
+  /* height:95rpx; */
 }
 .itemCont picker{
   width: 100%;

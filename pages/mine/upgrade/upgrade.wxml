@@ -217,19 +217,25 @@
 <view class="partnerArea">
     <view class='content'>
           <label class="partnerItem" wx:for="{{partnerList}}">
-             <switch bindchange="partnerChange" 
+            <view>
+               <switch bindchange="partnerChange" 
              data-index="{{index}}" 
              value="{{item.name}}" 
              checked="{{item.checked}}" 
              type="checkbox" 
              id="{{item.id}}"
-             disabled="{{item.id == store.level_id}}"/>
-              <text>{{item.partner_rank}} {{item.money}}元/年 （{{item.explain}}）</text>
+             disabled="{{item.id >= store.level_id}}"/>
+              <text>{{item.partner_rank}} {{item.money}}元/年</text>
+            </view>
+            <view>
+              <text >（{{item.explain}}）</text>
+            </view>
           </label>
     </view>
 </view>
 
 <view class='formButtom'>
     <button form-type='submit'>提交</button>
+    <!-- form-type='submit' -->
 </view>
 </form>
