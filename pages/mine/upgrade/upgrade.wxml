@@ -215,10 +215,22 @@
   </view>
   <view class="partnerArea">
     <view class='content'>
-      <label class="partnerItem" wx:for="{{partnerList}}">
-        <switch bindchange="partnerChange" data-index="{{index}}" value="{{item.name}}" checked="{{item.checked}}" type="checkbox" id="{{item.id}}" disabled="{{item.id == store.level_id}}" />
-        <text>{{item.partner_rank}} {{item.money}}元/年 （{{item.explain}}）</text>
-      </label>
+
+          <label class="partnerItem" wx:for="{{partnerList}}">
+            <view>
+               <switch bindchange="partnerChange" 
+             data-index="{{index}}" 
+             value="{{item.name}}" 
+             checked="{{item.checked}}" 
+             type="checkbox" 
+             id="{{item.id}}"
+             disabled="{{item.id >= store.level_id}}"/>
+              <text>{{item.partner_rank}} {{item.money}}元/年</text>
+            </view>
+            <view>
+              <text >（{{item.explain}}）</text>
+            </view>
+          </label>
     </view>
   </view>
 
@@ -226,3 +238,4 @@
     <button form-type='submit' data-store_id="{{store.id}}">提交店铺升级</button>
   </view>
 </form>
+

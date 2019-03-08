@@ -74,6 +74,11 @@ Page({
   // form表单数据提交
   formSubmit(e) {
     var that = this
+    wx.showToast({
+      title: '即将上线',
+      image: '/images/warn.png'
+    });
+    return;
     var formId = e.detail.formId;
     var shop_level_id = this.data.shop_level_id;
     var form = this.data.form;

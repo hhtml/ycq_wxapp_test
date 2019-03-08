@@ -203,7 +203,55 @@
 .floatIcon{
   width: 60rpx;
   height: 60rpx;
-
+}
+.bailMoney-wrap{
+  width:100%;
+  height:80rpx;
+  display: flex;
+  align-items: center;
+}
+.bailMoney{
+  font-size: 28rpx;
+  color:red;
+  font-weight: bold;
+}
+.cancelOrder{
+  font-size: 28rpx;
+  border:1rpx solid rgb(102, 102, 102);
+  border-radius: 10rpx;
+  padding:10rpx 20rpx;
+  color:rgb(102, 102, 102);
+  margin-left: 50rpx;
+}
+button{
+  background-color:rgb(247, 247, 247);
+  border-radius: 0rpx;
+  padding:0rpx;
+  margin:0rpx;
+  display: inline-block;
+  line-height: 1;
+}
+button::after{ /*button的边框样式是通过::after方式实现的*/
+  border:none;
+}
+.button-hover{ /*点击后样式*/
+  color:#000;
+  background-color: rgb(247, 247, 247);
+}
+.payMoney{
+  font-size: 28rpx;
+  border-radius: 10rpx;
+  padding:16rpx 50rpx;
+  color:#fff;
+  background-color: red;
+  margin-left: 40rpx;
+}
+.payMoney-wrap{
+  width:100%;
+  height:80rpx;
+  display: flex;
+  justify-content:flex-end;
+  align-items: center;
 }
 .floatIcon image{
   width: 100%;

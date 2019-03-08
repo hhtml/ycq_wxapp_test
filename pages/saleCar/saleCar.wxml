@@ -202,7 +202,7 @@
         </view>
         <view class="itemRight">
             <view class="itemCont">
-                <input placeholder="请如实描述车况，否则描述不准确将影响您的诚信" value="{{form.description}}" bindinput="descriptionInput" class="beizhu"> </input>
+                <textarea placeholder="请如实描述车况，否则描述不准确将影响您的诚信" value="{{form.description}}" bindinput="descriptionInput" class="beizhu" maxlength="-1" auto-height="{{true}}"> </textarea>
             </view>
           
         </view>
