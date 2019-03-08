@@ -12,16 +12,16 @@ Page({
   data: {
     showModal: false,
     userInfo: [],
-    store_has_many:[],
+    store_has_many: [],
     haibaoImg: '',
     userName: ' ',
-    unread:'', //消息列表提示
-    authentication:false, //是否实名认证
-    authenticationList:'',//认证提示消息
-    dataPath:'', //实名认证按钮点击路径
+    unread: '', //消息列表提示
+    authentication: false, //是否实名认证
+    authenticationList: '', //认证提示消息
+    dataPath: '', //实名认证按钮点击路径
     goldShop: true, //达到黄金店铺级别 隐藏认证区域
-    nickname:'',
-    store_level:'', //店铺等级
+    nickname: '',
+    store_level: '', //店铺等级
     navList: [{
         icon: '',
         name: '我的店铺',
@@ -55,53 +55,53 @@ Page({
    */
 
   // 店铺认证 实名认证
-  isAuthentication:function(){
+  isAuthentication: function() {
     var that = this
     var store_has_many = that.data.store_has_many[0]
-    if (store_has_many){
-      if (store_has_many.auditstatus == "wait_the_review"){
+    if (store_has_many) {
+      if (store_has_many.auditstatus == "wait_the_review") {
         that.setData({
-          authentication:false,
-          authenticationList:'店铺待审核',
-          dataPath:'../cooperationSupply/cooperationSupply',
+          authentication: false,
+          authenticationList: '店铺待审核',
+          dataPath: '../cooperationSupply/cooperationSupply',
         })
-      } else if (store_has_many.auditstatus == "in_the_review"){
+      } else if (store_has_many.auditstatus == "in_the_review") {
         that.setData({
           authentication: false,
           authenticationList: '店铺审核中',
           dataPath: '../cooperationSupply/cooperationSupply',
         })
-      } else if (store_has_many.auditstatus == "paid_the_money"){
-        if (store_has_many.storelevel.partner_rank == '铂金店铺'){
+      } else if (store_has_many.auditstatus == "paid_the_money") {
+        if (store_has_many.storelevel.partner_rank == '铂金店铺') {
           that.setData({
-            goldShop:false
+            goldShop: false
           })
-        }else{
-        that.setData({
-          authentication: false,
-          authenticationList: '升级店铺',
-          nickname: store_has_many.store_name,
-          store_level: store_has_many.storelevel.partner_rank,
-          dataPath: './upgrade/upgrade',
-        })
+        } else {
+          that.setData({
+            authentication: false,
+            authenticationList: '升级店铺',
+            nickname: store_has_many.store_name,
+            store_level: store_has_many.storelevel.partner_rank,
+            dataPath: './upgrade/upgrade',
+          })
         }
-      } else if (store_has_many.auditstatus == "audit_failed"){
+      } else if (store_has_many.auditstatus == "audit_failed") {
         that.setData({
           authentication: false,
           authenticationList: '店铺审核没有通过 查看详情',
           dataPath: '../cooperationSupply/cooperationSupply'
         })
-      } else if (store_has_many.auditstatus == "pass_the_audit"){
+      } else if (store_has_many.auditstatus == "pass_the_audit") {
         that.setData({
           authentication: false,
           authenticationList: '店铺审核已通过 去支付',
           dataPath: '../order/order',
         })
       }
-    }else{
+    } else {
       //店铺还没有实名认证,提示用户去实名认证
       that.setData({
-        authentication:true,
+        authentication: true,
         dataPath: '../cooperationSupply/cooperationSupply',
       })
     }
@@ -120,7 +120,7 @@ Page({
       })
     }
   },
-  
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -137,10 +137,12 @@ Page({
       out_trade_no: new Date().getTime(),
       money: 0.01,
       store_id: 26
-    } 
-    
-    payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no ;
-    $http.post('Wxpay/certification_wxPay', payInfo).then(res => {
+    }
+
+    payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no;
+    $http.post('store_certification_pay/certification_wxPay', payInfo).then(res => {
+
+
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;
       var nonceStr = res.data.nonce_str;
@@ -155,16 +157,14 @@ Page({
         'signType': 'MD5',
         'paySign': paySign,
         'success': function(res) {
-          //支付成功回调
-          console.log(res);
-          // console.log(timeStamp);
-          // payInfo.pay_time = timeStamp;
-          // payInfo.pay_type = 'certification'; 
-          $http.post('Wxpay/after_successful_payment',payInfo).then(res => {
-              console.log(res);
-          });
-          //支付成功之后的操作
+          console.log(res); 
+          if (res.errMsg =="requestPayment:ok") {
+            //推送模板消息回调 
+            $http.post('store_certification_pay/after_successful_payment', payInfo).then(res => {
 
+              console.log(res);
+            });
+          } 
         },
         'fail': function(res) {
           console.log('用户取消支付,需要重载页面');
@@ -236,13 +236,13 @@ Page({
 
               },
               fail(err) {
-                console.log($this.data.userInfo.invitation_code_img)
-                console.log(err)
+                // console.log($this.data.userInfo.invitation_code_img)
+                // console.log(err)
               }
             })
           }
         }
-        console.log('我的数据：', resObj);
+        
         if (resObj.code == 1) {
           var data = resObj.data;
           var isNewOffer = data.userInfo.isNewOffer;
@@ -340,8 +340,7 @@ Page({
     var height
     wx.getSystemInfo({
       success(res) {
-        console.log(res.windowWidth)
-        console.log(res.windowHeight)
+      
         width = res.windowWidth
         height = res.windowHeight
       }

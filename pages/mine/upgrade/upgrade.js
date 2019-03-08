@@ -1,29 +1,30 @@
 // pages/mine/upgrade/upgrade.js
 const app = getApp();
 var $http = require('../../../utils/http.js');
+var util = require('../../../utils/md5.js') // 引入md5.js文件
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    store:[], //店铺数据详情
-    partnerList:[], //合伙人级别
+    store: [], //店铺数据详情
+    partnerList: [], //合伙人级别
     appImgUrl: app.globalData.localImgUrl,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getStore_list();
     this.getStore_level_list();
   },
 
   //获取店铺详情数据
-  getStore_list:function(){
+  getStore_list: function() {
     var that = this
-    $http.post('my/upgrade_shop').then(res=>{
+    $http.post('my/upgrade_shop').then(res => {
       var store = res.data.data
       store.id_card_images = store.id_card_images.split(',')
       store.main_camp = store.main_camp.split(',')
@@ -34,9 +35,9 @@ Page({
     })
   },
   //获取合伙人级别数据
-  getStore_level_list:function(){
+  getStore_level_list: function() {
     var that = this
-    $http.post('Shop/index').then(res=>{
+    $http.post('Shop/index').then(res => {
       that.data.submit_type = res.data.data.submit_type
       that.setData({
         partnerList: res.data.data.store_level_list
@@ -82,6 +83,7 @@ Page({
     var shop_level_id = this.data.shop_level_id;
     var form = this.data.form;
     var store = that.data.store
+    var store_id = e.detail.target.dataset.store_id;
     if (!that.data.shop_level_id) {
       wx.showToast({
         title: '请选择合伙人级别',
@@ -92,46 +94,50 @@ Page({
       var submit_type = this.data.submit_type;
       var auditInfo = {
         store_name: store.store_name,
-        cities_name: store.cities_name,
-        store_address: store.store_address,
-        store_description: store.store_description,
-        phone: store.phone,
-        // login_code: store.smscode,
-        store_img: store.store_img,
-        business_life: store.business_life,
-        main_camp: store.main_camp,
-        bank_card: store.bank_card,
-        id_card_positive: store.id_card_images[0],
-        id_card_opposite: store.id_card_images[1],
-        business_licenseimages: store.business_licenseimages,
-        level_id: that.data.shop_level_id,
-        // code: store.inviteNumber,
-        name: store.real_name
+        store_id: store_id,
+        out_trade_no: new Date().getTime(),
+        up_level_id: that.data.shop_level_id,
+        formId: e.detail.formId,
+        base_level_id:store.level_id
       }
-      $http.post('shop/submit_audit', {
-        submit_type: submit_type,
-        auditInfo: auditInfo
-      })
+      auditInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + auditInfo.store_id + '_' + auditInfo.out_trade_no;
+
+      $http.post('store_up_pay/upShop', auditInfo)
         .then(res => {
-          //成功回调
-          var resObj = res.data;
-          console.log('表单提交：', resObj);
-          if (resObj.code == 1) {
-            var data = resObj.data;
-            wx.showToast({
-              title: resObj.msg,
-              icon: 'success'
-            });
-            wx.navigateTo({
-              url: '../order/order',
-            })
-          } else {
-            wx.showToast({
-              title: resObj.msg,
-              image: '/images/warn.png'
-            });
-            console.log('请求失败：', resObj.msg);
-          }
+          var timeStamp = (Date.parse(new Date()) / 1000).toString();
+          var pkg = 'prepay_id=' + res.data.prepay_id;
+          var nonceStr = res.data.nonce_str;
+          var appid = res.data.appid;
+          var key = res.data.key;
+          var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
+          //发起支付
+          wx.requestPayment({
+            'timeStamp': timeStamp,
+            'nonceStr': nonceStr,
+            'package': pkg,
+            'signType': 'MD5',
+            'paySign': paySign,
+            'success': function (res) { 
+              if (res.errMsg == "requestPayment:ok") {
+                //推送模板消息回调
+                console.log(res);
+                $http.post('store_up_pay/after_successful_payment', auditInfo).then(res => {
+                  console.log(res);
+                });
+              }
+
+
+            },
+            'fail': function (res) {
+              console.log('用户取消支付,需要重载页面');
+
+            },
+            'complete': function (res) {
+              // console.log(res)
+            }
+          });
+         
+
         }).catch(err => {
           //异常回调
           console.log('请求失败', err);
@@ -142,49 +148,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
