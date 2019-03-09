@@ -17,6 +17,7 @@ Page({
       displacement:'',
       productDate:'',
       transmissionData: '', //变速箱
+      phone:''
     },
     phone:'',
     transmission: [], //变速箱
@@ -197,7 +198,8 @@ Page({
   },
   checkForm() {
     var form = this.data.form; 
-    if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '有符合需求的卖家，第一时间联系我哦'; 
+    form.phone  = this.data.phone
+    if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '有符合需求的卖家，第一时间联系我哦';
     for (var item in form) {
       if (!form[item]) {
         return false;
@@ -231,7 +233,6 @@ Page({
     var formId = e.detail.formId;
     var form = this.data.form;
     var $this = this; 
-   
     if (!this.checkForm()) {
       wx.showToast({
         title: '请将信息填写完整',

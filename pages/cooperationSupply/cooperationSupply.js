@@ -42,7 +42,8 @@ Page({
       idCard:'',
       idCardFront:'',
       idCardReverse:'',
-      name:''
+      name:'',
+      regionImg: '',//营业执照
     },
     regionImg: '',//营业执照
     dtNUm:60,
@@ -358,6 +359,9 @@ Page({
             console.log(JSON.parse(res.data));
             let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
             $this.data.regionImg = imgUrl;
+            $this.setData({
+              regionImg: imgUrl
+            })
             $this.setData({ form: form });
           },
           fail: function (err) {
