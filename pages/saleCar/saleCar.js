@@ -494,6 +494,7 @@ Page({
         displacement: form.displacement + form.displacementUnit,
         transmissionData: form.transmissionData
       }
+      console.log(carInfo)
       $http.post('index/uploadModels',{
         carInfo: carInfo
       })
