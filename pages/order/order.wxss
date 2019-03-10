@@ -115,6 +115,7 @@ page{
 .orderHandle{
   display: flex;
   align-content: flex-end;
+  align-items: center;
 }
 .orderHandle text{
   display: inline-block;
@@ -126,6 +127,7 @@ page{
   color: #b2b2b2;
   font-size: 24rpx;
   margin-right: 30rpx;
+  float: left;
 }
 .orderHandle text:last-child{
    margin-right: 0;

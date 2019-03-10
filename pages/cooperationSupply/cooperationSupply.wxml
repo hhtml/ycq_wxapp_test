@@ -212,7 +212,7 @@
                    <text>+</text>
               </view>
               <view class='uploadRight'>
-                   <image src='{{appImgUrl+regionImg}}'></image>  
+                   <image src='{{appImgUrl+form.regionImg}}'></image>  
               </view>
           </view>
       </view>

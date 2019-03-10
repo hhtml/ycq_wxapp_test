@@ -1,2 +1,37 @@
 <!--pages/infomation/infomation.wxml-->
-<text>pages/infomation/infomation.wxml</text>
+<scroll-view scroll-x='{{scroll_x}}' class='scrollTitle'>
+  <block wx:for="{{titleList}}" wx:key="{{index}}">
+    <text class="scrollTitleItem {{activeTitle == item.id ? 'activeTitle':''}}" bindtap='changeTitle' data-id="{{item.id}}">{{item.name}}   </text>
+  </block>
+</scroll-view>
+
+<view class="infoList">
+  <view class='infoListTitle'>
+    <view class='titleLeft'>
+      <text>头条</text>
+    </view>
+    <view class='titleRight'>
+      <text>换一批</text>
+      <image src='../../images/sx.png' mode='widthFix'></image>
+    </view>
+  </view>
+
+  <block wx:for="{{infoList}}">
+    <view class="infoListItem" bindtap='nav_to_detail' data-id="{{item.id}}">
+      <view class="infoImg">
+        <image src='{{item.imgSrc}}' mode='widthFix'></image>
+      </view>
+      <view class="infoCont">
+        <view class="infoName">
+          <text>{{item.title}}</text>
+        </view>
+        <view class="infoOther">
+          <text>{{item.author}}</text>
+          <text>阅读量：{{item.browse_volume}}</text>
+        </view>
+      </view>
+
+    </view>
+  </block>
+
+</view>

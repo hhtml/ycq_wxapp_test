@@ -358,10 +358,11 @@ Page({
             //上传成功后的图片地址imgUrl，需要与服务器地址（app.js全局设置）做拼接, setData出去做预览
             console.log(JSON.parse(res.data));
             let imgUrl = JSON.parse(res.data).data.url; //eg:'https://czz.junyiqiche.com'+imgUrl
-            $this.data.regionImg = imgUrl;
-            $this.setData({
-              regionImg: imgUrl
-            })
+            //$this.data.regionImg = imgUrl;
+            //$this.setData({
+            //  regionImg: imgUrl
+            //})
+            form.regionImg = imgUrl;
             $this.setData({ form: form });
           },
           fail: function (err) {

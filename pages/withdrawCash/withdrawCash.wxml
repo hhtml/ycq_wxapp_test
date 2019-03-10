@@ -1,0 +1,27 @@
+<!--pages/withdrawCash/withdrawCash.wxml-->
+<view class="bankInfo">
+    <view class="bankImg">
+        <image src='{{bank.img}}' mode='aspectFill'></image>
+    </view>
+    <view class="bankCont">
+        <text>{{bank.name}}</text>
+        <text>尾号 {{bank.lastnum}} {{bank.cardtype}}</text>
+    </view>
+</view>
+
+<view class="withdraw">
+    <view class="title">
+        <text>提现金额</text>
+        <text>额外扣除￥34.9服务费（费率0.10%）</text>
+    </view>
+    <input type='text' value="{{money}}" bindinput='moneyInput'></input>
+    <view class='withdrawBottom'>
+        <text>可用余额：</text>
+        <text>{{total_money}}元</text>
+        <text>全部提现</text>
+    </view>
+</view>
+<view class="withdrawButton">
+  <button>预计24小时内到账，确认提现</button>
+</view>
+

@@ -1,0 +1,65 @@
+/* pages/infomationDetail/infomationDetail.wxss */
+@import "../../utils/wxParse/wxParse.wxss";
+.content{
+    padding: 30rpx 24rpx;
+}
+.articleTitle text{
+  font-size: 34rpx;
+  color: #353535;
+  line-height: 1.5em;
+}
+.articalInfo{
+  overflow: hidden;
+  padding: 20rpx 0;
+}
+.articalImg{
+  width: 62rpx;
+  height: 62rpx;
+  overflow: hidden;
+  float: left;
+  margin-right: 18rpx;
+}
+.articalImg image{
+  width: 100%;
+  height: 100%;
+}
+.articalTime{
+  float: left;
+  display: flex;
+  height: 62rpx;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.articalTime text{
+  font-size: 26rpx;
+  color: #666;
+  display: block;
+}
+.articalCont{
+  padding: 20rpx 0;
+}
+.articalBottom{
+  display: flex;
+  height: 90rpx;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.articalBottom text{
+  font-size: 24rpx;
+  color: #666;
+}
+.articalBottom image{
+  width:57rpx;
+  height:45rpx;
+}
+.articalBottom button{
+  position: absolute;
+  width: 57rpx;
+  height: 45rpx;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -23rpx;
+  opacity: 0;
+}

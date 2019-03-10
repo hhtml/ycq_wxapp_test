@@ -1,6 +1,5 @@
 {
   "pages":[
-    
     "pages/index/index",
     "pages/index/searchPage/searchPage",
     "pages/saleCar/carBrand/carBrand",
@@ -20,7 +19,11 @@
     "pages/buyCar/buyCar",
     "pages/clueCar/clueCar",
     "pages/404/404",
-    "pages/carDetail/carDetail"
+    "pages/carDetail/carDetail",
+    "pages/infomation/infomation",
+    "pages/infomationDetail/infomationDetail",
+    "pages/withdrawCash/withdrawCash",
+    "pages/myWallet/myWallet"
   ],
   "permission": {
     "scope.userLocation": {

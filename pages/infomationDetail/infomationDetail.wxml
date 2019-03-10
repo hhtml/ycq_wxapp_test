@@ -1,0 +1,28 @@
+<!--pages/infomationDetail/infomationDetail.wxml-->
+<import src="../../utils/wxParse/wxParse.wxml"/>
+<view class="content">
+  <view class="articleTitle">
+    <text>{{artical.title}}</text>
+  </view>
+
+  <view class="articalInfo">
+    <view class="articalImg">
+      <image src='{{artical.coverImg}}'></image>
+    </view>
+    <view class="articalTime">
+      <text>{{artical.author}}</text>
+      <text>{{artical.time}}</text>
+    </view>
+  </view>
+
+  <view class="articalCont">
+     <template is="wxParse" data="{{wxParseData:articalCont.nodes}}"/>
+  </view>
+  
+  
+  <view class="articalBottom">
+      <text>阅读量:({{artical.browse_volume}})</text>
+      <image src='../../images/share-icon-2.png'></image>
+      <button open-type='share'></button>
+  </view>
+</view>

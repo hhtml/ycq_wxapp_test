@@ -1,0 +1,150 @@
+/* pages/myWallet/myWallet.wxss */
+page{
+  background-color: #f2f2f2;
+}
+.headBg{
+  width: 100%;
+  height: 170rpx;
+  background-color: #f76553;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.content{
+  padding: 0 24rpx;
+}
+.userInfo{
+  overflow: hidden;
+}
+.userImg{
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50%;
+  float: left;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+  margin-right:20rpx;
+  }
+  .userImg image{
+    width: 100%;
+    height: 100%;
+  }
+  .userName text{
+  font-size: 34rpx;
+  color: #fff;
+  height: 100rpx;
+  line-height: 100rpx;
+  }
+
+  .userData{
+    display: flex;
+    background-color: #fff;
+    border-radius: 8rpx;
+    margin-top: 20rpx;
+    box-sizing: border-box;
+
+  }
+  .dataItem{
+    flex: 1;
+    position: relative;
+    text-align: center;
+    padding: 20rpx 0;
+  }
+  .dataItem::after{
+    content: "";
+    width: 2rpx;
+    height: 45rpx;
+    background-color: #e5e5e5;
+    position: absolute;
+    top: 30rpx;
+    right: 0;
+  }
+  .dataItem:last-child::after{
+     height: 0;
+  }
+   .dataItem text{
+     display: block;
+     text-align: center;
+     line-height: 1.5em;
+   }
+    .dataItem text:nth-child(1){
+      font-size: 30rpx;
+      color: #353535;
+    }
+     .dataItem text:nth-child(2){
+      font-size:26rpx;
+      color: #888;
+    }
+
+.cashButton{
+  width: 388rpx;
+  height: 56rpx;
+  background-color: #f76553;
+  border-radius: 8rpx;
+  margin: 35rpx auto;
+  text-align: center;
+}
+.cashButton text{
+  font-size: 30rpx;
+  color: #fff;
+}
+
+.cashTitle{
+  margin:25rpx auto 45rpx auto;
+  text-align: center;
+  position: relative;
+}
+.cashTitle text{
+  font-size: 30rpx;
+  color: #f76553;
+  position: relative;
+}
+.cashTitle text::before{
+  content: '"';
+  color:#f76553;
+  font-size: 80rpx;
+  position: absolute;
+  left: -45rpx;
+  top:-5rpx;
+}
+.cashTitle text::after{
+  content: '"';
+  color:#f76553;
+  font-size: 80rpx;
+  position: absolute;
+  right: -45rpx;
+  top:-5rpx;
+}
+.inviteList{
+  background-color: #fff;
+  border-radius: 8rpx;
+  padding:0 30rpx;
+}
+.itemImg {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: 20rpx;
+  float: left;
+  margin-right: 30rpx;
+}
+.itemImg image{
+  width: 100%;
+  height: 100%;
+}
+.itemInfo{
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom:1px solid #f2f2f2;
+}
+.itemInfo text{
+  font-size: 28rpx;
+  color: #666;
+}
+.inviteItem:last-child .itemInfo{
+  border-bottom: none;
+}
