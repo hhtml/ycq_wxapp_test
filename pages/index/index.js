@@ -37,7 +37,7 @@ Page({
         id: 3,
         iconUrl: '../../images/index-icon-04.png',
         name: '汽车资讯',
-        // path: '../clueCar/clueCar'
+        path: '../infomation/infomation'
       }
     ],
 
@@ -85,44 +85,89 @@ Page({
       // wx.navigateTo({
       //   url: path,
       // })
-      if (that.data.sell_car_condition.code == 0) {
+      if (that.data.sell_car_condition.code == 0) { //认证通过
         wx.navigateTo({
           url: path,
         })
-      } else if (that.data.sell_car_condition.code == 1) {
+      } else if (that.data.sell_car_condition.code == 1) { //去认证
         that.setData({
           msg: that.data.sell_car_condition.msg,
           showModal: true
         })
-      } else {
-        wx.showToast({
-          title: that.data.sell_car_condition.msg,
-          image: '../../images/warn.png'
+      } else if (that.data.sell_car_condition.code == 3) { //审核中/待审核
+        that.setData({
+          msg: that.data.sell_car_condition.msg,
+          showModal2:true
+        })
+      } else if (that.data.sell_car_condition.code == 4){ //去付费
+        that.setData({
+          msg: that.data.sell_car_condition.msg,
+          showModal: true
+        })
+      } else if (that.data.sell_car_condition.code == 5){ // 审核不通过
+        that.setData({
+          msg: that.data.sell_car_condition.msg,
+          showModal: true
         })
       }
+      else { //发布超过次数
+        that.setData({
+          msg: that.data.sell_car_condition.msg,
+          showModal2: true
+        })
+      }
+
+      // switch (that.data.sell_car_condition.code){
+      //   case1:0,
+
+      // }
+
     } else if (index == 1) {
       // wx.navigateTo({
       //   url: path,
       // })
-      if (that.data.buy_car_condition.code == 1) {
+      if (that.data.buy_car_condition.code == 1) { //去认证
         that.setData({
           msg: that.data.buy_car_condition.msg,
           showModal: true
         })
-      } else {
-        wx.navigateTo({
+      } else if (that.data.buy_car_condition.code == 3){ //审核中/待审核
+        that.setData({
+          msg: that.data.buy_car_condition.msg,
+          showModal2: true
+        })
+      } else if (that.data.buy_car_condition.code == 4){ //去付费
+        that.setData({
+          msg: that.data.buy_car_condition.msg,
+          showModal: true
+        })
+      } else if (that.data.buy_car_condition.code == 5){ //审核不通过
+        that.setData({
+          msg: that.data.buy_car_condition.msg,
+          showModal: true
+        })
+      }else { //认证通过
+        wx.navigateTo({ 
           url: path,
         })
       }
     } else {
-      // wx.navigateTo({
-      //   url: path,
-      // })
-      wx.showToast({
-        title: '即将上线',
-        image: '../../images/warn.png'
+      wx.navigateTo({
+        url: path,
       })
+      // wx.showToast({
+      //   title: '即将上线',
+      //   image: '../../images/warn.png'
+      // })
     }
+  },
+
+  //模态框点击事件
+  sureClick:function(){
+    var that = this
+    that.setData({
+      showModal2:false
+    })
   },
 
   //消息图标点击事件
@@ -198,11 +243,6 @@ Page({
           var saleList = resObj.data.carModelList.modelsInfoList;
           var buyList = resObj.data.carModelList.buycarModelList;
           var clueList = resObj.data.carModelList.clueList;
-          $this.setData({
-            buy_car_condition: resObj.data.buy_car_condition,
-            sell_car_condition: resObj.data.sell_car_condition,
-            unread: resObj.data.unread
-          })
           //分享数据
           $this.data.shareInfo = resObj.data.share;
           bannerList.forEach((val, index) => {
@@ -287,7 +327,10 @@ Page({
             shopList: shopList,
             saleInfoList: saleInfoList,
             buyInfoList: buyInfoList,
-            clueInfoList: clueInfoList
+            clueInfoList: clueInfoList,
+            buy_car_condition: resObj.data.buy_car_condition,
+            sell_car_condition: resObj.data.sell_car_condition,
+            unread: resObj.data.unread
           });
         } else {
           console.log('请求失败：', data.msg);
@@ -318,25 +361,26 @@ Page({
     });
     wx.hideTabBar();
   },
-  // set globalData
-  setGlobalData(data) {
-    return wx.setStorageSync('globalData', data || {})
-  },
-  // get globalData
-  getGlobalData() {
-    return wx.getStorageSync('globalData') || {}
-  },
-  // update globalData
-  updateGlobalData(data) {
-    return this.setGlobalData(Object.assign({}, this.getGlobalData(), data || {}))
-  },
+  // // set globalData
+  // setGlobalData(data) {
+  //   return wx.setStorageSync('globalData', data || {})
+  // },
+  // // get globalData
+  // getGlobalData() {
+  //   return wx.getStorageSync('globalData') || {}
+  // },
+  // // update globalData
+  // updateGlobalData(data) {
+  //   return this.setGlobalData(Object.assign({}, this.getGlobalData(), data || {}))
+  // },
   //判断是否登录
   check: function(cb) {
 
     var that = this;
-    if (that.getGlobalData().userInfo) {
-      typeof cb == "function" && cb(that.getGlobalData().userInfo);
-    } else { 
+    // if (that.getGlobalData().userInfo) {
+    //   typeof cb == "function" && cb(that.getGlobalData().userInfo);
+    // } else { 
+
       wx.getSetting({
         success: function(res) {
           if (res.authSetting['scope.userInfo']) {
@@ -368,7 +412,7 @@ Page({
           that.showLoginModal();
         }
       });
-    }
+    // }
     // this.login(cb);
 
   },
@@ -397,11 +441,11 @@ Page({
                   var response = lres.data
                   if (response.code == 1) {
                     that.data.userInfo = response.data.userInfo;
-                    that.updateGlobalData(response.data);
+                    // that.updateGlobalData(response.data);
                     wx.setStorageSync('token', response.data.userInfo.token)
                     // wx.setStorageSync('userInfo', response.data.userInfo);
                     wx.setStorageSync('user_id', response.data.userInfo.user_id);
-                    typeof cb == "function" && cb(response.data.userInfo);
+                    // typeof cb == "function" && cb(response.data.userInfo);
                   } else {
                     wx.setStorageSync('token', '');
                     console.log("用户登录失败")

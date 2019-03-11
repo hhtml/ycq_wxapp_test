@@ -55,7 +55,7 @@
       </view>
     </view>
 
-    <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'start_the_deal'}}">
+    <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal'}}">
       <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
       <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSell'>取消订单</view>
       <form bindsubmit='payOrderSell' bindreset='' report-submit>

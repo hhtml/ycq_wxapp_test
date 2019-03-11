@@ -72,6 +72,7 @@
   background-color: #ef4631;
   color: #fff;
   font-size: 30rpx;
+  z-index: 999999;
 }
 .smscode{
   width: 140rpx;
