@@ -134,11 +134,11 @@
     </view>
   </view>
 </view>
-<form bindsubmit='pay' bindreset='' report-submit>
+<!-- <form bindsubmit='pay' bindreset='' report-submit>
   <view class="btn-area">
     <button form-type="submit">测试支付</button>
   </view>
-</form>
+</form> -->
 <!-- 模态对话框 -->
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
 

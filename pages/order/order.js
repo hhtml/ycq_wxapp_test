@@ -28,7 +28,7 @@ Page({
     var paidList=new Array();
     $http.post('Shop/my_order')
       .then(res => {
-        //成功回调
+       
         //成功回调
         var resObj = res.data;
         console.log('订单列表：', resObj);
@@ -129,8 +129,10 @@ Page({
   }, 
   //去支付点击事件
   payOrder:function(e){
+    
     var $this = this;
-    var money = e.target.id.split('+')[0]
+    // var money = e.target.id.split('+')[0]
+    var money = 0.01;
     var store_id = e.target.id.split('+')[1]
     var payInfo = {
       formId: e.detail.formId,
@@ -141,7 +143,7 @@ Page({
 
     payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no
     console.log(payInfo.formId);
-    $http.post('Wxpay/certification_wxPay', payInfo).then(res => {
+    $http.post('store_certification_pay/certification_wxPay', payInfo).then(res => {
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;
       var nonceStr = res.data.nonce_str;
@@ -156,16 +158,12 @@ Page({
         'signType': 'MD5',
         'paySign': paySign,
         'success': function (res) {
-          //支付成功回调
+        //推送模板消息回调 
           console.log(res);
-          // console.log(timeStamp);
+          $http.post('store_certification_pay/after_successful_payment', payInfo).then(res => {
 
-          // payInfo.pay_time = timeStamp;
-          // payInfo.pay_type = 'certification'; 
-          // $http.post('Wxpay/wxOrder').then(res => {
-          //     console.log(res);
-          // });
-          //支付成功之后的操作
+            console.log(res);
+          });
 
         },
         'fail': function (res) {

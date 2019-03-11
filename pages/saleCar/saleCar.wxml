@@ -189,7 +189,7 @@
         </view>
         <view class="itemRight">
             <view class="itemCont">
-               <text>{{phone}}</text>
+               <text>{{form.phone}}</text>
             </view>
             
         </view>

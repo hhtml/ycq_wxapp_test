@@ -72,13 +72,14 @@ Page({
   },
 
   // form表单数据提交
-  formSubmit(e) {
+  formSubmit(e) { 
+ 
     var that = this
-    wx.showToast({
-      title: '即将上线',
-      image: '/images/warn.png'
-    });
-    return;
+    // wx.showToast({
+    //   title: '即将上线',
+    //   image: '/images/warn.png'
+    // });
+    // return;
     var formId = e.detail.formId;
     var shop_level_id = this.data.shop_level_id;
     var form = this.data.form;
@@ -98,7 +99,7 @@ Page({
         out_trade_no: new Date().getTime(),
         up_level_id: that.data.shop_level_id,
         formId: e.detail.formId,
-        base_level_id:store.level_id
+        base_level_id: store.level_id
       }
       auditInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + auditInfo.store_id + '_' + auditInfo.out_trade_no;
 
@@ -117,26 +118,47 @@ Page({
             'package': pkg,
             'signType': 'MD5',
             'paySign': paySign,
-            'success': function (res) { 
+            'success': function(res) {
               if (res.errMsg == "requestPayment:ok") {
                 //推送模板消息回调
                 console.log(res);
                 $http.post('store_up_pay/after_successful_payment', auditInfo).then(res => {
                   console.log(res);
+
+                  if(res.data.code==1){
+                    wx.showToast({
+                      title: res.data.msg,
+                      icon: 'success',
+                      duration: 2000,
+                      success: function (res) {
+                        wx.navigateBack({
+                          delta: 1
+                        })
+                      }
+
+                    })
+                  }
+                  else{
+                    wx.showToast({
+                      title: res.data.msg,
+                      image: '../../images/warn.png',
+                      duration: 500
+                    })
+                  }
                 });
               }
 
 
             },
-            'fail': function (res) {
+            'fail': function(res) {
               console.log('用户取消支付,需要重载页面');
 
             },
-            'complete': function (res) {
+            'complete': function(res) {
               // console.log(res)
             }
           });
-         
+
 
         }).catch(err => {
           //异常回调
