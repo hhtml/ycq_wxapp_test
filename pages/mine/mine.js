@@ -63,13 +63,13 @@ Page({
         that.setData({
           authentication: false,
           authenticationList: '店铺待审核',
-          dataPath: '../cooperationSupply/cooperationSupply',
+          dataPath: '../order/order',
         })
       } else if (store_has_many.auditstatus == "in_the_review") {
         that.setData({
           authentication: false,
           authenticationList: '店铺审核中',
-          dataPath: '../cooperationSupply/cooperationSupply',
+          dataPath: '../order/order',
         })
       } else if (store_has_many.auditstatus == "paid_the_money") {
         if (store_has_many.storelevel.partner_rank == '铂金店铺') {
@@ -108,6 +108,11 @@ Page({
   },
   nav_to_page: function(e) {
     var path = e.currentTarget.dataset.path;
+    // wx.showToast({
+    //   title: '即将上线',
+    //   image: '../../images/warn.png',
+    //   duration: 500
+    // })
     if (!path) {
       wx.showToast({
         title: '即将上线',

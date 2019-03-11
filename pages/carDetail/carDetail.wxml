@@ -177,4 +177,12 @@
 </view>
 
 <!-- 引入提示框组件 -->
-<tips wx:if="{{showModal}}" paramAtoB="{{msg}}"></tips>
+<tips wx:if="{{showModal}}" paramAtoB="{{msg}}+{{1}}"></tips>
+
+<!-- 模态对话框 -->
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal2}}"></view>
+
+<view class="toast-wrap" wx:if="{{showModal2}}">
+  <view class="toast-content">{{msg}}</view>
+  <view class="click-wrap" bindtap='sureClick'>确定</view>
+</view>

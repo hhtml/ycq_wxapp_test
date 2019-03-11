@@ -108,6 +108,7 @@ Page({
           createtime: data.detail.createtime,
           default: data.detail.default,
           defaultUrl: app.globalData.imgUrl,
+          can_quote: data.can_quote
         }
         form.phone = data.detail.user.mobile;
         var detailImages = data.detail.modelsimages;
@@ -139,15 +140,23 @@ Page({
       url: '../myShop/myShop?shopId='+shopId,
     })*/
   },
+
+  //点击砍价事件
   priceLog() {
     var that = this
-    var isOffer = this.data.car.isOffer;
-    var is_authentication = this.data.car.is_authentication
-    if (is_authentication == 0){
+    var isOffer = that.data.car.isOffer;
+    var is_authentication = that.data.car.can_quote.is_authentication
+    if (is_authentication == 2){ //未认证
       that.setData({
+        msg: that.data.car.can_quote.msg,
         showModal:true
       })
-    }else{
+    } else if (is_authentication == 2){ //未完成认证
+      that.setData({
+        msg:that.data.car.can_quote.msg,
+        showModal2:true
+      })
+    }else{ //已完成认证
       if (isOffer == 1) {
         wx.showToast({
           title: '您已报过价',
@@ -165,6 +174,16 @@ Page({
       priceLogShow: false
     })
   },
+
+  //模态框点击事件
+  sureClick: function () {
+    var that = this
+    that.setData({
+      showModal2: false
+    })
+  },
+
+
   //点击电话联系事件
   makePhoneCall() {
     var tel = '028 - 84167417';

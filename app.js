@@ -41,7 +41,7 @@ App({
   globalData: {
     userInfo: null,
     carType:'请选择车型',
-    carBrand:'选择品牌',
+    carBrand:'',
     brand_id:'',
     url: 'https://czz.junyiqiche.com/addons/cms/wxapp.', 
     imgUrl:'https://static-czz.junyiqiche.com/',  //此处不可修改...

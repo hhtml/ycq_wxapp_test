@@ -245,11 +245,15 @@ Page({
     })
   },
   
-  chooseBrand(e){
+  delBrand(e){
+    console.log(e)
     var index=e.currentTarget.dataset.index;
+    console.log(index)
     var brandCheckList = this.data.brandCheckList;
-    var check = brandCheckList[index].check;
-    brandCheckList[index].check = !check;
+    console.log(brandCheckList)
+    // var check = brandCheckList[index].check;
+    // brandCheckList[index].check = !check;
+    brandCheckList.splice(index,1)
     this.setData({ brandCheckList: brandCheckList})
   },
   
@@ -481,7 +485,7 @@ Page({
     var obj={
       id: brandList[e.detail.value[1]].id,
       name: brandList[e.detail.value[1]].name,
-      check: false
+      check: true
     }
     brandCheckList.push(obj);
     this.setData({
@@ -585,11 +589,13 @@ Page({
         bank_card: form.idCard,
         id_card_positive: form.idCardFront,
         id_card_opposite: form.idCardReverse,
-        business_licenseimages:that.data.regionImg,
+        business_licenseimages:form.regionImg,
         level_id: shop_level_id,
         code: form.inviteNumber,
         name:form.name
       }
+      console.log(auditInfo)
+      return;
       $http.post('shop/submit_audit',{
         submit_type: submit_type,
         auditInfo: auditInfo

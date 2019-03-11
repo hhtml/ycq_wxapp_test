@@ -12,9 +12,18 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    msg:'',
+    code:'',
+    sureMsg:'去认证'
   },
 
+  attached: function () {
+    var that = this
+    that.setData({
+      msg: that.properties.paramAtoB.split('+')[0],
+      code: that.properties.paramAtoB.split('+')[1],
+    })
+  },
   /**
    * 组件的方法列表
    */
@@ -39,9 +48,25 @@ Component({
     //提示框 点击确认事件
     goAuthentication: function () {
       var that = this
-      wx.navigateTo({
-        url: '/pages/cooperationSupply/cooperationSupply'
-      })
+      if(that.data.code == 1){
+        wx.navigateTo({
+          url: '/pages/cooperationSupply/cooperationSupply'
+        })
+      } else if (that.data.code == 4) {
+        that.setData({
+          sureMsg: '去付费'
+        })
+        wx.navigateTo({
+          url: '/pages/order/order'
+        })
+      } else if (that.data.code == 5){
+        that.setData({
+          sureMsg: '查看原因'
+        })
+        wx.navigateTo({
+          url: '/pages/cooperationSupply/cooperationSupply'
+        })
+      }
       var pages = getCurrentPages();
       var prevPage = pages[pages.length - 1];  //当前页面
       prevPage.setData({

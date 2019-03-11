@@ -123,6 +123,7 @@ Page({
           console.log(defaultTransmission)
           $this.setData({
             transmission: transmission,
+            phone: data.mobile
           })
           $this.data.form.transmissionData = transmission[0]
           form.phone = data.mobile;
@@ -327,7 +328,7 @@ Page({
 
   onHide: function () {
     app.globalData.carType = '请选择车型'
-    app.globalData.carBrand = '选择品牌'
+    app.globalData.carBrand = ''
     app.globalData.brand_id = ''
   },
 
