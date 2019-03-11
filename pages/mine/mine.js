@@ -162,14 +162,33 @@ Page({
         'signType': 'MD5',
         'paySign': paySign,
         'success': function(res) {
-          console.log(res); 
-          if (res.errMsg =="requestPayment:ok") {
+          console.log(res);
+          if (res.errMsg == "requestPayment:ok") {
             //推送模板消息回调 
             $http.post('store_certification_pay/after_successful_payment', payInfo).then(res => {
+              if(res.data.code==1){
+                wx.showToast({
+                  title: '支付成功！',
+                  icon: 'success',
+                  duration: 2000,
+                  success: function (res) {
+                    wx.navigateBack({
+                      delta: 1
+                    })
+                  }
 
-              console.log(res);
+                })
+
+              }
+               else{
+                wx.showToast({
+                  title: res.data.msg,
+                  image: '../../images/warn.png',
+                  duration: 500
+                })
+               }
             });
-          } 
+          }
         },
         'fail': function(res) {
           console.log('用户取消支付,需要重载页面');
@@ -180,9 +199,7 @@ Page({
         }
       });
 
-    });
-
-
+    }); 
 
   },
   request_mine() {
@@ -247,7 +264,7 @@ Page({
             })
           }
         }
-        
+
         if (resObj.code == 1) {
           var data = resObj.data;
           var isNewOffer = data.userInfo.isNewOffer;
@@ -269,8 +286,9 @@ Page({
   //二维码点击事件
   erWeiMa: function() {
     var $this = this;
-    var store_has_many = $this.data.store_has_many;
-    if (store_has_many) {
+    var store_has_many = $this.data.store_has_many || [];
+
+    if (store_has_many.length > 0) { 
       if (store_has_many[0].auditstatus == 'paid_the_money') {
         if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
           if ($this.data.userInfo.invitation_code_img == '') { //没有生成二维码
@@ -345,7 +363,7 @@ Page({
     var height
     wx.getSystemInfo({
       success(res) {
-      
+
         width = res.windowWidth
         height = res.windowHeight
       }
