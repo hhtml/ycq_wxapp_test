@@ -38,4 +38,21 @@
            </view>
        </view>
    </view>
+
+   
 </view>
+<view class="bottomArea">
+       <view class="bottomItem">
+           <image src='../../images/myshop-bottom-01.png'></image>
+           <text>批量上传</text>
+       </view>
+       <view class="bottomItem" bindtap='makePhoneCall'>
+           <image src='../../images/myshop-bottom-02.png'></image>
+           <text>电话咨询</text>
+       </view>
+       <view class="bottomItem">
+           <image src='../../images/myshop-bottom-03.png'></image>
+           <text>转发店铺</text>
+           <button open-type='share'></button>
+       </view>
+   </view>

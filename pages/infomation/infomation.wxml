@@ -1,7 +1,7 @@
 <!--pages/infomation/infomation.wxml-->
 <scroll-view scroll-x='{{scroll_x}}' class='scrollTitle'>
   <block wx:for="{{titleList}}" wx:key="{{index}}">
-    <text class="scrollTitleItem {{activeTitle == item.id ? 'activeTitle':''}}" bindtap='changeTitle' data-id="{{item.id}}">{{item.name}}   </text>
+    <text class="scrollTitleItem {{activeTitle == item.tid ? 'activeTitle':''}}" bindtap='changeTitle' data-id="{{item.tid}}">{{item.name}}   </text>
   </block>
 </scroll-view>
 
@@ -16,7 +16,7 @@
     </view>
   </view>
 
-  <block wx:for="{{infoList}}">
+  <block wx:for="{{currentInfoList}}">
     <view class="infoListItem" bindtap='nav_to_detail' data-id="{{item.id}}">
       <view class="infoImg">
         <image src='{{item.imgSrc}}' mode='widthFix'></image>

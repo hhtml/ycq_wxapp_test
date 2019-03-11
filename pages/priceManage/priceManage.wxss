@@ -210,6 +210,10 @@
   display: flex;
   align-items: center;
 }
+.bailMoney-wrap form{
+  display: flex;
+  align-items: center;
+}
 .bailMoney{
   font-size: 28rpx;
   color:red;
@@ -222,6 +226,7 @@
   padding:10rpx 20rpx;
   color:rgb(102, 102, 102);
   margin-left: 50rpx;
+  float: left;
 }
 button{
   background-color:rgb(247, 247, 247);
@@ -245,6 +250,7 @@ button::after{ /*button的边框样式是通过::after方式实现的*/
   color:#fff;
   background-color: red;
   margin-left: 40rpx;
+  float: left;
 }
 .payMoney-wrap{
   width:100%;

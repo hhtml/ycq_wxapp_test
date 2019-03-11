@@ -14,27 +14,27 @@ Page({
         name: '推荐'
       },
       {
-        id: 1,
+        tid: 1,
         name: '成都'
       },
       {
-        id: 2,
+        tid: 2,
         name: '军事'
       },
       {
-        id: 3,
+        tid: 3,
         name: '社会'
       },
       {
-        id: 4,
+        tid: 4,
         name: '娱乐'
       },
       {
-        id: 5,
+        tid: 5,
         name: '体育'
       },
       {
-        id: 6,
+        tid: 6,
         name: '其他'
       }
     ],
@@ -51,9 +51,19 @@ Page({
    */
   changeTitle(e) {
     var titleId = e.currentTarget.dataset.id;
+    var currentInfoList = this.searchCurrent(titleId);
     this.setData({
+      currentInfoList: currentInfoList,
       activeTitle: titleId
     })
+  },
+  searchCurrent(titleId){
+    var infoList=this.data.infoList;
+    for (var i = 0; i < infoList.length; i++){
+      if (infoList[i].tid == titleId){
+        return infoList[i].arr;
+      } 
+    }
   },
   nav_to_detail(e){
     var id=e.currentTarget.dataset.id;
@@ -64,6 +74,7 @@ Page({
   request_info_list() {
     var $this = this;
     var infoList=new Array();
+    var titleList=new Array();
     $http.post('index/information_list')
       .then(res => {
         //成功回调
@@ -71,20 +82,41 @@ Page({
         console.log('资讯列表：', resObj);
         if (resObj.code == 1) {
           var data = resObj.data;
-          var info_list = data.info_list;
-          if (info_list) {
-            info_list.forEach((val,index)=>{
-                var obj={
-                  id: val.id,
-                  imgSrc: '../../images/carsource_02.png',
-                  title: val.title,
-                  author: val.author,
-                  browse_volume: val.browse_volume
-                }
-                infoList[index]=obj;
-                $this.setData({ infoList});
+          var information = data.information;
+          if (information) {
+            information.forEach((val,index)=>{
+              var titleObj={
+                tid:val.id,
+                title: val.categories_name
+              };
+              var automotive = val.automotive;
+              var arr = new Array();
+              if (automotive){
+                automotive.forEach((el,i)=>{
+                  var obj = {
+                    id: el.id,
+                    imgSrc:app.globalData.localImgUrl+coverimage,
+                    title: el.title,
+                    author: el.author,
+                    browse_volume: el.browse_volume
+                  }
+                  arr[i]=obj;
+                });
+              }
+              var infoObj={
+                tid:val.id,
+                arr:arr
+              }
+                
+              infoList[index] = infoObj;
+              titleList[index] = titleObj;
+              
             });
-            
+            console.log('infoList：', infoList);
+            console.log('titleList', titleList);
+            var currentInfoList=infoList[0].arr;
+            var activeTitle = titleList[0].id;
+            $this.setData({ infoList, titleList, activeTitle, currentInfoList });
           }
 
         } else {

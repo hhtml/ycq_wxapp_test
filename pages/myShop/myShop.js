@@ -41,9 +41,10 @@ Page({
         var carList = data.detail.car_list;
         
         var shop = {
-          banner: '../../images/car-test_03.png',
+          banner: app.globalData.localImgUrl + data.detail.store_img,
           name: data.detail.store_name,
-          addr: data.detail.store_address,
+          phone:data.detail.phone,
+          addr: data.detail.cities_name+ data.detail.store_address,
           brands: brandList
         };
         if (carList){
@@ -79,11 +80,18 @@ Page({
       console.log('请求失败', err);
     });
   },
+  makePhoneCall(){
+     var phone=this.data.shop.phone;
+     wx.makePhoneCall({
+       phoneNumber: phone,
+     })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
       var shopId=options.shopId;
+    this.setData({ shopId})
       console.log('shopId:',shopId);
       this.request_shop_detail(shopId);
   },
@@ -128,6 +136,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+    var shopId = this.data.shopId;
+    return {
+      path: '/pages/myShop/myShop?shopId='+shopId
+    }
   }
 })

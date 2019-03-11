@@ -17,7 +17,7 @@ page{
 .shopInfo{
   margin-top:317rpx;
   z-index: 2;
-  padding: 0 24rpx;
+  padding: 0 24rpx 90rpx 24rpx;
 }
 .shopName{
   background-color: #fff;
@@ -115,4 +115,46 @@ text.tip{
 
 .detailContItemImg image{
    width: 100%;
+}
+.bottomArea{
+  width: 100%;
+  height: 90rpx;
+  background-color: #fff;
+  align-items: center;
+  display: flex;
+  box-shadow: 0 -4rpx 8rpx 0  #eee;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.bottomItem{
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #e5e5e5;
+  position: relative;
+}
+.bottomItem:last-child{
+  border-right: none;
+}
+.bottomItem image{
+  width: 32rpx;
+  height: 43rpx;
+  margin-right: 17rpx;
+  
+}
+.bottomItem text{
+  font-size: 32rpx;
+  color: #f76044;
+}
+.bottomItem button{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
 }
