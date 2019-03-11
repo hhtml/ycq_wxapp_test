@@ -1,0 +1,52 @@
+<!--pages/myWallet/myWallet.wxml-->
+<view class="headBg">
+</view>
+<view class='content'>
+  <view class="userInfo">
+      <view class="userImg">
+        <image src='{{user.avatar}}'></image>
+      </view>
+      <view class="userName">
+          <text>{{user.nickname}}</text>
+      </view>
+  </view>
+
+  <view class="userData">
+      <view class="dataItem">
+           <text>{{wallet.total_earnings}}（元）</text>
+           <text>总资产</text>
+      </view>
+      <view class="dataItem">
+           <text>{{wallet.first_earnings}}（元）</text>
+           <text>推荐佣金</text>
+      </view>
+      <view class="dataItem">
+           <text>{{wallet.second_earnings}}（元）</text>
+           <text>成员佣金</text>
+      </view>
+  </view>
+
+  <view class='cashButton'>
+       <text>提现</text>
+  </view>
+
+  <view class='cashTitle'>
+      <text>我的友车圈收益贡献明细</text>
+  </view>
+  
+  <view class='inviteList'>
+      <block wx:for="{{inviteList}}">
+         <view class="inviteItem">
+             <view class="itemImg">
+                 <image src='{{item.img}}'></image>
+             </view>
+
+             <view class="itemInfo">
+                 <text>{{item.name}}</text>
+                 <text>邀请成员数({{item.num}})</text>
+                 <text>贡献{{item.money}}元</text>
+             </view>
+         </view>
+       </block>
+  </view>
+</view>

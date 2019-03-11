@@ -1,1 +1,111 @@
 /* pages/infomation/infomation.wxss */
+
+page {
+  background-color: #f2f2f2;
+}
+
+.scrollTitle {
+  overflow: hidden;
+  display: -webkit-box;
+  white-space: nowrap;
+  padding: 0 24rpx;
+  border-bottom: 2px solid #f2f2f2;
+  background-color: #fff;
+}
+
+.scrollTitle text {
+  display: inline-block;
+  height: 90rpx;
+  line-height: 90rpx;
+  width: 16.6%;
+  font-size: 28rpx;
+  color: #353535;
+}
+
+text.activeTitle {
+  color: #ef4631;
+}
+
+.infoList {
+  background-color: #fff;
+  padding: 0 24rpx;
+  overflow: hidden;
+}
+
+.infoListTitle {
+  height: 90rpx;
+  line-height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+
+.titleLeft text {
+  font-size: 30rpx;
+  color: #666;
+}
+
+.titleRight text {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.titleRight image {
+  width: 39rpx;
+  margin-left: 20rpx;
+  vertical-align: middle;
+}
+
+.infoListItem {
+  padding: 30rpx 0;
+  overflow: hidden;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+
+.infoListItem:last-child {
+  border-bottom: none;
+}
+
+.infoImg {
+  width: 198rpx;
+  height: 198rpx;
+  overflow: hidden;
+  border-radius: 6rpx;
+  float: left;
+}
+
+.infoImg image {
+  width: 100%;
+}
+
+.infoCont {
+  width: 504rpx;
+  height: 198rpx;
+  box-sizing: border-box;
+  padding-left: 42rpx;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.infoName text {
+  font-size: 34rpx;
+  color: #353535;
+}
+
+.infoOther {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoOther text:nth-child(1) {
+  font-size: 30rpx;
+  color: #888;
+}
+
+.infoOther text:nth-child(2) {
+  font-size: 24rpx;
+  color: #888;
+}

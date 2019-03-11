@@ -1,0 +1,95 @@
+/* pages/withdrawCash/withdrawCash.wxss */
+page{
+  background-color: #f2f2f2;
+}
+.bankInfo{
+  background-color: #fff;
+  padding: 30rpx 24rpx;
+  margin: 20rpx 0;
+}
+.bankImg{
+  width: 75rpx;
+  height: 75rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  float: left;
+  margin-right: 15rpx;
+}
+.bankImg image{
+  height: 100%;
+}
+.bankCont {
+  height: 75rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.bankCont text{
+  display: block;
+
+}
+.bankCont text:nth-child(1){
+  font-size: 30rpx;
+  color: #353535;
+}
+.bankCont text:nth-child(2){
+  font-size: 24rpx;
+  color: #888;
+}
+
+.withdraw{
+  background-color: #fff;
+  padding: 0 24rpx;
+}
+.title{
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title text:nth-child(1){
+  font-size: 30rpx;
+  color: #333;
+}
+.title text:nth-child(2){
+  font-size: 24rpx;
+  color: #ef4631;
+}
+.withdraw input{
+  width: 100%;
+  height: 70rpx;
+  line-height: 70rpx;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 8rpx;
+  padding: 0 15rpx;
+  color: #888;
+  font-size: 26rpx;
+}
+.withdrawBottom{
+  height: 85rpx;
+  display: flex;
+  align-items: center;
+}
+.withdrawBottom text{
+  font-size: 26rpx;
+  color: #ef4631;
+}
+.withdrawBottom text:nth-child(1){
+  color: #353535;
+}
+.withdrawBottom text:nth-child(2){
+ margin-right: auto;
+}
+.withdrawButton{
+  padding: 0 24rpx;
+  margin-top: 65rpx;
+}
+.withdrawButton button{
+  background-color: #ef4631;
+  color: #fff;
+  font-size: 34rpx;
+  padding: 0;
+  height: 80rpx;
+  line-height: 80rpx;
+  border: none;
+}
