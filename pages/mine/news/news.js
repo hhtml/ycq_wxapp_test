@@ -24,7 +24,7 @@ Page({
   getNewsData:function(){
     var that = this
     $http.post('my/message_details',{
-      isRead:1
+      unread:1
     }).then(res=>{
       console.log(res)
       var resObj = res.data

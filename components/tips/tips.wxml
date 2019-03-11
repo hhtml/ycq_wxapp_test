@@ -5,11 +5,11 @@
 
 <view class="toast-wrap">
   <view class="toast-title">提示</view>
-  <view class="toast-content">{{paramAtoB}}</view> <!-- {{paramAtoB}} 父组件向子组件中传入的参数-->
+  <view class="toast-content">{{msg}}</view> <!-- {{paramAtoB}} 父组件向子组件中传入的参数-->
   <view class="click-wrap">
     <form bindsubmit='cancelShowModal' bindreset='' report-submit class="cancel"> <!-- 存储用户formID -->
       <button form-type="submit">取消</button>
     </form>
-    <view class="sure" bindtap='goAuthentication'>去认证</view>
+    <view class="sure" bindtap='goAuthentication'>{{sureMsg}}</view>
   </view>
 </view>

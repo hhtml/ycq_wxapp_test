@@ -37,7 +37,7 @@
     </view>
 
     <view class="nav_to_auth" bindtap='nav_to_page' data-path="{{dataPath}}">
-      <!-- data-path="../cooperationSupply/cooperationSupply" -->
+    <!-- data-path="{{dataPath}}" -->
       <image src='../../images/right-angle.png' mode='widthFix'></image>
     </view>
   </view>
@@ -134,11 +134,13 @@
     </view>
   </view>
 </view>
+
 <form bindsubmit='pay' bindreset='' report-submit>
   <view class="btn-area">
     <button form-type="submit">测试支付</button>
   </view>
 </form>
+
 <!-- 模态对话框 -->
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" bindtap='closeModalDlg'></view>
 

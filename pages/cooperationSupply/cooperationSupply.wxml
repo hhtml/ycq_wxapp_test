@@ -100,9 +100,12 @@
               <text class="infoTip">(没有符合的品牌可以自行添加)</text>
           </view>
           <view class="brandArea">
-               <block wx:for="{{brandCheckList}}">
-                   <text class="{{item.check? 'checkBrand':''}}" bindtap='chooseBrand' data-index="{{index}}">{{item.name}}</text>
-               </block>
+               <!-- <block > -->
+                   <view class="brand-wrap" wx:for="{{brandCheckList}}">
+                    <text class="{{item.check? 'checkBrand':''}}" bindtap='delBrand' data-index="{{index}}">{{item.name}}</text>
+                    <view class="delBrand">+</view>
+                   </view>
+               <!-- </block> -->
                <!--<text style="color:{{brand_id ? '#ef4631':'#353535'}};">{{brand_id ? brandInfo[1][multiIndex[0]].name :'选择品牌'}}</text>-->
                <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
                   <view class="picker">

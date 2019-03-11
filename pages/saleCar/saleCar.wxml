@@ -13,7 +13,7 @@
        </view>  
     </block>
     <view class="uploadTips">
-      <text>*至少上传3张以上车辆照片，横屏拍摄，第一张作为封面展示</text>
+      <text>*至少上传1张以上车辆照片，横屏拍摄，第一张作为封面展示</text>
     </view>
 </view>
 
@@ -195,21 +195,21 @@
         </view>
     </view>
 
-    <view class='formItem'>
+    <view class='formItem' wx:if="{{!phoneLogShow}}">
         <view class="itemLeft">
            <text></text>
            <text class="carDis">车况描述</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
-                <textarea placeholder="请如实描述车况，否则描述不准确将影响您的诚信" value="{{form.description}}" bindinput="descriptionInput" class="beizhu" maxlength="-1" auto-height="{{true}}"> </textarea>
+                <textarea placeholder="请如实描述车况，否则描述不准确将影响您的诚信" value="{{form.description}}" bindinput="descriptionInput" class="beizhu" maxlength="-1" auto-height="{{true}}" placeholder-class="placeholderClass"> </textarea>
             </view>
-          
         </view>
     </view>
 </view>
-
+<cover-view class="formButton" wx:if="{{!phoneLogShow}}">
    <button class="formButton" form-type='submit'>发布车源</button>
+</cover-view>
 </form>
 
 

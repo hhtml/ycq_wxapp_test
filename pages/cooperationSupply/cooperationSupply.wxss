@@ -104,6 +104,11 @@ text.infoTip{
   padding: 0 24rpx;
   padding-left: 46rpx;
 }
+.brand-wrap{
+  position: relative;
+  display: inline-block;
+  border:1rpx solid red;
+}
 .brandArea text{
   display: inline-block;
   height: 45rpx;
@@ -114,6 +119,21 @@ text.infoTip{
   color: #353535;
   border-radius: 20rpx;
   margin:0 25rpx 20rpx 0;
+}
+.delBrand{
+  position: absolute;
+  right:20rpx;
+  top:-4rpx;
+  font-size: 26rpx;
+  color:#ef4631;
+  transform: rotate(45deg);
+  width:18rpx;
+  height:18rpx;
+  border:1rpx solid #ef4631;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .brandArea picker{
   display: inline-block;
