@@ -15,7 +15,6 @@
                <view bindtap='selectCar'>
             <view class="picker">
               <text>{{carType?carType:'选择品牌'}}</text>
-              <!-- <text wx:else></text> -->
             </view>
           </view>
             </view>      

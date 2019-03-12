@@ -214,7 +214,9 @@ Page({
     for (var item in form) {
       if (item == 'phone') {
 
-      } else {
+      } else if (item == 'displacementUnit'){
+
+      }else {
         form[item] = '';
       }
 
@@ -235,6 +237,11 @@ Page({
     var form = this.data.form;
     var $this = this; 
     if (!this.checkForm()) {
+      wx.showToast({
+        title: '请将信息填写完整',
+        image: '../../images/warn.png'
+      })
+    }else if($this.data.carType == ''){
       wx.showToast({
         title: '请将信息填写完整',
         image: '../../images/warn.png'
@@ -265,12 +272,12 @@ Page({
               icon: 'success'
             });
             $this.cleanForm();
-            // brand = {
-
-            // };
+            $this.setData({
+              carType:''
+            })
             $this.setData({
               form: form,
-              brand: brand
+              // brand: brand
             })
           } else {
             wx.showToast({
@@ -327,7 +334,7 @@ Page({
    */
 
   onHide: function () {
-    app.globalData.carType = '请选择车型'
+    app.globalData.carType = ''
     app.globalData.carBrand = ''
     app.globalData.brand_id = ''
   },
@@ -337,8 +344,8 @@ Page({
    */
 
   onUnload: function () {
-    app.globalData.carType = '请选择车型'
-    app.globalData.carBrand = '选择品牌'
+    app.globalData.carType = ''
+    app.globalData.carBrand = ''
     app.globalData.brand_id = ''
   },
 
