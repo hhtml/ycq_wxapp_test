@@ -26,12 +26,14 @@
       </view>
   </view>
 
-  <view class='cashButton'>
+  <view class='cashButton' bindtap='nav_to_withdrawcash'>
        <text>提现</text>
   </view>
 
   <view class='cashTitle'>
+      <image src='../../images/cash-title-left.png'></image>
       <text>我的友车圈收益贡献明细</text>
+      <image src='../../images/cash-title-right.png'></image>
   </view>
   
   <view class='inviteList'>

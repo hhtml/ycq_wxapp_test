@@ -1,7 +1,7 @@
 <!--pages/infomation/infomation.wxml-->
 <scroll-view scroll-x='{{scroll_x}}' class='scrollTitle'>
   <block wx:for="{{titleList}}" wx:key="{{index}}">
-    <text class="scrollTitleItem {{activeTitle == item.tid ? 'activeTitle':''}}" bindtap='changeTitle' data-id="{{item.tid}}">{{item.name}}   </text>
+    <text class="scrollTitleItem {{activeTitle == item.tid ? 'activeTitle':''}}" bindtap='changeTitle' data-id="{{item.tid}}">{{item.title}}   </text>
   </block>
 </scroll-view>
 

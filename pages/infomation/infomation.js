@@ -95,7 +95,7 @@ Page({
                 automotive.forEach((el,i)=>{
                   var obj = {
                     id: el.id,
-                    imgSrc:app.globalData.localImgUrl+coverimage,
+                    imgSrc: app.globalData.imgUrl + el.coverimage,
                     title: el.title,
                     author: el.author,
                     browse_volume: el.browse_volume
@@ -115,7 +115,7 @@ Page({
             console.log('infoList：', infoList);
             console.log('titleList', titleList);
             var currentInfoList=infoList[0].arr;
-            var activeTitle = titleList[0].id;
+            var activeTitle = titleList[0].tid;
             $this.setData({ infoList, titleList, activeTitle, currentInfoList });
           }
 
