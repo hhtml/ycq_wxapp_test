@@ -8,7 +8,9 @@ Page({
    */
   data: {
     activeId:2,
+    selectCar:[], //已选择的汽车品牌
     brandCheckList:[],
+    colorIndex:'A', //锚点值
     year:['1年以下','1年','2年','3年','3年以上'],
     partnerList:[
       /*{
@@ -73,6 +75,9 @@ Page({
           var store_level_list = data.store_level_list;
           var brandList = data.brand_list;
           var fail_default_value = data.fail_default_value;
+          $this.setData({
+            carBrand: data.brand_list
+          })
           if (store_level_list) {
             store_level_list.forEach((val, index) => {
               if (val.condition == 'visible') {
@@ -243,18 +248,6 @@ Page({
     this.setData({
       form: form
     })
-  },
-  
-  delBrand(e){
-    console.log(e)
-    var index=e.currentTarget.dataset.index;
-    console.log(index)
-    var brandCheckList = this.data.brandCheckList;
-    console.log(brandCheckList)
-    // var check = brandCheckList[index].check;
-    // brandCheckList[index].check = !check;
-    brandCheckList.splice(index,1)
-    this.setData({ brandCheckList: brandCheckList})
   },
   
   
@@ -487,11 +480,69 @@ Page({
       name: brandList[e.detail.value[1]].name,
       check: true
     }
+    brandCheckList.forEach(item =>{
+      console.log(item)
+      if(item.id == obj.id){
+        console.log(item.id)
+      }
+    })
     brandCheckList.push(obj);
     this.setData({
       brandCheckList: brandCheckList
     })
-
+  },
+  //点击加号选择汽车品牌
+  popCarBrand:function(){
+    var that = this
+    that.setData({
+      showModal:true
+    })
+  },
+  // 取消模态框
+  preventTouchMove:function(){
+    var that = this
+    that.setData({
+      showModal: false
+    })
+  },
+  //锚点点击事件
+  selectAnchor: function (e) {
+    var that = this
+    console.log(e)
+    that.setData({
+      anchor: e.target.id,
+      colorIndex: e.target.id
+    })
+  },
+  //选择汽车品牌
+  checkboxChange:function(e){
+    var that = this
+    console.log(e)
+    var carIndex = '' //汽车品牌index
+    var obj = {
+      // id: e.target.id.split('+')[1],
+      name: e._relatedInfo.anchorRelatedText,
+      check: true
+    }
+    var brandCheckList = that.data.brandCheckList
+    console.log(brandCheckList)
+    brandCheckList.forEach((item,index)=>{
+      if(item.name == obj.name){
+        carIndex = index
+      }
+    })
+    if (carIndex !== ''){
+      brandCheckList.splice(carIndex,1)
+      that.setData({
+        brandCheckList: brandCheckList
+      })
+    }else{
+      brandCheckList.push(obj)
+      that.setData({
+        brandCheckList: brandCheckList
+      })
+    }
+    console.log(brandCheckList)
   },
   getCitysByIndex(index) {
     var zimuList = this.data.zimuList;
@@ -595,7 +646,6 @@ Page({
         name:form.name
       }
       console.log(auditInfo)
-      return;
       $http.post('shop/submit_audit',{
         submit_type: submit_type,
         auditInfo: auditInfo

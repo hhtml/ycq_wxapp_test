@@ -102,13 +102,14 @@ Page({
           type: data.detail.type,
           isOffer: data.detail.isOffer,
           description: data.detail.store_description,
-          userInfo: data.detail.user,
+          userInfo: data.detail.publisher_user,
           emission_standard: data.detail.emission_standard,
           // nickname =  $this.cutStr(data.detail.user.nickname, 6),
           createtime: data.detail.createtime,
           default: data.detail.default,
           defaultUrl: app.globalData.imgUrl,
-          can_quote: data.can_quote
+          can_quote: data.can_quote,
+          user:data.detail.user
         }
         form.phone = data.detail.user.mobile;
         var detailImages = data.detail.modelsimages;
@@ -146,28 +147,42 @@ Page({
     var that = this
     var isOffer = that.data.car.isOffer;
     var is_authentication = that.data.car.can_quote.is_authentication
-    if (is_authentication == 2){ //未认证
-      that.setData({
-        msg: that.data.car.can_quote.msg,
-        showModal:true
-      })
-    } else if (is_authentication == 2){ //未完成认证
-      that.setData({
-        msg:that.data.car.can_quote.msg,
-        showModal2:true
-      })
-    }else{ //已完成认证
-      if (isOffer == 1) {
-        wx.showToast({
-          title: '您已报过价',
-          image: '../../images/warn.png'
-        })
-      } else {
-        this.setData({
-          priceLogShow: true
-        })
+    var user = that.data.car.user
+    wx.getStorage({
+      key: 'user_id',
+      success(res) {
+        var user_id = res.data
+        if (user_id == user.id){
+          wx.showToast({
+            title: '不能给自己报价',
+            image: '../../images/warn.png'
+          })
+        }else {
+          if (is_authentication == 1) { //未认证
+            that.setData({
+              msg: that.data.car.can_quote.msg,
+              showModal: true
+            })
+          } else if (is_authentication == 2) { //未完成认证
+            that.setData({
+              msg: that.data.car.can_quote.msg,
+              showModal2: true
+            })
+          } else { //已完成认证
+            if (isOffer == 1) {
+              wx.showToast({
+                title: '您已报过价',
+                image: '../../images/warn.png'
+              })
+            } else {
+              this.setData({
+                priceLogShow: true
+              })
+            }
+          }
+        }
       }
-    }
+    })
   },
   closeLog() {
     this.setData({

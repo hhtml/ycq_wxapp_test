@@ -100,16 +100,14 @@
               <text class="infoTip">(没有符合的品牌可以自行添加)</text>
           </view>
           <view class="brandArea">
-               <!-- <block > -->
+
                    <view class="brand-wrap" wx:for="{{brandCheckList}}">
-                    <text class="{{item.check? 'checkBrand':''}}" bindtap='delBrand' data-index="{{index}}">{{item.name}}</text>
-                    <view class="delBrand">+</view>
+                    <text class="{{item.check? 'checkBrand':''}}" data-index="{{index}}">{{item.name}}</text>
                    </view>
-               <!-- </block> -->
-               <!--<text style="color:{{brand_id ? '#ef4631':'#353535'}};">{{brand_id ? brandInfo[1][multiIndex[0]].name :'选择品牌'}}</text>-->
-               <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
+
+               <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}" disabled>
                   <view class="picker">
-                    <text style="font-size:40rpx;padding:0 40rpx;color:#ef4631;">+</text>
+                    <text style="font-size:40rpx;padding:0 40rpx;color:#ef4631;" bindtap='popCarBrand'>+</text>
                   </view>
                 </picker>
           </view>
@@ -244,3 +242,35 @@
     <button form-type='submit'>提交</button>
 </view>
 </form>
+
+
+<!-- 模态对话框 -->
+<view class="mask" wx:if="{{showModal}}"></view>
+
+<view class="toast-wrap" hidden="{{!showModal}}">
+<!-- 头部区域 -->
+  <view class="toast-title-wrap">
+    <view class="carList">选择自营品牌</view>
+    <view class="closeToast" catchtap="preventTouchMove">X</view>
+    <scroll-view class="selectCar" scroll-y="true">
+      已选择：
+      <text wx:for="{{brandCheckList}}"> {{item.name}}、 </text>
+    </scroll-view>
+  </view>
+<!-- 滑动选择区域 -->
+<scroll-view scroll-y="true" scroll-into-view="{{anchor}}"  scroll-with-animation="true" class="src">
+  <view id="{{index}}" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectIndex' class="wrap">
+    <view class="initial">{{index}}</view>
+  <checkbox-group bindtap="checkboxChange">
+    <label class="checkbox" wx:for="{{item}}" wx:for-item="itemName" wx:key="{{itemName.id}}">
+    <checkbox value="{{itemName.name}}" checked="{{itemName.checked}}"/>
+    {{itemName.name}}
+    </label>
+  </checkbox-group>
+  </view>
+</scroll-view>
+  <!-- 右边锚点区域 -->
+<view class="anchor-wrap">
+  <view class="anchor" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectAnchor' id="{{index}}" style="color:{{colorIndex == index?'#ef4631':''}}">{{index}}</view>
+</view>
+</view>

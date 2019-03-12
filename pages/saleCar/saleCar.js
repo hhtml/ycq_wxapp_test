@@ -21,10 +21,6 @@ Page({
       displacementUnit:'L',
       transmissionData: '', //变速箱
     },
-    a:{
-      carRegion:''
-    },
-    carRegion:'',
     phone:'', //手机号
     transmission: [], //变速箱
     radioArray:[ //单选框
@@ -312,11 +308,48 @@ Page({
     if (form.description.replace(/(^\s*)|(\s*$)/g, "").length == 0) form.description = '车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系'; 
     for(var item in form){
       if(!form[item]){
-        // that.data.a.item = 'red'
-        // that.setData({
-        //   a: that.data.a
-        // })
-        // console.log(that.data.a.item)
+        console.log(item)
+        switch(item){
+          case 'carRegion':
+          that.setData({
+            colorCarRegion:'red'
+          })
+          break;
+          case 'productDate':
+          that.setData({
+            colorProductDate:'red'
+          })
+          break;
+          case 'listingDate':
+          that.setData({
+            colorListingDate:'red'
+          })
+          break;
+          case 'price':
+          that.setData({
+            colorPrice:'red'
+          })
+          break;
+          case 'distance':
+          that.setData({
+            colorDistance:'red'
+          })
+          break;
+          case 'emission':
+          that.setData({
+            colorEmission:'red'
+          })
+          break;
+          case 'displacement':
+          that.setData({
+            colorDisplacement:'red'
+          })
+          break;
+          case 'phone':
+          that.setData({
+            colorPhone:'red'
+          })
+        }
         return false;
       }
     }
@@ -328,7 +361,10 @@ Page({
     for (var item in form) {
       if(item == 'phone'){
 
-      }else{
+      } else if (item == 'displacementUnit'){
+
+      }
+      else{
         form[item] = '';
       }
       
@@ -367,7 +403,15 @@ Page({
         title: '价格有误',
         image: '../../images/warn.png'
       })
-    } else{
+    } else if($this.data.carType == ''){
+      wx.showToast({
+        title: '请将信息填写完整',
+        image: '../../images/warn.png'
+      })
+      $this.setData({
+        colorCarType:'red'
+      })
+    }else{
       var modelsimages = imgList.join(',');
       var carInfo = {
         brand_id: app.globalData.brand_id,
@@ -385,7 +429,6 @@ Page({
         transmissionData: form.transmissionData
       }
       console.log(carInfo)
-      return;
       $http.post('index/uploadModels',{
         carInfo: carInfo
       })
@@ -400,6 +443,9 @@ Page({
             });
             $this.cleanForm();
             $this.cleanImg();
+            $this.setData({
+              carType:''
+            })
           } else {
             wx.showToast({
               title: resObj.msg,
@@ -473,8 +519,8 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    app.globalData.carType = '请选择车型'
-    app.globalData.carBrand = '选择品牌'
+    app.globalData.carType = ''
+    app.globalData.carBrand = ''
     app.globalData.brand_id = ''
   },
 

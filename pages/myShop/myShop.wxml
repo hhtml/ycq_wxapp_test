@@ -1,58 +1,97 @@
 <!--pages/myShop/myShop.wxml-->
 <view class="shopImg">
-   <image src='{{shop.banner}}'></image>
+  <image src='{{shop.banner}}'></image>
 </view>
-
+<!--shopInfo-->
 <view class='shopInfo'>
-   <view class="shopName">
-       <text>{{shop.name}}</text>
-       <text>详细地址：{{shop.addr}}</text>
-       <text class="tip">未实名认证</text>
-   </view>
+  <view class="shopName">
+    <text>{{shop.name}}</text>
+    <text>详细地址：{{shop.addr}}</text>
+    <text class="tip">未实名认证</text>
+  </view>
 
-   <view class="shopCarType">
-       <view class="carTypeTitle">
-          <text>主营车型</text>
-       </view>
-       <view class='brandsList'>
-            <text wx:for="{{shop.brands}}" wx:key="{{index}}">{{item}}</text> 
-       </view>
-   </view>
-   <view class='detailTitle'>
-       <view class="detailTitleItem {{active_tab=='店铺特色' ?' detailActiveItem':''}} " bindtap="change_tab" data-title="店铺特色">
-           <text>店铺特色</text>
-           <text></text>
-       </view> 
-       <view class="detailTitleItem {{active_tab=='车型列表' ? 'detailActiveItem' : ''}} " bindtap='change_tab' data-title="车型列表">
-           <text>车型列表</text>
-           <text></text>
-       </view>   
-   </view>
+  <view class="shopCarType">
+    <view class="carTypeTitle">
+      <text>主营车型</text>
+    </view>
+    <view class='brandsList'>
+      <text wx:for="{{shop.brands}}" wx:key="{{index}}">{{item}}</text>
+    </view>
+  </view>
+  <view class='detailTitle'>
+    <view class="detailTitleItem {{active_tab=='店铺特色' ?' detailActiveItem':''}} " bindtap="change_tab" data-title="店铺特色">
+      <text>店铺特色</text>
+      <text></text>
+    </view>
+    <view class="detailTitleItem {{active_tab=='车型列表' ? 'detailActiveItem' : ''}} " bindtap='change_tab' data-title="车型列表">
+      <text>车型列表</text>
+      <text></text>
+    </view>
+  </view>
+ <!--店铺特色-->
+  <view class="detailCont">
 
-   <view class="detailCont">
-       <view class="detailContItem">
-           <view class='detailContItemImg'>
-               <block wx:for="{{detail_img_list}}">
-                   <image src='{{item}}' mode='widthFix'></image>
-               </block>
-           </view>
-       </view>
-   </view>
+    <view class="detailContItem" wx:if="{{active_tab=='店铺特色'}}">
+      <view class='detailContItemImg' wx:if="{{detail_img_list.length != 0}}">
+        <block wx:for="{{detail_img_list}}">
+          <image src='{{item}}' mode='widthFix'></image>
+        </block>
+      </view>
+      <text wx:else class="nonMes">暂无信息</text>
+    </view>
+ <!--.店铺特色o/-->
+ <!--车型列表-->
+    <view class="detailContItem" wx:if="{{active_tab=='车型列表'}}">
+      <view class="carInfoList"  wx:if="{{carList.length != 0}}">
+        <block wx:for="{{carList}}" wx:key="{{item.id}}">
+          <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
+            <view class="carImg">
+              <view class="imgArea">
+                <image src='{{item.modelsimages}}' mode='widthFix'></image>
+              </view>
 
-   
+            </view>
+            <view class="carInfoCont">
+              <view class="carInfoContWord">
+                <view class="carName">
+                  <text>{{item.models_name}}</text>
+                </view>
+
+                <view class="carInfoRow1">
+                  <text>{{item.car_licensetime ? item.car_licensetime+'上牌/' : ''}} {{item.kilometres ? item.kilometres+'/' : ''}}{{item.parkingposition}}</text>
+                </view>
+                <view class="carInfoRow2">
+                  <text> {{item.guide_price}}</text>
+                  <text>浏览量:{{item.browse_volume}}</text>
+                </view>
+              </view>
+              <view class="carInfoContLine">
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+       
+      <text wx:else class="nonMes">暂无车型信息</text>
+    </view>
+    <!--.车型列表/-->
+
+  </view>
+
 </view>
+<!--.shopInfo/-->
 <view class="bottomArea">
-       <view class="bottomItem">
-           <image src='../../images/myshop-bottom-01.png'></image>
-           <text>批量上传</text>
-       </view>
-       <view class="bottomItem" bindtap='makePhoneCall'>
-           <image src='../../images/myshop-bottom-02.png'></image>
-           <text>电话咨询</text>
-       </view>
-       <view class="bottomItem">
-           <image src='../../images/myshop-bottom-03.png'></image>
-           <text>转发店铺</text>
-           <button open-type='share'></button>
-       </view>
-   </view>
+  <view class="bottomItem">
+    <image src='../../images/myshop-bottom-01.png'></image>
+    <text>批量上传</text>
+  </view>
+  <view class="bottomItem" bindtap='makePhoneCall'>
+    <image src='../../images/myshop-bottom-02.png'></image>
+    <text>电话咨询</text>
+  </view>
+  <view class="bottomItem">
+    <image src='../../images/myshop-bottom-03.png'></image>
+    <text>转发店铺</text>
+    <button open-type='share'></button>
+  </view>
+</view>

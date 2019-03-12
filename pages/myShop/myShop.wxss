@@ -1,4 +1,5 @@
 /* pages/myShop/myShop.wxss */
+@import '../carSource/carSource.wxss'; 
 page{
   background-color: #f7f7f8;
 }
@@ -157,4 +158,29 @@ text.tip{
   top: 0;
   left: 0;
   opacity: 0;
+}
+.carInfoList{
+  padding: 0rpx;
+  background-color: #fff;
+}
+.carImg{
+  width: 232rpx;
+  height: 151rpx;
+}
+.imgArea{
+  width: 232rpx;
+  height: 151rpx;
+}
+.carInfoCont{
+  width: 420rpx;
+}
+.carInfoContWord{
+  height: 151rpx;
+}
+.nonMes{
+  display: block;
+  color: #888;
+  text-align: center;
+  font-size: 28rpx;
+  padding: 40rpx 0;
 }

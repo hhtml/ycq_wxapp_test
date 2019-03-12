@@ -21,13 +21,13 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>车型名称</text>
+           <text style="color:{{colorCarType}}">车型名称</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
                <view bindtap='selectCar'>
             <view class="picker">
-              <text>{{carType}}</text>
+              <text>{{carType?carType:'请选择车型'}}</text>
             </view>
           </view>
             </view>
@@ -39,7 +39,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>车辆所在地</text>
+           <text  style="color:{{colorCarRegion}}">车辆所在地</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -61,7 +61,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>车辆批发价</text>
+           <text style="color:{{colorPrice}}">车辆批发价</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -74,7 +74,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>输入排量</text>
+           <text style="color:{{colorDisplacement}}">输入排量</text>
         </view>
 
             <view class="itemRight">
@@ -113,7 +113,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>车辆年份</text>
+           <text style="color:{{colorProductDate}}">车辆年份</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -136,7 +136,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>上牌日期</text>
+           <text style="color:{{colorListingDate}}">上牌日期</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -159,7 +159,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>行驶里程</text>
+           <text style="color:{{colorDistance}}">行驶里程</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -172,7 +172,7 @@
     <view class='formItem'>
         <view class="itemLeft">
            <text>*</text>
-           <text>过户次数</text>
+           <text style="color:{{colorEmission}}">过户次数</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
@@ -185,17 +185,17 @@
     <view class='formItem' bindtap='openLog'>
         <view class="itemLeft">
            <text>*</text>
-           <text>联系电话</text>
+           <text style="color:{{colorPhone}}">联系电话</text>
         </view>
         <view class="itemRight">
             <view class="itemCont">
-               <text>{{form.phone}}</text>
+               <text>{{phone}}</text>
             </view>
             
         </view>
     </view>
 
-    <view class='formItem' wx:if="{{!phoneLogShow}}">
+    <view class='formItem' hidden="{{phoneLogShow}}">
         <view class="itemLeft">
            <text></text>
            <text class="carDis">车况描述</text>
@@ -207,7 +207,7 @@
         </view>
     </view>
 </view>
-<cover-view class="formButton" wx:if="{{!phoneLogShow}}">
+<cover-view class="formButton" hidden="{{phoneLogShow}}">
    <button class="formButton" form-type='submit'>发布车源</button>
 </cover-view>
 </form>

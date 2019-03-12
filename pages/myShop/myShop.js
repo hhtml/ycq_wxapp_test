@@ -8,13 +8,28 @@ Page({
    */
   data: {
      shop:{
-       banner:'../../images/car-test_03.png',
+       /*banner:'../../images/car-test_03.png',
        name:'济南二手车品鉴',
        addr:'成都市武侯区天府广场1栋',
-       brands:['奔驰','宝马','JEEP','玛莎拉蒂','VOLVO']
+       brands:['奔驰','宝马','JEEP','玛莎拉蒂','VOLVO']*/
      },
     active_tab:'店铺特色',
-    detail_img_list: ['../../images/car-test_03.png', '../../images/car-test_03.png', '../../images/car-test_03.png']
+    detail_img_list: [],
+    /*carInfoList:[
+      {
+        "id": 12,
+        "models_name": "奥迪Q3 20192.0L手动变速",
+        "guide_price": "100万",
+        "car_licensetime": "2019-03",
+        "kilometres": "0.1万公里",
+        "parkingposition": "北京市 北京市",
+        "browse_volume": 5750,
+        "createtime": 1551410619,
+        "store_description": "车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系",
+        "factorytime": "1970",
+        "modelsimages": "/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
+      }
+    ]*/
   },
   /**
    * 事件函数
@@ -60,7 +75,7 @@ Page({
                 //createtime: val.car_licensetime,// 1551410619,
                 store_description: val.store_description,// "车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系",
                 factorytime: val.factorytime,//"1970",
-                modelsimages: val.modelsimages,//"/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
+                modelsimages: app.globalData.localImgUrl+val.modelsimages,//"/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
               }
               carList[index]=obj;
           });

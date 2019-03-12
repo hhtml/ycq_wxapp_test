@@ -21,6 +21,7 @@ page {
   font-size: 28rpx;
   color: #353535;
   text-align: center;
+  box-sizing: border-box;
 }
 
 text.activeTitle {
