@@ -82,9 +82,9 @@ Page({
     var iconList = this.data.iconList;
     var path = iconList[index].path;
     if (index == 0) {
-      // wx.navigateTo({
-      //   url: path,
-      // })
+      wx.navigateTo({
+        url: path,
+      })
       if (that.data.sell_car_condition.code == 0) { //认证通过
         wx.navigateTo({
           url: path,
@@ -117,15 +117,10 @@ Page({
         })
       }
 
-      // switch (that.data.sell_car_condition.code){
-      //   case1:0,
-
-      // }
-
     } else if (index == 1) {
-      // wx.navigateTo({
-      //   url: path,
-      // })
+      wx.navigateTo({
+        url: path,
+      })
       if (that.data.buy_car_condition.code == 1) { //去认证
         that.setData({
           msg: that.data.buy_car_condition.msg,
