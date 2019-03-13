@@ -44,7 +44,12 @@ page{
   color:#666;
   margin-left:30rpx;
 }
-
+.list-wrap{
+  border:1rpx solid red;
+  width:100%;
+  box-sizing: border-box;
+  height:1342rpx;
+}
 /* 搜索结果列表-买车 */
 .searchList-wrap{
   width:100%;

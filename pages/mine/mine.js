@@ -209,11 +209,12 @@ Page({
         //成功回调
         var resObj = res.data;
         $this.data.userInfo = resObj.data.userInfo;
+        $this.data.store_has_many = resObj.data.userInfo.store_has_many
         $this.setData({
           nickname: resObj.data.userInfo.nickname,
           unread: resObj.data.userInfo.unread,
+          store_has_many: resObj.data.userInfo.store_has_many
         })
-        $this.data.store_has_many = resObj.data.userInfo.store_has_many
         $this.isAuthentication() //店铺认证 实名认证
         //转化头像图片地址
         if (typeof $this.data.userInfo.avatar === 'string') {

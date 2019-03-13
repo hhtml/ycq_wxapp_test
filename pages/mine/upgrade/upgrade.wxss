@@ -4,3 +4,14 @@
 page{
   padding:20rpx 0rpx;
 }
+.partnerItem{
+  position: relative;
+}
+.marker{
+  font-size: 48rpx;
+  color: #ccc;
+  position: absolute;
+  left:20rpx;
+  top:10rpx;
+  z-index: 9999999;
+}

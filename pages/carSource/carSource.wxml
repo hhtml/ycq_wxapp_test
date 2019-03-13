@@ -37,7 +37,7 @@
     <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
       <view class="carImg">
         <view class="imgArea">
-          <image src='{{item.imgSrc}}' mode='widthFix'></image>
+          <image src='{{item.imgSrc}}' mode='aspectFill'></image>
         </view>
         <text class='typeTip' wx:if="{{item.type == 'sell'}}">商家在售</text>
         <text class='typeTipBuy' wx:else>有人想买</text>

@@ -480,7 +480,7 @@ margin-top: 66rpx;
 
 .toast-wrap{
   width:500rpx;
-  height:190rpx;
+  height:250rpx;
   background-color: #fff;
   position: fixed;
   left:17%;
@@ -490,20 +490,23 @@ margin-top: 66rpx;
 }
 .toast-content{
   width:100%;
-  height:60%;
-  font-size: 32rpx;
-  color:#ccc;
+  height:65%;
+  font-size: 30rpx;
+  color:#666;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding:0rpx 20rpx;
+  box-sizing: border-box;
 }
 .click-wrap{
   width:100%;
-  height:40%;
+  height:35%;
   display: flex;
   font-size: 30rpx;
   border-top:1rpx solid #f2f2f2;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
+  color:#ef4631;
 }

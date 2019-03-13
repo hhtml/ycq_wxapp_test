@@ -48,6 +48,7 @@ page{
   right:30rpx;
   border-radius: 30rpx;
   padding:10rpx 0rpx;
+  box-sizing: border-box;
 }
 .anchor{
   width:100%;

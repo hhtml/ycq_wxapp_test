@@ -44,7 +44,7 @@
 </view>
 <view class="navListBg">
   <view class="navList">
-    <view class="navItem" bindtap='nav_to_page' data-path="../myShop/myShop">
+    <view class="navItem" bindtap='nav_to_page' data-path="../myShop/myShop" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
       <!-- data-path="../myShop/myShop" -->
       <image class="navIcon" src='../../images/mine-shop.png' mode='widthFix'></image>
       <view class="navName">
@@ -55,7 +55,7 @@
       </view>
     </view>
 
-    <view class="navItem" bindtap='nav_to_page' data-path="../myWallet/myWallet">
+    <view class="navItem" bindtap='nav_to_page' data-path="../myWallet/myWallet" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
       <!-- data-path="../myShop/myShop" -->
       <image class="navIcon" src='../../images/mine-shop.png' mode='widthFix'></image>
       <view class="navName">
@@ -68,7 +68,7 @@
   </view>
 
   <view class="navList">
-    <view class="navItem" bindtap='nav_to_page' data-path="../wantBuy/wantBuy">
+    <view class="navItem" bindtap='nav_to_page' data-path="../wantBuy/wantBuy" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
       <image class="navIcon" src='../../images/mine-buy.png' mode='widthFix'></image>
       <view class="navName">
         <text>我想买的</text>
@@ -79,7 +79,7 @@
     </view>
 
 
-    <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage">
+    <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
       <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
       <view class="navName">
         <text>砍价中心</text>
@@ -91,7 +91,7 @@
       <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
     </view>
 
-    <view class="navItem" bindtap='nav_to_page' data-path="../order/order">
+    <view class="navItem" bindtap='nav_to_page' data-path="../order/order" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
       <image class="navIcon" src='../../images/order.png' mode='widthFix'></image>
       <view class="navName">
         <text>订单中心</text>
@@ -134,14 +134,14 @@
         <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
     </view>
-    <view class="navItem" bindtap='makePhoneCall' data-path="">
+    <view class="navItem" >
       <image class="navIcon" src='../../images/mine-call.png' mode='widthFix'></image>
       <view class="navName">
-        <text>客服热线</text>
+        <button class="navName-btn" hover-class="none" open-type='contact'>在线客服</button>
       </view>
-      <!-- <view class='navRight'>
-               <image src='../../images/angle-right.png' mode='widthFix'></image>
-          </view> -->
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
+      </view>
     </view>
   </view>
 </view> 
