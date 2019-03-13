@@ -25,7 +25,7 @@ Page({
   getStore_list: function() {
     var that = this
     $http.post('my/upgrade_shop').then(res => {
-      var store = res.data.data
+      var store = res.data.data.store_info
       store.id_card_images = store.id_card_images.split(',')
       store.main_camp = store.main_camp.split(',')
       that.setData({

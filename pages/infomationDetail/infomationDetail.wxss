@@ -4,7 +4,7 @@
     padding: 30rpx 24rpx;
 }
 .articleTitle text{
-  font-size: 34rpx;
+  font-size: 40rpx;
   color: #353535;
   line-height: 1.5em;
 }
@@ -13,8 +13,8 @@
   padding: 20rpx 0;
 }
 .articalImg{
-  width: 70rpx;
-  height: 70rpx;
+  width: 76rpx;
+  height: 76rpx;
   overflow: hidden;
   float: left;
   margin-right: 18rpx;
@@ -26,12 +26,17 @@
 .articalTime{
   float: left;
   display: flex;
-  height:70rpx;
+  height:76rpx;
   flex-direction: column;
   justify-content: space-between;
 }
-.articalTime text{
-  font-size: 24rpx;
+.articalTime text:nth-child(1){
+  font-size: 28rpx;
+  color: #353535;
+  display: block;
+}
+.articalTime text:nth-child(2){
+  font-size: 22rpx;
   color: #888;
   display: block;
 }
@@ -39,22 +44,27 @@
   padding: 20rpx 0;
 }
 .articalBottom{
+  width: 100%;
   display: flex;
   height: 90rpx;
   align-items: center;
   justify-content: space-between;
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-shadow: -6rpx 0 6rpx 0 #e2e2e2;
+  box-sizing: border-box;
+  padding: 0 24rpx;
 }
 .articalBottom text{
-  font-size: 24rpx;
-  color: #666;
+  font-size: 28rpx;
+  color: #888;
 }
 .articalBottom image{
   width:57rpx;
   height:45rpx;
 }
 .articalBottom button{
-  position: absolute;
   width: 57rpx;
   height: 45rpx;
   position: absolute;
@@ -62,4 +72,18 @@
   right: 0;
   margin-top: -23rpx;
   opacity: 0;
+}
+.articalBottomLeft ,.articalBottomRight{
+  display: flex;
+  align-items: center;
+}
+.articalBottomLeft image{
+   width: 48rpx;
+   height: 39rpx;
+   margin: 0 20rpx 0 10rpx;
+}
+.articalBottomRight image{
+   width: 50rpx;
+   height: 44rpx;
+    margin: 0 10rpx 0 20rpx;
 }
