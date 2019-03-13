@@ -150,15 +150,22 @@ image.navIcon{
 .navName{
   margin-right: auto;
 }
+.navName-btn{
+  font-size: 30rpx;
+  color: #353535;
+  line-height: 1;
+  display: inline-block;
+}
+button::after{
+  border:none;
+}
 .navName text{
   font-size: 30rpx;
   color: #353535;
 }
 .navRight{
   width:16rpx;
-  
   float: right;
- 
 }
 .navRight image{
   width: 100%;

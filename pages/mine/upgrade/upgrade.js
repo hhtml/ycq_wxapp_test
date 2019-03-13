@@ -18,35 +18,28 @@ Page({
    */
   onLoad: function(options) {
     this.getStore_list();
-    this.getStore_level_list();
   },
 
-  //获取店铺详情数据
+  //获取详情数据
   getStore_list: function() {
     var that = this
     $http.post('my/upgrade_shop').then(res => {
-      var store = res.data.data
+      var store = res.data.data.store_info
       store.id_card_images = store.id_card_images.split(',')
       store.main_camp = store.main_camp.split(',')
       that.setData({
-        store: store
-      })
-      console.log(that.data.store)
-    })
-  },
-  //获取合伙人级别数据
-  getStore_level_list: function() {
-    var that = this
-    $http.post('Shop/index').then(res => {
-      that.data.submit_type = res.data.data.submit_type
-      that.setData({
+        store: store,
         partnerList: res.data.data.store_level_list
       })
+      console.log(that.data.store)
+      console.log(that.data.partnerList)
     })
   },
 
   // 选择合伙人级别
   partnerChange(e) {
+    var that = this
+    console.log(e)
     var index = e.currentTarget.dataset.index;
     var check = e.detail.value;
     var partnerList = this.data.partnerList;

@@ -3,6 +3,12 @@
 .selectArea{
   padding: 0 24rpx;
   border-top: 1rpx solid #f3f3f3;
+  position: fixed;
+  left:0rpx;
+  top:0rpx;
+  background-color: #fff;
+  z-index: 99999;
+  width:100%;
 }
 .selectList{
   display: flex;
@@ -10,7 +16,6 @@
   align-items: center;
   border-bottom: 1rpx solid #f3f3f3;
 }
-
 .selectItem{
   flex: 1;
   display: flex;
@@ -42,6 +47,7 @@
 }
 .carInfoList{
   padding: 0 24rpx;
+  margin-top:94rpx;
 }
 .carInfoItem{
    overflow: hidden;
@@ -61,6 +67,10 @@
   width: 256rpx;
   height: 167rpx;
   overflow: hidden;
+}
+.imgArea image{
+  width:100%;
+  height:100%;
 }
 .carImg .typeTip{
   display:inline-block;

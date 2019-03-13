@@ -82,69 +82,79 @@ Page({
     var iconList = this.data.iconList;
     var path = iconList[index].path;
     if (index == 0) {
-      wx.navigateTo({
-        url: path,
-      })
-      if (that.data.sell_car_condition.code == 0) { //认证通过
-        wx.navigateTo({
-          url: path,
-        })
-      } else if (that.data.sell_car_condition.code == 1) { //去认证
-        that.setData({
-          msg: that.data.sell_car_condition.msg,
-          showModal: true
-        })
-      } else if (that.data.sell_car_condition.code == 3) { //审核中/待审核
-        that.setData({
-          msg: that.data.sell_car_condition.msg,
-          showModal2:true
-        })
-      } else if (that.data.sell_car_condition.code == 4){ //去付费
-        that.setData({
-          msg: that.data.sell_car_condition.msg,
-          showModal: true
-        })
-      } else if (that.data.sell_car_condition.code == 5){ // 审核不通过
-        that.setData({
-          msg: that.data.sell_car_condition.msg,
-          showModal: true
-        })
-      }
-      else { //发布超过次数
-        that.setData({
-          msg: that.data.sell_car_condition.msg,
-          showModal2: true
-        })
+      // wx.navigateTo({
+      //   url: path,
+      // })
+      switch (that.data.sell_car_condition.code){
+        case '0': //认证通过
+          wx.navigateTo({
+            url: path,
+          })
+          break;
+        case '1': //去认证
+          that.setData({
+            msg: that.data.sell_car_condition.msg,
+            showModal: true
+          })
+          break;
+        case '3': //审核中/待审核
+          that.setData({
+            msg: that.data.sell_car_condition.msg,
+            showModal2: true
+          })
+          break;
+        case '4': //去付费
+          that.setData({
+            msg: that.data.sell_car_condition.msg,
+            showModal: true
+          })
+          break;
+        case '5': //审核不通过
+          that.setData({
+            msg: that.data.sell_car_condition.msg,
+            showModal: true
+          })
+          break;
+        default: //发布超过次数
+          that.setData({
+            msg: that.data.sell_car_condition.msg,
+            showModal2: true
+          })
       }
 
     } else if (index == 1) {
-      wx.navigateTo({
-        url: path,
-      })
-      if (that.data.buy_car_condition.code == 1) { //去认证
-        that.setData({
-          msg: that.data.buy_car_condition.msg,
-          showModal: true
-        })
-      } else if (that.data.buy_car_condition.code == 3){ //审核中/待审核
-        that.setData({
-          msg: that.data.buy_car_condition.msg,
-          showModal2: true
-        })
-      } else if (that.data.buy_car_condition.code == 4){ //去付费
-        that.setData({
-          msg: that.data.buy_car_condition.msg,
-          showModal: true
-        })
-      } else if (that.data.buy_car_condition.code == 5){ //审核不通过
-        that.setData({
-          msg: that.data.buy_car_condition.msg,
-          showModal: true
-        })
-      }else { //认证通过
-        wx.navigateTo({ 
-          url: path,
-        })
+      // wx.navigateTo({
+      //   url: path,
+      // })
+      switch (that.data.sell_car_condition.code){
+        case '1': //去认证
+          that.setData({
+            msg: that.data.buy_car_condition.msg,
+            showModal: true
+          })
+          break;
+        case '3': //审核中/待审核
+          that.setData({
+            msg: that.data.buy_car_condition.msg,
+            showModal2: true
+          })
+          break;
+        case '4': //去付费
+          that.setData({
+            msg: that.data.buy_car_condition.msg,
+            showModal: true
+          })
+          break;
+        case '5': //审核不通过
+          that.setData({
+            msg: that.data.buy_car_condition.msg,
+            showModal: true
+          })
+          break;
+        default: //认证通过
+          wx.navigateTo({
+            url: path,
+          })
       }
     } else {
       wx.navigateTo({

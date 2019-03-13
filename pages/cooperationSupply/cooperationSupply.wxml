@@ -1,7 +1,7 @@
 <!--pages/cooperationSupply/cooperationSupply.wxml-->
-<form report-submit='{{true}}' bindsubmit='formSubmit'>
-<!-- <view class="switchTitle">
-    <view class="titleItem {{activeId ==0 ? 'activeItem':''}}" data-id="0" bindtap='switchTitle'>
+<form report-submit='{{true}}' bindsubmit='formSubmit' hidden="{{showModal}}">
+<view class="switchTitle">
+    <view class="titleItem {{activeId ==0 ? 'activeItem':''}}" data-id="0"  bindtap='switchTitle'>
        <text>合作价值</text>
     </view>
     <view class="titleItem {{activeId == 1 ? 'activeItem':''}}" data-id="1"  bindtap='switchTitle'>
@@ -10,7 +10,7 @@
     <view class="titleItem {{activeId == 2 ? 'activeItem':''}}" data-id="2"  bindtap='switchTitle'>
        <text>合作意向申请</text>
     </view>
-</view> -->
+</view>
 
 <!--店铺信息-->
 <view class=" shopArea">

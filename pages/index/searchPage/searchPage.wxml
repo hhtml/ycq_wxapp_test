@@ -7,7 +7,8 @@
   <view class="cancel" bindtap='cancel'>取消</view>
 </view>
 
-<!-- 搜索结果列表-买车 -->
+<scroll-view class="list-wrap" scroll-y="true">
+  <!-- 搜索结果列表-买车 -->
 <view class="searchList-wrap" wx:for="{{searchList.buy}}" wx:key="{{item.id}}">
   <view class="name" bindtap='buyCarName'>
   <image src="/images/search-icon.png"></image>
@@ -30,6 +31,7 @@
   {{item.models_name}}
   </view>
 </view>
+</scroll-view>
 
 
 <!-- 历史记录 -->
@@ -49,7 +51,6 @@
   <!-- <view class="delete">X</view> -->
   </view>
 </view>
-  
 </view>
 
 <view class="noData" wx:if="{{noData}}">

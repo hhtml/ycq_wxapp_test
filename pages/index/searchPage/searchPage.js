@@ -81,6 +81,12 @@ Page({
         isHistory:false
       })
       
+    }else if(that.data.history == ''){
+      that.setData({
+        isHistory: false,
+        noData: false,
+        searchList: ''
+      })
     }else{
       that.setData({
         isHistory: true,
@@ -149,14 +155,9 @@ Page({
     })
   },
 
-  //买车 车名点击事件
-  buyCarName:function(e){
-    console.log(e)
-  },
-
 
   //买车 车名点击事件
-  sellCarName: function (e) {
+  buyCarName: function (e) {
     var name = e._relatedInfo.anchorTargetText
     wx.reLaunch({
       url: '/pages/carSource/carSource?name=' + name
@@ -190,9 +191,10 @@ Page({
   //清除历史记录缓存事件
   clearHistory:function(){
     var that = this
-    wx.clearStorageSync('history')
+    wx.removeStorageSync('history')
     that.setData({
-      history:''
+      history:'',
+      isHistory:false
     })
   },
 
