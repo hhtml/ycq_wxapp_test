@@ -54,6 +54,17 @@
         <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
     </view>
+
+    <view class="navItem" bindtap='nav_to_page' data-path="../myWallet/myWallet">
+      <!-- data-path="../myShop/myShop" -->
+      <image class="navIcon" src='../../images/mine-shop.png' mode='widthFix'></image>
+      <view class="navName">
+        <text>我的钱包</text>
+      </view>
+      <view class='navRight'>
+        <image src='../../images/angle-right.png' mode='widthFix'></image>
+      </view>
+    </view>
   </view>
 
   <view class="navList">

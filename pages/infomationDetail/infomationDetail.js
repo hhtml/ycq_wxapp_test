@@ -112,6 +112,9 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
+    var id = this.data.artical.id;
+    return {
+      path: '/pages/infomationDetail/infomationDetail?id=' + id
+    }
   }
 })

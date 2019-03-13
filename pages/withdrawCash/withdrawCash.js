@@ -7,13 +7,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    bank:{
+    /*bank:{
       img:'../../images/carsource_02.png',
       name:'中国建设银行',
       lastnum:'2345',
       cardtype:'储蓄卡'
 
-    }
+    }*/
+    rateMoney:0
   },
   /**
    * 事件函数
@@ -27,11 +28,12 @@ Page({
         var resObj = res.data;
         console.log('资讯列表：', resObj);
         if (resObj.code == 1) {
-          var data = resObj.data.data;
-          var total_money = data.total_money;
+          var data = resObj.data;
+          var total_money = data.total_money ? data.total_money:'0';
+          var rate = data.presentation_rate ? data.presentation_rate : '100';
           var bank_info = data.bank_info;
           if (bank_info) {
-           bank={
+            bank={
               id: bank_info.id,
               img: bank_info.banklogo,
               name: bank_info.bankname,
@@ -39,7 +41,7 @@ Page({
               cardtype: bank_info.cardtype
             }
           }
-          $this.setData({ total_money, bank})
+          $this.setData({ total_money, bank, rate})
         } else {
           wx.showToast({
             title: resObj.msg,
@@ -52,6 +54,80 @@ Page({
         console.log('请求失败', err);
       });
    
+  },
+  moneyInput(e){
+     var rate=this.data.rate;
+    var rateMoney = (e.detail.value * (rate / 100)).toFixed(1);
+     this.setData({
+       money:e.detail.value,
+       rateMoney: rateMoney
+     }) 
+  },
+  allWithdraw(){
+    var money=this.data.total_money;
+    this.setData({
+      money: money
+    })
+  },
+
+  withdrawSubmit(e){
+     var formId=e.detail.formId;
+     var money=this.data.money;
+    var rateMoney = this.data.rateMoney;
+    var total_money = this.data.total_money
+     if(!money){
+        wx.showToast({
+          title: '请输入提现金额',
+          image:'../../images/warn.png',
+          duration:2000
+        })
+     } else if (money > total_money) {
+       wx.showToast({
+         title: '已超过可提金额',
+         image: '../../images/warn.png',
+         duration: 2000
+       })
+     } else if (money < 100){
+       wx.showToast({
+         title: '不能低于100元',
+         image: '../../images/warn.png',
+         duration: 2000
+       })
+     } else{
+       $http.post('shop/check_money',{
+         formId:formId,
+         money: money
+       })
+         .then(res => {
+           //成功回调
+           var resObj = res.data;
+           console.log('核对提现：', resObj);
+           if (resObj.code == 1) {
+             wx.showModal({
+               title: '提示',
+               content: '您确认要提现' + money + '元到银行卡吗？本次提现收取服务费' + rateMoney+'元',
+               confirmText:'确认提现',
+               success(res) {
+                 if (res.confirm) {
+                   //确认提现
+                 } else if (res.cancel) {
+                   console.log('用户点击取消')
+                 }
+               }
+
+             })
+           } else {
+             wx.showToast({
+               title: resObj.msg,
+               image: '../../images/warn.png'
+             });
+             console.log('请求失败：', resObj.msg);
+           }
+         }).catch(err => {
+           //异常回调
+           console.log('请求失败', err);
+         });
+     }
   },
   /**
    * 生命周期函数--监听页面加载
