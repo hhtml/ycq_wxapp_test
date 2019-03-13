@@ -22,10 +22,10 @@
   
   <view class="articalBottom">
       <view class="articalBottomLeft">
-          <image src='../../images/share-icon-2.png'></image>
+          <image src='../../images/see-icon.png'></image>
           <text>阅读量:({{artical.browse_volume}})</text>
       </view>
-      <view class="articalBottomLeft">
+      <view class="articalBottomRight">
           <text>分享</text>
           <image src='../../images/share-icon-2.png'></image>
           <button open-type='share'></button>
