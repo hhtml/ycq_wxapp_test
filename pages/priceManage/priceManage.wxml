@@ -58,9 +58,9 @@
     <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal'}}">
       <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
       <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSell'>取消订单</view>
-      <form bindsubmit='payOrderSell' bindreset='' report-submit>
+      <form bindsubmit='payMargin' bindreset='' report-submit>
         <view>
-          <button form-type="submit" class="payMoney">支付</button>
+          <button form-type="submit" class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">支付</button>
         </view>
       </form>
     </view>
@@ -124,9 +124,9 @@
     <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal'}}">
       <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
       <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderBuy'>取消订单</view>
-      <form bindsubmit='payOrderBuy' bindreset='' report-submit>
+      <form bindsubmit='payMargin' bindreset='' report-submit>
         <view>
-          <button form-type="submit" class="payMoney">支付</button>
+          <button form-type="submit" class="payMoney" data-pay_type="buyers" data-id="{{item.models_id}}+{{item.bond}}">支付</button>
         </view>
       </form>
     </view>

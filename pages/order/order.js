@@ -161,8 +161,27 @@ Page({
         //推送模板消息回调 
           console.log(res);
           $http.post('store_certification_pay/after_successful_payment', payInfo).then(res => {
+            if (res.data.code == 1) {
+              wx.showToast({
+                title: '支付成功！',
+                icon: 'success',
+                duration: 2000,
+                success: function (res) {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }
 
-            console.log(res);
+              })
+
+            }
+            else {
+              wx.showToast({
+                title: res.data.msg,
+                image: '../../images/warn.png',
+                duration: 500
+              })
+            }
           });
 
         },
