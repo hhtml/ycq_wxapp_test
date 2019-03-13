@@ -9,28 +9,7 @@ Page({
    */
   data: {
     carInfoList: [
-      /* {
-         id: 0,
-         imgSrc: '../../images/car-test_03.png',
-         name: '2011款奥迪A6 2.0T自动舒适版自动舒',
-         priceArea: '10.5-30.5',
-         sale: '30',
-         time: '2011-03',
-         miles: '3万',
-         addr: '成都',
-         distance: '310'
-       },
-       {
-         id: 1,
-         imgSrc: '../../images/car-test_03.png',
-         name: '2011款奥迪A6 2.0T自动舒适版',
-         priceArea: '10.5-30.5',
-         sale: '30',
-         time: '2011-03',
-         miles: '3万',
-         addr: '成都',
-         distance: '310'
-       },*/
+
     ],
     state: 0,
   },

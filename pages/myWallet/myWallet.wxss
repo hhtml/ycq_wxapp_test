@@ -92,15 +92,21 @@ page{
 
 .cashTitle{
   margin:25rpx auto 45rpx auto;
-  text-align: center;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cashTitle image{
+  width: 27rpx;
+  height: 27rpx;
 }
 .cashTitle text{
   font-size: 30rpx;
   color: #f76553;
   position: relative;
+  padding: 0 10rpx;
 }
-.cashTitle text::before{
+/**.cashTitle text::before{
   content: '"';
   color:#f76553;
   font-size: 80rpx;
@@ -115,7 +121,7 @@ page{
   position: absolute;
   right: -45rpx;
   top:-5rpx;
-}
+}*/
 .inviteList{
   background-color: #fff;
   border-radius: 8rpx;

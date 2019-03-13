@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nickname:'李搜搜',
+    /*nickname:'',
     wallet:{
       total_earnings:2500,
       first_earnings:1300,
@@ -28,7 +28,7 @@ Page({
         num: 30,
         money: 9000
       }
-    ]
+    ]*/
   },
   /**
    *事件函数
@@ -71,6 +71,11 @@ Page({
         //异常回调
         console.log('请求失败', err);
       });
+  },
+  nav_to_withdrawcash(){
+      wx.navigateTo({
+        url: '../withdrawCash/withdrawCash',
+      })
   },
   /**
    * 生命周期函数--监听页面加载

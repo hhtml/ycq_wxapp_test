@@ -13,8 +13,8 @@
   padding: 20rpx 0;
 }
 .articalImg{
-  width: 62rpx;
-  height: 62rpx;
+  width: 70rpx;
+  height: 70rpx;
   overflow: hidden;
   float: left;
   margin-right: 18rpx;
@@ -26,13 +26,13 @@
 .articalTime{
   float: left;
   display: flex;
-  height: 62rpx;
+  height:70rpx;
   flex-direction: column;
   justify-content: space-between;
 }
 .articalTime text{
-  font-size: 26rpx;
-  color: #666;
+  font-size: 24rpx;
+  color: #888;
   display: block;
 }
 .articalCont{
