@@ -45,10 +45,13 @@ page{
   margin-left:30rpx;
 }
 .list-wrap{
-  border:1rpx solid red;
   width:100%;
   box-sizing: border-box;
-  height:1342rpx;
+  /* height:1342rpx; */
+  position: absolute;
+  left:0rpx;
+  top:106rpx;
+  height:92.5%;
 }
 /* 搜索结果列表-买车 */
 .searchList-wrap{

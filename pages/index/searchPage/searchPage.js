@@ -78,7 +78,8 @@ Page({
     console.log(e.detail.value)
     if (e.detail.value){
       that.setData({
-        isHistory:false
+        isHistory:false,
+        scroll:true
       })
       
     }else if(that.data.history == ''){
@@ -90,6 +91,7 @@ Page({
     }else{
       that.setData({
         isHistory: true,
+        scroll:false,
         noData: false,
         searchList:''
       })
@@ -117,7 +119,8 @@ Page({
     that.setData({
       inputValue:'',
       searchList:'',
-      noData:false
+      noData:false,
+      scroll:false,
     })
   },
 
