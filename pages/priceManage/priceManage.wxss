@@ -1,96 +1,118 @@
 /* pages/priceManage/priceManage.wxss */
-.selectArea{
+
+.selectArea {
   padding: 0 24rpx;
   border-top: 1rpx solid #f3f3f3;
+  background-color: #fff;
 }
-.selectList{
+.blockInfo{
+  background-color:#fff;margin:0 0 20rpx 0
+}
+
+.selectList {
   display: flex;
   height: 90rpx;
   align-items: center;
   border-bottom: 1rpx solid #f3f3f3;
 }
 
-.selectItem{
+.selectItem {
   flex: 1;
   display: flex;
   justify-content: center;
-  height:90rpx;
+  height: 90rpx;
   align-items: center;
   position: relative;
 }
-.selectItem::after{
-    content:"";
-    width:2rpx;
-    height:40rpx;
-    position:absolute;
-    top:25rpx;
-    left:0;
-    background:#e5e5e5;
+
+.selectItem::after {
+  content: "";
+  width: 2rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 25rpx;
+  left: 0;
+  background: #e5e5e5;
 }
-.selectItem:first-child::after{
-    height: 0;
+
+.selectItem:first-child::after {
+  height: 0;
 }
-.selectItem text{
+
+.selectItem text {
   font-size: 30rpx;
   color: #353535;
   margin-right: 20rpx;
 }
-.activeItem text{
+
+.activeItem text {
   color: #ef4631;
 }
-.carInfoList{
-  padding: 0 24rpx 40rpx 24rpx;
+
+.carInfoList {
+  margin: 0 24rpx 24rpx 24rpx;
+ 
 }
-.carInfoItem{
-   overflow: hidden;
-   padding: 30rpx 0;
-   display: flex;
+
+.carInfoItem {
+  overflow: hidden;
+  padding: 30rpx 0;
+  display: flex;
+  background-color: #fff;
 }
-.carInfoItem:nth-child(1){
+
+.carInfoItem:nth-child(1) {
   border-top: 1px solid #f3f3f3;
 }
-.carImg{
+
+.carImg {
   width: 256rpx;
   height: 167rpx;
-  flex-basis:256rpx;
+  flex-basis: 256rpx;
   position: relative;
 }
-.carImg text{
-  display:inline-block;
+
+.carImg text {
+  display: inline-block;
   padding: 0 20rpx;
   background-color: #ef4631;
   color: #fff;
   height: 35rpx;
-  line-height:35rpx;
+  line-height: 35rpx;
   font-size: 22rpx;
   position: absolute;
   top: -10rpx;
   right: -10rpx;
   border-radius: 7rpx;
 }
-.imgArea{
-   width: 256rpx;
+
+.imgArea {
+  width: 256rpx;
   height: 167rpx;
   overflow: hidden;
 }
-.imgArea image{
-  width:100%;
+
+.imgArea image {
+  width: 100%;
   height: 167rpx;
   display: block;
 }
-.carInfoCont{
+
+.carInfoCont {
   width: 444rpx;
   padding-left: 28rpx;
   box-sizing: border-box;
 }
-.carInfoContWord{
+
+.carInfoContWord {
   width: 100%;
   height: 167rpx;
   display: flex;
-  flex-direction:column;
-  justify-content:space-between;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.carInfoContLine{
+
+.carInfoContLine {
   width: 100%;
   height: 1px;
   border-bottom: 1px dashed #e5e5e5;
@@ -99,24 +121,27 @@
 
 .carName {
   /* overflow: hidden; */
-  word-break:break-all;
-  word-wrap:break-word;
+  word-break: break-all;
+  word-wrap: break-word;
 }
-.carName text{
+
+.carName text {
   font-size: 30rpx;
   color: #353535;
   float: left;
-  overflow:hidden;
-  text-overflow:ellipsis;  
-  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
 .carInfoRow1 {
-  width:100%;
+  width: 100%;
   /* overflow: hidden; */
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.carInfoRow1 text{
+
+.carInfoRow1 text {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -125,161 +150,184 @@
   color: #888;
   /* float: left; */
 }
-.carInfoRow2{
+
+.carInfoRow2 {
   overflow: hidden;
   height: 108rpx;
   display: flex;
   align-items: center;
-  
 }
 
-.carInfoRow2 text{
+.carInfoRow2 text {
   flex: 1;
   text-align: right;
   display: flex;
   align-items: center;
   font-size: 24rpx;
-  justify-content:flex-end;
+  justify-content: flex-end;
   color: #b2b2b2;
   float: left;
 }
-.carInfoRow2 text:nth-child(1){
+
+.carInfoRow2 text:nth-child(1) {
   font-size: 28rpx;
-  color: #ff0000;
+  color: #f00;
   font-weight: bold;
   margin-right: 100rpx;
   flex: 1;
   text-align: left;
   align-items: center;
-  display:inline-block;
+  display: inline-block;
   height: 35rpx;
-  line-height:35rpx;
+  line-height: 35rpx;
   position: absolute;
   border-radius: 7rpx;
 }
 
-.floatArea{
+.floatArea {
   display: flex;
   height: 70rpx;
   align-items: center;
   box-shadow: 0 0 20rpx 0 #888;
   margin-bottom: 30rpx;
-  
+  background-color: #fff;
 }
-.floatImg{
+
+.floatImg {
   width: 50rpx;
   height: 50rpx;
   border-radius: 50%;
   overflow: hidden;
-  margin:0 10rpx;
+  margin: 0 10rpx;
   border: 1rpx solid #666;
 }
-.floatImg image{
-  width:100%;
+
+.floatImg image {
+  width: 100%;
   height: 100%;
 }
-.floatName{
+
+.floatName {
   margin-right: 10rpx;
-  width:100rpx;
+  width: 100rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   height: 70rpx;
   line-height: 70rpx;
 }
-.floatName text{
+
+.floatName text {
   color: #666;
   font-size: 26rpx;
 }
-.floatMessage{
+
+.floatMessage {
   height: 70rpx;
   line-height: 70rpx;
 }
 
-.floatMessage text{
+.floatMessage text {
   font-size: 24rpx;
   color: #888;
 }
-.floatIcon{
+
+.floatIcon {
   width: 60rpx;
   height: 60rpx;
 }
-.bailMoney-wrap{
-  width:100%;
-  height:80rpx;
+
+.bailMoney-wrap {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+
+.bailMoney-wrap form {
   display: flex;
   align-items: center;
 }
-.bailMoney-wrap form{
-  display: flex;
-  align-items: center;
-}
-.bailMoney{
+
+.bailMoney {
   font-size: 28rpx;
-  color:red;
+  color: red;
   font-weight: bold;
 }
-.cancelOrder{
+
+.cancelOrder {
   font-size: 28rpx;
-  border:1rpx solid rgb(102, 102, 102);
+  border: 1rpx solid rgb(102, 102, 102);
   border-radius: 10rpx;
-  padding:10rpx 20rpx;
-  color:rgb(102, 102, 102);
+  padding: 10rpx 20rpx;
+  color: rgb(102, 102, 102);
   margin-left: 50rpx;
   float: left;
 }
-button{
-  background-color:rgb(247, 247, 247);
+
+button {
+  background-color: rgb(247, 247, 247);
   border-radius: 0rpx;
-  padding:0rpx;
-  margin:0rpx;
+  padding: 0rpx;
+  margin: 0rpx;
   display: inline-block;
   line-height: 1;
 }
-button::after{ /*button的边框样式是通过::after方式实现的*/
-  border:none;
+
+button::after {
+  /*button的边框样式是通过::after方式实现的*/
+  border: none;
 }
-.button-hover{ /*点击后样式*/
-  color:#000;
+
+.button-hover {
+  /*点击后样式*/
+  color: #000;
   background-color: rgb(247, 247, 247);
 }
-.payMoney{
+
+.payMoney {
   font-size: 28rpx;
   border-radius: 10rpx;
-  padding:16rpx 50rpx;
-  color:#fff;
+  padding: 16rpx 50rpx;
+  color: #fff;
   background-color: red;
   margin-left: 40rpx;
   float: left;
 }
-.payMoneySuccess{
+
+.payMoneySuccess {
   font-size: 28rpx;
   border-radius: 10rpx;
-  padding:16rpx 50rpx;
-  color:#fff;
+  padding: 16rpx 50rpx;
+  color: #fff;
   background-color: green;
   margin-left: 40rpx;
   float: left;
 }
-.payMoney-wrap{
-  width:100%;
-  height:80rpx;
+
+.payMoney-wrap {
+  width: 100%;
+  height: 80rpx;
   display: flex;
-  justify-content:flex-end;
+  justify-content: flex-end;
   align-items: center;
 }
-.floatIcon image{
+
+.floatIcon image {
   width: 100%;
   height: 100%;
 }
-.floatMessage{
+
+.floatMessage {
   margin-right: auto;
 }
+
 .hiddenText {
-     overflow : hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    word-break: break-all; /* 追加这一行代码 */ 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all; /* 追加这一行代码 */
 }

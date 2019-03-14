@@ -94,7 +94,7 @@ Page({
         formId: e.detail.formId,
         base_level_id: store.level_id
       }
-      auditInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + auditInfo.store_id + '_' + auditInfo.out_trade_no;
+      auditInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + auditInfo.store_id +'_'+ auditInfo.up_level_id+'_' + auditInfo.out_trade_no;
 
       $http.post('store_up_pay/upShop', auditInfo)
         .then(res => {
