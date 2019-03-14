@@ -66,6 +66,7 @@ Page({
                 name: val.models_info.models_name,
                 priceArea: val.models_info.guide_price,
                 price: val.money,
+                quotationtime_format: val.quotationtime_format, 
                 quotationtime: val.quotationtime,
                 sale: val.models_info.browse_volume,
                 time: val.models_info.car_licensetime,
@@ -84,7 +85,8 @@ Page({
                 user_ids: val.user_ids,
                 models_id: val.models_info_id,
                 seller_payment_status: val.seller_payment_status,
-                buyer_payment_status: val.buyer_payment_status
+                buyer_payment_status: val.buyer_payment_status,
+                by_user_ids:val.models_info.user_id
 
               }
               carSellList[index] = obj;
@@ -102,6 +104,7 @@ Page({
                 name: val.models_info.models_name,
                 priceArea: val.models_info.guide_price,
                 price: val.money,
+                quotationtime_format: val.quotationtime_format,
                 quotationtime: val.quotationtime,
                 sale: val.models_info.browse_volume,
                 time: val.models_info.car_licensetime,
@@ -120,7 +123,8 @@ Page({
                 models_id: val.models_info_id,
                 user_ids:val.user_ids,
                 seller_payment_status: val.seller_payment_status,
-                buyer_payment_status: val.buyer_payment_status
+                buyer_payment_status: val.buyer_payment_status,
+                by_user_ids:val.models_info.user_id
               }
               carBuyList[index] = obj;
             });
@@ -197,7 +201,20 @@ Page({
           if (res.errMsg == "requestPayment:ok") {
             //支付成功推送模板
             $http.post('store_margin_pay/after_successful_payment', payInfo).then(res => {
-              console.log(res);
+              if(res.data.code==1){
+                console.log(res);
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'success'
+                });
+                that.request_price_list();
+              }else{
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'error'
+                });
+              }
+             
             });
           }
         },
@@ -219,15 +236,60 @@ Page({
       formId: e.detail.formId,
       seller_payment_status: e.detail.target.dataset.seller_payment_status,//确认买家保证金到账
       trading_models_id: e.detail.target.dataset.id ,//车辆交易id
-      user_ids: e.detail.target.dataset.user_ids
+      user_ids: e.detail.target.dataset.user_ids,//砍价人的id
+      by_user_ids: by_user_ids.by_user_ids ,//卖家的id
+      quotationtime: e.detail.target.dataset.quotationtime
+
     }
  
     $http.post('store_margin_pay/sellerConfirmTheDelivery',params).then(res=>{
-      console.log(res);
+      if (res.data.code == 1) {
+        console.log(res);
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'success'
+        });
+        that.request_price_list();
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'error'
+        });
+      }
     });
     
 
   },
+  //买家确认收货
+  buyersConfirmTheDelivery: function (e) {
+    var that = this; 
+    var params = {
+      formId: e.detail.formId,
+      buyers_payment_status: e.detail.target.dataset.buyers_payment_status,//确认买家保证金到账
+      trading_models_id: e.detail.target.dataset.id,//车辆交易id
+      user_ids: e.detail.target.dataset.user_ids,
+      by_user_ids: e.detail.target.dataset.by_user_ids,//卖家的id
+      quotationtime: e.detail.target.dataset.quotationtime
+    } 
+    $http.post('store_margin_pay/buyersConfirmTheDelivery', params).then(res => {
+      if (res.data.code == 1) { 
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'success',
+          duration:2000
+        });
+        that.request_price_list();
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'clear'
+        });
+      }
+    });
+
+
+  },
+
 
   //取消买车订单
   cancelOrderBuy: function(e) {
