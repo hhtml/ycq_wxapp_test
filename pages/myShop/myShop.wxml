@@ -7,7 +7,11 @@
   <view class="shopName">
     <text>{{shop.name}}</text>
     <text>详细地址：{{shop.addr}}</text>
-    <text class="tip">未实名认证</text>
+    <view class="tip">
+        <text >{{shop.level_name ? shop.level_name : '未实名认证'}}</text>
+        <text wx:if="{{shop.level_id > 1}}" bindtap="upgrade_shop">升级</text>
+    </view>
+    
   </view>
 
   <view class="shopCarType">
@@ -42,8 +46,8 @@
  <!--.店铺特色o/-->
  <!--车型列表-->
     <view class="detailContItem" wx:if="{{active_tab=='车型列表'}}">
-      <view class="carInfoList"  wx:if="{{carList.length != 0}}">
-        <block wx:for="{{carList}}" wx:key="{{item.id}}">
+      <view class="carInfoList"  wx:if="{{carInfoList.length != 0}}">
+        <block wx:for="{{carInfoList}}" wx:key="{{item.id}}">
           <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
             <view class="carImg">
               <view class="imgArea">
@@ -65,8 +69,10 @@
                   <text>浏览量:{{item.browse_volume}}</text>
                 </view>
               </view>
-              <view class="carInfoContLine">
-              </view>
+              <view class="putAndOff">
+                   <text class=" {{item.shelfismenu == 0 ? 'activePut':''}}" catchtap="pullOff" data-index="{{index}}" data-id="{{item.id}}" >下架</text>
+                   <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" catchtap="putOn"  data-index="{{index}}"  data-id="{{item.id}}" >上架</text>
+                </view>
             </view>
           </view>
         </block>

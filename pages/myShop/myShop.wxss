@@ -39,17 +39,35 @@ page{
   font-size: 24rpx;
   color: #888;
 }
-text.tip{
-  display: inline;
-  height: 27rpx;
-  line-height: 27rpx;
+.tip{
+  position: absolute;
+  top:30rpx;
+  right: 38rpx;
+}
+.tip text{
+  margin-bottom: 0;
+  float: left;
+  padding: 0 6rpx;
+}
+.tip text:nth-child(1){
+  display: inline-block;
+  height:35rpx;
+  line-height: 35rpx;
   color: #ef4631;
   border: 1rpx solid #ef4631;
   border-radius: 4rpx;
   font-size: 24rpx;
-  position: absolute;
-  top:30rpx;
-  right: 38rpx;
+}
+.tip text:nth-child(2){
+  display: inline-block;
+  height: 35rpx;
+  line-height: 35rpx;
+  color: #fff;
+  border: 1rpx solid #ef4631;
+  background-color: #ef4631;
+  border-radius: 4rpx;
+  font-size: 24rpx;
+  margin-left: 10rpx;
 }
 .shopCarType{
   padding: 30rpx 20rpx;
@@ -183,4 +201,37 @@ text.tip{
   text-align: center;
   font-size: 28rpx;
   padding: 40rpx 0;
+}
+
+.putAndOff{
+  padding: 20rpx 0;
+  border-bottom: 1px dashed #e5e5e5;
+  display: flex;
+  flex-direction:row-reverse;
+
+}
+.putAndOff text{
+  display:block;
+  width: 90rpx;
+  height:40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
+.putAndOff text{
+  background-color: #fff;
+  color: #888;
+  border:1rpx solid #888;
+  border-radius: 6rpx;
+}
+.putAndOff text:nth-child(1){
+  
+  border-radius: 6rpx;
+  margin-left: 20rpx;
+}
+text.activePut{
+  background-color: #ef4631;
+  color: #fff;
+  border:1rpx solid #ef4631;
+
 }

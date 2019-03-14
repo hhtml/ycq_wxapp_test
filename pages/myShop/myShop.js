@@ -15,7 +15,7 @@ Page({
      },
     active_tab:'店铺特色',
     detail_img_list: [],
-    /*carInfoList:[
+    carInfoList:[
       {
         "id": 12,
         "models_name": "奥迪Q3 20192.0L手动变速",
@@ -29,7 +29,7 @@ Page({
         "factorytime": "1970",
         "modelsimages": "/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
       }
-    ]*/
+    ]
   },
   /**
    * 事件函数
@@ -60,6 +60,8 @@ Page({
           name: data.detail.store_name,
           phone:data.detail.phone,
           addr: data.detail.cities_name+ data.detail.store_address,
+          level_name: data.detail.storelevel.partner_rank,
+          level_id: data.detail.storelevel.id,
           brands: brandList
         };
         if (carList){
@@ -76,6 +78,7 @@ Page({
                 store_description: val.store_description,// "车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系",
                 factorytime: val.factorytime,//"1970",
                 modelsimages: app.globalData.localImgUrl+val.modelsimages,//"/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
+                shelfismenu: val.shelfismenu //是否上下架 0-下架 1-上架
               }
               carList[index]=obj;
           });
@@ -99,6 +102,80 @@ Page({
      var phone=this.data.shop.phone;
      wx.makePhoneCall({
        phoneNumber: phone,
+     })
+  },
+  //车型上架
+  putOn(e) {
+    var id = e.currentTarget.dataset.id;
+    var index = e.currentTarget.dataset.index;
+    var carInfoList = this.data.carInfoList;
+    var $this = this;
+    $http.post('my/Buyshelf', {
+      id: id,
+      shelfismenu: 1
+    })
+      .then(res => {
+        //成功回调
+        var resObj = res.data;
+        if (resObj.code == 1) {
+          var data = resObj.data;
+          wx.showToast({
+            title: resObj.msg,
+          })
+          carInfoList[index].shelfismenu = 1;
+          $this.setData({
+            carInfoList: carInfoList
+          })
+        } else {
+          wx.showToast({
+            title: resObj.msg,
+            image: '../../images/warn.png'
+          })
+          console.log('请求失败：', resObj.msg);
+        }
+      }).catch(err => {
+        //异常回调
+        console.log('请求失败');
+      });
+  },
+  //车型下架
+  pullOff(e) {
+    var id = e.currentTarget.dataset.id;
+    var index = e.currentTarget.dataset.index;
+    var carInfoList = this.data.carInfoList;
+    var $this = this;
+    $http.post('my/Buyshelf', {
+      id: id,
+      shelfismenu: 0
+    })
+      .then(res => {
+        //成功回调
+        var resObj = res.data;
+        if (resObj.code == 1) {
+          var data = resObj.data;
+          wx.showToast({
+            title: resObj.msg,
+          })
+          carInfoList[index].shelfismenu = 0;
+          $this.setData({
+            carInfoList: carInfoList
+          })
+        } else {
+          wx.showToast({
+            title: resObj.msg,
+            image: '../../images/warn.png'
+          })
+          console.log('请求失败：', resObj.msg);
+        }
+      }).catch(err => {
+        //异常回调
+        console.log('请求失败');
+      });
+  },
+  //去升级
+  upgrade_shop(){
+     wx.navigateTo({
+       url: '../mine/upgrade/upgrade',
      })
   },
   /**
