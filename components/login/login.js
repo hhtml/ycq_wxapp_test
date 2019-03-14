@@ -47,7 +47,6 @@ Component({
 
             // 已经授权，可以直接调用 getUserInfo 获取头像昵称
             console.log('已经授权');
-
             wx.getUserInfo({
               withCredentials: true,
               success: function (res) {
@@ -104,6 +103,12 @@ Component({
                       // wx.setStorageSync('userInfo', response.data.userInfo);
                       wx.setStorageSync('user_id', response.data.userInfo.user_id);
                       // typeof cb == "function" && cb(response.data.userInfo);
+
+                        //刷新当前页面
+                        var pages = getCurrentPages();
+                        var prevPage = pages[pages.length - 1];  //当前页面)
+                        prevPage.onLoad()
+
                     } else {
                       wx.setStorageSync('token', '');
                       console.log("用户登录失败")
@@ -132,6 +137,12 @@ Component({
         this.check();
       }
 
+    },
+    //登陆界面点击友车圈服务协议跳转到服务协议界面事件
+    goServiceAgreement: function () {
+      wx.navigateTo({
+        url: '../mine/serviceAgreement/serviceAgreement'
+      })
     },
   }
 })

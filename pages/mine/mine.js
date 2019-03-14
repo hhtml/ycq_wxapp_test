@@ -131,17 +131,8 @@ Page({
    */
   onLoad: function(options) {
     var that = this
-    console.log(options)
-    //var user_id=wx.getStorageSync("user_id");
-    // this.check();
-    wx.getStorage({
-      key: 'user_id',
-      success(res) {
-        console.log(res.data)
-        that.request_mine();
-      }
-    })
-    // this.request_mine();
+    // var user_id=wx.getStorageSync("user_id");
+    this.request_mine();
   },
   //测试支付
   pay: function(e) {
@@ -428,117 +419,6 @@ Page({
       }
     })
   },
-
-
-  /***
-   * 
-   * 登录相关
-   */
-  /*close_the_log: function() {
-    this.check();
-  },
-  //显示登录或授权提示
-  showLoginModal: function() {
-    this.setData({
-      settingShow: true
-    });
-    wx.hideTabBar();
-  },
-  //判断是否登录
-  check: function() {
-
-    var that = this;
-    wx.getSetting({
-      success: function(res) {
-        if (res.authSetting['scope.userInfo']) {
-
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          console.log('已经授权');
-          wx.getUserInfo({
-            withCredentials: true,
-            success: function(res) {
-              that.setData({
-                settingShow: false
-              })
-              wx.showTabBar();
-
-              that.login();
-            },
-            fail: function() {
-              that.showLoginModal();
-
-            }
-          });
-        } else {
-          that.showLoginModal();
-
-        }
-      },
-      fail: function() {
-        that.showLoginModal();
-      }
-    });
-    // this.login(cb);
-
-  },
-  login: function() {
-    var that = this;
-    var token = wx.getStorageSync('token') || '';
-    //调用登录接口
-    wx.login({
-      success: function(res) {
-        if (res.code) {
-          //发起网络请求
-          wx.getUserInfo({
-            success: function(ures) {
-              wx.request({
-                url: app.globalData.url + 'user/login',
-                data: {
-                  code: res.code,
-                  rawData: ures.rawData,
-                  token: token
-                },
-                method: 'post',
-                header: {
-                  "Content-Type": "application/x-www-form-urlencoded",
-                },
-                success: function(lres) {
-                  var response = lres.data
-                  if (response.code == 1) {
-                    that.data.userInfo = response.data.userInfo;
-
-                    wx.setStorageSync('userInfo', response.data.userInfo);
-                    wx.setStorageSync('user_id', response.data.userInfo.user_id);
-                  } else {
-                    wx.setStorageSync('token', '');
-                    console.log("用户登录失败")
-                    that.showLoginModal();
-                  }
-                }
-              });
-            },
-            fail: function(res) {
-              that.showLoginModal();
-            }
-          });
-        } else {
-          that.showLoginModal();
-        }
-      }
-    });
-  },
-  getuserinfo: function(e) {
-    if (!e.detail.userInfo) {
-
-    } else {
-      console.log('userInfo:', e.detail.userInfo);
-      this.setData({
-        settingShow: false
-      });
-      this.check();
-    }
-
-  },*/
 
 
   /**

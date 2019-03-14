@@ -3,7 +3,6 @@
 const app = getApp();
 var $http = require('../../utils/http.js');
 var util = require('../../utils/util.js');
-var sharePath;
 
 Page({
   data: {
@@ -215,11 +214,8 @@ Page({
   },
 
   onLoad: function (options) {
-    if (options.path){
-      sharePath = options.path
-    }
     this.request_index_info();
-    this.check();
+    // this.check();
   },
   nav_to_classify: function(e) {
     var index = e.currentTarget.dataset.index;
@@ -356,144 +352,7 @@ Page({
       url: '../carDetail/carDetail?carId=' + carId + '&type=' + type,
     })
   },
-  /***
-   * 
-   * 登录相关
-   */
-  close_the_log: function() {
-    this.check();
-  },
-  //显示登录或授权提示
-  showLoginModal: function() {
-    this.setData({
-      settingShow: true
-    });
-    wx.hideTabBar();
-  },
-  // // set globalData
-  // setGlobalData(data) {
-  //   return wx.setStorageSync('globalData', data || {})
-  // },
-  // // get globalData
-  // getGlobalData() {
-  //   return wx.getStorageSync('globalData') || {}
-  // },
-  // // update globalData
-  // updateGlobalData(data) {
-  //   return this.setGlobalData(Object.assign({}, this.getGlobalData(), data || {}))
-  // },
-  //判断是否登录
-  check: function(cb) {
-
-    var that = this;
-    // if (that.getGlobalData().userInfo) {
-    //   typeof cb == "function" && cb(that.getGlobalData().userInfo);
-    // } else { 
-
-      wx.getSetting({
-        success: function(res) {
-          if (res.authSetting['scope.userInfo']) {
-
-            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-            console.log('已经授权');
-            // wx.reLaunch({
-            //   url: '../../' + sharePath
-            // })
-            wx.getUserInfo({
-              withCredentials: true,
-              success: function(res) {
-                that.setData({
-                  settingShow: false
-                })
-                wx.showTabBar();
-
-                that.login();
-              },
-              fail: function() {
-                that.showLoginModal();
-
-              }
-            });
-          } else {
-            that.showLoginModal();
-
-          }
-        },
-        fail: function() {
-          that.showLoginModal();
-        }
-      });
-    // }
-    // this.login(cb);
-
-  },
-  login: function() {
-    var that = this;
-    var token = wx.getStorageSync('token') || '';
-    //调用登录接口
-    wx.login({
-      success: function(res) {
-        if (res.code) {
-          //发起网络请求
-          wx.getUserInfo({
-            success: function(ures) {
-              wx.request({
-                url: app.globalData.url + 'user/login',
-                data: {
-                  code: res.code,
-                  rawData: ures.rawData,
-                  token: token
-                },
-                method: 'post',
-                header: {
-                  "Content-Type": "application/x-www-form-urlencoded",
-                },
-                success: function(lres) {
-                  var response = lres.data
-                  if (response.code == 1) {
-                    that.data.userInfo = response.data.userInfo;
-                    // that.updateGlobalData(response.data);
-                    wx.setStorageSync('token', response.data.userInfo.token)
-                    // wx.setStorageSync('userInfo', response.data.userInfo);
-                    wx.setStorageSync('user_id', response.data.userInfo.user_id);
-                    // typeof cb == "function" && cb(response.data.userInfo);
-
-
-                    // if (sharePath){
-                    //   wx.reLaunch({
-                    //     url: '../../' + sharePath
-                    //   })
-                    // }
-                  } else {
-                    wx.setStorageSync('token', '');
-                    console.log("用户登录失败")
-                    that.showLoginModal();
-                  }
-                }
-              });
-            },
-            fail: function(res) {
-              that.showLoginModal();
-            }
-          });
-        } else {
-          that.showLoginModal();
-        }
-      }
-    });
-  },
-  getuserinfo: function(e) {
-    if (!e.detail.userInfo) {
-
-    } else {
-      // console.log('userInfo:', e.detail.userInfo);
-      this.setData({
-        settingShow: false
-      });
-      this.check();
-    }
-
-  },
+  
   onPullDownRefresh() {
     this.request_index_info();
 
@@ -511,16 +370,10 @@ Page({
     return {
       title: that.data.shareInfo.shares_title, // 转发后 所显示的title
       path: '/pages/index/index', // 相对的路径
-      imgPathimageUrl: that.data.shareInfo.shares_img
+      imageUrl: app.globalData.imgUrl+that.data.shareInfo.shares_img
     }
   },
 
-  //登陆界面点击友车圈服务协议跳转到服务协议界面事件
-  goServiceAgreement: function() {
-    wx.navigateTo({
-      url: '../mine/serviceAgreement/serviceAgreement'
-    })
-  },
   onShow: function() {
     this.request_index_info();
   }
