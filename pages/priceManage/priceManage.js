@@ -50,7 +50,8 @@ Page({
         //成功回调
         var resObj = res.data;
         console.log('报价管理：', resObj);
-        if (resObj.code == 1) {
+        if (resObj.code == 1 && resObj.data != null) {
+
           var data = resObj.data;
           var carSell = data.QuotedPriceList.sell;
           var carBuy = data.QuotedPriceList.buy;
@@ -80,8 +81,11 @@ Page({
                 bond: val.bond,
                 cancel_order: val.cancel_order,
                 quoted_id: val.id,
+                user_ids: val.user_ids,
                 models_id: val.models_info_id,
-                seller_payment_status: val.seller_payment_status
+                seller_payment_status: val.seller_payment_status,
+                buyer_payment_status: val.buyer_payment_status
+
               }
               carSellList[index] = obj;
             });
@@ -114,7 +118,9 @@ Page({
                 cancel_order: val.cancel_order,
                 quoted_id: val.id,
                 models_id: val.models_info_id,
-                seller_payment_status: val.seller_payment_status
+                user_ids:val.user_ids,
+                seller_payment_status: val.seller_payment_status,
+                buyer_payment_status: val.buyer_payment_status
               }
               carBuyList[index] = obj;
             });
@@ -124,7 +130,7 @@ Page({
             carSellList
           });
         } else {
-          console.log('请求失败：', data.msg);
+          console.log('数据为空', resObj.msg);
         }
       }).catch(err => {
         //异常回调
@@ -169,9 +175,9 @@ Page({
       trading_models_id: e.detail.target.dataset.id.split('+')[0],
       // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
       money: 0.01,
-      user_type: e.detail.target.dataset.pay_type 
-    } 
-    payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no; 
+      user_type: e.detail.target.dataset.pay_type
+    }
+    payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no;
     $http.post('store_margin_pay/marginPay', payInfo).then(res => {
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;
@@ -187,13 +193,13 @@ Page({
         'signType': 'MD5',
         'paySign': paySign,
         'success': function(res) {
-          //支付成功推送模板
-          console.log(res); 
-          $http.post('store_margin_pay/after_successful_payment', payInfo).then(res => {
-            console.log(res);
-          });
-          //支付成功之后的操作
-
+          console.log(res);
+          if (res.errMsg == "requestPayment:ok") {
+            //支付成功推送模板
+            $http.post('store_margin_pay/after_successful_payment', payInfo).then(res => {
+              console.log(res);
+            });
+          }
         },
         'fail': function(res) {
           console.log('用户取消支付,需要重载页面');
@@ -205,6 +211,22 @@ Page({
       });
 
     });
+  },
+  //卖家确认发货
+  sellerConfirmTheDelivery: function(e) {
+    var that = this;
+    var params = {
+      formId: e.detail.formId,
+      seller_payment_status: e.detail.target.dataset.seller_payment_status,//确认买家保证金到账
+      trading_models_id: e.detail.target.dataset.id ,//车辆交易id
+      user_ids: e.detail.target.dataset.user_ids
+    }
+ 
+    $http.post('store_margin_pay/sellerConfirmTheDelivery',params).then(res=>{
+      console.log(res);
+    });
+    
+
   },
 
   //取消买车订单
