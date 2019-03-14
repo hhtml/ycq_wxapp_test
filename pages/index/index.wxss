@@ -352,7 +352,7 @@ page{
   border-radius: 7rpx;
 }
 
-.logAreaBg{
+/* .logAreaBg{
   width: calc(100vw - 0rpx);
   height: calc(100vh - 0rpx);
   position: fixed;
@@ -361,7 +361,6 @@ page{
   background: rgba(0, 0, 0, 0.7);
   z-index: 9999;
 }
-/* 更改 */
 .logArea{
 width:560rpx;
 height: 520rpx;
@@ -372,13 +371,11 @@ padding: 40rpx 0;
 position: relative;
 overflow: hidden;
 }
-/* 更改 */
 .logArea image{
 display: block;
 width: 26%;
 margin: 0 auto;
 }
-/* 更改 */
 .logArea text{
 display: block;
 text-align: center;
@@ -429,7 +426,7 @@ margin-top: 66rpx;
   display: block;
   text-align: center;
   text-decoration: underline;
-}
+} */
 
 /* 页面悬浮分享功能 */
 .share{

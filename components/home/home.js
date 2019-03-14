@@ -18,6 +18,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    goHome:function(){
+      wx.reLaunch({
+        url: '../../../../index/index'
+      })
+    }
   }
 })

@@ -179,13 +179,15 @@
     <text bindtap='goServiceAgreement'>友车圈服务协议</text>
   </view>
 </view>
-<!-- <login wx:if="{{settingShow}}"></login> -->
 
 <!-- 页面悬浮分享功能 -->
 <button class="share" open-type="share">分享</button>
 
 <!-- 提示框组件 -->
 <tips wx:if="{{showModal}}" paramAtoB="{{msg}}+{{sell_car_condition.code}}"></tips>
+
+<!-- 引入登录组件 -->
+<login></login>
 
 <!-- 模态对话框 -->
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal2}}"></view>

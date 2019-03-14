@@ -1,9 +1,20 @@
 /* components/home/home.wxss */
 .home-wrap{
-  width:60rpx;
-  height:100rpx;
-  border:1rpx solid red;
+  width:80rpx;
+  height:80rpx;
   position: fixed;
-  right:50rpx;
-  bottom:15%;
+  right:40rpx;
+  bottom:34%;
+  font-size: 28rpx;
+  background-color: rgba(243, 85, 65,0.81);
+  color:#fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.home-wrap image{
+  width:50rpx;
+  height:50rpx;
 }

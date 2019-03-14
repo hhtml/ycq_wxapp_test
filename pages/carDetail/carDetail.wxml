@@ -182,6 +182,9 @@
 <!-- 引入提示框组件 -->
 <tips wx:if="{{showModal}}" paramAtoB="{{msg}}+{{1}}"></tips>
 
+<!-- 引入登录组件 -->
+<login></login>
+
 <!-- 模态对话框 -->
 <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal2}}"></view>
 

@@ -2,7 +2,6 @@
 var $http = require('./utils/http.js');
 App({
   onLaunch: function (options) {
-    console.log(options)
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -35,11 +34,6 @@ App({
         }
       }
     })
-    // if (options.scene == 1036) {
-    //   wx.reLaunch({
-    //     url: '/pages/index/index?path=' + options.path
-    //   })
-    // }
   },
  
   
