@@ -252,6 +252,15 @@ button::after{ /*button的边框样式是通过::after方式实现的*/
   margin-left: 40rpx;
   float: left;
 }
+.payMoneySuccess{
+  font-size: 28rpx;
+  border-radius: 10rpx;
+  padding:16rpx 50rpx;
+  color:#fff;
+  background-color: green;
+  margin-left: 40rpx;
+  float: left;
+}
 .payMoney-wrap{
   width:100%;
   height:80rpx;
