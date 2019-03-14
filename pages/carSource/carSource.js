@@ -316,9 +316,14 @@ Page({
    */
   onPullDownRefresh: function () {
     this.request_car_source(1);
+    var screen = {
+      id: 1,
+      name: '最新发布'
+    }
     this.setData({
       city_id: '',
-      brand_id: ''
+      brand_id: '',
+      screen: screen
     })
   },
 

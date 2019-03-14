@@ -1,0 +1,9 @@
+/* components/home/home.wxss */
+.home-wrap{
+  width:60rpx;
+  height:100rpx;
+  border:1rpx solid red;
+  position: fixed;
+  right:50rpx;
+  bottom:15%;
+}

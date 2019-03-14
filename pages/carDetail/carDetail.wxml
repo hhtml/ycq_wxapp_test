@@ -3,6 +3,9 @@
 <!-- 自定义导航栏 -->
 <view class="nav-wrap">
   <view class="nav-title" style="padding:{{statusBarHeight+5}}px 0 8px 24rpx;">
+    <view class="return" bindtap="returnPage">
+      <image src="/images/return.png"></image>
+    </view>
     <view class="zhuye-wrap" bindtap='goHome'>
       <image src="/images/home.png"></image>
       <view>主页</view>

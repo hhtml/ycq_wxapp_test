@@ -1,0 +1,3 @@
+<!--components/home/home.wxml-->
+
+<view class="home-wrap"></view>

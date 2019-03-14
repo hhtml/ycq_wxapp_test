@@ -1,5 +1,6 @@
 <!--pages/index/searchPage/searchPage.wxml-->
 
+  <!-- 顶部搜索框 -->
 <view class="search-wrap">
   <input class="search" bindinput="search" value='{{inputValue}}' focus="{{focus}}" bindblur="getHistory"></input>
   <image src="/images/search-icon.png"></image>
@@ -7,7 +8,9 @@
   <view class="cancel" bindtap='cancel'>取消</view>
 </view>
 
-<scroll-view class="list-wrap" scroll-y="true">
+
+  <!-- 搜索结果列表 -->
+<scroll-view class="list-wrap" scroll-y="true" wx:if="{{scroll}}">
   <!-- 搜索结果列表-买车 -->
 <view class="searchList-wrap" wx:for="{{searchList.buy}}" wx:key="{{item.id}}">
   <view class="name" bindtap='buyCarName'>
@@ -20,7 +23,7 @@
   </view>
 </view>
 
-<!-- 搜索结果列表-卖车 -->
+  <!-- 搜索结果列表-卖车 -->
 <view class="searchListSell-wrap" wx:for="{{searchList.sell}}" wx:key="{{item.id}}">
   <view class="sellName"bindtap="sellCarName">
   <image src="/images/search-icon.png"></image>
@@ -48,14 +51,13 @@
 <view class="searchHistoryContent">
   <view class="searchName" wx:for="{{history}}" wx:key="{{item.index}}" bindtap='searchHistory'>
   {{item}}
-  <!-- <view class="delete">X</view> -->
   </view>
 </view>
 </view>
 
+<!-- 暂无数据界面 -->
 <view class="noData" wx:if="{{noData}}">
   <image src="/images/404.png" mode='widthFix'></image>
-  <!-- <view class="data">暂无数据</view> -->
 </view>
 
 <view class="data" wx:if="{{noData}}">暂无数据</view>

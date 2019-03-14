@@ -192,7 +192,18 @@ Page({
       showModal2: false
     })
   },
-
+  //自定义nav返回主页事件
+  goHome: function () {
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
+  },
+  //点击返回按钮事件
+  returnPage: function () {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
 
   //点击电话联系事件
   makePhoneCall() {
@@ -358,10 +369,5 @@ Page({
     }
   },
   
-  //自定义nav返回主页事件
-  goHome:function(){
-    wx.switchTab({
-      url: '/pages/index/index'
-    })
-  }
+  
 })

@@ -1,6 +1,7 @@
 { 
   "usingComponents": {
-    "tips": "/components/tips/tips"
+    "tips": "/components/tips/tips",
+    "login":"/components/login/login"
   },
   "navigationBarBackgroundColor":"#fff",
   "navigationStyle":"custom"

@@ -3,6 +3,7 @@
 const app = getApp();
 var $http = require('../../utils/http.js');
 var util = require('../../utils/util.js');
+var sharePath;
 
 Page({
   data: {
@@ -86,30 +87,30 @@ Page({
       //   url: path,
       // })
       switch (that.data.sell_car_condition.code){
-        case '0': //认证通过
+        case 0: //认证通过
           wx.navigateTo({
             url: path,
           })
           break;
-        case '1': //去认证
+        case 1: //去认证
           that.setData({
             msg: that.data.sell_car_condition.msg,
             showModal: true
           })
           break;
-        case '3': //审核中/待审核
+        case 3: //审核中/待审核
           that.setData({
             msg: that.data.sell_car_condition.msg,
             showModal2: true
           })
           break;
-        case '4': //去付费
+        case 4: //去付费
           that.setData({
             msg: that.data.sell_car_condition.msg,
             showModal: true
           })
           break;
-        case '5': //审核不通过
+        case 5: //审核不通过
           that.setData({
             msg: that.data.sell_car_condition.msg,
             showModal: true
@@ -127,25 +128,25 @@ Page({
       //   url: path,
       // })
       switch (that.data.sell_car_condition.code){
-        case '1': //去认证
+        case 1: //去认证
           that.setData({
             msg: that.data.buy_car_condition.msg,
             showModal: true
           })
           break;
-        case '3': //审核中/待审核
+        case 3: //审核中/待审核
           that.setData({
             msg: that.data.buy_car_condition.msg,
             showModal2: true
           })
           break;
-        case '4': //去付费
+        case 4: //去付费
           that.setData({
             msg: that.data.buy_car_condition.msg,
             showModal: true
           })
           break;
-        case '5': //审核不通过
+        case 5: //审核不通过
           that.setData({
             msg: that.data.buy_car_condition.msg,
             showModal: true
@@ -213,7 +214,10 @@ Page({
       });*/
   },
 
-  onLoad: function() {
+  onLoad: function (options) {
+    if (options.path){
+      sharePath = options.path
+    }
     this.request_index_info();
     this.check();
   },
@@ -392,7 +396,9 @@ Page({
 
             // 已经授权，可以直接调用 getUserInfo 获取头像昵称
             console.log('已经授权');
-
+            // wx.reLaunch({
+            //   url: '../../' + sharePath
+            // })
             wx.getUserInfo({
               withCredentials: true,
               success: function(res) {
@@ -451,6 +457,13 @@ Page({
                     // wx.setStorageSync('userInfo', response.data.userInfo);
                     wx.setStorageSync('user_id', response.data.userInfo.user_id);
                     // typeof cb == "function" && cb(response.data.userInfo);
+
+
+                    // if (sharePath){
+                    //   wx.reLaunch({
+                    //     url: '../../' + sharePath
+                    //   })
+                    // }
                   } else {
                     wx.setStorageSync('token', '');
                     console.log("用户登录失败")

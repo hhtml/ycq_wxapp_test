@@ -17,17 +17,17 @@ Page({
     detail_img_list: [],
     carInfoList:[
       {
-        "id": 12,
-        "models_name": "奥迪Q3 20192.0L手动变速",
-        "guide_price": "100万",
-        "car_licensetime": "2019-03",
-        "kilometres": "0.1万公里",
-        "parkingposition": "北京市 北京市",
-        "browse_volume": 5750,
-        "createtime": 1551410619,
-        "store_description": "车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系",
-        "factorytime": "1970",
-        "modelsimages": "/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
+        // "id": 12,
+        // "models_name": "奥迪Q3 20192.0L手动变速",
+        // "guide_price": "100万",
+        // "car_licensetime": "2019-03",
+        // "kilometres": "0.1万公里",
+        // "parkingposition": "北京市 北京市",
+        // "browse_volume": 5750,
+        // "createtime": 1551410619,
+        // "store_description": "车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系",
+        // "factorytime": "1970",
+        // "modelsimages": "/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
       }
     ]
   },
@@ -84,6 +84,7 @@ Page({
           });
         }
         this.setData({
+          carInfoList: carList,
           shop, carList
         })
       } else {

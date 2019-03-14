@@ -1,4 +1,5 @@
 <!--pages/mine/mine.wxml-->
+<login wx:if="{{settingShow}}"></login>
 
 <view class="headBg">
 </view>
@@ -157,7 +158,7 @@
 </view>
 
 <!-- 登录 -->
-<view class="logAreaBg" wx:if="{{settingShow}}" bindtouchmove='bindtouchmove'>
+<!-- <view class="logAreaBg" wx:if="{{settingShow}}" bindtouchmove='bindtouchmove'>
   <view class="logArea">
     <image src='../../images/auth-icon.png' mode='widthFix'></image>
     <text>您暂时未登录</text>
@@ -172,4 +173,4 @@
     <text>登录即为默认同意并会遵守</text>
     <text bindtap='goServiceAgreement'>友车圈服务协议</text>
   </view>
-</view>
+</view> -->

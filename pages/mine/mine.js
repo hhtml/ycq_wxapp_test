@@ -130,9 +130,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var that = this
+    console.log(options)
     //var user_id=wx.getStorageSync("user_id");
     // this.check();
-    this.request_mine();
+    wx.getStorage({
+      key: 'user_id',
+      success(res) {
+        console.log(res.data)
+        that.request_mine();
+      }
+    })
+    // this.request_mine();
   },
   //测试支付
   pay: function(e) {
@@ -288,19 +297,18 @@ Page({
   erWeiMa: function() {
     var $this = this;
     var store_has_many = $this.data.store_has_many || [];
-
+    if ($this.data.userInfo.invitation_code_img == null) { //没有生成二维码
+      $http.post('my/setQrcode')
+        .then(res => {
+          $this.request_mine() //重新请求数据
+        }).catch(err => {
+          //异常回调
+          console.log('请求失败,异常回调');
+        });
+    }
     if (store_has_many.length > 0) { 
       if (store_has_many[0].auditstatus == 'paid_the_money') {
         if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
-          if ($this.data.userInfo.invitation_code_img == '') { //没有生成二维码
-            $http.post('my/setQrcode')
-              .then(res => {
-                $this.request_mine() //重新请求数据
-              }).catch(err => {
-                //异常回调
-                console.log('请求失败,异常回调');
-              });
-          }
           $this.createNewImg()
           $this.setData({
             showModal: true
@@ -311,6 +319,12 @@ Page({
             icon: 'loading',
             duration: 1000
           })
+          setTimeout(function(){
+            $this.createNewImg()
+            $this.setData({
+              showModal: true
+            })
+          },1000)
         }
 
       } else if (store_has_many[0].auditstatus == 'in_the_review') {
@@ -364,9 +378,8 @@ Page({
     var height
     wx.getSystemInfo({
       success(res) {
-
-        width = res.windowWidth
-        height = res.windowHeight
+        width = res.screenWidth
+        height = res.screenHeight
       }
     })
     var ctx = wx.createCanvasContext('mycanvas');
@@ -374,7 +387,7 @@ Page({
     var path2 = $this.data.userInfo.avatar //头像图片
     var name = $this.data.userInfo.nickname
     var invite_code = $this.data.userInfo.invite_code
-    ctx.drawImage(path, 0, 0, 0.8 * width, 0.72 * height); //绘制图片模板的背景图片
+    ctx.drawImage(path, 0, 0, 0.8 * width, 0.58 * height); //绘制图片模板的背景图片
     ctx.drawImage(path2, 30, 20, 60, 60); // 绘制头像
     //绘制昵称
     ctx.setFontSize(16);
@@ -384,10 +397,10 @@ Page({
     //绘制邀请码
     ctx.setFontSize(18);
     ctx.setFillStyle('#000');
-    ctx.fillText(invite_code, 0.8 * width * 0.25, 0.72 * height * 0.82);
+    ctx.fillText(invite_code, 0.8 * width * 0.25, 0.58 * height * 0.82);
     ctx.stroke();
     var path1 = $this.data.userInfo.invitation_code_img //二维码图片
-    ctx.drawImage(path1, 0.8 * width * 0.7, 0.72 * height * 0.72, 0.8 * width * 0.25, 0.8 * width * 0.25); //绘制图片模板的二维码
+    ctx.drawImage(path1, 0.8 * width * 0.7, 0.58 * height * 0.72, 0.8 * width * 0.25, 0.8 * width * 0.25); //绘制图片模板的二维码
     ctx.draw(true, () => {
       var that = this
       wx.canvasToTempFilePath({
