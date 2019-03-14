@@ -11,7 +11,7 @@
    <!-- <view class="titleItem {{activeId ==2 ? 'activeItem':''}}"  data-id="2" bindtap='switchTitle'>
        <text>已完成</text>
        <text></text>
-    </view>-->
+    </view> -->
 </view>
 
 
@@ -46,14 +46,16 @@
                           <button form-type="submit"  wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton'>去支付</button>
                           <text wx:else>去支付</text>
                         </form>
-                        <!-- <text wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton' bindtap='payOrder'>去支付</text>
-                        <text wx:else>去支付</text> -->
                     </view>
                </view>
             </view>
             
         </view>
     </block>
+    <view class="noOrder" wx:if="{{toBePaidList == ''}}">
+      <image src="/images/404.png" mode="widthFix"></image>
+      <view>暂无订单</view>
+    </view>
 </view>
 
 <view class="orderList" wx:if="{{activeId==1}}">
@@ -64,7 +66,7 @@
                     <image src='{{item.avatar}}'></image>
                 </view>
                 <view class="infoName">
-                    <text>{{item.nickname}}</text>
+                    <text>{{item.companystoreone.store_name}}</text>
                 </view>
                 <view class="infoPrice">
                     <text>店铺认证费：￥{{item.certification_fee}}</text>
@@ -72,27 +74,34 @@
             </view>
             <view class="orderDomainBg">
                 <view class="orderDomain">
-                    <view class="orderSchedule" style="opacity:{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review'||item.auditstatus=='wait_the_review' ? '1' : '0'}};">   
+                    <!-- <view class="orderSchedule" style="opacity:{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review'||item.auditstatus=='wait_the_review' ? '1' : '0'}};">   
                         <text class="{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review'||item.auditstatus=='wait_the_review' ? 'activeSche' : ''}}">待审</text>
                         <text class="{{item.auditstatus=='pass_the_audit'||item.auditstatus=='in_the_review' ? 'activeSche' : ''}}">审核中</text>
                         <text class="{{item.auditstatus=='pass_the_audit' ? 'activeSche' : ''}}">完成</text>
+                    </view> -->
+                    <view class="paytime">
+                      <text>{{item.payment_time}}</text>
                     </view>
-                    <view class="orderHandle" wx:if="{{item.auditstatus=='paid_the_money'}}">
+                    <view class="orderHandle" wx:if="{{item.companystore_auditstatus=='paid_the_money'}}">
                         <text wx:if="{{item.can_upgrade=='1'}}" class="activeButton" bindtap='upgradeOrder'>升级</text>
                         <text wx:else>升级</text>
                     </view>
-                    <view class="orderHandle" wx:else>
+                    <!-- <view class="orderHandle" wx:else>
                         <text bindtap='cancelOrder' data-store="{{item.companystore_id}}">取消订单</text>
                         <form bindsubmit='payOrder' bindreset='' report-submit id="{{item.certification_fee}}+{{item.companystore_id}}">
                           <button form-type="submit"  wx:if="{{item.auditstatus=='pass_the_audit'}}" class='activeButton'>去支付</button>
                           <text wx:else>去支付</text>
                         </form>
-                    </view>
+                    </view> -->
                </view>
             </view>
             
         </view>
     </block>
+    <view class="noOrder" wx:if="{{paidList == ''}}">
+      <image src="/images/404.png" mode="widthFix"></image>
+      <view>暂无订单</view>
+    </view>
 </view>
 <!--已完成-->
 <!--<view class="orderList" wx:if="{{activeId==2}}">

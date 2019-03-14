@@ -1,4 +1,5 @@
 {
   "usingComponents": {},
-  "disableScroll": true
+  "disableScroll": true,
+  "navigationBarTitleText": "搜索车辆"
 }

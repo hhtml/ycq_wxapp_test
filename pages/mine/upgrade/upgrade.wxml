@@ -224,12 +224,13 @@
              checked="{{item.checked}}" 
              type="checkbox" 
              id="{{item.id}}"
-             disabled="{{item.id >= store.level_id}}"/>
+             disabled="{{item.condition == 'disabled'}}"/>
               <text>{{item.partner_rank}} {{item.money}}元/年</text>
             </view>
             <view>
               <text >（{{item.explain}}）</text>
             </view>
+            <view class="marker" wx:if="{{item.id == store.level_id}}">✓</view>
           </label>
     </view>
   </view>

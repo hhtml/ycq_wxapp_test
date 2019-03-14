@@ -160,6 +160,7 @@ Page({
   },
   //切换标题
   switchTitle(e){
+    console.log(e)
       this.setData({
         activeId:e.currentTarget.dataset.id
       })

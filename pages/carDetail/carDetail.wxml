@@ -27,7 +27,7 @@
       <text class='money'>心里价：{{car.price}}</text>
       <view class='userInfo'>
         <image src='{{car.userInfo.avatar}}' class='userInfoImg' mode=' '></image>
-        {{car.userInfo.nickname}} 在{{car.createtime}} 发布
+        {{car.userInfo.real_name}} 在{{car.createtime}} 发布
       </view>
     </block>
 

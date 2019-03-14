@@ -89,7 +89,7 @@ Page({
         // console.log(this.cut_str(data.detail.user.nickname, 6));
         var car = {
           id: data.detail.id,
-          is_authentication: data.is_authentication,
+          is_authentication: data.can_quote.is_authentication,
           banner: himgUrl + (data.detail.brand.brand_default_images ? data.detail.brand.brand_default_images : data.detail.modelsimages[0]),
           brand_name: data.detail.brand.name,
           name: data.detail.models_name,
@@ -109,7 +109,7 @@ Page({
           default: data.detail.default,
           defaultUrl: app.globalData.imgUrl,
           can_quote: data.can_quote,
-          user:data.detail.user
+          user: data.detail.user
         }
         form.phone = data.detail.user.mobile;
         var detailImages = data.detail.modelsimages;
@@ -146,43 +146,38 @@ Page({
   priceLog() {
     var that = this
     var isOffer = that.data.car.isOffer;
-    var is_authentication = that.data.car.can_quote.is_authentication
+    var is_authentication = that.data.car.is_authentication
     var user = that.data.car.user
-    wx.getStorage({
-      key: 'user_id',
-      success(res) {
-        var user_id = res.data
-        if (user_id == user.id){
+    var userInfo = that.data.car.userInfo
+    if (userInfo.id == user.id) {
+      wx.showToast({
+        title: '不能给自己报价',
+        image: '../../images/warn.png'
+      })
+    } else {
+      if (is_authentication == 1) { //未认证
+        that.setData({
+          msg: that.data.car.can_quote.msg,
+          showModal: true
+        })
+      } else if (is_authentication == 2) { //未完成认证
+        that.setData({
+          msg: that.data.car.can_quote.msg,
+          showModal2: true
+        })
+      } else { //已完成认证
+        if (isOffer == 1) {
           wx.showToast({
-            title: '不能给自己报价',
+            title: '您已报过价',
             image: '../../images/warn.png'
           })
-        }else {
-          if (is_authentication == 1) { //未认证
-            that.setData({
-              msg: that.data.car.can_quote.msg,
-              showModal: true
-            })
-          } else if (is_authentication == 2) { //未完成认证
-            that.setData({
-              msg: that.data.car.can_quote.msg,
-              showModal2: true
-            })
-          } else { //已完成认证
-            if (isOffer == 1) {
-              wx.showToast({
-                title: '您已报过价',
-                image: '../../images/warn.png'
-              })
-            } else {
-              this.setData({
-                priceLogShow: true
-              })
-            }
-          }
+        } else {
+          that.setData({
+            priceLogShow: true
+          })
         }
       }
-    })
+    }
   },
   closeLog() {
     this.setData({

@@ -65,14 +65,16 @@ Page({
                 companystore_id: val.companystoreone.id,
                 companystore_level: val.companystoreone.level_id,
                 companystore_auditstatus: val.companystoreone.auditstatus,
-                can_upgrade: val.can_upgrade ? val.can_upgrade : ''
+                can_upgrade: val.can_upgrade ? val.can_upgrade : '',
+                companystoreone: val.companystoreone,
+                payment_time: val.payment_time
               }
               paidList[index] = obj;
             });
           }
           $this.setData({
-            toBePaidList,
-            paidList
+            toBePaidList: toBePaidList,
+            paidList:paidList
           })
         } else {
           wx.showToast({
@@ -205,6 +207,13 @@ Page({
     console.log(e.detail.formId);
 
     console.log(e.detail.value);
+  }, 
+
+  //店铺升级
+  upgradeOrder:function(){
+    wx.navigateTo({
+      url: '../mine/upgrade/upgrade'
+    })
   },
   /**
    * 生命周期函数--监听页面加载
