@@ -145,7 +145,7 @@ Page({
     }
 
     payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no
-    console.log(payInfo.formId);
+    
     $http.post('store_certification_pay/certification_wxPay', payInfo).then(res => {
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;

@@ -69,9 +69,10 @@
                   <text>浏览量:{{item.browse_volume}}</text>
                 </view>
               </view>
-              <view class="putAndOff" wx:if="{{is_own == 1}}">
-                   <text class=" {{item.shelfismenu == 0 ? 'activePut':''}}" catchtap="pullOff" data-index="{{index}}" data-id="{{item.id}}" >下架</text>
-                   <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" catchtap="putOn"  data-index="{{index}}"  data-id="{{item.id}}" >上架</text>
+              <view class="putAndOff">
+                   <text class=" {{item.shelfismenu == 0 ? 'activePut':''}}" data-car_type="{{item.carType}}" catchtap="carStatus" data-index="{{index}}" data-id="{{item.id}}" >下架</text>
+                   <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" catchtap="carStatus"  data-index="{{index}}"  data-id="{{item.id}}" >上架</text>
+
                 </view>
             </view>
           </view>

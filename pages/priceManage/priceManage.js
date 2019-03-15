@@ -259,7 +259,7 @@ Page({
       seller_payment_status: e.detail.target.dataset.seller_payment_status,//确认买家保证金到账
       trading_models_id: e.detail.target.dataset.id ,//车辆交易id
       user_ids: e.detail.target.dataset.user_ids,//砍价人的id
-      by_user_ids: by_user_ids.by_user_ids ,//卖家的id
+      by_user_ids: e.detail.target.dataset.by_user_ids ,//卖家的id
       quotationtime: e.detail.target.dataset.quotationtime
 
     }

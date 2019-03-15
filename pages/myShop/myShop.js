@@ -78,7 +78,8 @@ Page({
                 store_description: val.store_description,// "车况良好，车子也有按时保养，感兴趣的朋友，随时欢迎联系",
                 factorytime: val.factorytime,//"1970",
                 modelsimages: app.globalData.localImgUrl+val.modelsimages,//"/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
-                shelfismenu: val.shelfismenu //是否上下架 0-下架 1-上架
+                shelfismenu: val.shelfismenu ,//是否上下架 0-下架 1-上架
+                carType:val.type
               }
               carList[index]=obj;
           });
@@ -106,15 +107,18 @@ Page({
        phoneNumber: phone,
      })
   },
-  //车型上架
-  putOn(e) {
+  //车型上架下架
+  carStatus(e) {
     var id = e.currentTarget.dataset.id;
     var index = e.currentTarget.dataset.index;
     var carInfoList = this.data.carInfoList;
     var $this = this;
+    console.log(e)
+    console.log(e.detail.target.dataset.car_type);return;
     $http.post('my/Buyshelf', {
       id: id,
-      shelfismenu: 1
+      shelfismenu: 1,
+      car_type: e.detail.target.dataset.car_type
     })
       .then(res => {
         //成功回调
@@ -141,10 +145,11 @@ Page({
       });
   },
   //车型下架
-  pullOff(e) {
+  carStatus(e) {
     var id = e.currentTarget.dataset.id;
     var index = e.currentTarget.dataset.index;
     var carInfoList = this.data.carInfoList;
+    
     var $this = this;
     $http.post('my/Buyshelf', {
       id: id,
