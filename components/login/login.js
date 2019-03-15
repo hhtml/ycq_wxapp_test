@@ -18,8 +18,12 @@ Component({
 
   },
 
-  attached: function () {
-    this.check();
+  attached: function () { //检测有没有缓存到user_id
+    if (wx.getStorageSync("user_id")){
+      //已登录
+    }else{
+      this.check();
+    }
   },
 
   /**
@@ -107,7 +111,8 @@ Component({
                         //刷新当前页面
                         var pages = getCurrentPages();
                         var prevPage = pages[pages.length - 1];  //当前页面)
-                        prevPage.onLoad()
+                        // prevPage.onLoad()
+                        prevPage.onPullDownRefresh(); //重新刷新页面
 
                     } else {
                       wx.setStorageSync('token', '');

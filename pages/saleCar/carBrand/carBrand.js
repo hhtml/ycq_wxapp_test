@@ -14,6 +14,7 @@ Page({
     carType:[], //具体车型列表
     marker: -1, //点击汽车名字显示红标记
     moveData: null, //动画
+    colorIndex:'A',
   },
 
   /**
@@ -53,7 +54,8 @@ Page({
     var that = this
     console.log(e)
     that.setData({
-      anchor: e.target.id
+      anchor: e.target.id,
+      colorIndex: e.target.id
     })
   },
 

@@ -86,13 +86,14 @@ Page({
         }
         this.setData({
           carInfoList: carList,
-          shop, carList
+          shop, carList,
+          is_own: data.is_own
         })
       } else {
-        wx.showToast({
-          title: resObj.msg,
-          image: '../../images/warn.png'
-        });
+        // wx.showToast({
+        //   title: resObj.msg,
+        //   image: '../../images/warn.png'
+        // });
         console.log('请求失败：', resObj.msg);
       }
     }).catch(err => {
@@ -188,10 +189,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      var shopId=options.shopId;
+    var shopId = options.shopId;
     this.setData({ shopId})
-      console.log('shopId:',shopId);
-      this.request_shop_detail(shopId);
+    console.log('shopId:', shopId);
+    this.request_shop_detail(shopId);
   },
   
   /**
@@ -222,7 +223,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    this.request_shop_detail(this.data.shopId);
   },
   /**
    * 页面上拉触底事件的处理函数
