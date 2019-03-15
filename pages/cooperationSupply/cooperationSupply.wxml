@@ -141,7 +141,7 @@
              <input type='text' placeholder-class='placeholder' placeholder="请输入您的银行卡号或对公帐户" value="{{form.idCard}}" bindinput='formBindInput' data-name="idCard"></input>
           </view>
           <view class="rowInput">
-             <input type='number' placeholder-class='placeholder' placeholder="请输入与银行卡号绑定的手机号" value="{{form.shopTel}}" bindinput='formBindInput' data-name="shopTel"></input>
+             <input type='number' placeholder-class='placeholder' placeholder="" value="{{form.shopTel}}" bindinput='formBindInput' data-name="shopTel"></input>
           </view>
           <view class="rowInput">
               <input type='text'bindinput='formBindInput' data-name="smscode" value="{{form.smscode}}"></input>

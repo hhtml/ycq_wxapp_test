@@ -258,7 +258,11 @@ Page({
     var form = this.data.form;
     wx.chooseImage({
       count: 1,
+    
       success(res) {
+        wx.showLoading({
+          title: '加载中',
+        })
         // tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
         console.log('tupian:', tempFilePaths)
@@ -288,6 +292,9 @@ Page({
     wx.chooseImage({
       count: 1,
       success(res) {
+        wx.showLoading({
+          title: '加载中',
+        })
         // tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
         wx.uploadFile({
@@ -317,6 +324,9 @@ Page({
     wx.chooseImage({
           count: 1,
           success(res) {
+            wx.showLoading({
+              title: '加载中',
+            })
             // tempFilePath可以作为img标签的src属性显示图片
             var tempFilePaths = res.tempFilePaths;
             wx.uploadFile({
@@ -345,6 +355,9 @@ Page({
     wx.chooseImage({
       count:1,
       success(res) {
+        wx.showLoading({
+          title: '加载中',
+        })
         // tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
         wx.uploadFile({
