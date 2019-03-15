@@ -138,13 +138,13 @@
              <input type='text' placeholder-class='placeholder' placeholder="输入您的姓名或公司名称" value="{{form.name}}" bindinput='formBindInput' data-name="name"></input>
           </view>
           <view class="rowInput">
-             <input type='text' placeholder-class='placeholder' placeholder="请输入您的银行卡号或对公帐户" value="{{form.idCard}}" bindinput='formBindInput' data-name="idCard"></input>
+             <input type='number' placeholder-class='placeholder' placeholder="请输入您的银行卡号或对公帐户" value="{{form.idCard}}" bindinput='formBindInput' data-name="idCard"></input>
           </view>
           <view class="rowInput">
              <input type='number' placeholder-class='placeholder' placeholder="请输入与银行卡号绑定的手机号" value="{{form.shopTel}}" bindinput='formBindInput' data-name="shopTel"></input>
           </view>
           <view class="rowInput">
-              <input type='text'bindinput='formBindInput' data-name="smscode" value="{{form.smscode}}"></input>
+              <input type='number' bindinput='formBindInput' data-name="smscode" value="{{form.smscode}}"></input>
               <view class="smscode" wx-if="{{sentSms}}" style="color:#eee;">
                 <text>{{dtNUm}}已获取</text><text></text>
               </view>
@@ -251,7 +251,7 @@
 <!-- 头部区域 -->
   <view class="toast-title-wrap">
     <view class="carList">选择自营品牌</view>
-    <view class="closeToast" catchtap="preventTouchMove">X</view>
+    <view class="closeToast" catchtap="preventTouchMove">完成</view>
     <scroll-view class="selectCar" scroll-y="true">
       已选择：
       <text wx:for="{{brandCheckList}}"> {{item.name}}、 </text>
@@ -259,9 +259,9 @@
   </view>
 <!-- 滑动选择区域 -->
 <scroll-view scroll-y="true" scroll-into-view="{{anchor}}"  scroll-with-animation="true" class="src">
-  <view id="{{index}}" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectIndex' class="wrap">
+  <view id="{{index}}" wx:for="{{carBrand}}" wx:key="{{item}}" catchtap='selectIndex' class="wrap">
     <view class="initial">{{index}}</view>
-  <checkbox-group bindtap="checkboxChange">
+  <checkbox-group catchtap="checkboxChange">
     <label class="checkbox" wx:for="{{item}}" wx:for-item="itemName" wx:key="{{itemName.id}}">
     <checkbox value="{{itemName.name}}" checked="{{itemName.checked}}"/>
     {{itemName.name}}

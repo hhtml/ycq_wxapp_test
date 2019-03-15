@@ -41,14 +41,16 @@ Page({
               console.log(val.companystoreone.auditstatus);
               var obj = {
                 id: val.id,
-                nickname: val.nickname,
+                nickname: val.companystoreone.store_name,
                 avatar: val.avatar,
                 certification_fee: val.certification_fee,
                 can_pay: val.can_pay,
                 companystore_id: val.companystoreone.id,
                 companystore_level: val.companystoreone.level_id,
                 auditstatus: val.companystoreone.auditstatus,
-                can_upgrade: val.can_upgrade ? val.can_upgrade : ''
+                can_upgrade: val.can_upgrade ? val.can_upgrade : '',
+                level_name: val.level_name,
+                createtime: val.companystoreone.createtime
               }
               toBePaidList[index] = obj;
             });

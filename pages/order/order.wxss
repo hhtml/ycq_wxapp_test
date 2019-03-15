@@ -41,6 +41,13 @@ page{
   display: flex;
   align-items: center;
 }
+.orderInfoTime{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 86rpx;
+  padding-right: 24rpx;
+}
 .infoImg{
   width: 75rpx;
   height: 75rpx;
@@ -59,10 +66,20 @@ page{
   font-size: 34rpx;
   color: #000;
 }
-
+.infoName .store_level{
+  /* color:#ef4631; */
+  font-size: 26rpx;
+}
+.infoName image{
+  width:25rpx;
+  height:25rpx;
+}
 .infoPrice text{
   font-size: 26rpx;
   color: #ef4631;
+}
+.infoPrice .time{
+  color:#b2b2b2;
 }
 .orderDomainBg{
   padding-left: 95rpx;
