@@ -78,7 +78,7 @@
         <view class="bailMoney-wrap" wx:elif="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='to_the_account'}}">
           <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
           <form bindsubmit='sellerConfirmTheDelivery' bindreset='' report-submit>
-            <button class="payMoney" form-type="submit" data-seller_payment_status="{{item.seller_payment_status}}" data-pay_type="seller" data-id="{{item.models_id}}" data-quotationtime="{{item.quotationtime}}" data-user_ids="{{item.user_ids}}">确认发货</button>
+            <button class="payMoney" form-type="submit" data-seller_payment_status="{{item.seller_payment_status}}" data-pay_type="seller" data-id="{{item.models_id}}" data-by_user_ids="{{item.by_user_ids}}" data-quotationtime="{{item.quotationtime}}" data-user_ids="{{item.user_ids}}">确认发货</button>
           </form>
         </view>
         <!-- 发货成功 -->
