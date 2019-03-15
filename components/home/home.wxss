@@ -4,7 +4,7 @@
   height:80rpx;
   position: fixed;
   right:40rpx;
-  bottom:34%;
+  bottom:44%;
   font-size: 28rpx;
   background-color: rgba(243, 85, 65,0.81);
   color:#fff;

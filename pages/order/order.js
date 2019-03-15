@@ -58,16 +58,16 @@ Page({
             paid_the_money.forEach((val, index) => {
               var obj = {
                 id: val.id,
-                nickname: val.nickname,
-                avatar: val.avatar,
-                certification_fee: val.certification_fee,
+                nickname: val.company_store.store_name,
+                avatar: val.user.avatar,
+                certification_fee: val.level.money,
                 can_pay: val.can_pay,
-                companystore_id: val.companystoreone.id,
-                companystore_level: val.companystoreone.level_id,
-                companystore_auditstatus: val.companystoreone.auditstatus,
+                companystore_id: val.company_store.id,
+                companystore_level: val.level,
+                companystore_auditstatus: val.company_store.auditstatus,
                 can_upgrade: val.can_upgrade ? val.can_upgrade : '',
-                companystoreone: val.companystoreone,
-                payment_time: val.payment_time
+                companystoreone: val.company_store,
+                payment_time: val.time_end
               }
               paidList[index] = obj;
             });

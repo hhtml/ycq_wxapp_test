@@ -1,9 +1,16 @@
 /* pages/priceManage/priceManage.wxss */
-
+page{
+  background-color: #f2f2f2;
+}
 .selectArea {
   padding: 0 24rpx;
   border-top: 1rpx solid #f3f3f3;
   background-color: #fff;
+  position: fixed;
+  left:0rpx;
+  top:0rpx;
+  width:100%;
+  z-index: 99999;
 }
 .blockInfo{
   background-color:#fff;margin:0 0 20rpx 0
@@ -50,7 +57,7 @@
 }
 
 .carInfoList {
-  margin: 0 24rpx 24rpx 24rpx;
+  margin: 92rpx 24rpx 24rpx 24rpx;
  
 }
 

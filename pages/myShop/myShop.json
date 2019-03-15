@@ -1,4 +1,8 @@
-{
+{ 
+  "usingComponents": {
+    "login": "/components/login/login",
+    "home":"/components/home/home"
+  },
   "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "我的店铺"
