@@ -169,15 +169,11 @@ Page({
           var brandList = data.brand;
           var cityList=data.city;
           carList.forEach( (val,index)=>{
-            var himgUrl;
-            if (val.type=='sell'){
-              himgUrl = app.globalData.localImgUrl;
-            }else{
-              himgUrl = app.globalData.imgUrl;
-            }
+            var himgUrl; 
              var obj={
                id: val.id,
-               imgSrc: himgUrl + (val.brand.brand_default_images ? val.brand.brand_default_images : val.modelsimages),
+               imgSrc: val.type == 'buy' ? app.globalData.imgUrl + val.brand.brand_default_images : app.globalData.localImgUrl + val.modelsimages,
+             
                brand_name: val.brand.name,
                name: val.models_name,
                priceArea: val.guide_price,

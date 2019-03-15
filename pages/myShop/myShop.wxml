@@ -70,8 +70,8 @@
                 </view>
               </view>
               <view class="putAndOff">
-                   <text class=" {{item.shelfismenu == 0 ? 'activePut':''}}" data-car_type="{{item.carType}}" catchtap="carStatus" data-index="{{index}}" data-id="{{item.id}}" >下架</text>
-                   <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" catchtap="carStatus"  data-index="{{index}}"  data-id="{{item.id}}" >上架</text>
+                   <text class=" {{item.shelfismenu ==2 ? 'activePut':''}}" data-car_type="{{item.carType}}" bindtap="carStatus" data-index="{{index}}" data-id="{{item.id}}" data-status="0" >下架</text>
+                   <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" bindtap="carStatus" data-car_type="{{item.carType}}" data-status="1"  data-index="{{index}}"  data-id="{{item.id}}" >上架</text>
 
                 </view>
             </view>

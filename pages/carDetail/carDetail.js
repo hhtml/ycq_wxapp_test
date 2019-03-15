@@ -80,7 +80,7 @@ Page({
       console.log('车辆详情：', resObj);
       if (resObj.code == 1) {
         var data = resObj.data;
-        var himgUrl; 
+        var himgUrl;
         if (data.detail.type == 'sell') {
           himgUrl = app.globalData.localImgUrl;
         } else {
@@ -89,7 +89,8 @@ Page({
         // console.log(this.cut_str(data.detail.user.nickname, 6));
         var car = {
           id: data.detail.id,
-          banner: himgUrl + (data.detail.brand.brand_default_images ? data.detail.brand.brand_default_images : data.detail.modelsimages[0]),
+          banner: data.detail.type == 'buy' ? app.globalData.imgUrl + data.detail.brand.brand_default_images : app.globalData.localImgUrl + data.detail.modelsimages[0],
+ 
           brand_name: data.detail.brand.name,
           name: data.detail.models_name,
           year: data.detail.car_licensetime,
