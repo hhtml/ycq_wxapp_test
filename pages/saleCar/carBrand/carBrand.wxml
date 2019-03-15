@@ -13,7 +13,7 @@
 
 <!-- 右边锚点区域 -->
 <view class="anchor-wrap">
-  <view class="anchor" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectAnchor' id="{{index}}">{{index}}</view>
+  <view class="anchor" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectAnchor' id="{{index}}" style="color:{{colorIndex == index?'#ef4631':''}}">{{index}}</view>
 </view>
 
 <!-- 遮罩层 -->

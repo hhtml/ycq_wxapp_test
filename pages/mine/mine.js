@@ -74,7 +74,9 @@ Page({
       } else if (store_has_many.auditstatus == "paid_the_money") {
         if (store_has_many.storelevel.partner_rank == '铂金店铺') {
           that.setData({
-            goldShop: false
+            goldShop: false,
+            nickname: store_has_many.store_name,
+            store_level: store_has_many.storelevel.partner_rank,
           })
         } else {
           that.setData({
