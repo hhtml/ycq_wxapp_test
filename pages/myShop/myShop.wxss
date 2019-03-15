@@ -91,12 +91,14 @@ page{
 .brandsList text{
   padding:6rpx 15rpx;
   height: 46rpx;
+  line-height: 46rpx;
+  display: inline-block;
   font-size: 28rpx;
   color: #353535;
   background-color: #f2f2f2;
   border-radius: 23rpx;
   margin-right: 30rpx;
-  margin:0 30rpx 20rpx 0;
+  margin:6rpx 30rpx 20rpx 0;
 }
 .detailTitle{
   margin: 20rpx 0;

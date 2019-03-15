@@ -25,8 +25,17 @@
                 <view class="infoName">
                     <text>{{item.nickname}}</text>
                 </view>
+                <view class="infoName">
+                    <image src="/images/mine-shop.png"></image>
+                    <text class="store_level">{{item.level_name}}</text>
+                </view>
+            </view>
+            <view class='orderInfoTime'>
                 <view class="infoPrice">
                     <text>店铺认证费：￥{{item.certification_fee}}</text>
+                </view>
+                <view class="infoPrice">
+                    <text class="time">提交时间:{{item.createtime}}</text>
                 </view>
             </view>
             <view class="orderDomainBg">

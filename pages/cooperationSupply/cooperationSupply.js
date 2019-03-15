@@ -2,6 +2,7 @@
 const app = getApp();
 var $http = require('../../utils/http.js');
 var util = require('../../utils/util.js');
+var valve = true //节流阀
 Page({
 
   /**
@@ -605,78 +606,83 @@ Page({
     return checkBrands;
   },
   formSubmit(e){
-    var that = this
-    var formId=e.detail.formId;
-    var shop_level_id = this.data.shop_level_id;
-    var form=this.data.form;
-    if (!this.checkForm()){
-      wx.showToast({
-        title: '请将信息填写完整',
-        image: '../../images/warn.png'
-      })
-    } else if (!this.checkBrand()){
-      wx.showToast({
-        title: '请选择主营车系',
-        image: '../../images/warn.png'
-      });
-    } else if (!shop_level_id){
-      wx.showToast({
-        title: '请选择合伙人等级',
-        image: '../../images/warn.png'
-      })
-     }else{
-      var checkBrands=this.getBrand();
-      var checkBrandStr = checkBrands.join(',');//主营品牌名称，用,连接
-      console.log("formId,checkBrandStr:", formId, checkBrandStr);
-      var submit_type = this.data.submit_type;
-      var auditInfo={
-        store_name: form.shopName,
-        cities_name: form.shopRegion,
-        store_address: form.shopRegionDetail,
-        store_description: form.context,
-        phone:form.shopTel,
-        login_code:form.smscode,
-        store_img: form.shopImg,
-        business_life:form.time,
-        main_camp: checkBrandStr,
-        bank_card: form.idCard,
-        id_card_positive: form.idCardFront,
-        id_card_opposite: form.idCardReverse,
-        business_licenseimages:form.regionImg,
-        level_id: shop_level_id,
-        code: form.inviteNumber,
-        name:form.name
-      }
-      console.log(auditInfo)
-      $http.post('shop/submit_audit',{
-        submit_type: submit_type,
-        auditInfo: auditInfo
-      })
-        .then(res => {
-          //成功回调
-          var resObj = res.data;
-          console.log('表单提交：', resObj);
-          if (resObj.code == 1) {
-            var data = resObj.data;
-            wx.showToast({
-              title: resObj.msg,
-              icon: 'success'
-            });
-            wx.navigateTo({
-              url: '../order/order',
-            })
-          } else {
-            wx.showToast({
-              title: resObj.msg,
-              image: '../../images/warn.png'
-            });
-            console.log('请求失败：', resObj.msg);
-          }
-        }).catch(err => {
-          //异常回调
-          console.log('请求失败', err);
+    if (valve == true){
+      valve = false
+      var that = this
+      var formId = e.detail.formId;
+      var shop_level_id = this.data.shop_level_id;
+      var form = this.data.form;
+      if (!this.checkForm()) {
+        wx.showToast({
+          title: '请将信息填写完整',
+          image: '../../images/warn.png'
+        })
+      } else if (!this.checkBrand()) {
+        wx.showToast({
+          title: '请选择主营车系',
+          image: '../../images/warn.png'
         });
+      } else if (!shop_level_id) {
+        wx.showToast({
+          title: '请选择合伙人等级',
+          image: '../../images/warn.png'
+        })
+      } else {
+        var checkBrands = this.getBrand();
+        var checkBrandStr = checkBrands.join(',');//主营品牌名称，用,连接
+        console.log("formId,checkBrandStr:", formId, checkBrandStr);
+        var submit_type = this.data.submit_type;
+        var auditInfo = {
+          store_name: form.shopName,
+          cities_name: form.shopRegion,
+          store_address: form.shopRegionDetail,
+          store_description: form.context,
+          phone: form.shopTel,
+          login_code: form.smscode,
+          store_img: form.shopImg,
+          business_life: form.time,
+          main_camp: checkBrandStr,
+          bank_card: form.idCard,
+          id_card_positive: form.idCardFront,
+          id_card_opposite: form.idCardReverse,
+          business_licenseimages: form.regionImg,
+          level_id: shop_level_id,
+          code: form.inviteNumber,
+          real_name: form.name
+        }
+        console.log(auditInfo)
+        $http.post('shop/submit_audit', {
+          submit_type: submit_type,
+          auditInfo: auditInfo
+        })
+          .then(res => {
+            //成功回调
+            var resObj = res.data;
+            console.log('表单提交：', resObj);
+            if (resObj.code == 1) {
+              var data = resObj.data;
+              wx.showToast({
+                title: resObj.msg,
+                icon: 'success'
+              });
+              wx.redirectTo({
+                url: '../order/order',
+              })
+            } else {
+              wx.showToast({
+                title: resObj.msg,
+                image: '../../images/warn.png'
+              });
+              console.log('请求失败：', resObj.msg);
+            }
+          }).catch(err => {
+            //异常回调
+            console.log('请求失败', err);
+          });
+      }
+      valve = true
     }
+    
   },
   /**
    * 生命周期函数--监听页面加载
