@@ -150,6 +150,19 @@ page{
 .itemInfo text{
   font-size: 28rpx;
   color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.itemInfo text:nth-child(1){
+  width: 160rpx;
+  
+}
+.itemInfo text:nth-child(2){
+  width: 200rpx;
+}
+.itemInfo text:nth-child(2){
+  width: 200rpx;
 }
 .inviteItem:last-child .itemInfo{
   border-bottom: none;
