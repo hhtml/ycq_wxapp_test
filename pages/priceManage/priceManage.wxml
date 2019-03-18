@@ -97,7 +97,7 @@
         <!-- 保证金退回 -->
         <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='refund_bond'}}">
           <view class=" " style='color:green'>已退回保证金：￥{{item.bond}}元</view>
-          <button class="payMoneySuccess">保证金以退回，请查收</button>
+          <button class="payMoneySuccess">保证金已退回，请查收</button>
         </view>
         <!-- <view class="payMoney-wrap" wx:if="{{item.deal_status == 'close_the_deal'}}">
       <form bindsubmit='payOrderSell' bindreset='' report-submit>

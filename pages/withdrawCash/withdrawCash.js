@@ -71,6 +71,7 @@ Page({
   },
 
   withdrawSubmit(e){
+    var that = this
      var formId=e.detail.formId;
      var money=this.data.money;
     var rateMoney = this.data.rateMoney;
@@ -110,6 +111,15 @@ Page({
                success(res) {
                  if (res.confirm) {
                    //确认提现
+                   wx.showToast({
+                     title: '提现成功',
+                     icon: 'success',
+                     duration: 1000
+                   })
+                   that.setData({
+                     total_money: that.data.total_money-that.data.money,
+                     money:'',
+                   })
                  } else if (res.cancel) {
                    console.log('用户点击取消')
                  }

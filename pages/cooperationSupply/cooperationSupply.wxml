@@ -122,7 +122,7 @@
               <text class="infoTip">(请输入邀请人的邀请码，没有可不填)</text>
           </view>
           <view class="rowInput">
-             <input type='text' value="{{form.inviteNumber}}" bindinput='formBindInput' bindblur='checkInviteNumber' bindconfirm='checkInviteNumber'data-name="inviteNumber"></input>
+             <input type='text' value="{{form.inviteNumber}}" bindinput='formBindInput' bindblur='checkInviteNumber' bindconfirm='checkInviteNumber'data-name="inviteNumber" disabled='{{disabled}}'></input>
           </view>
       </view>
 
