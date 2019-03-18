@@ -106,6 +106,14 @@ Page({
       phoneNumber: phone,
     })
   },
+  nav_to_car_detail:function(e){
+    console.log(e)
+    var carId = e.currentTarget.dataset.id
+    var type = 'sell'
+    wx.navigateTo({
+      url: '../carDetail/carDetail?carId='+carId+'&type='+type
+    })
+  },
   //车型上架下架
   carStatus(e) {
     var id = e.currentTarget.dataset.id,

@@ -2,7 +2,7 @@
 <form report-submit='{{true}}' bindsubmit='withdrawSubmit'>
 <view class="bankInfo">
     <view class="bankImg">
-        <image src='{{bank.img}}' mode='aspectFill'></image>
+        <image src='{{bank.img}}' mode='aspectFit'></image>
     </view>
     <view class="bankCont">
         <text>{{bank.name}}</text>

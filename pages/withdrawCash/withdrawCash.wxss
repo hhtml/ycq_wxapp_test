@@ -17,6 +17,7 @@ page{
 }
 .bankImg image{
   height: 100%;
+  width:100%;
 }
 .bankCont {
   height: 75rpx;
