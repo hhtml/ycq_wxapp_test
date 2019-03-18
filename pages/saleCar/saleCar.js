@@ -382,8 +382,9 @@ Page({
   },
   //发布
   formSubmit(e){
-    if(valve == true){ //节流阀
+    if (valve == true){ //节流阀
       valve = false
+      console.log(1)
       this.checkForm();
       var form = this.data.form;
       var brand = this.data.brand;
@@ -394,18 +395,21 @@ Page({
           title: '请将信息填写完整',
           image: '../../images/warn.png'
         })
+        valve = true
       }
-      // else if(imgList.length < 6){
-      //   wx.showToast({
-      //     title: '至少上传6张图片',
-      //     image: '../../images/warn.png'
-      //   })
-      // } 
+      else if(imgList.length < 1){
+        wx.showToast({
+          title: '至少上传1张图片',
+          image: '../../images/warn.png'
+        })
+      valve = true
+      } 
       else if (this.data.form.price < 1000) {
         wx.showToast({
           title: '价格有误',
           image: '../../images/warn.png'
         })
+        valve = true
       } else if ($this.data.carType == '') {
         wx.showToast({
           title: '请将信息填写完整',
@@ -414,6 +418,7 @@ Page({
         $this.setData({
           colorCarType: 'red'
         })
+        valve = true
       } else {
         var modelsimages = imgList.join(',');
         var carInfo = {
@@ -449,21 +454,23 @@ Page({
               $this.setData({
                 carType: ''
               })
+              valve = true
             } else {
               wx.showToast({
                 title: resObj.msg,
                 image: '../../images/warn.png'
               });
               console.log('请求失败：', resObj.msg);
+              valve = true
             }
           }).catch(err => {
             //异常回调
             console.log('请求失败', err);
+            valve = true
           });
       }
 
     }
-    valve = true
   },
   formTip(){
       this.setData({

@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "home":"/components/home/home"
+    "home":"/components/home/home",
+    "login":"/components/login/login"
   },
   "navigationBarTitleText": "意向合作申请",
   "backgroundColor": "#ffffff",

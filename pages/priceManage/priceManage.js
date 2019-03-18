@@ -61,7 +61,7 @@ Page({
             carSell.forEach((val, index) => {
               var obj = {
                 id: val.models_info.id,
-                imgSrc: (val.models_info.type == 'sell' ? app.globalData.localImgUrl : app.globalData.imgUrl) + (val.models_info.brand_default_images ? val.models_info.brand_default_images : val.models_info.modelsimages),
+                imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.models_info.modelsimages: app.globalData.imgUrl + val.models_info.brand_default_images,
                 brand_name: val.models_info.brand_name,
                 name: val.models_info.models_name,
                 priceArea: val.models_info.guide_price,
@@ -99,7 +99,7 @@ Page({
               //console.log('userINFO:', userInfo);
               var obj = {
                 id: val.models_info.id,
-                imgSrc: (val.models_info.type == 'sell' ? app.globalData.localImgUrl : app.globalData.imgUrl) + (val.models_info.brand_default_images ? val.models_info.brand_default_images : val.models_info.modelsimages),
+                imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.models_info.modelsimages : app.globalData.imgUrl + val.models_info.brand_default_images,
                 brand_name: val.models_info.brand_name,
                 name: val.models_info.models_name,
                 priceArea: val.models_info.guide_price,

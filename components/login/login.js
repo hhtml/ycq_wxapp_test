@@ -113,7 +113,7 @@ Component({
                         var prevPage = pages[pages.length - 1];  //当前页面)
                         // prevPage.onLoad()
                         prevPage.onPullDownRefresh(); //重新刷新页面
-
+                        
                     } else {
                       wx.setStorageSync('token', '');
                       console.log("用户登录失败")

@@ -244,11 +244,13 @@ Page({
           title: '请将信息填写完整',
           image: '../../images/warn.png'
         })
+        valve = true 
       } else if ($this.data.carType == '') {
         wx.showToast({
           title: '请将信息填写完整',
           image: '../../images/warn.png'
         })
+        valve = true 
       } else {
         var carInfo = {
           brand_id: app.globalData.brand_id,
@@ -282,20 +284,22 @@ Page({
                 form: form,
                 // brand: brand
               })
+              valve = true 
             } else {
               wx.showToast({
                 title: resObj.msg,
                 image: '../../images/warn.png'
               })
               console.log('请求失败：', resObj.msg);
+              valve = true 
             }
           }).catch(err => {
             //异常回调
             console.log('请求失败', err);
+            valve = true 
           });
       }
     }
-    valve = true
   },
 
   //选择车辆品牌

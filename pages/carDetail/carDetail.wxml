@@ -148,8 +148,9 @@
     <view class='buttonItem' bindtap='priceLog'>
       <text>砍价</text>
     </view>
-    <view class='buttonItem' bindtap='makePhoneCall'>
-      <text>电话联系</text>
+    <view class='buttonItem'>
+      <!-- <text>聊一聊</text> -->
+      <button open-type='contact'>聊一聊</button>
     </view>
   </view>
 </view>
