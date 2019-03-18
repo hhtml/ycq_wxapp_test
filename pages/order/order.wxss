@@ -45,7 +45,7 @@ page{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 86rpx;
+  padding-left: 94rpx;
   padding-right: 24rpx;
 }
 .infoImg{

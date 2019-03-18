@@ -58,7 +58,7 @@
 
     <view class="navItem" bindtap='nav_to_page' data-path="../myWallet/myWallet" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
       <!-- data-path="../myShop/myShop" -->
-      <image class="navIcon" src='../../images/mine-shop.png' mode='widthFix'></image>
+      <image class="navIcon" src='../../images/wallet.png' mode='widthFix'></image>
       <view class="navName">
         <text>我的钱包</text>
       </view>

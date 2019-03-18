@@ -68,30 +68,36 @@
           </form>
         </view>
         <!-- 卖家已支付等待后台确认保证金到账 -->
-        <view class="bailMoney-wrap" wx:elif="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='already_paid'}}">
+        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='already_paid'}}">
           <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
 
           <button class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">等待系统确认保证金到账</button>
 
         </view>
         <!-- 后台已确认保证金到账，卖家确认发货 -->
-        <view class="bailMoney-wrap" wx:elif="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='to_the_account'}}">
+        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='to_the_account'}}">
           <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
           <form bindsubmit='sellerConfirmTheDelivery' bindreset='' report-submit>
             <button class="payMoney" form-type="submit" data-seller_payment_status="{{item.seller_payment_status}}" data-pay_type="seller" data-id="{{item.models_id}}" data-by_user_ids="{{item.by_user_ids}}" data-quotationtime="{{item.quotationtime}}" data-user_ids="{{item.user_ids}}">确认发货</button>
           </form>
         </view>
         <!-- 发货成功 -->
-        <view class="bailMoney-wrap" wx:elif="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='waiting_for_buyers'}}">
+        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='waiting_for_buyers'}}">
           <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
 
           <button class="payMoney">等待买家确认收货</button>
 
         </view>
         <!--买家确认收货 -->
-        <view class="bailMoney-wrap" wx:elif="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='confirm_receipt' && item.buyer_payment_status=='confirm_receipt'}}">
+        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='confirm_receipt' && item.buyer_payment_status=='confirm_receipt'}}">
           <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
-          <button class=" payMoneySuccess">交易成功，等待保证金退回</button>
+          <button class="payMoneySuccess">交易成功，等待保证金退回</button>
+        </view>
+        
+        <!-- 保证金退回 -->
+        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='refund_bond'}}">
+          <view class=" " style='color:green'>已退回保证金：￥{{item.bond}}元</view>
+          <button class="payMoneySuccess">保证金以退回，请查收</button>
         </view>
         <!-- <view class="payMoney-wrap" wx:if="{{item.deal_status == 'close_the_deal'}}">
       <form bindsubmit='payOrderSell' bindreset='' report-submit>
@@ -173,14 +179,14 @@
         </form>
       </view>
       <!-- 买家已支付等待后台确认保证金到账 -->
-      <view class="bailMoney-wrap" wx:elif="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='already_paid'}}">
+      <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='already_paid'}}">
         <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
 
         <button class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">等待系统确认保证金到账</button>
 
       </view>
       <!-- 后台已确认保证金到账，买家确认收货 -->
-      <view class="bailMoney-wrap" wx:elif="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='to_the_account'}}">
+      <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='to_the_account'}}">
         <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
         <form bindsubmit='buyersConfirmTheDelivery' bindreset='' report-submit>
           <button class="payMoney" form-type="submit" data-buyers_payment_status="{{item.buyer_payment_status}}" data-pay_type="buyers" data-id="{{item.models_id}}" data-quotationtime="{{item.quotationtime}}" data-user_ids="{{item.user_ids}}" data-by_user_ids="{{item.by_user_ids}}">确认收货</button>
@@ -189,9 +195,15 @@
 
 
       <!--买家确认收货成功 -->
-      <view class="bailMoney-wrap" wx:elif="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='confirm_receipt'}}">
+      <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='confirm_receipt'}}">
         <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
-        <button class=" payMoneySuccess">交易成功，等待保证金退回</button>
+        <button class="payMoneySuccess">交易成功，等待保证金退回</button>
+      </view>
+
+      <!-- 保证金退回 -->
+      <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='refund_bond'}}">
+        <view class=" " style='color:green'>已退回保证金：￥{{item.bond}}元</view>
+        <button class="payMoneySuccess">保证金已退回，请查收</button>
       </view>
 
 

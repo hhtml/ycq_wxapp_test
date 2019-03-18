@@ -32,8 +32,6 @@ Page({
         store: store,
         partnerList: res.data.data.store_level_list
       })
-      console.log(that.data.store)
-      console.log(that.data.partnerList)
     })
   },
 
@@ -45,8 +43,6 @@ Page({
     var check = e.detail.value;
     var partnerList = this.data.partnerList;
     var shop_level_id;
-    //console.log('index:', partnerList[index].checked);
-    //console.log('check:', check)
     if (check) {
       for (var i = 0; i < partnerList.length; i++) {
         partnerList[i].checked = false;
@@ -85,8 +81,8 @@ Page({
           title: '请选择合伙人级别',
           image: '/images/warn.png'
         })
+        valve = true
       } else {
-        // console.log("formId,checkBrandStr:", formId, checkBrandStr);
         var submit_type = this.data.submit_type;
         var auditInfo = {
           store_name: store.store_name,
@@ -130,8 +126,8 @@ Page({
                             delta: 1
                           })
                         }
-
                       })
+                      valve = true
                     }
                     else {
                       wx.showToast({
@@ -139,6 +135,7 @@ Page({
                         image: '../../images/warn.png',
                         duration: 500
                       })
+                      valve = true
                     }
                   });
                 }
@@ -147,7 +144,7 @@ Page({
               },
               'fail': function (res) {
                 console.log('用户取消支付,需要重载页面');
-
+                valve = true
               },
               'complete': function (res) {
                 // console.log(res)
@@ -160,7 +157,6 @@ Page({
             console.log('请求失败', err);
           });
       }
-      valve = true
     }
     
   },
