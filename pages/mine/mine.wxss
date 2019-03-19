@@ -62,8 +62,12 @@ page{
 .userName .nickName{
   width:454rpx;
 }
+.nickName .name{
+  font-weight: bold;
+}
 .storeLevel{
   font-size: 30rpx;
+  padding-top:8rpx;
 }
 .writeIcon{
   width: 34rpx;

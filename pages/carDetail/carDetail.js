@@ -133,14 +133,14 @@ Page({
     });
   },
   nav_to_shop() {
-    wx.showToast({
-      title: '敬请期待',
-      image: '../../images/warn.png'
-    })
-    /**var shopId = this.data.car.store_id;
+    // wx.showToast({
+    //   title: '敬请期待',
+    //   image: '../../images/warn.png'
+    // })
+    var shopId = this.data.car.store_id;
     wx.navigateTo({
       url: '../myShop/myShop?shopId='+shopId,
-    })*/
+    })
   },
 
   //点击砍价事件

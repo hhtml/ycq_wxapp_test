@@ -12,6 +12,13 @@
     </view>
 </view>
 
+<!-- 审核失败提示 -->
+<!-- <view class="switchTitle">
+    <view class="titleItem {{activeId ==0 ? 'activeItem':''}}" data-id="0"  bindtap='switchTitle'>
+       <text>！失败原因</text>
+    </view>
+</view> -->
+
 <!--店铺信息-->
 <view class=" shopArea">
    <view class="content">
@@ -100,7 +107,6 @@
               <text class="infoTip">(没有符合的品牌可以自行添加)</text>
           </view>
           <view class="brandArea">
-
                    <view class="brand-wrap" wx:for="{{brandCheckList}}">
                     <text class="{{item.check? 'checkBrand':''}}" data-index="{{index}}">{{item.name}}</text>
                    </view>

@@ -13,9 +13,9 @@
 <view class="withdraw">
     <view class="title">
         <text>提现金额</text>
-        <text>额外扣除￥{{rateMoney}}服务费（费率{{rate}}%）</text>
+        <text>额外扣除￥{{rateMoney}}服务费（费率{{rate*100}}%）</text>
     </view>
-    <input type='digit' value="{{money}}" bindinput='moneyInput'></input>
+    <input type='digit' value="{{money}}" bindinput='moneyInput' focus></input>
     <view class='withdrawBottom'>
         <text>可用余额：</text>
         <text>{{total_money}}元</text>

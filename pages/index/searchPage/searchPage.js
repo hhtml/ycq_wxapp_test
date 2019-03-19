@@ -81,7 +81,6 @@ Page({
         isHistory:false,
         scroll:true
       })
-      
     }else if(that.data.history == ''){
       that.setData({
         isHistory: false,
@@ -134,44 +133,28 @@ Page({
   //选择买车事件
   selectBuyCar:function(e){
     console.log(e)
-    models_name = e._relatedInfo.anchorTargetText
-    history.push(e._relatedInfo.anchorTargetText)
+    models_name = e.currentTarget.dataset.name
+    history.push(e.currentTarget.dataset.name)
     wx.setStorage({
       key: 'history',
       data: history
     })
     wx.reLaunch({
-      url: '/pages/carSource/carSource?models_name=' + models_name
+      url: '/pages/carSource/carSource?models_name='+models_name
     })
   },
 
   //选择卖车事件
   selectSellCar:function(e){
-    models_name = e._relatedInfo.anchorTargetText
-    history.push(e._relatedInfo.anchorTargetText)
+    console.log(e)
+    models_name = e.currentTarget.dataset.name
+    history.push(e.currentTarget.dataset.name)
     wx.setStorage({
       key: 'history',
       data: history
     })
     wx.reLaunch({
-      url: '/pages/carSource/carSource?models_name=' + models_name
-    })
-  },
-
-
-  //买车 车名点击事件
-  buyCarName: function (e) {
-    var name = e._relatedInfo.anchorTargetText
-    wx.reLaunch({
-      url: '/pages/carSource/carSource?name=' + name
-    })
-  },
-
-  //卖车 车名点击事件
-  sellCarName: function (e) {
-    var name = e._relatedInfo.anchorTargetText
-    wx.reLaunch({
-      url: '/pages/carSource/carSource?name=' + name
+      url: '/pages/carSource/carSource?models_name='+models_name
     })
   },
 
@@ -205,10 +188,10 @@ Page({
   searchHistory:function(e){
     var that = this
     that.setData({
-      inputValue:e._relatedInfo.anchorTargetText
+      inputValue: e.currentTarget.dataset.name
     })
     $http.post('index/search', {
-      query_criteria: e._relatedInfo.anchorTargetText
+      query_criteria: e.currentTarget.dataset.name
     }).then(res => {
       console.log(res.data)
       if (res.data.data.buy.length == 0 && res.data.data.sell.length == 0) {
@@ -218,7 +201,9 @@ Page({
       } else {
         that.setData({
           searchList: res.data.data,
-          noData: false
+          noData: false,
+          scroll:true,
+          isHistory:false
         })
       }
       })

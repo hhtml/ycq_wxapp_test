@@ -15,7 +15,7 @@
       <view class="userName">
         <!-- <open-data type="userNickName"></open-data> -->
         <view class="nickName">
-          <view>{{nickname}}</view>
+          <view class="name">{{nickname}}</view>
           <view class="storeLevel">{{store_level}}</view>
         </view>
         <!--<view class="writeIcon">
@@ -80,7 +80,7 @@
     </view>
 
 
-    <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
+    <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage">
       <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
       <view class="navName">
         <text>砍价中心</text>

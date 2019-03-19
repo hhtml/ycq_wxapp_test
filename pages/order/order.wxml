@@ -77,14 +77,23 @@
                 <view class="infoName">
                     <text>{{item.companystoreone.store_name}}</text>
                 </view>
-                <view class="infoPrice">
+                <view class="infoLevel">
+                    <text>【{{item.partner_rank}}】</text>
+                </view>
+                <!-- <view class="infoPrice">
+                    <text>店铺认证费：￥{{item.certification_fee}}</text>
+                </view> -->
+            </view>
+                <view class="infoPrice-wrap">
                     <text>店铺认证费：￥{{item.certification_fee}}</text>
                 </view>
-            </view>
             <view class="orderDomainBg">
                 <view class="orderDomain">
                     <view class="paytime">
                       <text>{{item.payment_time}}</text>
+                    </view>
+                    <view class="upgrade" wx:if="{{item.level_id !== 1}}">
+                      <text bindtap='upgradeOrder'>升级</text>
                     </view>
                </view>
             </view>
