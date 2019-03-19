@@ -228,7 +228,9 @@
   </view>
 
   <view class='formButtom' report-submit>
-    <button form-type='submit' data-store_id="{{store.id}}">提交店铺升级</button>
+    <button form-type='submit' data-store_id="{{store.id}}" wx:if="{{newPayMoney}}">提交店铺升级 ￥{{newPayMoney}}元</button>
+    <button form-type='submit' data-store_id="{{store.id}}" wx:else>提交店铺升级</button>
+
   </view>
 </form>
 

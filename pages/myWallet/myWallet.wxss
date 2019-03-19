@@ -1,8 +1,10 @@
 /* pages/myWallet/myWallet.wxss */
-page{
+
+page {
   background-color: #f2f2f2;
 }
-.headBg{
+
+.headBg {
   width: 100%;
   height: 170rpx;
   background-color: #f76553;
@@ -11,101 +13,134 @@ page{
   left: 0;
   z-index: -1;
 }
-.content{
+
+.content {
   padding: 0 24rpx;
 }
-.userInfo{
+
+.userInfo {
   overflow: hidden;
 }
-.userImg{
-  width:100rpx;
-  height:100rpx;
+
+.userImg {
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
   float: left;
   border: 1px solid #f0f0f0;
   overflow: hidden;
-  margin-right:20rpx;
-  }
-  .userImg image{
-    width: 100%;
-    height: 100%;
-  }
-  .userName text{
+  margin-right: 20rpx;
+}
+
+.userImg image {
+  width: 100%;
+  height: 100%;
+}
+
+.userName text {
   font-size: 34rpx;
   color: #fff;
   height: 100rpx;
   line-height: 100rpx;
-  }
+}
 
-  .userData{
-    display: flex;
-    background-color: #fff;
-    border-radius: 8rpx;
-    margin-top: 20rpx;
-    box-sizing: border-box;
+.userData {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8rpx;
+  margin-top: 20rpx;
+  box-sizing: border-box;
+}
 
-  }
-  .dataItem{
-    flex: 1;
-    position: relative;
-    text-align: center;
-    padding: 20rpx 0;
-  }
-  .dataItem::after{
-    content: "";
-    width: 2rpx;
-    height: 45rpx;
-    background-color: #e5e5e5;
-    position: absolute;
-    top: 30rpx;
-    right: 0;
-  }
-  .dataItem:last-child::after{
-     height: 0;
-  }
-   .dataItem text{
-     display: block;
-     text-align: center;
-     line-height: 1.5em;
-   }
-    .dataItem text:nth-child(1){
-      font-size: 30rpx;
-      color: #353535;
-    }
-     .dataItem text:nth-child(2){
-      font-size:26rpx;
-      color: #888;
-    }
+.dataItem {
+  flex: 1;
+  position: relative;
+  text-align: center;
+  padding: 20rpx 0;
+}
 
-.cashButton{
+.dataItem::after {
+  content: "";
+  width: 2rpx;
+  height: 45rpx;
+  background-color: #e5e5e5;
+  position: absolute;
+  top: 30rpx;
+  right: 0;
+}
+
+.dataItem:last-child::after {
+  height: 0;
+}
+
+.dataItem text {
+  display: block;
+  text-align: center;
+  line-height: 1.5em;
+}
+
+.dataItem text:nth-child(1) {
+  font-size: 32rpx;
+  color: #353535;
+}
+
+.dataItem text:nth-child(2) {
+  font-size: 26rpx;
+  color: #888;
+}
+
+.cashButton {
   width: 388rpx;
-  height: 56rpx;
+  height: auto;
+  line-height: 56rpx;
   background-color: #f76553;
   border-radius: 8rpx;
-  margin: 35rpx auto;
+  margin: 35rpx 0 12rpx 22%;
   text-align: center;
 }
-.cashButton text{
+
+.stongMoney {
+  font-weight: bold;
+}
+
+.toMoney {
+  color: #888;
+  font-size: 26rpx;
+  position: absolute;
+  right: 0;
+  top: 15rpx;
+}
+
+.cashButton text {
   font-size: 30rpx;
   color: #fff;
 }
 
-.cashTitle{
-  margin:25rpx auto 45rpx auto;
+.toMoneyNote {
+  text-align: center;
+  font-size: 26rpx;
+  color: #888;
+}
+
+.cashTitle {
+  margin: 45rpx auto 45rpx auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.cashTitle image{
+
+.cashTitle image {
   width: 27rpx;
   height: 27rpx;
 }
-.cashTitle text{
+
+.cashTitle text {
   font-size: 30rpx;
   color: #f76553;
   position: relative;
   padding: 0 10rpx;
 }
+
 /**.cashTitle text::before{
   content: '"';
   color:#f76553;
@@ -122,11 +157,13 @@ page{
   right: -45rpx;
   top:-5rpx;
 }*/
-.inviteList{
+
+.inviteList {
   background-color: #fff;
   border-radius: 8rpx;
-  padding:0 30rpx;
+  padding: 0 30rpx;
 }
+
 .itemImg {
   width: 50rpx;
   height: 50rpx;
@@ -136,34 +173,40 @@ page{
   float: left;
   margin-right: 30rpx;
 }
-.itemImg image{
+
+.itemImg image {
   width: 100%;
   height: 100%;
 }
-.itemInfo{
+
+.itemInfo {
   height: 90rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom:1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
 }
-.itemInfo text{
+
+.itemInfo text {
   font-size: 28rpx;
   color: #666;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.itemInfo text:nth-child(1){
+
+.itemInfo text:nth-child(1) {
   width: 160rpx;
-  
 }
-.itemInfo text:nth-child(2){
+
+.itemInfo text:nth-child(2) {
   width: 200rpx;
 }
-.itemInfo text:nth-child(2){
+
+.itemInfo text:nth-child(2) {
   width: 200rpx;
 }
-.inviteItem:last-child .itemInfo{
+
+.inviteItem:last-child .itemInfo {
   border-bottom: none;
 }
