@@ -9,7 +9,8 @@ Page({
   data: {
     scroll_x: true,
     activeTitle: 0,
-    titleList: [{
+    titleList: [
+      /*{
         id: 0,
         name: '推荐'
       },
@@ -24,27 +25,9 @@ Page({
       {
         tid: 3,
         name: '社会'
-      },
-      {
-        tid: 4,
-        name: '娱乐'
-      },
-      {
-        tid: 5,
-        name: '体育'
-      },
-      {
-        tid: 6,
-        name: '其他'
-      }
+      }*/
     ],
-    infoList: [{
-      id:0,
-      imgSrc: '../../images/carsource_02.png',
-      title: '平台上线100天，平台总人数正式突破10万大关突破10万大关',
-      author: '萌宠部落',
-      browse_volume: 300
-    }]
+    infoList: []
   },
   /**
    * 事件3函数

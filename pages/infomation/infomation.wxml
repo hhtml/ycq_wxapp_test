@@ -1,12 +1,12 @@
 <!--pages/infomation/infomation.wxml-->
-<scroll-view scroll-x='{{scroll_x}}' class='scrollTitle'>
+<scroll-view scroll-x='{{scroll_x}}' class='scrollTitle' wx:if="{{titleList}}">
   <block wx:for="{{titleList}}" wx:key="{{index}}">
     <text class="scrollTitleItem {{activeTitle == item.tid ? 'activeTitle':''}}" bindtap='changeTitle' data-id="{{item.tid}}">{{item.title}}   </text>
   </block>
 </scroll-view>
 
-<view class="infoList">
-  <view class='infoListTitle'>
+<view class="infoList" wx:if="{{currentInfoList}}">
+  <!--view class='infoListTitle'>
     <view class='titleLeft'>
       <text>头条</text>
     </view>
@@ -14,7 +14,7 @@
       <text>换一批</text>
       <image src='../../images/sx.png' mode='widthFix'></image>
     </view>
-  </view>
+  </view>-->
 
   <block wx:for="{{currentInfoList}}">
     <view class="infoListItem" bindtap='nav_to_detail' data-id="{{item.id}}">
@@ -34,4 +34,9 @@
     </view>
   </block>
 
+</view>
+
+<view wx:else   class="noCont">
+  <image src="../../images/404.png" mode='widthFix'></image>
+  <text>暂无数据</text>
 </view>

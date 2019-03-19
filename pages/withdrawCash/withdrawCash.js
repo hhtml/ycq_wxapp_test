@@ -57,7 +57,7 @@ Page({
   },
   moneyInput(e){
      var rate=this.data.rate;
-    var rateMoney = (e.detail.value * (rate / 100)).toFixed(1);
+    var rateMoney = (e.detail.value * (rate / 100)).toFixed(2);
      this.setData({
        money:e.detail.value,
        rateMoney: rateMoney
@@ -65,8 +65,11 @@ Page({
   },
   allWithdraw(){
     var money=this.data.total_money;
+    var rate = this.data.rate;
+    var rateMoney = (money * (rate / 100)).toFixed(2);
     this.setData({
-      money: money
+      money: money,
+      rateMoney: rateMoney
     })
   },
 
@@ -75,7 +78,8 @@ Page({
      var formId=e.detail.formId;
      var money=this.data.money;
     var rateMoney = this.data.rateMoney;
-    var total_money = this.data.total_money
+    var total_money = this.data.total_money;
+    var $this=this;
      if(!money){
         wx.showToast({
           title: '请输入提现金额',
@@ -94,7 +98,14 @@ Page({
          image: '../../images/warn.png',
          duration: 2000
        })
-     } else{
+     } else{ 
+       wx.showModal({
+         title: '提示',
+         content: '您确认要提现' + money + '元到银行卡吗？本次提现收取服务费' + rateMoney + '元',
+         confirmText: '确认提现',
+         success(res) {
+           if (res.confirm) {
+             //确认提现 
        $http.post('shop/check_money',{
          formId:formId,
          money: money
@@ -103,13 +114,7 @@ Page({
            //成功回调
            var resObj = res.data;
            console.log('核对提现：', resObj);
-           if (resObj.code == 1) {
-             wx.showModal({
-               title: '提示',
-               content: '您确认要提现' + money + '元到银行卡吗？本次提现收取服务费' + rateMoney+'元',
-               confirmText:'确认提现',
-               success(res) {
-                 if (res.confirm) {
+           if (resObj.code == 1) { 
                    //确认提现
                    wx.showToast({
                      title: '提现成功',
@@ -119,24 +124,38 @@ Page({
                    that.setData({
                      total_money: that.data.total_money-that.data.money,
                      money:'',
-                   })
-                 } else if (res.cancel) {
-                   console.log('用户点击取消')
-                 }
-               }
-
+                   }) 
+               } 
              })
-           } else {
-             wx.showToast({
-               title: resObj.msg,
-               image: '../../images/warn.png'
-             });
-             console.log('请求失败：', resObj.msg);
+               .then(res => {
+                 //成功回调
+                 var resObj = res.data;
+                 console.log('核对提现：', resObj);
+                 if (resObj.code == 1) {
+                   wx.showToast({
+                     title: resObj.msg,
+                     duration:2000
+                   });
+                   $this.setData({money:''});
+                   $this.request_bank();
+                 } else {
+                   wx.showToast({
+                     title: resObj.msg,
+                     image: '../../images/warn.png'
+                   });
+                   console.log('请求失败：', resObj.msg);
+                 }
+               }).catch(err => {
+                 //异常回调
+                 console.log('请求失败', err);
+               });
+           } else if (res.cancel) {
+             console.log('用户点击取消')
            }
-         }).catch(err => {
-           //异常回调
-           console.log('请求失败', err);
-         });
+         }
+
+       })
+       
      }
   },
   /**
