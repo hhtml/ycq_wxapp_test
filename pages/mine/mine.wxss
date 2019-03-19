@@ -153,8 +153,9 @@ image.navIcon{
 .navName-btn{
   font-size: 30rpx;
   color: #353535;
-  line-height: 1;
-  display: inline-block;
+  line-height: 100rpx;
+  width:560rpx;
+  text-align: left;
 }
 button::after{
   border:none;
@@ -221,7 +222,7 @@ button::after{
 .share-wrap{
   width:600rpx;
   height:70rpx;
-  position: fixed;
+  position: absolute;
   left:75rpx;
   bottom:15%;
   z-index:9999;

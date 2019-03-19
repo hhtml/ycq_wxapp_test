@@ -73,11 +73,9 @@
           <text>经营年限</text>
         </view>
         <view class="formInput">
-          <!-- <picker bindchange="bindYearChange" value="{{timeIndex}}" range="{{year}}"> -->
           <view class="picker">
             <text>{{store.business_life}}</text>
           </view>
-          <!-- </picker> -->
 
         </view>
       </view>
@@ -88,17 +86,11 @@
             <text>*</text>
             <text>主营品牌车系</text>
           </view>
-          <!-- <text class="infoTip">(没有符合的品牌可以自行添加)</text> -->
         </view>
         <view class="brandArea">
           <block wx:for="{{store.main_camp}}">
             <text class="checkBrand">{{item}}</text>
           </block>
-          <!-- <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
-                  <view class="picker">
-                    <text style="font-size:40rpx;padding:0 40rpx;color:#ef4631;">+</text>
-                  </view>
-                </picker> -->
         </view>
       </view>
 

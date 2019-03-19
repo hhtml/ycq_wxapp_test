@@ -61,7 +61,7 @@ Page({
             carSell.forEach((val, index) => {
               var obj = {
                 id: val.models_info.id,
-                imgSrc: (val.models_info.type == 'sell' ? app.globalData.localImgUrl : app.globalData.imgUrl) + (val.models_info.brand_default_images ? val.models_info.brand_default_images : val.models_info.modelsimages),
+                imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.models_info.modelsimages: app.globalData.imgUrl + val.models_info.brand_default_images,
                 brand_name: val.models_info.brand_name,
                 name: val.models_info.models_name,
                 priceArea: val.models_info.guide_price,
@@ -99,7 +99,7 @@ Page({
               //console.log('userINFO:', userInfo);
               var obj = {
                 id: val.models_info.id,
-                imgSrc: (val.models_info.type == 'sell' ? app.globalData.localImgUrl : app.globalData.imgUrl) + (val.models_info.brand_default_images ? val.models_info.brand_default_images : val.models_info.modelsimages),
+                imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.models_info.modelsimages : app.globalData.imgUrl + val.models_info.brand_default_images,
                 brand_name: val.models_info.brand_name,
                 name: val.models_info.models_name,
                 priceArea: val.models_info.guide_price,
@@ -161,11 +161,22 @@ Page({
         duration: 500
       })
     } else {
-      $http.post('my/cancellation_of_quotation', {
-        quoted_id: quoted_id
-      }).then(res => {
-        console.log(res)
-        that.request_price_list();
+      wx.showModal({
+        title: '提示',
+        content: '确定要取消订单吗？',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            $http.post('my/cancellation_of_quotation', {
+              quoted_id: quoted_id
+            }).then(res => {
+              console.log(res)
+              that.request_price_list();
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
       })
     }
   },
@@ -173,61 +184,72 @@ Page({
   //支付保证金，买车/卖车
   payMargin: function(e) {
     var that = this
-    var payInfo = {
-      formId: e.detail.formId,
-      out_trade_no: new Date().getTime(),
-      trading_models_id: e.detail.target.dataset.id.split('+')[0],
-      // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
-      money: 0.01,
-      user_type: e.detail.target.dataset.pay_type
-    }
-    payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no;
-    $http.post('store_margin_pay/marginPay', payInfo).then(res => {
-      var timeStamp = (Date.parse(new Date()) / 1000).toString();
-      var pkg = 'prepay_id=' + res.data.prepay_id;
-      var nonceStr = res.data.nonce_str;
-      var appid = res.data.appid;
-      var key = res.data.key;
-      var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
-      //发起支付
-      wx.requestPayment({
-        'timeStamp': timeStamp,
-        'nonceStr': nonceStr,
-        'package': pkg,
-        'signType': 'MD5',
-        'paySign': paySign,
-        'success': function(res) {
-          console.log(res);
-          if (res.errMsg == "requestPayment:ok") {
-            //支付成功推送模板
-            $http.post('store_margin_pay/after_successful_payment', payInfo).then(res => {
-              if(res.data.code==1){
-                console.log(res);
-                wx.showToast({
-                  title: res.data.msg,
-                  icon: 'success'
-                });
-                that.request_price_list();
-              }else{
-                wx.showToast({
-                  title: res.data.msg,
-                  icon: 'error'
-                });
-              }
-             
-            });
+    wx.showModal({
+      title: '提示',
+      content: '确定要支付订单吗？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          var payInfo = {
+            formId: e.detail.formId,
+            out_trade_no: new Date().getTime(),
+            trading_models_id: e.detail.target.dataset.id.split('+')[0],
+            // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
+            money: 0.01,
+            user_type: e.detail.target.dataset.pay_type
           }
-        },
-        'fail': function(res) {
-          console.log('用户取消支付,需要重载页面');
+          payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no;
+          $http.post('store_margin_pay/marginPay', payInfo).then(res => {
+            var timeStamp = (Date.parse(new Date()) / 1000).toString();
+            var pkg = 'prepay_id=' + res.data.prepay_id;
+            var nonceStr = res.data.nonce_str;
+            var appid = res.data.appid;
+            var key = res.data.key;
+            var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
+            //发起支付
+            wx.requestPayment({
+              'timeStamp': timeStamp,
+              'nonceStr': nonceStr,
+              'package': pkg,
+              'signType': 'MD5',
+              'paySign': paySign,
+              'success': function (res) {
+                console.log(res);
+                if (res.errMsg == "requestPayment:ok") {
+                  //支付成功推送模板
+                  $http.post('store_margin_pay/after_successful_payment', payInfo).then(res => {
+                    if (res.data.code == 1) {
+                      console.log(res);
+                      wx.showToast({
+                        title: res.data.msg,
+                        icon: 'success'
+                      });
+                      that.request_price_list();
+                    } else {
+                      wx.showToast({
+                        title: res.data.msg,
+                        icon: 'error'
+                      });
+                    }
 
-        },
-        'complete': function(res) {
+                  });
+                }
+              },
+              'fail': function (res) {
+                console.log('用户取消支付,需要重载页面');
 
+              },
+              'complete': function (res) {
+
+              }
+            });
+
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消')
         }
-      });
-
-    });
+      }
+    })
   },
   //卖家确认发货
   sellerConfirmTheDelivery: function(e) {
@@ -237,7 +259,7 @@ Page({
       seller_payment_status: e.detail.target.dataset.seller_payment_status,//确认买家保证金到账
       trading_models_id: e.detail.target.dataset.id ,//车辆交易id
       user_ids: e.detail.target.dataset.user_ids,//砍价人的id
-      by_user_ids: by_user_ids.by_user_ids ,//卖家的id
+      by_user_ids: e.detail.target.dataset.by_user_ids ,//卖家的id
       quotationtime: e.detail.target.dataset.quotationtime
 
     }
@@ -304,11 +326,22 @@ Page({
         duration: 500
       })
     } else {
-      $http.post('my/cancellation_of_quotation', {
-        quoted_id: quoted_id
-      }).then(res => {
-        console.log(res)
-        that.request_price_list();
+      wx.showModal({
+        title: '提示',
+        content: '确定要取消订单吗？',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            $http.post('my/cancellation_of_quotation', {
+              quoted_id: quoted_id
+            }).then(res => {
+              console.log(res)
+              that.request_price_list();
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
       })
     }
   },

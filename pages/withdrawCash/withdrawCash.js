@@ -74,6 +74,7 @@ Page({
   },
 
   withdrawSubmit(e){
+    var that = this
      var formId=e.detail.formId;
      var money=this.data.money;
     var rateMoney = this.data.rateMoney;
@@ -97,17 +98,34 @@ Page({
          image: '../../images/warn.png',
          duration: 2000
        })
-     } else{
+     } else{ 
        wx.showModal({
          title: '提示',
          content: '您确认要提现' + money + '元到银行卡吗？本次提现收取服务费' + rateMoney + '元',
          confirmText: '确认提现',
          success(res) {
            if (res.confirm) {
-             //确认提现
-             $http.post('shop/check_money', {
-               formId: formId,
-               money: money
+             //确认提现 
+       $http.post('shop/check_money',{
+         formId:formId,
+         money: money
+       })
+         .then(res => {
+           //成功回调
+           var resObj = res.data;
+           console.log('核对提现：', resObj);
+           if (resObj.code == 1) { 
+                   //确认提现
+                   wx.showToast({
+                     title: '提现成功',
+                     icon: 'success',
+                     duration: 1000
+                   })
+                   that.setData({
+                     total_money: that.data.total_money-that.data.money,
+                     money:'',
+                   }) 
+               } 
              })
                .then(res => {
                  //成功回调

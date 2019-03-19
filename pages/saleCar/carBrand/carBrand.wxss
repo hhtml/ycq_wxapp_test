@@ -18,8 +18,9 @@ page{
   padding-left:30rpx;
 }
 .carName{
-  width:90%;
+  width:100%;
   margin:0 auto;
+  padding:0rpx 40rpx;
   height:90rpx;
   border-bottom: 1rpx solid #e4e4e4;
   font-size: 14px;

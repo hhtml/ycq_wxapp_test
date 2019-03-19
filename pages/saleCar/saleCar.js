@@ -1,6 +1,7 @@
 // pages/saleCar/saleCar.js
 const app = getApp();
 var $http = require('../../utils/http.js');
+var valve = true //节流阀
 Page({
 
   /**
@@ -381,84 +382,95 @@ Page({
   },
   //发布
   formSubmit(e){
-    this.checkForm();
-    var form = this.data.form;
-    var brand=this.data.brand;
-    var $this=this;
-    var imgList = this.data.imgList;
-    if (!this.checkForm()){
-      wx.showToast({
-        title: '请将信息填写完整',
-        image: '../../images/warn.png'
-      })
-    } 
-    // else if(imgList.length < 6){
-    //   wx.showToast({
-    //     title: '至少上传6张图片',
-    //     image: '../../images/warn.png'
-    //   })
-    // } 
-    else if (this.data.form.price<1000){
-      wx.showToast({
-        title: '价格有误',
-        image: '../../images/warn.png'
-      })
-    } else if($this.data.carType == ''){
-      wx.showToast({
-        title: '请将信息填写完整',
-        image: '../../images/warn.png'
-      })
-      $this.setData({
-        colorCarType:'red'
-      })
-    }else{
-      var modelsimages = imgList.join(',');
-      var carInfo = {
-        brand_id: app.globalData.brand_id,
-        models_name: app.globalData.carType + ' ' + form.productDate +'款'+' ' + form.displacement + form.displacementUnit + ' ' + form.transmissionData,
-        parkingposition: form.carRegion,
-        guide_price: form.price,
-        factorytime: form.productDate,
-        car_licensetime: form.listingDate,
-        kilometres: form.distance,
-        emission_standard: form.emission,
-        phone: $this.data.phone,
-        store_description: form.description,
-        modelsimages: modelsimages,
-        displacement: form.displacement + form.displacementUnit,
-        transmissionData: form.transmissionData
+    if (valve == true){ //节流阀
+      valve = false
+      console.log(1)
+      this.checkForm();
+      var form = this.data.form;
+      var brand = this.data.brand;
+      var $this = this;
+      var imgList = this.data.imgList;
+      if (!this.checkForm()) {
+        wx.showToast({
+          title: '请将信息填写完整',
+          image: '../../images/warn.png'
+        })
+        valve = true
       }
-      console.log(carInfo)
-      $http.post('index/uploadModels',{
-        carInfo: carInfo
-      })
-        .then(res => {
-          //成功回调
-          var resObj = res.data;
-          console.log('我的数据：', resObj);
-          if (resObj.code == 1) {
-            wx.showToast({
-              title: resObj.msg,
-              icon:'success'
-            });
-            $this.cleanForm();
-            $this.cleanImg();
-            $this.setData({
-              carType:''
-            })
-          } else {
-            wx.showToast({
-              title: resObj.msg,
-              image: '../../images/warn.png'
-            });
-            console.log('请求失败：', resObj.msg);
-          }
-        }).catch(err => {
-          //异常回调
-          console.log('请求失败', err);
-        });
+      else if(imgList.length < 1){
+        wx.showToast({
+          title: '至少上传1张图片',
+          image: '../../images/warn.png'
+        })
+      valve = true
+      } 
+      else if (this.data.form.price < 1000) {
+        wx.showToast({
+          title: '价格有误',
+          image: '../../images/warn.png'
+        })
+        valve = true
+      } else if ($this.data.carType == '') {
+        wx.showToast({
+          title: '请将信息填写完整',
+          image: '../../images/warn.png'
+        })
+        $this.setData({
+          colorCarType: 'red'
+        })
+        valve = true
+      } else {
+        var modelsimages = imgList.join(',');
+        var carInfo = {
+          brand_id: app.globalData.brand_id,
+          models_name: app.globalData.carType + ' ' + form.productDate + '款' + ' ' + form.displacement + form.displacementUnit + ' ' + form.transmissionData,
+          parkingposition: form.carRegion,
+          guide_price: form.price,
+          factorytime: form.productDate,
+          car_licensetime: form.listingDate,
+          kilometres: form.distance,
+          emission_standard: form.emission,
+          phone: $this.data.phone,
+          store_description: form.description,
+          modelsimages: modelsimages,
+          displacement: form.displacement + form.displacementUnit,
+          transmissionData: form.transmissionData
+        }
+        console.log(carInfo)
+        $http.post('index/uploadModels', {
+          carInfo: carInfo
+        })
+          .then(res => {
+            //成功回调
+            var resObj = res.data;
+            console.log('我的数据：', resObj);
+            if (resObj.code == 1) {
+              wx.showToast({
+                title: resObj.msg,
+                icon: 'success'
+              });
+              $this.cleanForm();
+              $this.cleanImg();
+              $this.setData({
+                carType: ''
+              })
+              valve = true
+            } else {
+              wx.showToast({
+                title: resObj.msg,
+                image: '../../images/warn.png'
+              });
+              console.log('请求失败：', resObj.msg);
+              valve = true
+            }
+          }).catch(err => {
+            //异常回调
+            console.log('请求失败', err);
+            valve = true
+          });
+      }
+
     }
-    
   },
   formTip(){
       this.setData({

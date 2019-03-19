@@ -1,6 +1,7 @@
 // pages/carDetail/carDetail.js
 const app = getApp();
 var $http = require('../../utils/http.js');
+var valve = true //节流阀
 Page({
 
   /**
@@ -80,7 +81,7 @@ Page({
       console.log('车辆详情：', resObj);
       if (resObj.code == 1) {
         var data = resObj.data;
-        var himgUrl; 
+        var himgUrl;
         if (data.detail.type == 'sell') {
           himgUrl = app.globalData.localImgUrl;
         } else {
@@ -89,8 +90,8 @@ Page({
         // console.log(this.cut_str(data.detail.user.nickname, 6));
         var car = {
           id: data.detail.id,
-          is_authentication: data.can_quote.is_authentication,
-          banner: himgUrl + (data.detail.brand.brand_default_images ? data.detail.brand.brand_default_images : data.detail.modelsimages[0]),
+          banner: data.detail.type == 'buy' ? app.globalData.imgUrl + data.detail.brand.brand_default_images : app.globalData.localImgUrl + data.detail.modelsimages[0],
+ 
           brand_name: data.detail.brand.name,
           name: data.detail.models_name,
           year: data.detail.car_licensetime,
@@ -146,7 +147,6 @@ Page({
   priceLog() {
     var that = this
     var isOffer = that.data.car.isOffer;
-    var is_authentication = that.data.car.is_authentication
     var user = that.data.car.user
     var userInfo = that.data.car.userInfo
     if (userInfo.id == user.id) {
@@ -155,27 +155,15 @@ Page({
         image: '../../images/warn.png'
       })
     } else {
-      if (is_authentication == 1) { //未认证
-        that.setData({
-          msg: that.data.car.can_quote.msg,
-          showModal: true
+      if (isOffer == 1) {
+        wx.showToast({
+          title: '您已报过价',
+          image: '../../images/warn.png'
         })
-      } else if (is_authentication == 2) { //未完成认证
+      } else {
         that.setData({
-          msg: that.data.car.can_quote.msg,
-          showModal2: true
+          priceLogShow: true
         })
-      } else { //已完成认证
-        if (isOffer == 1) {
-          wx.showToast({
-            title: '您已报过价',
-            image: '../../images/warn.png'
-          })
-        } else {
-          that.setData({
-            priceLogShow: true
-          })
-        }
       }
     }
   },
@@ -236,53 +224,60 @@ Page({
     })
   },
   priceSubmit(e) {
-    var formId = e.detail.formId;
-    var form = this.data.form;
-    var car = this.data.car;
-    var $this = this;
-    if (!form.price || !form.phone) {
-      wx.showToast({
-        title: '信息填写完整',
-        image: '../../images/warn.png'
-      });
-    } else if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(form.phone))) {
-      wx.showToast({
-        title: '手机号有误',
-        image: '../../images/warn.png'
-      });
-
-    } else {
-      $http.post('wechat/sendOffer', {
+    if (valve == true){
+      valve = false
+      var formId = e.detail.formId;
+      var form = this.data.form;
+      var car = this.data.car;
+      var $this = this;
+      if (!form.price || !form.phone) {
+        wx.showToast({
+          title: '信息填写完整',
+          image: '../../images/warn.png'
+        });
+        valve = true
+      } else if (!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(form.phone))) {
+        wx.showToast({
+          title: '手机号有误',
+          image: '../../images/warn.png'
+        });
+        valve = true
+      } else {
+        $http.post('wechat/sendOffer', {
           money: form.price,
           phone: form.phone,
           models_id: car.id,
           type: car.type
         })
-        .then(res => {
-          //成功回调
-          var resObj = res.data;
-          console.log('报价：', resObj);
-          if (resObj.code == 1) {
-            wx.showToast({
-              title: resObj.msg
-            });
-            $this.cleanForm();
-            car.isOffer = 1;
-            $this.setData({
-              priceLogShow: false,
-              car: car
-            })
-          } else {
-            wx.showToast({
-              title: resObj.msg,
-              image: '../../images/warn.png'
-            });
-            console.log('请求失败：', resObj.msg);
-          }
-        }).catch(err => {
-          //异常回调
-          console.log('请求失败', err);
-        });
+          .then(res => {
+            //成功回调
+            var resObj = res.data;
+            console.log('报价：', resObj);
+            if (resObj.code == 1) {
+              wx.showToast({
+                title: resObj.msg
+              });
+              $this.cleanForm();
+              car.isOffer = 1;
+              $this.setData({
+                priceLogShow: false,
+                car: car
+              })
+              valve = true
+            } else {
+              wx.showToast({
+                title: resObj.msg,
+                image: '../../images/warn.png'
+              });
+              console.log('请求失败：', resObj.msg);
+              valve = true
+            }
+          }).catch(err => {
+            //异常回调
+            console.log('请求失败', err);
+            valve = true
+          });
+      }
     }
 
   },

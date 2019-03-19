@@ -303,6 +303,14 @@ page{
   font-size: 32rpx;
   color: #fff;
 }
+.buttonItem button{
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #ef4631;
+}
+button::after{
+  border:none;
+}
 
 
 .backDiv{

@@ -1,6 +1,7 @@
 // pages/buyCar/buyCar.js
 const app = getApp();
 var $http = require('../../utils/http.js');
+var valve = true //节流阀
 Page({
 
   /**
@@ -233,65 +234,72 @@ Page({
   },
   //发布
   formSubmit(e) {
-    var formId = e.detail.formId;
-    var form = this.data.form;
-    var $this = this; 
-    if (!this.checkForm()) {
-      wx.showToast({
-        title: '请将信息填写完整',
-        image: '../../images/warn.png'
-      })
-    }else if($this.data.carType == ''){
-      wx.showToast({
-        title: '请将信息填写完整',
-        image: '../../images/warn.png'
-      })
-    } else {
-      var carInfo = {
-        brand_id: app.globalData.brand_id,
-        models_name: app.globalData.carBrand +' '+ form.productDate+'款' + ' ' + form.displacement + form.displacementUnit + ' ' + form.transmissionData,
-        parkingposition: form.carRegion,
-        guide_price: form.price,
-        phone: $this.data.phone,
-        store_description: form.description,
-        displacement: form.displacement + form.displacementUnit,
-        productDate: form.productDate,
-        transmissionData: form.transmissionData,
-      }
-      $http.post('index/wantBuyCar', {
+    if (valve == true){ //节流阀
+      valve = false
+      var formId = e.detail.formId;
+      var form = this.data.form;
+      var $this = this;
+      if (!this.checkForm()) {
+        wx.showToast({
+          title: '请将信息填写完整',
+          image: '../../images/warn.png'
+        })
+        valve = true 
+      } else if ($this.data.carType == '') {
+        wx.showToast({
+          title: '请将信息填写完整',
+          image: '../../images/warn.png'
+        })
+        valve = true 
+      } else {
+        var carInfo = {
+          brand_id: app.globalData.brand_id,
+          models_name: app.globalData.carBrand + ' ' + form.productDate + '款' + ' ' + form.displacement + form.displacementUnit + ' ' + form.transmissionData,
+          parkingposition: form.carRegion,
+          guide_price: form.price,
+          phone: $this.data.phone,
+          store_description: form.description,
+          displacement: form.displacement + form.displacementUnit,
+          productDate: form.productDate,
+          transmissionData: form.transmissionData,
+        }
+        $http.post('index/wantBuyCar', {
           carInfo: carInfo,
           formId: formId
         })
-        .then(res => {
-          //成功回调
-          var resObj = res.data;
-          console.log('我的数据：', resObj);
-          if (resObj.code == 1) {
-            wx.showToast({
-              title: resObj.msg,
-              icon: 'success'
-            });
-            $this.cleanForm();
-            $this.setData({
-              carType:''
-            })
-            $this.setData({
-              form: form,
-              // brand: brand
-            })
-          } else {
-            wx.showToast({
-              title: resObj.msg,
-              image: '../../images/warn.png'
-            })
-            console.log('请求失败：', resObj.msg);
-          }
-        }).catch(err => {
-          //异常回调
-          console.log('请求失败', err);
-        });
+          .then(res => {
+            //成功回调
+            var resObj = res.data;
+            console.log('我的数据：', resObj);
+            if (resObj.code == 1) {
+              wx.showToast({
+                title: resObj.msg,
+                icon: 'success'
+              });
+              $this.cleanForm();
+              $this.setData({
+                carType: ''
+              })
+              $this.setData({
+                form: form,
+                // brand: brand
+              })
+              valve = true 
+            } else {
+              wx.showToast({
+                title: resObj.msg,
+                image: '../../images/warn.png'
+              })
+              console.log('请求失败：', resObj.msg);
+              valve = true 
+            }
+          }).catch(err => {
+            //异常回调
+            console.log('请求失败', err);
+            valve = true 
+          });
+      }
     }
-
   },
 
   //选择车辆品牌

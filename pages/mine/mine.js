@@ -74,7 +74,9 @@ Page({
       } else if (store_has_many.auditstatus == "paid_the_money") {
         if (store_has_many.storelevel.partner_rank == '铂金店铺') {
           that.setData({
-            goldShop: false
+            goldShop: false,
+            nickname: store_has_many.store_name,
+            store_level: store_has_many.storelevel.partner_rank,
           })
         } else {
           that.setData({
@@ -134,74 +136,7 @@ Page({
     // var user_id=wx.getStorageSync("user_id");
     this.request_mine();
   },
-  //测试支付
-  pay: function(e) {
-    var $this = this;
-    var payInfo = {
-      formId: e.detail.formId,
-      out_trade_no: new Date().getTime(),
-      money: 0.01,
-      store_id: 26
-    }
 
-    payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no;
-    $http.post('store_certification_pay/certification_wxPay', payInfo).then(res => {
-
-
-      var timeStamp = (Date.parse(new Date()) / 1000).toString();
-      var pkg = 'prepay_id=' + res.data.prepay_id;
-      var nonceStr = res.data.nonce_str;
-      var appid = res.data.appid;
-      var key = res.data.key;
-      var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
-      //发起支付
-      wx.requestPayment({
-        'timeStamp': timeStamp,
-        'nonceStr': nonceStr,
-        'package': pkg,
-        'signType': 'MD5',
-        'paySign': paySign,
-        'success': function(res) {
-          console.log(res);
-          if (res.errMsg == "requestPayment:ok") {
-            //推送模板消息回调 
-            $http.post('store_certification_pay/after_successful_payment', payInfo).then(res => {
-              if(res.data.code==1){
-                wx.showToast({
-                  title: '支付成功！',
-                  icon: 'success',
-                  duration: 2000,
-                  success: function (res) {
-                    wx.navigateBack({
-                      delta: 1
-                    })
-                  }
-
-                })
-
-              }
-               else{
-                wx.showToast({
-                  title: res.data.msg,
-                  image: '../../images/warn.png',
-                  duration: 500
-                })
-               }
-            });
-          }
-        },
-        'fail': function(res) {
-          console.log('用户取消支付,需要重载页面');
-
-        },
-        'complete': function(res) {
-          // console.log(res)
-        }
-      });
-
-    }); 
-
-  },
   request_mine() {
     var $this = this;
     $http.post('my/index')

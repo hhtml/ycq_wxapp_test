@@ -23,6 +23,15 @@ Component({
       msg: that.properties.paramAtoB.split('+')[0],
       code: that.properties.paramAtoB.split('+')[1],
     })
+    if (that.data.code==4){
+      that.setData({
+        sureMsg: '去支付'
+      })
+    }else if(that.data.code == 5){
+      that.setData({
+        sureMsg: '查看原因'
+      })
+    }
   },
   /**
    * 组件的方法列表
@@ -53,16 +62,10 @@ Component({
           url: '/pages/cooperationSupply/cooperationSupply'
         })
       } else if (that.data.code == 4) {
-        that.setData({
-          sureMsg: '去付费'
-        })
         wx.navigateTo({
           url: '/pages/order/order'
         })
       } else if (that.data.code == 5){
-        that.setData({
-          sureMsg: '查看原因'
-        })
         wx.navigateTo({
           url: '/pages/cooperationSupply/cooperationSupply'
         })
