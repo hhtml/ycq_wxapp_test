@@ -183,6 +183,9 @@ Page({
 
   //支付保证金，买车/卖车
   payMargin: function(e) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this
     wx.showModal({
       title: '提示',
@@ -206,6 +209,7 @@ Page({
             var appid = res.data.appid;
             var key = res.data.key;
             var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
+            wx.hideLoading()
             //发起支付
             wx.requestPayment({
               'timeStamp': timeStamp,
@@ -253,6 +257,9 @@ Page({
   },
   //卖家确认发货
   sellerConfirmTheDelivery: function(e) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this;
     var params = {
       formId: e.detail.formId,
@@ -266,6 +273,7 @@ Page({
  
     $http.post('store_margin_pay/sellerConfirmTheDelivery',params).then(res=>{
       if (res.data.code == 1) {
+        wx.hideLoading();
         console.log(res);
         wx.showToast({
           title: res.data.msg,
@@ -284,6 +292,9 @@ Page({
   },
   //买家确认收货
   buyersConfirmTheDelivery: function (e) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var that = this; 
     var params = {
       formId: e.detail.formId,
@@ -295,6 +306,7 @@ Page({
     } 
     $http.post('store_margin_pay/buyersConfirmTheDelivery', params).then(res => {
       if (res.data.code == 1) { 
+        wx.hideLoading();
         wx.showToast({
           title: res.data.msg,
           icon: 'success',
@@ -315,17 +327,22 @@ Page({
 
   //取消买车订单
   cancelOrderBuy: function(e) {
+    wx.showLoading({
+      title: '加载中',
+    })
     console.log(e)
     var that = this
     var cancel_order = e.target.id.split('+')[0]
     var quoted_id = e.target.id.split('+')[1]
     if (cancel_order == 0) {
+      wx.hideLoading();
       wx.showToast({
         title: '不能取消订单',
         image: '../../images/warn.png',
         duration: 500
       })
     } else {
+      wx.hideLoading();
       wx.showModal({
         title: '提示',
         content: '确定要取消订单吗？',
