@@ -57,7 +57,14 @@ Page({
   },
   moneyInput(e){
      var rate=this.data.rate;
-    var rateMoney = (e.detail.value * rate).toFixed(2);
+
+     
+    if (e.detail.value >= this.data.total_money) {
+      e.detail.value = this.data.total_money;
+    }
+
+    var rateMoney = (e.detail.value * (rate / 100)).toFixed(2);
+
      this.setData({
        money:e.detail.value,
        rateMoney: rateMoney
@@ -207,10 +214,5 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+ 
 })

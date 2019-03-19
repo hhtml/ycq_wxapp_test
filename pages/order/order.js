@@ -136,7 +136,9 @@ Page({
   },
   //去支付点击事件
   payOrder: function(e) {
-
+    wx.showLoading({
+      title: '加载中',
+    })
     var $this = this;
     // var money = e.target.id.split('+')[0]
     var money = 0.01;
@@ -149,7 +151,7 @@ Page({
     }
 
     payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no
-    
+   
     $http.post('store_certification_pay/certification_wxPay', payInfo).then(res => {
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;
@@ -157,7 +159,9 @@ Page({
       var appid = res.data.appid;
       var key = res.data.key;
       var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件
+      wx.hideLoading()
       //发起支付
+      
       wx.requestPayment({
         'timeStamp': timeStamp,
         'nonceStr': nonceStr,

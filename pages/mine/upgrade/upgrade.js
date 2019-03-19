@@ -36,33 +36,43 @@ Page({
   },
 
   // 选择合伙人级别
+  
   partnerChange(e) {
+     
     var that = this
-    console.log(e)
+ 
+    var store_money,newPayMoney ;  
     var index = e.currentTarget.dataset.index;
     var check = e.detail.value;
-    var partnerList = this.data.partnerList;
+    var partnerList = this.data.partnerList; 
     var shop_level_id;
     if (check) {
       for (var i = 0; i < partnerList.length; i++) {
+        if (that.data.store.level_id == partnerList[i]['id']) store_money = partnerList[i]['money']
         partnerList[i].checked = false;
       }
       partnerList[index].checked = true;
       shop_level_id = partnerList[index].id;
+      newPayMoney = partnerList[index].money - store_money;
     } else {
       for (var i = 0; i < partnerList.length; i++) {
         partnerList[i].checked = false;
       }
     }
+    console.log(newPayMoney);
     console.log('shop_level_id:', shop_level_id)
     this.setData({
       partnerList: partnerList,
-      shop_level_id: shop_level_id
+      shop_level_id: shop_level_id,
+      newPayMoney: newPayMoney
     })
   },
 
   // form表单数据提交
   formSubmit(e) { 
+    wx.showLoading({
+      title: '加载中',
+    })
     if(valve == true){
       valve = false
       var that = this
@@ -76,6 +86,7 @@ Page({
       var form = this.data.form;
       var store = that.data.store
       var store_id = e.detail.target.dataset.store_id;
+
       if (!that.data.shop_level_id) {
         wx.showToast({
           title: '请选择合伙人级别',
@@ -102,6 +113,7 @@ Page({
             var appid = res.data.appid;
             var key = res.data.key;
             var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
+            wx.hideLoading()
             //发起支付
             wx.requestPayment({
               'timeStamp': timeStamp,
