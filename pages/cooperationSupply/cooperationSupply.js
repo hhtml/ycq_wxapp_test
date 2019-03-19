@@ -138,19 +138,33 @@ Page({
               idCard: fail_default_value.bank_card,
               idCardFront: fail_default_value.id_card_positive,
               idCardReverse: fail_default_value.id_card_opposite,
-              regionImg: fail_default_value.business_licenseimages
+              regionImg: fail_default_value.business_licenseimages,
+              name: fail_default_value.real_name
             }
+            var main_camp = fail_default_value.main_camp.split(',')
+            var carObj = []
+            main_camp.forEach((item,index)=>{
+              var obj = {
+                name:item,
+                check:true
+              }
+              carObj[index] = obj
+            })
+            var level_id = fail_default_value.level_id
+            partnerList[level_id-1].checked = true
+            $this.setData({
+              brandCheckList: carObj,
+              shop_level_id: level_id
+            })
           }
-          
           $this.setData({
             submit_type: submit_type,
             form: form,
             partnerList: partnerList,
             zimuList,
             brandsList,
-            brandInfo: [zimuList, brandsList[0].brands]
+            brandInfo: [zimuList, brandsList[0].brands],
           });
-
         } else {
           wx.showToast({
             title: resObj.msg,
@@ -580,7 +594,7 @@ Page({
   checkForm() {
     var form = this.data.form;
     for (var item in form) {
-      if (!form[item]&&item!='inviteNumber') {
+      if (!form[item] && item != 'inviteNumber' && item !='regionImg') {
         return false;
       }
     }

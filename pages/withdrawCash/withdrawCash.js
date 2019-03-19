@@ -57,7 +57,7 @@ Page({
   },
   moneyInput(e){
      var rate=this.data.rate;
-    var rateMoney = (e.detail.value * (rate / 100)).toFixed(2);
+    var rateMoney = (e.detail.value * rate).toFixed(2);
      this.setData({
        money:e.detail.value,
        rateMoney: rateMoney
@@ -66,7 +66,7 @@ Page({
   allWithdraw(){
     var money=this.data.total_money;
     var rate = this.data.rate;
-    var rateMoney = (money * (rate / 100)).toFixed(2);
+    var rateMoney = (money * rate).toFixed(2);
     this.setData({
       money: money,
       rateMoney: rateMoney

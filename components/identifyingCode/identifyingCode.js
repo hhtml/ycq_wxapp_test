@@ -120,7 +120,7 @@ Component({
       var phone = this.data.phone;
       var smscode = this.data.smscode;
       var $this = this;
-      if(!/^1(3|4|5|7|8)\d{9}$/.test(phone)){
+      if(!/^1(3|4|5|6|7|8)\d{9}$/.test(phone)){
         wx.showToast({
           title: '手机号格式错误',
           image: '../../images/warn.png'

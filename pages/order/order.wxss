@@ -66,6 +66,17 @@ page{
   font-size: 34rpx;
   color: #000;
 }
+.infoLevel text{
+  font-size: 26rpx;
+  color: #ef4631;
+}
+.upgrade text{
+  font-size: 26rpx;
+  background-color: #ef4631;
+  color:#fff;
+  padding:8rpx 10rpx;
+  border-radius: 8rpx;
+}
 .infoName .store_level{
   /* color:#ef4631; */
   font-size: 26rpx;
@@ -80,6 +91,13 @@ page{
 }
 .infoPrice .time{
   color:#b2b2b2;
+}
+.infoPrice-wrap{
+  padding:0rpx 90rpx;
+}
+.infoPrice-wrap text{
+  font-size: 26rpx;
+  color: #ef4631;
 }
 .orderDomainBg{
   padding-left: 95rpx;

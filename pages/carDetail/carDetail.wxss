@@ -303,10 +303,11 @@ page{
   font-size: 32rpx;
   color: #fff;
 }
-.buttonItem button{
+.buttonItem .buttonItem-btn{
   font-size: 32rpx;
   color: #fff;
   background-color: #ef4631;
+  line-height: 2;
 }
 button::after{
   border:none;

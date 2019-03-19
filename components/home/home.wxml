@@ -1,6 +1,5 @@
 <!--components/home/home.wxml-->
 
 <view class="home-wrap" bindtap='goHome'>
-  <!-- <image src="/images/index_01.png" mode="widthFix"></image> -->
   <view>主页</view>
 </view>

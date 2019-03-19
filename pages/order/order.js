@@ -69,7 +69,9 @@ Page({
                 companystore_auditstatus: val.company_store.auditstatus,
                 can_upgrade: val.can_upgrade ? val.can_upgrade : '',
                 companystoreone: val.company_store,
-                payment_time: val.time_end
+                payment_time: val.time_end,
+                partner_rank: val.level.partner_rank,
+                level_id: val.level.id
               }
               paidList[index] = obj;
             });

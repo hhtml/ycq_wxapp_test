@@ -134,7 +134,7 @@
 
 <view class="bottomArea">
   <view class="iconArea">
-    <view class="iconItem" bindtap="nav_to_shop">
+    <view class="iconItem" bindtap="nav_to_shop" data-path="../myShop/myShop">
       <image src='../../images/shop-icon.png'></image>
       <text>店铺</text>
     </view>
@@ -150,7 +150,7 @@
     </view>
     <view class='buttonItem'>
       <!-- <text>聊一聊</text> -->
-      <button open-type='contact'>聊一聊</button>
+      <button open-type='contact' class="buttonItem-btn">聊一聊</button>
     </view>
   </view>
 </view>

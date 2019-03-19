@@ -35,7 +35,7 @@
   </block>
 </view>
 
-<view class="shopArea">
+<!-- <view class="shopArea">
   <view class='shopAreaTitle'>
     <view class='titleLeft'>
       <image src='../../images/good-icon.png' mode='widthFix'></image>
@@ -62,7 +62,7 @@
       </view>
     </block>
   </scroll-view>
-</view>
+</view> -->
 
 <view class="switchArea">
   <view class="switchAreaTitle">

@@ -34,8 +34,8 @@ Page({
     ],
     multiIndex:[0,0],
     screen: {
-      id: 1,
-      name: '最新发布'
+      id: 3,
+      name: '价格最低'
     },
     screenList:[
       {
@@ -78,6 +78,10 @@ Page({
       this.setData({
         city_id: city_id
       })
+    wx.pageScrollTo({ //滚动到页面最上方
+      scrollTop: 0,
+      duration: 300
+    })
   },
   bindScreenChange: function (e) {
     var screenList = this.data.screenList;
@@ -88,6 +92,10 @@ Page({
     this.change_car_source(screen_id, city_id, brand_id); 
     this.setData({
       screen: screenList[e.detail.value]
+    })
+    wx.pageScrollTo({ //滚动到页面最上方
+      scrollTop: 0,
+      duration: 300
     })
   },
   bindPickerColumnChange(e) {
@@ -110,7 +118,10 @@ Page({
    this.setData({
      brand_id: brand_id
    })
-
+   wx.pageScrollTo({ //滚动到页面最上方
+     scrollTop: 0,
+     duration: 300
+   })
 },
   getCitysByIndex(index) {
     var zimuList = this.data.zimuList;
@@ -134,14 +145,14 @@ Page({
     console.log(options)
     if (options.models_name){ 
       models_name = options.models_name
-      that.request_car_source(1, '', '',models_name)
+      that.request_car_source(3, '', '',models_name)
     } else if (options.name){ 
       var name = options.name
-      that.request_car_source(1, '', name , '')
+      that.request_car_source(3, '', name , '')
     }else{
-      this.request_car_source(1);
+      this.request_car_source(3);
     }
-    // this.request_car_source(1);
+    // this.request_car_source(3);
     this.setData({
       city_id: '',
       brand_id: ''
@@ -172,8 +183,7 @@ Page({
             var himgUrl; 
              var obj={
                id: val.id,
-               imgSrc: val.type == 'buy' ? app.globalData.imgUrl + val.brand.brand_default_images : app.globalData.localImgUrl + val.modelsimages,
-             
+               imgSrc: val.type == 'buy' ? app.globalData.imgUrl + val.brand.brand_default_images : app.globalData.localImgUrl + val.modelsimages,  
                brand_name: val.brand.name,
                name: val.models_name,
                priceArea: val.guide_price,
@@ -244,15 +254,9 @@ Page({
           var data = resObj.data;
           var carList = data.carList;
           carList.forEach((val, index) => {
-            var himgUrl;
-            if (val.type == 'sell') {
-              himgUrl = app.globalData.localImgUrl;
-            } else {
-              himgUrl = app.globalData.imgUrl;
-            }
             var obj = {
               id: val.id,
-              imgSrc: himgUrl + (val.brand.brand_default_images ? val.brand.brand_default_images : val.modelsimages),
+              imgSrc: val.type == 'buy' ? app.globalData.imgUrl + val.brand.brand_default_images : app.globalData.localImgUrl + val.modelsimages,
               brand_name: val.brand.name,
               name: val.models_name,
               priceArea: val.guide_price,
@@ -311,10 +315,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.request_car_source(1);
+    this.request_car_source(3);
     var screen = {
-      id: 1,
-      name: '最新发布'
+      id: 3,
+      name: '价格最低'
     }
     this.setData({
       city_id: '',
