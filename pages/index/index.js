@@ -3,7 +3,8 @@
 const app = getApp();
 var $http = require('../../utils/http.js');
 var util = require('../../utils/util.js');
-
+//onload 与onshow 避免重复加载
+var checkReLoad=false;
 Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
@@ -81,6 +82,7 @@ Page({
     var index = e.currentTarget.dataset.index;
     var iconList = this.data.iconList;
     var path = iconList[index].path;
+    //我有车卖
     if (index == 0) {
       // wx.navigateTo({
       //   url: path,
@@ -122,7 +124,9 @@ Page({
           })
       }
 
-    } else if (index == 1) {
+    } 
+    //我想买车
+    /*else if (index == 1) {
       // wx.navigateTo({
       //   url: path,
       // })
@@ -156,7 +160,8 @@ Page({
             url: path,
           })
       }
-    } else {
+    } */
+    else {
       wx.navigateTo({
         url: path,
       })
@@ -215,6 +220,8 @@ Page({
 
   onLoad: function (options) {
     this.request_index_info();
+    checkReLoad = true;    
+    
     // this.check();
   },
   nav_to_classify: function(e) {
@@ -243,6 +250,7 @@ Page({
         // console.log('首页数据：', resObj);
 
         if (resObj.code == 1) {
+          checkReLoad = false;
           var bannerList = resObj.data.bannerList;
           var storeList = resObj.data.storeList;
           var saleList = resObj.data.carModelList.modelsInfoList;
@@ -333,7 +341,7 @@ Page({
             saleInfoList: saleInfoList,
             buyInfoList: buyInfoList,
             clueInfoList: clueInfoList,
-            buy_car_condition: resObj.data.buy_car_condition,
+            // buy_car_condition: resObj.data.buy_car_condition,
             sell_car_condition: resObj.data.sell_car_condition,
             unread: resObj.data.unread
           });
@@ -374,8 +382,8 @@ Page({
     }
   },
 
-  onShow: function() {
-    this.request_index_info();
+  onShow: function() { 
+    if (!checkReLoad) this.request_index_info(); 
   }
  
 })

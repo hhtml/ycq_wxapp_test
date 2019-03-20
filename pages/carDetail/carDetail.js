@@ -281,6 +281,12 @@ Page({
     }
 
   },
+  chat:function(e){
+    wx.showLoading({
+      title: '加载中',
+    })
+    wx.hideLoading();
+  },
   /* 截取字符串，多余的以省略号代替 */
   cut_str:function(str, len) {
     var str_length = 0;

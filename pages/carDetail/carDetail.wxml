@@ -1,4 +1,4 @@
-<!--pages/carDetail/carDetail.wxml-->
+ <!--pages/carDetail/carDetail.wxml-->
 
 <!-- 自定义导航栏 -->
 <view class="nav-wrap">
@@ -141,7 +141,7 @@
     <view class="iconItem">
       <image src='../../images/share-icon.png'></image>
       <text>转发</text>
-      <button open-type='share'></button>
+      <button open-type='share' ></button>
     </view>
   </view>
   <view class='buttonArea'>
@@ -150,7 +150,7 @@
     </view>
     <view class='buttonItem'>
       <!-- <text>聊一聊</text> -->
-      <button open-type='contact' class="buttonItem-btn">聊一聊</button>
+      <button open-type='contact' bindtap='chat'  send-message-title="{{car.name}}" send-message-img="{{car.banner}}" show-message-card="true" send-message-path="pages/carDetail/carDetail?carId={{car.id}}&&type={{car.type}}" class="buttonItem-btn">聊一聊</button>
     </view>
   </view>
 </view>

@@ -2,8 +2,7 @@
 const app = getApp();
 var $http = require('../../utils/http.js');
 var util = require('../../utils/md5.js') // 引入md5.js文件
-
-
+var checkReLoad = false; 
 Page({
 
   /**
@@ -135,81 +134,86 @@ Page({
     var that = this
     // var user_id=wx.getStorageSync("user_id");
     this.request_mine();
+    checkReLoad = true;    
   },
 
   request_mine() {
     var $this = this;
     $http.post('my/index')
       .then(res => {
-        //成功回调
         var resObj = res.data;
-        $this.data.userInfo = resObj.data.userInfo;
-        $this.data.store_has_many = resObj.data.userInfo.store_has_many
-        $this.setData({
-          nickname: resObj.data.userInfo.nickname,
-          unread: resObj.data.userInfo.unread,
-          store_has_many: resObj.data.userInfo.store_has_many
-        })
-        $this.isAuthentication() //店铺认证 实名认证
-        //转化头像图片地址
-        if (typeof $this.data.userInfo.avatar === 'string') {
-          wx.getImageInfo({ //  小程序获取图片信息API
-            src: $this.data.userInfo.avatar,
-            success: function(res) {
-              $this.data.switch1 = 1
-              $this.data.userInfo.avatar = res.path
-            },
-            fail(err) {
-
-              console.log(err)
-            }
+        if (resObj.code == 1) {
+          checkReLoad = false; 
+          //成功回调
+         
+          $this.data.userInfo = resObj.data.userInfo;
+          $this.data.store_has_many = resObj.data.userInfo.store_has_many
+          $this.setData({
+            nickname: resObj.data.userInfo.nickname,
+            unread: resObj.data.userInfo.unread,
+            store_has_many: resObj.data.userInfo.store_has_many
           })
-        }
-
-        // //获取背景图片
-        $this.data.userInfo.invite_bg_img = app.globalData.imgUrl + $this.data.userInfo.invite_bg_img
-        if (typeof $this.data.userInfo.invite_bg_img === 'string') {
-          wx.getImageInfo({ //  小程序获取图片信息API
-            src: $this.data.userInfo.invite_bg_img,
-            success: function(res) {
-              console.log(res.path)
-              $this.data.switch2 = 1
-              $this.data.userInfo.invite_bg_img = res.path
-            },
-            fail(err) {
-              console.log($this.data.userInfo.invite_bg_img)
-              console.log(err)
-            }
-          })
-        }
-        //获取二维码图片地址
-        if ($this.data.userInfo.invitation_code_img) {
-          $this.data.userInfo.invitation_code_img = app.globalData.localImgUrl + $this.data.userInfo.invitation_code_img
-          if (typeof $this.data.userInfo.invitation_code_img === 'string') {
+          $this.isAuthentication() //店铺认证 实名认证
+          //转化头像图片地址
+          if (typeof $this.data.userInfo.avatar === 'string') {
             wx.getImageInfo({ //  小程序获取图片信息API
-              src: $this.data.userInfo.invitation_code_img,
+              src: $this.data.userInfo.avatar,
               success: function(res) {
-                $this.data.switch3 = 1
-                $this.data.userInfo.invitation_code_img = res.path
-
+                $this.data.switch1 = 1
+                $this.data.userInfo.avatar = res.path
               },
               fail(err) {
-                // console.log($this.data.userInfo.invitation_code_img)
-                // console.log(err)
+
+                console.log(err)
               }
             })
           }
-        }
 
-        if (resObj.code == 1) {
-          var data = resObj.data;
-          var isNewOffer = data.userInfo.isNewOffer;
-          $this.setData({
-            isNewOffer
-          });
+          // //获取背景图片
+          $this.data.userInfo.invite_bg_img = app.globalData.imgUrl + $this.data.userInfo.invite_bg_img
+          if (typeof $this.data.userInfo.invite_bg_img === 'string') {
+            wx.getImageInfo({ //  小程序获取图片信息API
+              src: $this.data.userInfo.invite_bg_img,
+              success: function(res) {
+                console.log(res.path)
+                $this.data.switch2 = 1
+                $this.data.userInfo.invite_bg_img = res.path
+              },
+              fail(err) {
+                console.log($this.data.userInfo.invite_bg_img)
+                console.log(err)
+              }
+            })
+          }
+          //获取二维码图片地址
+          if ($this.data.userInfo.invitation_code_img) {
+            $this.data.userInfo.invitation_code_img = app.globalData.localImgUrl + $this.data.userInfo.invitation_code_img
+            if (typeof $this.data.userInfo.invitation_code_img === 'string') {
+              wx.getImageInfo({ //  小程序获取图片信息API
+                src: $this.data.userInfo.invitation_code_img,
+                success: function(res) {
+                  $this.data.switch3 = 1
+                  $this.data.userInfo.invitation_code_img = res.path
 
-        } else {
-          console.log('请求失败：', data.msg);
+                },
+                fail(err) {
+                  // console.log($this.data.userInfo.invitation_code_img)
+                  // console.log(err)
+                }
+              })
+            }
+          }
+
+          if (resObj.code == 1) {
+            var data = resObj.data;
+            var isNewOffer = data.userInfo.isNewOffer;
+            $this.setData({
+              isNewOffer
+            });
+
+          } else {
+            console.log('请求失败：', data.msg);
+          }
         }
       }).catch(err => {
         //异常回调
@@ -232,7 +236,7 @@ Page({
           console.log('请求失败,异常回调');
         });
     }
-    if (store_has_many.length > 0) { 
+    if (store_has_many.length > 0) {
       if (store_has_many[0].auditstatus == 'paid_the_money') {
         if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {
           $this.createNewImg()
@@ -245,12 +249,12 @@ Page({
             icon: 'loading',
             duration: 1000
           })
-          setTimeout(function(){
+          setTimeout(function() {
             $this.createNewImg()
             $this.setData({
               showModal: true
             })
-          },1000)
+          }, 1000)
         }
 
       } else if (store_has_many[0].auditstatus == 'in_the_review') {
@@ -367,7 +371,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.request_mine();
+    if (!checkReLoad) this.request_mine();
   },
 
   /**

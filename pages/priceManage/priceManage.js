@@ -84,6 +84,7 @@ Page({
                 quoted_id: val.id,
                 user_ids: val.user_ids,
                 models_id: val.models_info_id,
+                buy_car_id: val.buy_car_id,
                 seller_payment_status: val.seller_payment_status,
                 buyer_payment_status: val.buyer_payment_status,
                 by_user_ids:val.models_info.user_id
@@ -121,6 +122,7 @@ Page({
                 cancel_order: val.cancel_order,
                 quoted_id: val.id,
                 models_id: val.models_info_id,
+                buy_car_id: val.buy_car_id,
                 user_ids:val.user_ids,
                 seller_payment_status: val.seller_payment_status,
                 buyer_payment_status: val.buyer_payment_status,
@@ -199,9 +201,10 @@ Page({
             trading_models_id: e.detail.target.dataset.id.split('+')[0],
             // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
             money: 0.01,
-            user_type: e.detail.target.dataset.pay_type
+            user_type: e.detail.target.dataset.pay_type,
+            type: e.detail.target.dataset.type
           }
-          payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no;
+          payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no + '_' + payInfo.type;
           $http.post('store_margin_pay/marginPay', payInfo).then(res => {
             var timeStamp = (Date.parse(new Date()) / 1000).toString();
             var pkg = 'prepay_id=' + res.data.prepay_id;
