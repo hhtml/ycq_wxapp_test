@@ -401,7 +401,12 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(res) {
+    let that = this;
+    return {
+      title: '友车圈圈', // 转发后 所显示的title
+      path: '/pages/cooperationSupply/cooperationSupply?inviter_user_id='+wx.getStorageSync("user_id"), // 相对的路径
+      // imageUrl: app.globalData.imgUrl + that.data.shareInfo.shares_img
+    }
   },
 })

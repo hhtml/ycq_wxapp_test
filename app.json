@@ -23,7 +23,8 @@
     "pages/infomation/infomation",
     "pages/infomationDetail/infomationDetail",
     "pages/withdrawCash/withdrawCash",
-    "pages/myWallet/myWallet"
+    "pages/myWallet/myWallet",
+    "pages/myWallet/record/record"
   ],
   "permission": {
     "scope.userLocation": {

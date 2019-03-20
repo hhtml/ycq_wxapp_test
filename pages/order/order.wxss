@@ -36,6 +36,15 @@ page{
   padding: 30rpx 24rpx;
   border-radius: 8rpx;
   margin-bottom: 20rpx;
+  position: relative;
+}
+.store_icon{
+  position: absolute;
+  left:164rpx;
+  top:36rpx;
+  z-index: 9999;
+  width:420rpx;
+  height:190rpx;
 }
 .orderInfo{
   display: flex;
@@ -91,6 +100,13 @@ page{
 }
 .infoPrice .time{
   color:#b2b2b2;
+}
+.infoName-wrap{
+  padding-left:90rpx;
+}
+.infoName-wrap text{
+  font-size: 26rpx;
+  color: #ef4631;
 }
 .infoPrice-wrap{
   padding:0rpx 90rpx;
@@ -151,7 +167,6 @@ page{
   display: inline-block;
   height: 43rpx;
   line-height: 43rpx;
-  padding: 0 8rpx;
   color: #b2b2b2;
   font-size: 28rpx;
   margin-right: 30rpx;

@@ -63,21 +63,19 @@ Page({
   selectCar:function(e){
     console.log(e)
     var that = this
-    console.log(e.target.id)
     that.setData({
       showModal:true,
       carIndex:e.target.id.split('+')[0], 
-      marker: e.target.id.split('+')[1]
+      marker: e.target.id.split('+')[1],
+      carName: e.currentTarget.dataset.name
     })
     app.globalData.brand_id = e.target.id.split('+')[1]
-    // console.log(that.data.carBrand['A'].brand[0].series)
   },
 
   // 对外暴露出id事件
   selectIndex:function(e){
     var that = this
-    console.log(e._relatedInfo.anchorTargetText)
-    var carName = e._relatedInfo.anchorTargetText
+    var carName = that.data.carName
     var carType = that.data.carBrand[e.currentTarget.id].brand[that.data.carIndex].series
     console.log(carType)
     carType.forEach((val,index) =>{ //汽车型号前面补全名字

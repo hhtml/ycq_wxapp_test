@@ -16,7 +16,12 @@
         <!-- <open-data type="userNickName"></open-data> -->
         <view class="nickName">
           <view class="name">{{nickname}}</view>
-          <view class="storeLevel">{{store_level}}</view>
+          <view class="storeLevel">
+          <!-- {{store_level}} -->
+          <image src="/images/store_bojin.png" wx:if="{{store_level=='铂金店铺'}}"></image>
+          <image src="/images/store_huangjin.png" wx:if="{{store_level=='黄金店铺'}}"></image>
+          <image src="/images/store_baiyin.png" wx:if="{{store_level=='白银店铺'}}"></image>
+          </view>
         </view>
         <!--<view class="writeIcon">
                     <image src='' mode='widthFix'></image>
