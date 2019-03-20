@@ -110,7 +110,8 @@ Page({
           default: data.detail.default,
           defaultUrl: app.globalData.imgUrl,
           can_quote: data.can_quote,
-          user: data.detail.user
+          user: data.detail.user,
+          is_certification_needed: data.detail.is_certification_needed
         }
         form.phone = data.detail.user.mobile;
         var detailImages = data.detail.modelsimages;
@@ -132,15 +133,20 @@ Page({
       console.log('请求失败', err);
     });
   },
+  
+  //点击店铺事件
   nav_to_shop() {
-    // wx.showToast({
-    //   title: '敬请期待',
-    //   image: '../../images/warn.png'
-    // })
     var shopId = this.data.car.store_id;
-    wx.navigateTo({
-      url: '../myShop/myShop?shopId='+shopId,
+    if (shopId){
+      wx.navigateTo({
+        url: '../myShop/myShop?shopId=' + shopId,
+      })
+    }else{
+      wx.showToast({
+      title: '暂无店铺',
+      image: '../../images/warn.png'
     })
+    }
   },
 
   //点击砍价事件
@@ -149,22 +155,30 @@ Page({
     var isOffer = that.data.car.isOffer;
     var user = that.data.car.user
     var userInfo = that.data.car.userInfo
-    if (userInfo.id == user.id) {
-      wx.showToast({
-        title: '不能给自己报价',
-        image: '../../images/warn.png'
-      })
-    } else {
-      if (isOffer == 1) {
+    var is_certification_needed = that.data.car.is_certification_needed
+    console.log(is_certification_needed)
+    if (is_certification_needed == 0){ //不需要认证
+      if (userInfo.id == user.id) {
         wx.showToast({
-          title: '您已报过价',
+          title: '不能给自己报价',
           image: '../../images/warn.png'
         })
       } else {
-        that.setData({
-          priceLogShow: true
-        })
+        if (isOffer == 1) {
+          wx.showToast({
+            title: '您已报过价',
+            image: '../../images/warn.png'
+          })
+        } else {
+          that.setData({
+            priceLogShow: true
+          })
+        }
       }
+    }else{ //需要认证
+      that.setData({
+        showModal:true
+      })
     }
   },
   closeLog() {

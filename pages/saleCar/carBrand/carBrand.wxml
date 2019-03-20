@@ -4,7 +4,7 @@
 <scroll-view scroll-y="true" scroll-into-view="{{anchor}}"  scroll-with-animation="true" class="src">
   <view id="{{index}}" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectIndex' class="wrap">
     <view class="initial">{{index}}</view>
-    <view class="carName" wx:for-item="itemName" wx:for="{{item.brand}}" wx:key="{{itemName.id}}" bindtap='selectCar' id="{{index}}+{{itemName.id}}">
+    <view class="carName" wx:for-item="itemName" wx:for="{{item.brand}}" wx:key="{{itemName.id}}" bindtap='selectCar' id="{{index}}+{{itemName.id}}" data-name="{{itemName.name}}">
     <text class="marker" wx:if="{{marker == itemName.id}}"></text>
     {{itemName.name}}
     </view>

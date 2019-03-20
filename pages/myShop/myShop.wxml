@@ -1,6 +1,6 @@
 <!--pages/myShop/myShop.wxml-->
 <view class="shopImg">
-  <image src='{{shop.banner}}'></image>
+  <image src='{{shop.banner}}' mode="aspectFill"></image>
 </view>
 <!--shopInfo-->
 <view class='shopInfo'>

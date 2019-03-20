@@ -1,17 +1,6 @@
 <!--pages/mine/upgrade/upgrade.wxml-->
 
 <form report-submit='{{true}}' bindsubmit='formSubmit'>
-  <!-- <view class="switchTitle">
-    <view class="titleItem {{activeId ==0 ? 'activeItem':''}}" data-id="0" bindtap='switchTitle'>
-       <text>合作价值</text>
-    </view>
-    <view class="titleItem {{activeId == 1 ? 'activeItem':''}}" data-id="1"  bindtap='switchTitle'>
-       <text>合作成果</text>
-    </view>
-    <view class="titleItem {{activeId == 2 ? 'activeItem':''}}" data-id="2"  bindtap='switchTitle'>
-       <text>合作意向申请</text>
-    </view>
-</view> -->
 
   <!--店铺信息-->
   <view class=" shopArea">
@@ -230,7 +219,6 @@
   <view class='formButtom' report-submit>
     <button form-type='submit' data-store_id="{{store.id}}" wx:if="{{newPayMoney}}">提交店铺升级 ￥{{newPayMoney}}元</button>
     <button form-type='submit' data-store_id="{{store.id}}" wx:else>提交店铺升级</button>
-
   </view>
 </form>
 

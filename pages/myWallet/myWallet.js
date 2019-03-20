@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    record:false, //体现记录
     /*nickname:'',
     wallet:{
       total_earnings:2500,
@@ -46,7 +47,7 @@ Page({
           var user = data.user;
           var wallet = data.mymoney;
           var earning_details = data.earning_details;
-
+          $this.data.store_id = data.user.store_has_many.id
           if (earning_details) {
             earning_details.forEach((val, index) => {
               var obj = {
@@ -110,6 +111,13 @@ Page({
 
 
   },
+  //提现记录点击事件
+  goRecord:function(){
+    var that = this
+    wx.navigateTo({
+      url: './record/record?store_id=' + that.data.store_id
+    })
+  },
 
 
   /**
@@ -144,7 +152,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    this.request_wallet();
+    this.onLoad();
 
   },
 

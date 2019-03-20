@@ -1,0 +1,21 @@
+<!--pages/myWallet/record/record.wxml-->
+
+<!-- 提现记录 -->
+<view class="record-wrap">
+  <view class="record" wx:for="{{recordList}}" wx:key="{{item.id}}">
+    <view class="icon">
+      <image src="/images/record.png"></image>
+    </view>
+    <view class="content-wrap">
+      <view class="content">
+        <view class="recordMonry"> 
+          <text>提现-到{{item.bankname}}({{item.bank_card}})</text>
+          <text>￥{{item.withdrawal_amount}}</text>
+        </view>
+        <view class="recordTime">{{item.createtime}}</view>
+        <view class="recordState" wx:if="{{item.status == 'cash_in'}}">状态:正在提现中</view>
+        <view class="recordState" wx:else>状态:已提现到账</view>
+      </view>
+    </view>
+  </view>
+</view>

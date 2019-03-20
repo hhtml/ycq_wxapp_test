@@ -265,10 +265,10 @@
   </view>
 <!-- 滑动选择区域 -->
 <scroll-view scroll-y="true" scroll-into-view="{{anchor}}"  scroll-with-animation="true" class="src">
-  <view id="{{index}}" wx:for="{{carBrand}}" wx:key="{{item}}" catchtap='selectIndex' class="wrap">
+  <view id="{{index}}" wx:for="{{carBrand}}" wx:key="{{item}}" bindtap='selectIndex' class="wrap">
     <view class="initial">{{index}}</view>
-  <checkbox-group catchtap="checkboxChange">
-    <label class="checkbox" wx:for="{{item}}" wx:for-item="itemName" wx:key="{{itemName.id}}">
+  <checkbox-group>
+    <label class="checkbox" wx:for="{{item}}" wx:for-item="itemName" wx:key="{{itemName.id}}" bindtap='selectCarName' data-name="{{itemName.name}}">
     <checkbox value="{{itemName.name}}" checked="{{itemName.checked}}"/>
     {{itemName.name}}
     </label>

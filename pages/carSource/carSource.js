@@ -152,7 +152,6 @@ Page({
     }else{
       this.request_car_source(3);
     }
-    // this.request_car_source(3);
     this.setData({
       city_id: '',
       brand_id: ''
@@ -323,7 +322,8 @@ Page({
     this.setData({
       city_id: '',
       brand_id: '',
-      screen: screen
+      screen: screen,
+      multiIndex: [0, 0],
     })
   },
 

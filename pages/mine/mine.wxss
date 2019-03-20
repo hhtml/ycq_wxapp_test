@@ -66,8 +66,12 @@ page{
   font-weight: bold;
 }
 .storeLevel{
-  font-size: 30rpx;
-  padding-top:8rpx;
+  font-size: 28rpx;
+  padding-top:6rpx;
+}
+.storeLevel image{
+  width:200rpx;
+  height:56rpx;
 }
 .writeIcon{
   width: 34rpx;

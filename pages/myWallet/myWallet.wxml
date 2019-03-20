@@ -30,7 +30,7 @@
       <text>提现</text>
     </view>
     <view class='toMoney'>
-      <text>提现记录 ></text>
+      <text bindtap="goRecord">提现记录 ></text>
     </view>
   </view>
   <view class='toMoneyNote'><text>(每次提现金额不能少于100元)</text></view>
@@ -56,23 +56,3 @@
     </block>
   </view>
 </view>
-
-<!-- 提现记录 -->
-<view class="record-wrap">
-  <view class="record">
-    <view class="icon">
-      <image src="/images/record.png" mode="widthFix"></image>
-    </view>
-    <view class="content-wrap">
-      <view class="content">
-        <view class="recordMonry"> 
-          <text>提现-到工商银行(4828)</text>
-          <text>900.90</text>
-        </view>
-        <view class="recordTime">2019年3月19日</view>
-        <view class="recordState">状态:已提现到账</view>
-      </view>
-    </view>
-  </view>
-</view>
-
