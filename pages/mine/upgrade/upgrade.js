@@ -80,7 +80,6 @@ Page({
       //   title: '即将上线',
       //   image: '/images/warn.png'
       // });
-      // return;
       var formId = e.detail.formId;
       var shop_level_id = this.data.shop_level_id;
       var form = this.data.form;

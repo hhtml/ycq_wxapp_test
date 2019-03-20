@@ -77,27 +77,32 @@
                 <view class="infoName">
                     <text>{{item.companystoreone.store_name}}</text>
                 </view>
-                <view class="infoLevel">
+                <view class="infoLevel" wx:if="{{item.pay_type !== 'bond'}}">
                     <text>【{{item.partner_rank}}】</text>
                 </view>
                 <!-- <view class="infoPrice">
                     <text>店铺认证费：￥{{item.certification_fee}}</text>
                 </view> -->
             </view>
-                <view class="infoPrice-wrap">
-                    <text>店铺认证费：￥{{item.certification_fee}}</text>
+                <view class="infoName-wrap" wx:if="{{item.pay_type == 'bond'}}">
+                    <text>车型：{{item.models_name}}</text>
+                </view>
+                <view class="infoPrice-wrap" wx:if="{{item.pay_type !== 'bond'}}">
+                    <text>店铺{{item.pay_type =='up'?'升级':'认证'}}费：￥{{item.certification_fee}}</text>
                 </view>
             <view class="orderDomainBg">
                 <view class="orderDomain">
                     <view class="paytime">
-                      <text>{{item.payment_time}}</text>
+                      <text>{{item.pay_type=='up'?'升级':'认证'}}时间：{{item.payment_time}}</text>
                     </view>
-                    <view class="upgrade" wx:if="{{item.level_id !== 1}}">
+                    <!-- <view class="upgrade" wx:if="{{item.level_id !== 1}}">
                       <text bindtap='upgradeOrder'>升级</text>
-                    </view>
+                    </view> -->
                </view>
             </view>
-            
+            <image src="/images/store_money.png" class="store_icon" wx:if="{{item.pay_type == 'bond'}}"></image>
+            <image src="/images/store_renzheng.png" class="store_icon" wx:if="{{item.pay_type == 'certification'}}"></image> 
+            <image src="/images/store_shengji.png" class="store_icon" wx:if="{{item.pay_type == 'up'}}"></image>   
         </view>
     </block>
     <view class="noOrder" wx:if="{{paidList == ''}}">

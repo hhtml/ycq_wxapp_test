@@ -71,7 +71,7 @@ Page({
     searchResult: [],
     shareInfo: '',
     sell_car_condition: {},
-    buy_car_condition: {},
+    // buy_car_condition: {},
     msg: '',
     showModal: false
   },
@@ -123,6 +123,7 @@ Page({
             showModal2: true
           })
       }
+
 
     } 
     //我想买车

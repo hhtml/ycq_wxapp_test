@@ -71,7 +71,9 @@ Page({
                 companystoreone: val.company_store,
                 payment_time: val.time_end,
                 partner_rank: val.level.partner_rank,
-                level_id: val.level.id
+                level_id: val.level.id,
+                pay_type: val.pay_type,
+                models_name: val.models_name
               }
               paidList[index] = obj;
             });

@@ -547,14 +547,14 @@ Page({
       colorIndex: e.target.id
     })
   },
+  
   //选择汽车品牌
-  checkboxChange:function(e){
+  selectCarName:function(e){
     var that = this
     console.log(e)
     var carIndex = '' //汽车品牌index
     var obj = {
-      // id: e.target.id.split('+')[1],
-      name: e._relatedInfo.anchorRelatedText,
+      name: e.currentTarget.dataset.name,
       check: true
     }
     var brandCheckList = that.data.brandCheckList
@@ -724,7 +724,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    // this.come_in_page();
+    if (options.inviter_user_id){ //点击分享链接进入
+      if (options.inviter_user_id == wx.getStorageSync("user_id")){
+        //点击自己分享的链接不产生邀请码
+      }else{
+        that.data.inviter_user_id = options.inviter_user_id
+      // that.setData({
+      //   disabled: true
+      // })
+      }
+    }
     console.log("index 生命周期 onload" + JSON.stringify(options))
     //在此函数中获取扫描普通链接二维码参数
     let q = decodeURIComponent(options.q)

@@ -134,7 +134,7 @@
 
 <view class="bottomArea">
   <view class="iconArea">
-    <view class="iconItem" bindtap="nav_to_shop" data-path="../myShop/myShop">
+    <view class="iconItem" bindtap="nav_to_shop">
       <image src='../../images/shop-icon.png'></image>
       <text>店铺</text>
     </view>
