@@ -11,8 +11,10 @@ page{
   top:0rpx;
   width:100%;
   z-index: 99999;
+  box-sizing: border-box;
 }
 .blockInfo{
+
   background-color:#fff;padding:10rpx 10rpx 5rpx 10rpx;
 
 }
@@ -67,6 +69,7 @@ page{
   padding: 30rpx 0;
   display: flex;
   background-color: #fff;
+  box-sizing: border-box;
 }
 
 .carInfoItem:nth-child(1) {
@@ -129,43 +132,39 @@ page{
 
 .carName {
   /* overflow: hidden; */
-  word-break: break-all;
-  word-wrap: break-word;
+  /* word-break: break-all;
+  word-wrap: break-word; */
 }
 
 .carName text {
   font-size: 30rpx;
   color: #353535;
-  float: left;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  display: inline-block;
+  width:400rpx;
 }
 
 .carInfoRow1 {
   width: 100%;
-  /* overflow: hidden; */
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .carInfoRow1 text {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   font-size: 26rpx;
   color: #888;
-  /* float: left; */
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  display: inline-block;
+  width:400rpx;
 }
-
 .carInfoRow2 {
   overflow: hidden;
   height: 108rpx;
   display: flex;
   align-items: center;
 }
-
 .carInfoRow2 text {
   flex: 1;
   text-align: right;
@@ -174,7 +173,7 @@ page{
   font-size: 24rpx;
   justify-content: flex-end;
   color: #b2b2b2;
-  float: left;
+  padding:0rpx 10rpx;
 }
 
 .carInfoRow2 text:nth-child(1) {

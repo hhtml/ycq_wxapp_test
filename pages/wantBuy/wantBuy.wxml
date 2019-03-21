@@ -3,7 +3,7 @@
 <view class="selectArea">
     <view class="selectList">
       <view class="selectItem {{state == 0 ? 'activeItem' :''}} " data-state="0" bindtap='chooseState'>
-        <text>买家的砍价</text>
+        <text>收到的砍价</text>
       </view>
       <view class="selectItem  {{state == 1 ? 'activeItem' :''}}" data-state="1" bindtap='chooseState'>
         <text>我的砍价</text>
@@ -11,16 +11,19 @@
     </view>
 </view>
 
+
+
+<!-- 收到的砍价 -->
 <view class="selectItem-wrap" wx:if="{{state == 0}}">
-<view class="noCont" wx:if="{{carInfoList.length==0}}">
+<view class="noCont" wx:if="{{receive_List.length==0}}">
   <image src="../../images/404.png" mode='widthFix'></image>
   <text>暂无数据</text>
 </view>
 <view class="carInfoList">
-       <block wx:for="{{carInfoList}}">
+       <block wx:for="{{receive_List}}">
         <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
             <view class="carImg">
-                <image src='{{item.imgSrc}}' mode='widthFix'></image>
+                <image src='{{item.imgSrc}}' mode='aspectFill'></image>
             </view>
             <view class="carInfoCont">
               <view class="carInfoContWord">
@@ -33,7 +36,7 @@
                   </view>
 
                   <view class="carInfoRow2">
-                      <text>心里价:{{item.priceArea}}</text>
+                      <text>心里价:{{item.priceArea}}万</text>
                       <text>浏览量:{{item.sale}}</text>
                   </view>
               </view>
@@ -45,22 +48,20 @@
                 </view>
             </view>
         </view>
-        </block>
-    </view>
 
-      <!-- 报价用户 -->
-      <view class="floatArea">
+        <!-- 报价用户 -->
+      <view class="floatArea" wx:for="{{item.has_many_quoted_price}}" wx:for-item="itemChirs">
           <view class="floatArea-user">
             <view class="floatImg">
-              <image src='{{item.userPic}}'></image>
+              <image src='{{itemChirs.user.avatar}}'></image>
             </view>
             <view class="floatName">
-              <text>君忆汽车</text>
+              <text>{{itemChirs.user.nickname}}</text>
             </view>
             <view class="floatMessage">
-              <text>用户的心里价100万，请您尽快联系</text>
+              <text>用户的心里价{{itemChirs.money}}万，请您尽快联系</text>
            </view>
-            <view class="floatIcon" bindtap='makePhoneCall' data-tel="{{item.mobile}}">
+            <view class="floatIcon" bindtap='makePhoneCall' data-tel="{{default_phone}}">
               <image src='../../images/sf-call-icon.png'></image>
             </view>
           </view>
@@ -69,9 +70,9 @@
           <!--开始支付-->
           <view>
             <view class="bailMoney-wrap">
-              <view class="bailMoney">交易保证金：￥3000元</view>
+              <view class="bailMoney">交易保证金：￥{{itemChirs.bond}}元</view>
               <view class="status-wrap">
-                <view class="cancelOrder">取消订单</view>
+                <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSell'>取消订单</view>
                 <form bindsubmit='payMargin' bindreset='' report-submit>
                   <button form-type="submit" class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">支付</button>
                 </form>
@@ -79,4 +80,82 @@
             </view>
           </view>
       </view>
+        </block>
+    </view>
+
+      
+</view>
+
+
+<!-- 我的砍价 -->
+<view class="selectItem-wrap" wx:if="{{state == 1}}">
+<view class="noCont" wx:if="{{carInfoList.length==0}}">
+  <image src="../../images/404.png" mode='widthFix'></image>
+  <text>暂无数据</text>
+</view>
+<view class="carInfoList">
+       <block wx:for="{{carInfoList}}">
+        <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
+            <view class="carImg">
+                <image src='{{item.imgSrc}}' mode='aspectFill'></image>
+            </view>
+            <view class="carInfoCont">
+              <view class="carInfoContWord">
+                  <view class="carName">
+                      <text>{{item.name}}</text>
+                  </view>
+                  
+                  <view class="carInfoRow1">
+                      <text>{{item.time ? item.time+'上牌/' : ''}} {{item.miles ? item.miles+'/' : ''}}{{item.addr}}</text>
+                  </view>
+
+                  <view class="carInfoRow2">
+                      <text>心里价:{{item.priceArea}}万</text>
+                      <text>浏览量:{{item.sale}}</text>
+                  </view>
+              </view>
+                
+
+                <view class="putAndOff">
+              <text class=" {{item.shelfismenu == 0 ? 'activePut':''}}" catchtap="pullOff" data-index="{{index}}" data-id="{{item.id}}">下架</text>
+              <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" catchtap="putOn"  data-index="{{index}}"  data-id="{{item.id}}">上架</text>
+                </view>
+            </view>
+        </view>
+
+        <!-- 报价用户 -->
+      <view class="floatArea" wx:for="{{item.has_many_quoted_price}}" wx:for-item="itemChirs">
+          <view class="floatArea-user">
+            <view class="floatImg">
+              <image src='{{itemChirs.user.avatar}}'></image>
+            </view>
+            <view class="floatName">
+              <text>{{itemChirs.user.nickname}}</text>
+            </view>
+            <view class="floatMessage">
+              <text>用户的心里价{{itemChirs.money}}万，请您尽快联系</text>
+           </view>
+            <view class="floatIcon" bindtap='makePhoneCall' data-tel="{{default_phone}}">
+              <image src='../../images/sf-call-icon.png'></image>
+            </view>
+          </view>
+
+          <view class="line"></view>
+          <!--开始支付-->
+          <view>
+            <view class="bailMoney-wrap">
+              <view class="bailMoney">交易保证金：￥{{itemChirs.bond}}元</view>
+              <view class="status-wrap">
+                <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSell'>取消订单</view>
+                <form bindsubmit='payMargin' bindreset='' report-submit>
+                  <button form-type="submit" class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">支付</button>
+                </form>
+              </view>
+            </view>
+          </view>
+      </view>
+        </block>
+    </view>
+
+      
 </view>
