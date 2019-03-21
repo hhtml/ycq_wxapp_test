@@ -46,7 +46,7 @@
  <!--.店铺特色o/-->
  <!--车型列表-->
     <view class="detailContItem" wx:if="{{active_tab=='车型列表'}}">
-      <view class="carInfoList"  wx:if="{{carInfoList.length != 0}}">
+      <view class="carInfoList1"  wx:if="{{carInfoList.length != 0}}">
         <block wx:for="{{carInfoList}}" wx:key="{{item.id}}">
           <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
             <view class="carImg">

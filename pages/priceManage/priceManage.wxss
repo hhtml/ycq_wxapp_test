@@ -239,11 +239,14 @@ page{
   color: #888;
 }
 
-.floatIcon {
+.floatIcon{
   width: 60rpx;
   height: 60rpx;
 }
-
+.floatIcon image {
+  width: 100%;
+  height: 100%;
+}
 .bailMoney-wrap {
   width: 100%;
   height: 80rpx;
@@ -320,12 +323,6 @@ button::after {
   justify-content: flex-end;
   align-items: center;
 }
-
-.floatIcon image {
-  width: 100%;
-  height: 100%;
-}
-
 .floatMessage {
   margin-right: auto;
 }

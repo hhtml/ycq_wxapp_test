@@ -31,6 +31,7 @@ Page({
         distance: '310'
       },*/
     ],
+    state: 0,
   },
 
   /**
@@ -88,6 +89,18 @@ Page({
       url: '../carDetail/carDetail?carId=' + carId + '&type=' + type,
     });
   }, 
+  makePhoneCall(e) {
+    var tel = '028 - 84167417';
+    wx.makePhoneCall({
+      phoneNumber: tel,
+    })
+  },
+  chooseState(e) {
+    var state = e.currentTarget.dataset.state;
+    this.setData({
+      state: state
+    })
+  },
   putOn(e){
     var id=e.currentTarget.dataset.id;
     var index = e.currentTarget.dataset.index;

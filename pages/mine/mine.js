@@ -247,14 +247,14 @@ Page({
           wx.showToast({
             title: '生成中',
             icon: 'loading',
-            duration: 1000
+            duration: 1500
           })
           setTimeout(function() {
             $this.createNewImg()
             $this.setData({
               showModal: true
             })
-          }, 1000)
+          }, 1500)
         }
 
       } else if (store_has_many[0].auditstatus == 'in_the_review') {

@@ -52,16 +52,16 @@ Page({
         if (resObj.code == 1 && resObj.data != null) {
           console.log(resObj); 
 
-          var data = resObj.data;
+          var data = resObj.data; 
           var carSell = data.QuotedPriceList.receive_quotation; //收到的报价
           var carBuy = data.QuotedPriceList.buy;//我的砍价
-        
+ 
           $this.data.sell = carSell
           $this.data.buy = carBuy
           if (carSell) {
             carSell.forEach((val, index) => {
               var obj = {
-                id: val.id,
+                id: val.id, 
                 modelsimages:app.globalData.localImgUrl+val. modelsimages,//车辆图片
                 models_name: val.models_name,//车辆名称 
                 parkingposition: val.parkingposition,//车辆所在地
@@ -69,7 +69,7 @@ Page({
                 browse_volume: val.browse_volume,//浏览量
                 car_licensetime: val.car_licensetime,//车辆年份  
                 type: val.type,//车辆类型 
-                has_many_quoted_price: val.has_many_quoted_price,  
+                has_many_quoted_price: val.has_many_quoted_price,   
               }
               carSellList[index] = obj;
             });
