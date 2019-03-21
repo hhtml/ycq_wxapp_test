@@ -88,7 +88,7 @@
                     <text>车型：{{item.models_name}}</text>
                 </view>
                 <view class="infoPrice-wrap" wx:if="{{item.pay_type !== 'bond'}}">
-                    <text>店铺{{item.pay_type =='up'?'升级':'认证'}}费：￥{{item.certification_fee}}</text>
+                    <text>店铺{{item.pay_type =='up'?'升级':'认证'}}费：￥{{item.pay_type =='up'?item.total_fee:item.certification_fee}}</text>
                 </view>
             <view class="orderDomainBg">
                 <view class="orderDomain">

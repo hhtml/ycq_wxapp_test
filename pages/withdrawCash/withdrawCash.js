@@ -56,12 +56,12 @@ Page({
    
   },
   moneyInput(e){
-     var rate=this.data.rate;
+     var rate=this.data.rate*100;
 
      
-    if (e.detail.value >= this.data.total_money) {
-      e.detail.value = this.data.total_money;
-    }
+    // if (e.detail.value >= this.data.total_money) {
+    //   e.detail.value = this.data.total_money;
+    // }
 
     var rateMoney = (e.detail.value * (rate / 100)).toFixed(2);
 
@@ -124,7 +124,7 @@ Page({
            if (resObj.code == 1) { 
                    //确认提现
                    wx.showToast({
-                     title: '提现成功',
+                     title: '等待受理中',
                      icon: 'success',
                      duration: 1000
                    })

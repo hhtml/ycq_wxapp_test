@@ -131,4 +131,3 @@ module.exports = {
     return upload(url, name, filePath);
   }
 };
-

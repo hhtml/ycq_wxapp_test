@@ -73,7 +73,8 @@ Page({
                 partner_rank: val.level.partner_rank,
                 level_id: val.level.id,
                 pay_type: val.pay_type,
-                models_name: val.models_name
+                models_name: val.models_name,
+                total_fee: val.total_fee
               }
               paidList[index] = obj;
             });

@@ -53,42 +53,42 @@ Page({
         if (resObj.code == 1 && resObj.data != null) {
 
           var data = resObj.data;
-          var carSell = data.QuotedPriceList.sell;
+          var carSell = data.QuotedPriceList.receive_quotation;
           var carBuy = data.QuotedPriceList.buy;
           $this.data.sell = carSell
           $this.data.buy = carBuy
           if (carSell) {
             carSell.forEach((val, index) => {
               var obj = {
-                id: val.models_info.id,
-                imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.models_info.modelsimages: app.globalData.imgUrl + val.models_info.brand_default_images,
-                brand_name: val.models_info.brand_name,
-                name: val.models_info.models_name,
-                priceArea: val.models_info.guide_price,
-                price: val.money,
-                quotationtime_format: val.quotationtime_format, 
-                quotationtime: val.quotationtime,
-                sale: val.models_info.browse_volume,
-                time: val.models_info.car_licensetime,
-                miles: val.models_info.kilometres,
-                addr: val.models_info.parkingposition,
-                //  brand_id: val.buycar_model.brand.id,
-                //  brand_name: val.buycar_model.brand.name,
-                type: val.models_info.type,
-                userPic: val.user.avatar,
-                userName: val.user.nickname,
-                mobile: val.user.mobile,
-                deal_status: val.deal_status,
-                bond: val.bond,
-                cancel_order: val.cancel_order,
-                quoted_id: val.id,
-                user_ids: val.user_ids,
-                models_id: val.models_info_id,
-                buy_car_id: val.buy_car_id,
-                seller_payment_status: val.seller_payment_status,
-                buyer_payment_status: val.buyer_payment_status,
-                by_user_ids:val.models_info.user_id
-
+                id: val.id,
+                imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.modelsimages: app.globalData.imgUrl + val.models_info.brand_default_images,
+                // brand_name: val.models_info.brand_name,
+                name: val.models_name,
+                priceArea: val.guide_price,
+                // price: val.money,
+                // quotationtime_format: val.quotationtime_format, 
+                // quotationtime: val.quotationtime,
+                sale: val.browse_volume,
+                time: val.car_licensetime,
+                miles: val.kilometres,
+                addr: val.parkingposition,
+                // brand_id: val.buycar_model.brand.id,
+                // brand_name: val.buycar_model.brand.name,
+                type: val.type,
+                has_many_quoted_price: val.has_many_quoted_price
+                // userPic: val.user.avatar,
+                // userName: val.user.nickname,
+                // mobile: val.user.mobile,
+                // deal_status: val.deal_status,
+                // bond: val.bond,
+                // cancel_order: val.cancel_order,
+                // quoted_id: val.id,
+                // user_ids: val.user_ids,
+                // models_id: val.models_info_id,
+                // buy_car_id: val.buy_car_id,
+                // seller_payment_status: val.seller_payment_status,
+                // buyer_payment_status: val.buyer_payment_status,
+                // by_user_ids:val.models_info.user_id
               }
               carSellList[index] = obj;
             });

@@ -729,9 +729,9 @@ Page({
         //点击自己分享的链接不产生邀请码
       }else{
         that.data.inviter_user_id = options.inviter_user_id
-      // that.setData({
-      //   disabled: true
-      // })
+        that.setData({
+          disabled: true
+        })
       }
     }
     console.log("index 生命周期 onload" + JSON.stringify(options))
