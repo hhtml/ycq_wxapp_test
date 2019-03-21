@@ -69,7 +69,8 @@ Page({
                 browse_volume: val.browse_volume,//浏览量
                 car_licensetime: val.car_licensetime,//车辆年份  
                 type: val.type,//车辆类型 
-                has_many_quoted_price: val.has_many_quoted_price,   
+                has_many_quoted_price: val.has_many_quoted_price,
+                priceArea: val.guide_price//批发价
               }
               carSellList[index] = obj;
             });

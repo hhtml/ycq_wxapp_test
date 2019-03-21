@@ -31,7 +31,6 @@
 
               <view class="carInfoRow1">
                 <text>{{item.car_licensetime ? item.car_licensetime+'/' : ''}} {{item.kilometres ? item.kilometres : ''}}万公里 /{{item.parkingposition}}</text>
-
               </view>
               <view class="carInfoRow2">
                 <text>{{item.type == 'sell' ? '批发价':'求购价'}} {{item.priceArea}}万</text>
@@ -137,7 +136,7 @@
         <!--开始支付-->
           <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='to_be_paid'}}">
             <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
-            <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSe ll'>取消订单</view>
+            <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSell'>取消订单</view>
             <form bindsubmit='payMargin' bindreset='' report-submit>
               <view>
                 <button form-type="submit" class="payMoney" data-pay_type="buyers" data-id="{{item.models_id}}+{{item.bond}}">支付</button>

@@ -43,35 +43,54 @@ Page({
   request_want_list(){
     var $this = this;
     var carInfoList = new Array();
-    $http.post('my/buyCar')
+    var receive_List = new Array();
+    $http.post('my/buyer_quote')
       .then(res => {
         //成功回调
         var resObj = res.data;
         console.log('我想买的：', resObj);
         if (resObj.code == 1) {
           var data = resObj.data;
-          var carList = data.buyCarList;
-
-          carList.forEach((val, index) => {
-            var obj = {
-              id: val.id,
-              imgSrc: app.globalData.imgUrl + (val.brand.brand_default_images ? val.brand.brand_default_images:val.modelsimages),
-              brand_name:val.brand.name,
-              name: val.models_name,
-              shelfismenu: val.shelfismenu,
-              priceArea: val.guide_price,
-              sale: val.browse_volume,
-              time: val.car_licensetime,
-              miles: val.kilometres,
-              addr: val.parkingposition,
-              brand_id: val.brand.id,
-              brand_name: val.brand.name,
-              type: val.type
-            }
-            carInfoList[index] = obj;
-          });
+          var carList = data.QuotedPriceList.my_quoted;
+          var carList_receive = data.QuotedPriceList.receive_quotation;
+          if (carList){ //我的砍价
+            carList.forEach((val, index) => {
+              var obj = {
+                id: val.id,
+                imgSrc: app.globalData.localImgUrl + val.modelsimages,
+                name: val.models_name,
+                priceArea: val.guide_price,
+                sale: val.browse_volume,
+                time: val.car_licensetime,
+                miles: val.kilometres,
+                addr: val.parkingposition,
+                type: val.type,
+                has_many_quoted_price: val.has_many_quoted_price
+              }
+              carInfoList[index] = obj;
+            });
+          }
+          if (carList_receive){ //收到的砍价
+            carList_receive.forEach((val, index) => {
+              var obj = {
+                id: val.id,
+                imgSrc: app.globalData.imgUrl + val.modelsimages,
+                name: val.models_name,
+                priceArea: val.guide_price,
+                sale: val.browse_volume,
+                time: val.car_licensetime,
+                miles: val.kilometres,
+                addr: val.parkingposition,
+                type: val.type,
+                has_many_quoted_price: val.has_many_quoted_price
+              }
+              receive_List[index] = obj;
+            });
+          }
           $this.setData({
-            carInfoList
+            carInfoList,
+            receive_List,
+            default_phone: data.QuotedPriceList.default_phone
           });
 
         } else {
@@ -90,10 +109,42 @@ Page({
     });
   }, 
   makePhoneCall(e) {
-    var tel = '028 - 84167417';
     wx.makePhoneCall({
-      phoneNumber: tel,
+      phoneNumber: e.currentTarget.dataset.tel
     })
+  },
+  //取消订单
+  cancelOrderSell: function (e) {
+    console.log(e)
+    return;
+    var that = this
+    var cancel_order = e.target.id.split('+')[0]
+    var quoted_id = e.target.id.split('+')[1]
+    if (cancel_order == 0) {
+      wx.showToast({
+        title: '不能取消订单',
+        image: '../../images/warn.png',
+        duration: 500
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '确定要取消订单吗？',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            $http.post('my/cancellation_of_quotation', {
+              quoted_id: quoted_id
+            }).then(res => {
+              console.log(res)
+              that.request_price_list();
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
   },
   chooseState(e) {
     var state = e.currentTarget.dataset.state;
