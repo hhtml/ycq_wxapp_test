@@ -1,5 +1,61 @@
 /* pages/wantBuy/wantBuy.wxss */
 
+.selectArea {
+  padding: 0 24rpx;
+  border-top: 1rpx solid #f3f3f3;
+  background-color: #fff;
+  position: fixed;
+  left:0rpx;
+  top:0rpx;
+  width:100%;
+  z-index: 99999;
+}
+.blockInfo{
+  background-color:#fff;margin:0 0 20rpx 0
+}
+
+.selectList {
+  display: flex;
+  height: 90rpx;
+  align-items: center;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+
+.selectItem {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  height: 90rpx;
+  align-items: center;
+  position: relative;
+}
+
+.selectItem::after {
+  content: "";
+  width: 2rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 25rpx;
+  left: 0;
+  background: #e5e5e5;
+}
+
+.selectItem:first-child::after {
+  height: 0;
+}
+
+.selectItem text {
+  font-size: 30rpx;
+  color: #353535;
+  margin-right: 20rpx;
+}
+
+.activeItem text {
+  color: #ef4631;
+}
+.selectItem-wrap{
+  margin-top:64rpx;
+}
 .carInfoList{
   padding: 0 24rpx;
 }
@@ -40,15 +96,19 @@
   margin-top: 20rpx;
 }
 .carName {
-  overflow: hidden;
-  margin-bottom: 25rpx;
-  word-break:break-all;
-  word-wrap:break-word;
+  /* margin-bottom: 25rpx; */
+  /* word-break:break-all;
+  word-wrap:break-word; */
 }
 .carName text{
+  width:400rpx;
   font-size: 30rpx;
   color: #353535;
-  float: left;
+  /* float: left; */
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  display: inline-block;
 }
 .carInfoRow1 {
   width:100%;
@@ -96,13 +156,11 @@
   position: absolute;
   border-radius: 7rpx;
 }
-
 .putAndOff{
   padding: 20rpx 0;
   border-bottom: 1px dashed #e5e5e5;
   display: flex;
   flex-direction:row-reverse;
-
 }
 .putAndOff text{
   display:block;
@@ -119,7 +177,6 @@
   border-radius: 6rpx;
 }
 .putAndOff text:nth-child(1){
-  
   border-radius: 6rpx;
   margin-left: 20rpx;
 }
@@ -127,5 +184,145 @@ text.activePut{
   background-color: #ef4631;
   color: #fff;
   border:1rpx solid #ef4631;
+}
 
+/* 报价用户 */
+.floatArea {
+  display: flex;
+  box-shadow: 0 0 20rpx 0 #888;
+  margin-bottom: 30rpx;
+  background-color: #fff;
+  flex-direction: column;
+  padding:0rpx 15rpx;
+}
+.floatArea-user{
+  display: flex;
+  align-items: center;
+  height:70rpx;
+}
+.floatImg {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 10rpx;
+  border: 1rpx solid #666;
+}
+
+.floatImg image {
+  width: 100%;
+  height: 100%;
+}
+
+.floatName {
+  margin-right: 10rpx;
+  width: 100rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.floatName text {
+  color: #666;
+  font-size: 26rpx;
+}
+
+.floatMessage {
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-right: auto;
+}
+.floatMessage text {
+  font-size: 24rpx;
+  color: #888;
+}
+
+.floatIcon {
+  width: 60rpx;
+  height: 60rpx;
+}
+.floatIcon image{
+  width: 100%;
+  height: 100%;
+}
+.line{
+  width:90%;
+  height:2rpx;
+  margin:8rpx auto;
+  background-color: #e5e5e5;
+}
+/* 支付状态 */
+.bailMoney-wrap {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.bailMoney-wrap form {
+  display: flex;
+  align-items: center;
+}
+.bailMoney {
+  font-size: 24rpx;
+  color: red;
+  font-weight: bold;
+}
+.status-wrap{
+  display: flex;
+}
+.status-wrap .cancelOrder {
+  font-size: 24rpx;
+  border: 1rpx solid #666;
+  border-radius: 8rpx;
+  padding: 6rpx 10rpx;
+  color: #666;
+  height:34rpx;
+}
+button {
+  background-color: rgb(247, 247, 247);
+  border-radius: 0rpx;
+  padding: 0rpx;
+  margin: 0rpx;
+  display: inline-block;
+  line-height: 1;
+}
+button::after {
+  /*button的边框样式是通过::after方式实现的*/
+  border: none;
+}
+.button-hover {
+  /*点击后样式*/
+  color: #000;
+  background-color: rgb(247, 247, 247);
+}
+.payMoney {
+  font-size: 24rpx;
+  border-radius: 10rpx;
+  padding: 12rpx 30rpx;
+  color: #fff;
+  background-color: #ef4631;
+  margin-left: 20rpx;
+}
+
+.payMoneySuccess {
+  font-size: 24rpx;
+  border-radius: 10rpx;
+  padding: 16rpx 50rpx;
+  color: #fff;
+  background-color: green;
+  margin-left: 40rpx;
+  float: left;
+}
+.payMoney-wrap {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }

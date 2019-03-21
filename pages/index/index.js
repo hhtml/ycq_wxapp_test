@@ -84,9 +84,6 @@ Page({
     var path = iconList[index].path;
     //我有车卖
     if (index == 0) {
-      // wx.navigateTo({
-      //   url: path,
-      // })
       switch (that.data.sell_car_condition.code){
         case 0: //认证通过
           wx.navigateTo({
@@ -131,7 +128,7 @@ Page({
       // wx.navigateTo({
       //   url: path,
       // })
-      switch (that.data.sell_car_condition.code){
+      switch (that.data.buy_car_condition.code){
         case 1: //去认证
           that.setData({
             msg: that.data.buy_car_condition.msg,
