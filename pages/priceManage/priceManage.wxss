@@ -13,7 +13,8 @@ page{
   z-index: 99999;
 }
 .blockInfo{
-  background-color:#fff;margin:0 0 20rpx 0
+  background-color:#fff;padding:10rpx 10rpx 5rpx 10rpx;
+
 }
 
 .selectList {
@@ -57,7 +58,7 @@ page{
 }
 
 .carInfoList {
-  margin: 92rpx 24rpx 24rpx 24rpx;
+  margin: 92rpx 20rpx 20rpx 20rpx;
  
 }
 
@@ -69,7 +70,7 @@ page{
 }
 
 .carInfoItem:nth-child(1) {
-  border-top: 1px solid #f3f3f3;
+  /* border-top: 1px solid #f3f3f3; */
 }
 
 .carImg {
@@ -178,7 +179,7 @@ page{
 
 .carInfoRow2 text:nth-child(1) {
   font-size: 28rpx;
-  color: #f00;
+  color: #FF5722;
   font-weight: bold;
   margin-right: 100rpx;
   flex: 1;
@@ -190,16 +191,22 @@ page{
   position: absolute;
   border-radius: 7rpx;
 }
-
+.carInfoRow2 text:nth-child(2){
+  padding-right: 10rpx;
+}
 .floatArea {
   display: flex;
- 
-  align-items: center;
   box-shadow: 0 0 20rpx 0 #888;
   margin-bottom: 30rpx;
   background-color: #fff;
+  flex-direction: column;
+  padding:0rpx 15rpx;
 }
-
+.floatArea-user{
+  display: flex;
+  align-items: center;
+  height:70rpx;
+}
 .floatImg {
   width: 50rpx;
   height: 50rpx;
@@ -216,10 +223,10 @@ page{
 
 .floatName {
   margin-right: 10rpx;
-  width: 100rpx;
+  /* width: 100rpx;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
   height: 70rpx;
   line-height: 70rpx;
 }
@@ -247,12 +254,20 @@ page{
   width: 100%;
   height: 100%;
 }
+.line{
+  width:90%;
+  height:2rpx;
+  margin:8rpx auto;
+  background-color: #e5e5e5;
+}
 .bailMoney-wrap {
   width: 100%;
   height: 80rpx;
   display: flex;
   align-items: center;
   background-color: #fff;
+  box-sizing: border-box;
+  justify-content: space-between;
 }
 
 .bailMoney-wrap form {
@@ -261,19 +276,20 @@ page{
 }
 
 .bailMoney {
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: red;
   font-weight: bold;
 }
-
-.cancelOrder {
-  font-size: 28rpx;
-  border: 1rpx solid rgb(102, 102, 102);
-  border-radius: 10rpx;
-  padding: 10rpx 20rpx;
-  color: rgb(102, 102, 102);
-  margin-left: 50rpx;
-  float: left;
+.status-wrap{
+  display: flex;
+}
+.status-wrap .cancelOrder {
+  font-size: 24rpx;
+  border: 1rpx solid #666;
+  border-radius: 8rpx;
+  padding: 6rpx 10rpx;
+  color: #666;
+  height:34rpx;
 }
 
 button {
@@ -297,17 +313,16 @@ button::after {
 }
 
 .payMoney {
-  font-size: 28rpx;
+  font-size: 24rpx;
   border-radius: 10rpx;
-  padding: 16rpx 50rpx;
+  padding: 12rpx 30rpx;
   color: #fff;
-  background-color: red;
-  margin-left: 40rpx;
-  float: left;
+  background-color: #ef4631;
+  margin-left: 20rpx;
 }
 
 .payMoneySuccess {
-  font-size: 28rpx;
+  font-size: 24rpx;
   border-radius: 10rpx;
   padding: 16rpx 50rpx;
   color: #fff;
@@ -315,7 +330,6 @@ button::after {
   margin-left: 40rpx;
   float: left;
 }
-
 .payMoney-wrap {
   width: 100%;
   height: 80rpx;

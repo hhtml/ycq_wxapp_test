@@ -12,6 +12,7 @@ Page({
 
     ],
     state: 0,
+ 
   },
   /***
    * 事件
@@ -50,14 +51,14 @@ Page({
         var resObj = res.data;
         //成功回调 
         if (resObj.code == 1 && resObj.data != null) {
-          console.log(resObj); 
-
+          console.log(resObj);  
           var data = resObj.data; 
           var carSell = data.QuotedPriceList.receive_quotation; //收到的报价
           var carBuy = data.QuotedPriceList.buy;//我的砍价
  
           $this.data.sell = carSell
-          $this.data.buy = carBuy
+          $this.data.buy = carBuy;
+        
           if (carSell) {
             carSell.forEach((val, index) => {
               var obj = {
@@ -69,6 +70,8 @@ Page({
                 browse_volume: val.browse_volume,//浏览量
                 car_licensetime: val.car_licensetime,//车辆年份  
                 type: val.type,//车辆类型 
+                guide_price: val.guide_price,//批发价
+                createtime: val.createtime,//车辆发布时间
                 has_many_quoted_price: val.has_many_quoted_price,   
               }
               carSellList[index] = obj;
@@ -114,7 +117,8 @@ Page({
           // }
           $this.setData({
             carBuyList,
-            carSellList
+            carSellList,
+            default_phone: data.QuotedPriceList.default_phone
           });
         } else {
           console.log('数据为空', resObj.msg);
@@ -124,10 +128,9 @@ Page({
         console.log('请求失败', err);
       });
   },
-  makePhoneCall(e) {
-    var tel = '028 - 84167417';
+  makePhoneCall(e) { 
     wx.makePhoneCall({
-      phoneNumber: tel,
+      phoneNumber: e.currentTarget.dataset.tel
     })
   },
 
