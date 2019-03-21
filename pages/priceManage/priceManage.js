@@ -47,90 +47,71 @@ Page({
     var carBuyList = new Array();
     $http.post('my/myQuoted')
       .then(res => {
-        //成功回调
         var resObj = res.data;
-        console.log('报价管理：', resObj);
+        //成功回调 
         if (resObj.code == 1 && resObj.data != null) {
+          console.log(resObj); 
 
-          var data = resObj.data;
-          var carSell = data.QuotedPriceList.receive_quotation;
-          var carBuy = data.QuotedPriceList.buy;
+          var data = resObj.data; 
+          var carSell = data.QuotedPriceList.receive_quotation; //收到的报价
+          var carBuy = data.QuotedPriceList.buy;//我的砍价
+ 
           $this.data.sell = carSell
           $this.data.buy = carBuy
           if (carSell) {
             carSell.forEach((val, index) => {
               var obj = {
-                id: val.id,
-                imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.modelsimages: app.globalData.imgUrl + val.models_info.brand_default_images,
-                // brand_name: val.models_info.brand_name,
-                name: val.models_name,
-                priceArea: val.guide_price,
-                // price: val.money,
-                // quotationtime_format: val.quotationtime_format, 
-                // quotationtime: val.quotationtime,
-                sale: val.browse_volume,
-                time: val.car_licensetime,
-                miles: val.kilometres,
-                addr: val.parkingposition,
-                // brand_id: val.buycar_model.brand.id,
-                // brand_name: val.buycar_model.brand.name,
-                type: val.type,
-                has_many_quoted_price: val.has_many_quoted_price
-                // userPic: val.user.avatar,
-                // userName: val.user.nickname,
-                // mobile: val.user.mobile,
-                // deal_status: val.deal_status,
-                // bond: val.bond,
-                // cancel_order: val.cancel_order,
-                // quoted_id: val.id,
-                // user_ids: val.user_ids,
-                // models_id: val.models_info_id,
-                // buy_car_id: val.buy_car_id,
-                // seller_payment_status: val.seller_payment_status,
-                // buyer_payment_status: val.buyer_payment_status,
-                // by_user_ids:val.models_info.user_id
+                id: val.id, 
+                modelsimages:app.globalData.localImgUrl+val. modelsimages,//车辆图片
+                models_name: val.models_name,//车辆名称 
+                parkingposition: val.parkingposition,//车辆所在地
+                kilometres: val.kilometres,//公里数
+                browse_volume: val.browse_volume,//浏览量
+                car_licensetime: val.car_licensetime,//车辆年份  
+                type: val.type,//车辆类型 
+                has_many_quoted_price: val.has_many_quoted_price,   
               }
               carSellList[index] = obj;
             });
             console.log(carSellList)
           }
 
-          if (carBuy) {
-            carBuy.forEach((val, index) => {
-              //console.log('userINFO:', userInfo);
-              var obj = {
-                id: val.models_info.id,
-                imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.models_info.modelsimages : app.globalData.imgUrl + val.models_info.brand_default_images,
-                brand_name: val.models_info.brand_name,
-                name: val.models_info.models_name,
-                priceArea: val.models_info.guide_price,
-                price: val.money,
-                quotationtime_format: val.quotationtime_format,
-                quotationtime: val.quotationtime,
-                sale: val.models_info.browse_volume,
-                time: val.models_info.car_licensetime,
-                miles: val.models_info.kilometres,
-                addr: val.models_info.parkingposition,
-                //brand_id: val.buycar_model.brand.id,
-                //brand_name: val.buycar_model.brand.name,
-                type: val.models_info.type,
-                userPic: val.user.avatar,
-                userName: val.user.nickname,
-                mobile: val.user.mobile,
-                deal_status: val.deal_status,
-                bond: val.bond,
-                cancel_order: val.cancel_order,
-                quoted_id: val.id,
-                models_id: val.models_info_id,
-                buy_car_id: val.buy_car_id,
-                user_ids:val.user_ids,
-                seller_payment_status: val.seller_payment_status,
-                buyer_payment_status: val.buyer_payment_status,
-                by_user_ids:val.models_info.user_id
-              }
-              carBuyList[index] = obj;
-            });
-          }
+          // if (carBuy) {
+          //   carBuy.forEach((val, index) => {
+          //     //console.log('userINFO:', userInfo);
+          //     var obj = {
+          //       id: val.models_info.id,
+          //       imgSrc: val.type == 'sell' ? app.globalData.localImgUrl + val.models_info.modelsimages : app.globalData.imgUrl + val.models_info.brand_default_images,
+          //       brand_name: val.models_info.brand_name,
+          //       name: val.models_info.models_name,
+          //       priceArea: val.models_info.guide_price,
+          //       price: val.money,
+          //       quotationtime_format: val.quotationtime_format,
+          //       quotationtime: val.quotationtime,
+          //       sale: val.models_info.browse_volume,
+          //       time: val.models_info.car_licensetime,
+          //       miles: val.models_info.kilometres,
+          //       addr: val.models_info.parkingposition,
+          //       //brand_id: val.buycar_model.brand.id,
+          //       //brand_name: val.buycar_model.brand.name,
+          //       type: val.models_info.type,
+          //       userPic: val.user.avatar,
+          //       userName: val.user.nickname,
+          //       mobile: val.user.mobile,
+          //       deal_status: val.deal_status,
+          //       bond: val.bond,
+          //       cancel_order: val.cancel_order,
+          //       quoted_id: val.id,
+          //       models_id: val.models_info_id,
+          //       buy_car_id: val.buy_car_id,
+          //       user_ids:val.user_ids,
+          //       seller_payment_status: val.seller_payment_status,
+          //       buyer_payment_status: val.buyer_payment_status,
+          //       by_user_ids:val.models_info.user_id
+          //     }
+          //     carBuyList[index] = obj;
+          //   });
+          // }
           $this.setData({
             carBuyList,
             carSellList
@@ -201,10 +182,10 @@ Page({
             trading_models_id: e.detail.target.dataset.id.split('+')[0],
             // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
             money: 0.01,
-            user_type: e.detail.target.dataset.pay_type,
-            type: e.detail.target.dataset.type
+            user_type: e.detail.target.dataset.pay_type 
+           
           }
-          payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no + '_' + payInfo.type;
+          payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no  
           $http.post('store_margin_pay/marginPay', payInfo).then(res => {
             var timeStamp = (Date.parse(new Date()) / 1000).toString();
             var pkg = 'prepay_id=' + res.data.prepay_id;

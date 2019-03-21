@@ -77,7 +77,7 @@
     <view class="navItem" bindtap='nav_to_page' data-path="../wantBuy/wantBuy" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
       <image class="navIcon" src='../../images/mine-buy.png' mode='widthFix'></image>
       <view class="navName">
-        <text>我想买的</text>
+        <text>我是买家</text>
       </view>
       <view class='navRight'>
         <image src='../../images/angle-right.png' mode='widthFix'></image>
@@ -88,7 +88,7 @@
     <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage">
       <image class="navIcon" src='../../images/mine-sale.png' mode='widthFix'></image>
       <view class="navName">
-        <text>砍价中心</text>
+        <text>我是卖家</text>
       </view>
       <view class='navRight'>
         <image src='../../images/angle-right.png' mode='widthFix'></image>

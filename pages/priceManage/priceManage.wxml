@@ -4,7 +4,7 @@
   <view class="selectArea">
     <view class="selectList">
       <view class="selectItem {{state == 0 ? 'activeItem' :''}} " data-state="0" bindtap='chooseState'>
-        <text>买家的砍价</text>
+        <text>收到的砍价</text>
       </view>
       <view class="selectItem  {{state == 1 ? 'activeItem' :''}}" data-state="1" bindtap='chooseState'>
         <text>我的砍价</text>
@@ -13,29 +13,29 @@
   </view>
 
   <view class="carInfoList" wx:if="{{state == 0}}">
-    <block wx:for="{{carSellList}}"> 
-    <view class='blockInfo'>
+    <block wx:for="{{carSellList}}">
+      <view class='blockInfo'>
         <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
           <view class="carImg">
             <view class="imgArea">
-              <image src='{{item.imgSrc}}' mode=''></image>
+              <image src='{{item.modelsimages}}' mode=''></image>
             </view>
-            <text class='typeTip'>{{item.type == 'sell' ? '我在卖':'买车'}}</text>
+            <text class='typeTip'>{{item.type == 'sell' ? '我在卖':'我想买'}}</text>
 
           </view>
           <view class="carInfoCont">
             <view class="carInfoContWord">
               <view class="carName">
-                <text class=' '>{{item.name}}</text>
+                <text class=' '>{{item.models_name}}</text>
               </view>
 
               <view class="carInfoRow1">
-                <text>{{item.time ? item.time+'/' : ''}} {{item.miles ? item.miles+'/' : ''}}公里 /{{item.addr}}</text>
+                <text>{{item.car_licensetime ? item.car_licensetime+'/' : ''}} {{item.kilometres ? item.kilometres : ''}}万公里 /{{item.parkingposition}}</text>
 
               </view>
               <view class="carInfoRow2">
                 <text>{{item.type == 'sell' ? '批发价':'求购价'}} {{item.priceArea}}万</text>
-                <text>浏览量:{{item.sale}}</text>
+                <text>浏览量:{{item.browse_volume}}</text>
               </view>
               <view class="carInfoContLine">
               </view>
@@ -56,49 +56,15 @@
           <view class="floatIcon" bindtap='makePhoneCall' data-tel="{{item.mobile}}">
             <image src='../../images/sf-call-icon.png'></image>
           </view>
-        </view>
-        <!--开始支付-->
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='to_be_paid'}}">
-          <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
-          <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSell'>取消订单</view>
-          <form bindsubmit='payMargin' bindreset='' report-submit>
-            <view>
-              <button form-type="submit" class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">支付</button>
-            </view>
-          </form>
-        </view>
-        <!-- 卖家已支付等待后台确认保证金到账 -->
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='already_paid'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
+          <!-- 后台已经确定交易，需要把其他订单给变成不可交易 -->
+          <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'cannot_the_deal' && item.buyer_payment_status=='to_be_paid'}}">
+            <!-- <view class=" bailMoney" style=''>保证金：￥{{item.bond}}元</view> -->
 
-          <button class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">等待系统确认保证金到账</button>
+            <button class="payMoney" style='background-color:#ddd'>不可交易，已有订单正在进行中</button>
 
+          </view>
         </view>
-        <!-- 后台已确认保证金到账，卖家确认发货 -->
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='to_the_account'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
-          <form bindsubmit='sellerConfirmTheDelivery' bindreset='' report-submit>
-            <button class="payMoney" form-type="submit" data-seller_payment_status="{{item.seller_payment_status}}" data-pay_type="seller" data-id="{{item.models_id}}" data-by_user_ids="{{item.by_user_ids}}" data-quotationtime="{{item.quotationtime}}" data-user_ids="{{item.user_ids}}">确认发货</button>
-          </form>
-        </view>
-        <!-- 发货成功 -->
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='waiting_for_buyers'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
 
-          <button class="payMoney">等待买家确认收货</button>
-
-        </view>
-        <!--买家确认收货 -->
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='confirm_receipt' && item.buyer_payment_status=='confirm_receipt'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
-          <button class="payMoneySuccess">交易成功，等待保证金退回</button>
-        </view>
-        
-        <!-- 保证金退回 -->
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='refund_bond'}}">
-          <view class=" " style='color:green'>已退回保证金：￥{{item.bond}}元</view>
-          <button class="payMoneySuccess">保证金已退回，请查收</button>
-        </view>
         <!-- <view class="payMoney-wrap" wx:if="{{item.deal_status == 'close_the_deal'}}">
       <form bindsubmit='payOrderSell' bindreset='' report-submit>
         <view>
@@ -108,57 +74,57 @@
         </view>
       </form>
     </view> -->
-</view>
+      </view>
     </block>
-   
+
   </view>
   <!-- 我的砍价=========================================================================== -->
   <view class="carInfoList" wx:if="{{state == 1}}">
     <block wx:for="{{carBuyList}}">
-    <view class='blockInfo'>
-      <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
-        <view class="carImg">
-          <view class="imgArea">
-            <image src='{{item.imgSrc}}' mode=''></image>
-          </view>
-          <text class='typeTip'>{{item.type == 'sell' ? '我想买':'我想卖'}}</text>
-          <!-- <text class='typeTip'>我想买</text> -->
-
-        </view>
-        <view class="carInfoCont">
-          <view class="carInfoContWord">
-            <view class="carName">
-              <text>{{item.name}}</text>
+      <view class='blockInfo'>
+        <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
+          <view class="carImg">
+            <view class="imgArea">
+              <image src='{{item.imgSrc}}' mode=''></image>
             </view>
+            <text class='typeTip'>{{item.type == 'sell' ? '我想买':'我想卖'}}</text>
+            <!-- <text class='typeTip'>我想买</text> -->
 
-            <view class="carInfoRow1">
-              <text>{{item.time ? item.time+'/' : ''}} {{item.miles ? item.miles+'/' : ''}}公里/{{item.addr}}</text>
+          </view>
+          <view class="carInfoCont">
+            <view class="carInfoContWord">
+              <view class="carName">
+                <text>{{item.name}}</text>
+              </view>
+
+              <view class="carInfoRow1">
+                <text>{{item.time ? item.time+'/' : ''}} {{item.miles ? item.miles+'/' : ''}}公里/{{item.addr}}</text>
+              </view>
+              <view class="carInfoRow2">
+                <text>{{item.type == 'sell' ? '批发价':'求购价'}} {{item.priceArea}}万</text>
+                <text>浏览量:{{item.sale}}</text>
+              </view>
             </view>
-            <view class="carInfoRow2">
-              <text>{{item.type == 'sell' ? '批发价':'求购价'}} {{item.priceArea}}万</text>
-              <text>浏览量:{{item.sale}}</text>
+            <view class="carInfoContLine">
             </view>
           </view>
-          <view class="carInfoContLine">
+        </view>
+        <view class="floatArea">
+          <view class="floatImg">
+            <image src='{{item.userPic}}'></image>
+          </view>
+          <view class="floatName">
+            <text>{{item.userName}}</text>
+          </view>
+          <view class="floatMessage">
+            <text>您{{item.quotationtime_format}}报价为:{{item.price}}万，联系客服</text>
+          </view>
+          <view class="floatIcon" bindtap='makePhoneCall' data-tel="{{item.mobile}}">
+            <image src='../../images/sf-call-icon.png'></image>
           </view>
         </view>
-      </view>
-      <view class="floatArea">
-        <view class="floatImg">
-          <image src='{{item.userPic}}'></image>
-        </view>
-        <view class="floatName">
-          <text>{{item.userName}}</text>
-        </view>
-        <view class="floatMessage">
-          <text>您{{item.quotationtime_format}}报价为:{{item.price}}万，联系客服</text>
-        </view>
-        <view class="floatIcon" bindtap='makePhoneCall' data-tel="{{item.mobile}}">
-          <image src='../../images/sf-call-icon.png'></image>
-        </view>
-      </view>
 
-      <!-- <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal'}}">
+        <!-- <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal'}}">
       <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
       <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderBuy'>取消订单</view>
       <form bindsubmit='payMargin' bindreset='' report-submit>
@@ -168,95 +134,57 @@
       </form>
     </view> -->
 
-      <!--开始支付-->
-      <view  wx:if="{{item.type == 'sell'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='to_be_paid'}}">
-          <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
-          <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSell'>取消订单</view>
-          <form bindsubmit='payMargin' bindreset='' report-submit>
-            <view>
-              <button form-type="submit" class="payMoney" data-pay_type="buyers" data-id="{{item.models_id}}+{{item.bond}}">支付</button>
-            </view>
-          </form>
-        </view>
-      </view>
-      <view wx:if="{{item.type == 'buy'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='to_be_paid'}}">
-          <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
-          <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSell'>取消订单</view>
-          <form bindsubmit='payMargin' bindreset='' report-submit>
-            <view>
-              <button form-type="submit" class="payMoney" data-pay_type="seller" data-type="buy" data-id="{{item.buy_car_id}}+{{item.bond}}">支付</button>
-            </view>
-          </form>
-        </view>
-      </view>
-      <!-- 买家已支付等待后台确认保证金到账 -->
-      <view wx:if="{{item.type == 'sell'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='already_paid'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
+        <!--开始支付-->
+          <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='to_be_paid'}}">
+            <view class="bailMoney">交易保证金：￥{{item.bond}}元</view>
+            <view class="cancelOrder" id="{{item.cancel_order}}+{{item.quoted_id}}" bindtap='cancelOrderSe ll'>取消订单</view>
+            <form bindsubmit='payMargin' bindreset='' report-submit>
+              <view>
+                <button form-type="submit" class="payMoney" data-pay_type="buyers" data-id="{{item.models_id}}+{{item.bond}}">支付</button>
+              </view>
+            </form>
+          </view>
 
-          <button class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">等待系统确认保证金到账</button>
+        <!-- 买家已支付等待后台确认保证金到账 -->
 
-        </view>
-      </view>
-      <view wx:if="{{item.type == 'buy'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='already_paid'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
+          <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='already_paid'}}">
+            <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
 
-          <button class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">等待系统确认保证金到账</button>
+            <button class="payMoney" data-pay_type="seller" data-id="{{item.models_id}}+{{item.bond}}">等待系统确认保证金到账</button>
 
-        </view>
-      </view>
-      <!-- 后台已确认保证金到账，买家确认收货 -->
-      <view wx:if="{{item.type == 'sell'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='to_the_account'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
-          <form bindsubmit='buyersConfirmTheDelivery' bindreset='' report-submit>
-            <button class="payMoney" form-type="submit" data-buyers_payment_status="{{item.buyer_payment_status}}" data-pay_type="buyers" data-id="{{item.models_id}}" data-quotationtime="{{item.quotationtime}}" data-user_ids="{{item.user_ids}}" data-by_user_ids="{{item.by_user_ids}}">确认收货</button>
-          </form>
-        </view>
-      </view>
-      <view wx:if="{{item.type == 'buy'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='to_the_account'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
-          <form bindsubmit='buyersConfirmTheDelivery' bindreset='' report-submit>
-            <button class="payMoney" form-type="submit" data-buyers_payment_status="{{item.buyer_payment_status}}" data-pay_type="buyers" data-id="{{item.models_id}}" data-quotationtime="{{item.quotationtime}}" data-user_ids="{{item.user_ids}}" data-by_user_ids="{{item.by_user_ids}}">确认发货</button>
-          </form>
-        </view>
-      </view>
-      <!--买家确认收货成功 -->
-      <view wx:if="{{item.type == 'sell'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='confirm_receipt'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
-          <button class="payMoneySuccess">交易成功，等待保证金退回</button>
-        </view>
-      </view>
-      <view wx:if="{{item.type == 'buy'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='confirm_receipt'}}">
-          <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
-          <button class="payMoneySuccess">交易成功，等待保证金退回</button>
-        </view>
-      </view>
-      
-      <!-- 保证金退回 -->
-      <view wx:if="{{item.type == 'sell'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='refund_bond'}}">
-          <view class=" " style='color:green'>已退回保证金：￥{{item.bond}}元</view>
-          <button class="payMoneySuccess">保证金已退回，请查收</button>
-        </view>
-      </view>
-      <view wx:if="{{item.type == 'buy'}}">
-        <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.seller_payment_status=='refund_bond'}}">
-          <view class=" " style='color:green'>已退回保证金：￥{{item.bond}}元</view>
-          <button class="payMoneySuccess">保证金已退回，请查收</button>
-        </view>
-      </view>
+          </view>
+
+        <!-- 后台已确认保证金到账，买家确认收货 -->
+
+          <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='to_the_account'}}">
+            <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
+            <form bindsubmit='buyersConfirmTheDelivery' bindreset='' report-submit>
+              <button class="payMoney" form-type="submit" data-buyers_payment_status="{{item.buyer_payment_status}}" data-pay_type="buyers" data-id="{{item.models_id}}" data-quotationtime="{{item.quotationtime}}" data-user_ids="{{item.user_ids}}" data-by_user_ids="{{item.by_user_ids}}">确认收货</button>
+            </form>
+          </view>
+
+        <!--买家确认收货成功 -->
+
+          <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='confirm_receipt'}}">
+            <view class=" " style='color:green'>已支付保证金：￥{{item.bond}}元</view>
+            <button class="payMoneySuccess">交易成功，等待保证金退回</button>
+          </view>
+ 
+
+
+        <!-- 保证金退回 -->
+    
+          <view class="bailMoney-wrap" wx:if="{{item.deal_status == 'click_the_deal' && item.buyer_payment_status=='refund_bond'}}">
+            <view class=" " style='color:green'>已退回保证金：￥{{item.bond}}元</view>
+            <button class="payMoneySuccess">保证金已退回，请查收</button>
+          </view>
+
+ 
 
 
 
 
-      <!-- <view class="payMoney-wrap" wx:if="{{item.deal_status == 'close_the_deal'}}">
+        <!-- <view class="payMoney-wrap" wx:if="{{item.deal_status == 'close_the_deal'}}">
       <form bindsubmit='' bindreset='' report-submit>
         <view>
           <button form-type="submit" class="payMoney" wx:if="{{item.seller_payment_status == 'already_paid'}}">保证金到账</button>
@@ -266,7 +194,7 @@
       </form>
     </view> -->
 
-  </view>
+      </view>
     </block>
   </view>
 </view>

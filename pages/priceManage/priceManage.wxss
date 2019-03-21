@@ -193,7 +193,7 @@ page{
 
 .floatArea {
   display: flex;
-  height: 70rpx;
+ 
   align-items: center;
   box-shadow: 0 0 20rpx 0 #888;
   margin-bottom: 30rpx;
