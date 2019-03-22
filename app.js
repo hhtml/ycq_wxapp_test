@@ -39,28 +39,28 @@ App({
   
 
   //测试版本域名
-  globalData: {
-    userInfo: null,
-    carType:'',
-    carBrand:'',
-    brand_id:'',
-    url: 'https://czz.junyiqiche.com/addons/cms/wxapp.', 
-    imgUrl:'https://static-czz.junyiqiche.com/',  //此处不可修改...
-    localImgUrl: 'https://czz.junyiqiche.com',
-    statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
-  }
+  // globalData: {
+  //   userInfo: null,
+  //   carType:'',
+  //   carBrand:'',
+  //   brand_id:'',
+  //   url: 'https://czz.junyiqiche.com/addons/cms/wxapp.', 
+  //   imgUrl:'https://static-czz.junyiqiche.com/',  //此处不可修改...
+  //   localImgUrl: 'https://czz.junyiqiche.com',
+  //   statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
+  // }
 
 
 // 线上版本域名
-  // globalData: {
-  //   userInfo: null,
-  //   carType: '',
-  //   carBrand: '',
-  //   brand_id: '',
-  //   url: 'https://ycq.ucuj.com.cn/addons/cms/wxapp.',
-  //   imgUrl: 'https://static-czz.junyiqiche.com/',  //此处不可修改...
-  //   localImgUrl: 'https://ycq.ucuj.com.cn',
-  //   statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
-  // }
+  globalData: {
+    userInfo: null,
+    carType: '',
+    carBrand: '',
+    brand_id: '',
+    url: 'https://ycq.ucuj.com.cn/addons/cms/wxapp.',
+    imgUrl: 'https://static-czz.junyiqiche.com/',  //此处不可修改...
+    localImgUrl: 'https://ycq.ucuj.com.cn',
+    statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
+  }
   
 })
