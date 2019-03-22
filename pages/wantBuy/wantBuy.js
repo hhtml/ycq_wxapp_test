@@ -1,6 +1,7 @@
 // pages/wantBuy/wantBuy.js
 const app = getApp();
 var $http = require('../../utils/http.js');
+var util = require('../../utils/md5.js') // 引入md5.js文件
 Page({
 
   /**
@@ -137,7 +138,7 @@ Page({
               quoted_id: quoted_id
             }).then(res => {
               console.log(res)
-              that.request_price_list();
+              that.request_want_list();
             })
           } else if (res.cancel) {
             console.log('用户点击取消')
@@ -146,6 +147,228 @@ Page({
       })
     }
   },
+  //支付保证金，收到砍价
+  payMargin: function (e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '确定要支付订单吗？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          var payInfo = {
+            formId: e.detail.formId,
+            out_trade_no: new Date().getTime(),
+            trading_models_id: e.detail.target.dataset.id.split('+')[0],
+            // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
+            money: 0.01,
+            user_type: e.detail.target.dataset.pay_type
+
+          }
+          payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no
+
+          $http.post('store_margin_pay_other/marginPay', payInfo).then(res => {
+            var timeStamp = (Date.parse(new Date()) / 1000).toString();
+            var pkg = 'prepay_id=' + res.data.prepay_id;
+            var nonceStr = res.data.nonce_str;
+            var appid = res.data.appid;
+            var key = res.data.key;
+            var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
+            wx.hideLoading()
+            //发起支付
+            wx.requestPayment({
+              'timeStamp': timeStamp,
+              'nonceStr': nonceStr,
+              'package': pkg,
+              'signType': 'MD5',
+              'paySign': paySign,
+              'success': function (res) {
+                console.log(res);
+                if (res.errMsg == "requestPayment:ok") {
+                  //支付成功推送模板
+                  $http.post('store_margin_pay_other/after_successful_payment', payInfo).then(res => {
+                    if (res.data.code == 1) {
+                      console.log(res);
+                      wx.showToast({
+                        title: res.data.msg,
+                        icon: 'success'
+                      });
+                      that.request_want_list();
+                    } else {
+                      wx.showToast({
+                        title: res.data.msg,
+                        icon: 'error'
+                      });
+                    }
+
+                  });
+                }
+              },
+              'fail': function (res) {
+                console.log('用户取消支付,需要重载页面');
+
+              },
+              'complete': function (res) {
+
+              }
+            });
+
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  //支付保证金，我的砍价
+  payMarginMy: function (e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '确定要支付订单吗？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          var payInfo = {
+            formId: e.detail.formId,
+            out_trade_no: new Date().getTime(),
+            trading_models_id: e.detail.target.dataset.id.split('+')[0],
+            // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
+            money: 0.01,
+            user_type: e.detail.target.dataset.pay_type
+
+          }
+          payInfo.out_trade_no = payInfo.user_type + '_' + wx.getStorageSync("user_id") + '_' + payInfo.trading_models_id + '_' + payInfo.out_trade_no
+
+          $http.post('store_margin_pay/marginPay', payInfo).then(res => {
+            var timeStamp = (Date.parse(new Date()) / 1000).toString();
+            var pkg = 'prepay_id=' + res.data.prepay_id;
+            var nonceStr = res.data.nonce_str;
+            var appid = res.data.appid;
+            var key = res.data.key;
+            var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件 
+            wx.hideLoading()
+            //发起支付
+            wx.requestPayment({
+              'timeStamp': timeStamp,
+              'nonceStr': nonceStr,
+              'package': pkg,
+              'signType': 'MD5',
+              'paySign': paySign,
+              'success': function (res) {
+                console.log(res);
+                if (res.errMsg == "requestPayment:ok") {
+                  //支付成功推送模板
+                  $http.post('store_margin_pay/after_successful_payment', payInfo).then(res => {
+                    if (res.data.code == 1) {
+                      console.log(res);
+                      wx.showToast({
+                        title: res.data.msg,
+                        icon: 'success'
+                      });
+                      that.request_want_list();
+                    } else {
+                      wx.showToast({
+                        title: res.data.msg,
+                        icon: 'error'
+                      });
+                    }
+
+                  });
+                }
+              },
+              'fail': function (res) {
+                console.log('用户取消支付,需要重载页面');
+
+              },
+              'complete': function (res) {
+
+              }
+            });
+
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+
+  //买家确认收货  -收到的砍价
+  buyersConfirmTheDelivery: function (e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that = this;
+    var params = {
+      formId: e.detail.formId,
+      trading_models_id: e.detail.target.dataset.id,//车辆交易id
+      user_ids: e.detail.target.dataset.user_ids,
+      by_user_ids: e.detail.target.dataset.by_user_ids,//卖家的id
+      quotationtime: e.detail.target.dataset.quotationtime
+    }
+
+ 
+    $http.post('store_margin_pay_other/buyersConfirmTheDelivery', params).then(res => {
+      if (res.data.code == 1) {
+        wx.hideLoading();
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'success',
+          duration: 2000
+        });
+        that.request_want_list();
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'clear'
+        });
+      }
+    });
+
+
+  },
+  //买家确认收货  -我的砍价
+  buyersConfirmTheDeliveryMy: function (e) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    var that = this;
+    var params = {
+      formId: e.detail.formId,
+      trading_models_id: e.detail.target.dataset.id,//车辆交易id
+      user_ids: e.detail.target.dataset.user_ids,
+      by_user_ids: e.detail.target.dataset.by_user_ids,//卖家的id
+      quotationtime: e.detail.target.dataset.quotationtime
+    }
+
+
+    $http.post('store_margin_pay/buyersConfirmTheDelivery', params).then(res => {
+      if (res.data.code == 1) {
+        wx.hideLoading();
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'success',
+          duration: 2000
+        });
+        that.request_want_list();
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          icon: 'clear'
+        });
+      }
+    });
+
+
+  },
+
   chooseState(e) {
     var state = e.currentTarget.dataset.state;
     this.setData({

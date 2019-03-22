@@ -206,9 +206,11 @@ Page({
 
           if (resObj.code == 1) {
             var data = resObj.data;
-            var isNewOffer = data.userInfo.isNewOffer;
+            var isNewOfferSeller = data.userInfo.isNewOfferSeller;
+            var isNewOfferbuyer = data.userInfo.isNewOfferbuyer;
             $this.setData({
-              isNewOffer
+              isNewOfferSeller,
+              isNewOfferbuyer
             });
 
           } else {
@@ -227,6 +229,7 @@ Page({
   erWeiMa: function() {
     var $this = this;
     var store_has_many = $this.data.store_has_many || [];
+    // console.log($this.data.userInfo);return;
     if ($this.data.userInfo.invitation_code_img == null) { //没有生成二维码
       $http.post('my/setQrcode')
         .then(res => {

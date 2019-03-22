@@ -74,7 +74,7 @@
   </view>
 
   <view class="navList">
-    <view class="navItem" bindtap='nav_to_page' data-path="../wantBuy/wantBuy" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
+    <view class="navItem" bindtap='nav_to_page' data-path="../wantBuy/wantBuy">
       <image class="navIcon" src='../../images/buy.jpg' mode='widthFix'></image>
       <view class="navName">
         <text>我是买家</text>
@@ -82,10 +82,11 @@
       <view class='navRight'>
         <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
+      <view class="offertip" wx:if="{{isNewOfferbuyer==1}}"></view>
     </view>
 
 
-    <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage">
+    <view class="navItem" bindtap='nav_to_page' data-path="../priceManage/priceManage" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">
       <image class="navIcon" src='../../images/sell.jpg' mode='widthFix'></image>
       <view class="navName">
         <text>我是卖家</text>
@@ -93,8 +94,7 @@
       <view class='navRight'>
         <image src='../../images/angle-right.png' mode='widthFix'></image>
       </view>
-
-      <view class="offertip" wx:if="{{isNewOffer==1}}"></view>
+      <view class="offertip" wx:if="{{isNewOfferSeller==1}}"></view>
     </view>
 
     <view class="navItem" bindtap='nav_to_page' data-path="../order/order" wx:if="{{store_has_many[0].auditstatus == 'paid_the_money'}}">

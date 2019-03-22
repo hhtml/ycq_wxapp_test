@@ -67,10 +67,30 @@
 .carInfoItem:nth-child(1){
   border-top: 1px solid #f3f3f3;
 }
-.carImg{
+.carImg {
   width: 256rpx;
-  height: 248rpx;
-  flex-basis:256rpx;
+  height: 167rpx;
+  flex-basis: 256rpx;
+  position: relative;
+}
+
+.carImg text {
+  display: inline-block;
+  padding: 0 20rpx;
+  background-color: #ef4631;
+  color: #fff;
+  height: 35rpx;
+  line-height: 35rpx;
+  font-size: 22rpx;
+  position: absolute;
+  top: -10rpx;
+  right: -10rpx;
+  border-radius: 7rpx;
+}
+.imgArea {
+  width: 256rpx;
+  height: 167rpx;
+  overflow: hidden;
 }
 .carImg image{
   width:100%;
