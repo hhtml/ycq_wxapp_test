@@ -168,7 +168,7 @@
           <input type='number' value='{{form.phone}}' bindinput='phoneInput' cursor-spacing="50"></input>
         </view>
         <view class="centerRow">
-          <text>我期望的价格(万元)</text>
+          <text>{{car.type=='buy'?'我的意向收购价':'我期望的价格'}}(万元)</text>
           <input type='digit' value='{{form.price}}' bindinput="priceInput"></input>
         </view>
       </view>

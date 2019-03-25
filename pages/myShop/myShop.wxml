@@ -8,10 +8,10 @@
     <text>{{shop.name}}</text>
     <text>详细地址：{{shop.addr}}</text>
     <view class="tip">
-        <text >{{shop.level_name ? shop.level_name : '未实名认证'}}</text>
-        <text wx:if="{{shop.level_id > 1 && is_own == 1}}" bindtap="upgrade_shop">升级</text>
+      <text>{{shop.level_name ? shop.level_name : '未实名认证'}}</text>
+      <text wx:if="{{shop.level_id > 1 && is_own == 1}}" bindtap="upgrade_shop">升级</text>
     </view>
-    
+
   </view>
 
   <view class="shopCarType">
@@ -32,7 +32,7 @@
       <text></text>
     </view>
   </view>
- <!--店铺特色-->
+  <!--店铺特色-->
   <view class="detailCont">
 
     <view class="detailContItem" wx:if="{{active_tab=='店铺特色'}}">
@@ -43,10 +43,10 @@
       </view>
       <text wx:else class="nonMes">暂无信息</text>
     </view>
- <!--.店铺特色o/-->
- <!--车型列表-->
+    <!--.店铺特色o/-->
+    <!--车型列表-->
     <view class="detailContItem" wx:if="{{active_tab=='车型列表'}}">
-      <view class="carInfoList1"  wx:if="{{carInfoList.length != 0}}">
+      <view class="carInfoList1" wx:if="{{carInfoList.length != 0}}">
         <block wx:for="{{carInfoList}}" wx:key="{{item.id}}">
           <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
             <view class="carImg">
@@ -69,15 +69,23 @@
                   <text>浏览量:{{item.browse_volume}}</text>
                 </view>
               </view>
-              <view class="putAndOff" wx:if="{{is_own == 1}}">
-                   <text class=" {{item.shelfismenu ==2 ? 'activePut':''}}" data-car_type="{{item.carType}}" catchtap="carStatus" data-index="{{index}}" data-id="{{item.id}}" data-status="0" >下架</text>
-                   <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" catchtap="carStatus" data-car_type="{{item.carType}}" data-status="1"  data-index="{{index}}"  data-id="{{item.id}}" >上架</text>
-                </view>
+              <!-- is_own == 1 && item.trading_status=='normal'   上架下架-->
+              <view class="putAndOff" wx:if="{{is_own == 1 && item.trading_status=='normal'}}">
+                <text class=" {{item.shelfismenu ==2 ? 'activePut':''}}" data-car_type="{{item.carType}}" catchtap="carStatus" data-index="{{index}}" data-id="{{item.id}}" data-status="0">下架</text>
+                <text class=" {{item.shelfismenu == 1 ? 'activePut':''}}" catchtap="carStatus" data-car_type="{{item.carType}}" data-status="1" data-index="{{index}}" data-id="{{item.id}}">上架</text>
+              </view>
+              <view class="putAndOff" wx:if="{{is_own == 1 && item.trading_status=='underway'}}">
+                <text class='activePut' style=''>该车辆正在交易进行中，点击查看交易状态</text>
+                <!-- <text></text> -->
+              </view>
+              <view class="putAndOff" wx:if="{{is_own == 1 && item.trading_status=='complete'}}">
+                <text class='activePut' style='color:green'>车辆已完成买卖交易</text>
+              </view>
             </view>
           </view>
         </block>
       </view>
-       
+
       <text wx:else class="nonMes">暂无车型信息</text>
     </view>
     <!--.车型列表/-->
