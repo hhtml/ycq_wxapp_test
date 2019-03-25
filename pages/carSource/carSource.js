@@ -75,10 +75,10 @@ Page({
     var screen_id = screen.id;
     console.log(cityList[e.detail.value].name);
     this.change_car_source(screen_id, city_id, brand_id); 
-      this.setData({
-        city_id: city_id
-      })
-    wx.pageScrollTo({ //滚动到页面最上方
+    this.setData({
+      city_id: city_id
+    })
+    wx.pageScrollTo({ //调用小程序api 让页面滚动到最上方
       scrollTop: 0,
       duration: 300
     })
@@ -93,7 +93,7 @@ Page({
     this.setData({
       screen: screenList[e.detail.value]
     })
-    wx.pageScrollTo({ //滚动到页面最上方
+    wx.pageScrollTo({ //调用小程序api 使页面滚动到最上方
       scrollTop: 0,
       duration: 300
     })
@@ -118,7 +118,7 @@ Page({
    this.setData({
      brand_id: brand_id
    })
-   wx.pageScrollTo({ //滚动到页面最上方
+   wx.pageScrollTo({ //调用小程序api 使页面滚动到最上方
      scrollTop: 0,
      duration: 300
    })
@@ -324,6 +324,7 @@ Page({
       brand_id: '',
       screen: screen,
       multiIndex: [0, 0],
+      index:0
     })
   },
 

@@ -37,6 +37,7 @@ page{
   flex-direction: column;
   justify-content: space-between;
   padding:20rpx 20rpx;
+  padding-left: 0rpx;
   position: relative; 
 }
 .recordMonry{

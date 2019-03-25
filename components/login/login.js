@@ -18,10 +18,10 @@ Component({
 
   },
 
-  attached: function () { //检测有没有缓存到user_id
-    if (wx.getStorageSync("user_id")){
+  attached: function() { //检测有没有缓存到user_id
+    if (wx.getStorageSync("user_id")) {
       //已登录
-    }else{
+    } else {
       this.check();
     }
   },
@@ -31,29 +31,29 @@ Component({
    */
   methods: {
     /***
-   * 
-   * 登录相关
-   */
+     * 
+     * 登录相关
+     */
     //显示登录或授权提示
-    showLoginModal: function () {
+    showLoginModal: function() {
       this.setData({
         settingShow: true
       });
       wx.hideTabBar();
     },
     //判断是否登录
-    check: function (cb) {
+    check: function(cb) {
       console.log('登录')
       var that = this;
       wx.getSetting({
-        success: function (res) {
+        success: function(res) {
           if (res.authSetting['scope.userInfo']) {
 
             // 已经授权，可以直接调用 getUserInfo 获取头像昵称
             console.log('已经授权');
             wx.getUserInfo({
               withCredentials: true,
-              success: function (res) {
+              success: function(res) {
                 that.setData({
                   settingShow: false
                 })
@@ -61,7 +61,7 @@ Component({
 
                 that.login();
               },
-              fail: function () {
+              fail: function() {
                 that.showLoginModal();
 
               }
@@ -71,22 +71,22 @@ Component({
 
           }
         },
-        fail: function () {
+        fail: function() {
           that.showLoginModal();
         }
       });
 
     },
-    login: function () {
+    login: function() {
       var that = this;
       var token = wx.getStorageSync('token') || '';
       //调用登录接口
       wx.login({
-        success: function (res) {
+        success: function(res) {
           if (res.code) {
             //发起网络请求
             wx.getUserInfo({
-              success: function (ures) {
+              success: function(ures) {
                 wx.request({
                   url: app.globalData.url + 'user/login',
                   data: {
@@ -98,7 +98,7 @@ Component({
                   header: {
                     "Content-Type": "application/x-www-form-urlencoded",
                   },
-                  success: function (lres) {
+                  success: function(lres) {
                     var response = lres.data
                     if (response.code == 1) {
                       that.data.userInfo = response.data.userInfo;
@@ -108,12 +108,13 @@ Component({
                       wx.setStorageSync('user_id', response.data.userInfo.user_id);
                       // typeof cb == "function" && cb(response.data.userInfo);
 
-                        //刷新当前页面
-                        var pages = getCurrentPages();
-                        var prevPage = pages[pages.length - 1];  //当前页面)
-                        // prevPage.onLoad()
-                        prevPage.onPullDownRefresh(); //重新刷新页面
-                        
+
+                      //刷新当前页面
+                      var pages = getCurrentPages();
+                      var prevPage = pages[pages.length - 1]; //当前页面)
+                      prevPage.onPullDownRefresh(); //重新刷新页面
+
+
                     } else {
                       wx.setStorageSync('token', '');
                       console.log("用户登录失败")
@@ -122,7 +123,7 @@ Component({
                   }
                 });
               },
-              fail: function (res) {
+              fail: function(res) {
                 that.showLoginModal();
               }
             });
@@ -132,7 +133,7 @@ Component({
         }
       });
     },
-    getuserinfo: function (e) {
+    getuserinfo: function(e) {
       if (!e.detail.userInfo) {
 
       } else {
@@ -144,7 +145,7 @@ Component({
 
     },
     //登陆界面点击友车圈服务协议跳转到服务协议界面事件
-    goServiceAgreement: function () {
+    goServiceAgreement: function() {
       wx.navigateTo({
         url: '../mine/serviceAgreement/serviceAgreement'
       })

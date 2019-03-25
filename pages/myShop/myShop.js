@@ -13,8 +13,10 @@ Page({
       addr:'成都市武侯区天府广场1栋',
       brands:['奔驰','宝马','JEEP','玛莎拉蒂','VOLVO']*/
     },
-    active_tab: '店铺特色',
+    statusBarHeight: app.globalData.statusBarHeight,
+    active_tab: '车型列表',
     detail_img_list: [],
+    store_description:'',
     carInfoList: [{
       // "id": 12,
       // "models_name": "奥迪Q3 20192.0L手动变速",
@@ -60,7 +62,7 @@ Page({
           addr: data.detail.cities_name + data.detail.store_address,
           level_name: data.detail.storelevel.partner_rank,
           level_id: data.detail.storelevel.id,
-          brands: brandList
+          brands: brandList,
         };
         if (carList) {
           carList.forEach((val, index) => {
@@ -82,12 +84,14 @@ Page({
             carList[index] = obj;
           });
         }
-        this.setData({
+        $this.setData({
           carInfoList: carList,
           shop,
           carList,
-          is_own: data.is_own
+          is_own: data.is_own,
+          store_description: data.detail.store_description
         })
+        console.log($this.data.store_description)
       } else {
         // wx.showToast({
         //   title: resObj.msg,
@@ -106,6 +110,19 @@ Page({
       phoneNumber: phone,
     })
   },
+  //自定义nav返回主页事件
+  goHome: function () {
+    wx.switchTab({
+      url: '/pages/index/index'
+    })
+  },
+  //点击返回按钮事件
+  returnPage: function () {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  //查看车辆详情
   nav_to_car_detail:function(e){
     console.log(e)
     var carId = e.currentTarget.dataset.id

@@ -89,7 +89,7 @@
             <view class="status-wrap">
               <view class="cancelOrder" id="{{item.cancel_order}}+{{itemChirs.id}}" bindtap='cancelOrderSell'>取消订单</view>
               <form bindsubmit='payMargin' bindreset='' report-submit>
-                <button form-type="submit" class="payMoney" data-pay_type="buyer" data-id="{{item.id}}+{{itemChirs.bond}}" wx:if="{{itemChirs.buyer_payment_status == 'to_be_paid'}}">支付</button>
+                <button form-type="submit" class="payMoney" data-pay_type="buyer" data-id="{{item.id}}+{{itemChirs.bond}}" >支付</button>
 
               </form>
             </view>

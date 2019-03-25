@@ -66,8 +66,10 @@ Page({
     var partnerList = new Array();
     var zimuList = new Array();
     var brandsList = new Array();
+
+    console.log('邀请人ID'+$this.data.inviter_user_id)
     $http.post('Shop/index', {
-      inviter_user_id: $this.data.inviter_user_id
+      inviter_user_id: $this.data.inviter_user_id  //
     })
       .then(res => {
         //成功回调
@@ -80,9 +82,25 @@ Page({
           var store_level_list = data.store_level_list;
           var brandList = data.brand_list;
           var fail_default_value = data.fail_default_value;
+          var have_store = data.have_store  //是否开通店铺 1：开通 0：未开通
           $this.setData({
             carBrand: data.brand_list
           })
+          if (have_store == 1){ //如果通过分享进来的人是已经申请过店铺的，不能重复申请，跳转首页
+            wx.showModal({
+              title: '提示',
+              content: '您已经申请过店铺,不能重复申请',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  wx.switchTab({
+                    url: '/pages/index/index'
+                  })
+                }
+              }
+            })
+            return false;
+          }
           if (store_level_list) {
             store_level_list.forEach((val, index) => {
               if (val.condition == 'visible') {
@@ -120,8 +138,6 @@ Page({
               brandsList.push(obj2);
             }
           }
-
-
           console.log('zimuList:', zimuList);
           console.log('brandsList:', brandsList);
           if (fail_default_value) {
@@ -212,7 +228,6 @@ Page({
       $http.post('Shop/check_the_invitation_code', {
         code: invite
       }).then(res => {
-        //成功回调
         //成功回调
         var resObj = res.data;
         console.log('邀请码验证：', resObj);
@@ -635,6 +650,8 @@ Page({
     }
     return checkBrands;
   },
+
+  //表单提交
   formSubmit(e) {
     if (valve == true) {
       valve = false
@@ -734,15 +751,15 @@ Page({
         })
       }
     }
-    console.log("index 生命周期 onload" + JSON.stringify(options))
+   
     //在此函数中获取扫描普通链接二维码参数
     let q = decodeURIComponent(options.q)
     if (q) {
-      console.log("index 生命周期 onload url=" + q)
-      console.log("index 生命周期 onload 参数 user_id=" + util.getQueryString(q, 'user_id'))
+
+      // console.log("index 生命周期 onload 参数 user_id=" + util.getQueryString(q, 'user_id'))
       if (util.getQueryString(q, 'user_id')) { //扫描二维码进入，自动填充邀请码
         //扫描自己的二维码，不产生邀请码
-          //提示不能邀请自己
+        //提示不能邀请自己
         if (util.getQueryString(q, 'user_id') == wx.getStorageSync("user_id")) {
           wx.showModal({
             title: '提示',
@@ -756,23 +773,17 @@ Page({
               }
             }
           })
-        
-
           console.log('扫描自己的二维码，不产生邀请码')
-        } 
-        //如果扫描进来的人是已经认证过店铺的，不能合作申请，跳转到首页
-      
-
+        }
+        
         else {
           that.data.inviter_user_id = util.getQueryString(q, 'user_id')
-
           that.setData({
             disabled: true
           })
         }
       }
     }
-    console.log(that.data.inviter_user_id)
     that.come_in_page();
   },
 
