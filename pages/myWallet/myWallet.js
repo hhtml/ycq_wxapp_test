@@ -87,7 +87,7 @@ Page({
     // console.log(typeof(that.data.wallet.total_earnings));
     // console.log(that.data.wallet.total_earnings);return
 
-    if (that.data.wallet.total_earnings < 100) {
+    if (that.data.wallet.available_balance < 100) {
       wx.hideLoading();
       wx.showModal({
         title: '提示',

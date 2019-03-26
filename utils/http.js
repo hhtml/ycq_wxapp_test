@@ -38,7 +38,6 @@ function fun(url, method, data, header) {
         }
         resolve(res);
       },
-     // fail: reject,
      fail:function(){
         wx.redirectTo({
           url: '../404/404',

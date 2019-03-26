@@ -231,6 +231,7 @@ Page({
     var store_has_many = $this.data.store_has_many || [];
     // console.log($this.data.userInfo);return;
     if ($this.data.userInfo.invitation_code_img == null) { //没有生成二维码
+    console.log(1)
       $http.post('my/setQrcode')
         .then(res => {
           $this.request_mine() //重新请求数据
@@ -239,6 +240,7 @@ Page({
           console.log('请求失败,异常回调');
         });
     }
+    // console.log(2);return;
     if (store_has_many.length > 0) {
       if (store_has_many[0].auditstatus == 'paid_the_money') {
         if ($this.data.switch1 == 1 && $this.data.switch2 == 1 && $this.data.switch3 == 1) {

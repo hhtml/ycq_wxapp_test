@@ -4,13 +4,12 @@
     <view class='selectItem'>
       <picker bindchange="bindAddrChange" value="{{index}}" range="{{cityList}}" range-key='name'>
         <view class="picker">
-
           <text style="color:{{city_id ? '#ef4631':'#353535'}};"> {{city_id ? city_id :'选择地区'}}</text>
           <image src="{{city_id ? '../../images/choose-active-icon.png' : '../../images/choose-icon.png'}}" mode='widthFix'></image>
         </view>
       </picker>
-
     </view>
+    
     <view class='selectItem'>
       <picker mode="multiSelector" value="{{multiIndex}}" bindcolumnchange="bindPickerColumnChange" bindchange="bindPickerChange" range="{{brandInfo}}" range-key="{{'name'}}">
         <view class="picker">
@@ -26,7 +25,6 @@
           <image src="{{screen ? '../../images/choose-active-icon.png' : '../../images/choose-icon.png'}}" mode='widthFix'></image>
         </view>
       </picker>
-
       <!--<image src='' mode='widthFix'></image>-->
     </view>
   </view>

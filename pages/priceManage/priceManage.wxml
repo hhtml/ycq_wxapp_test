@@ -14,6 +14,10 @@
 
   <!-- 收到的砍价 -->
   <view class="carInfoList" wx:if="{{state == 0}}">
+    <view class="noCont" wx:if="{{carSellList.length==0}}">
+      <image src="../../images/404.png" mode='widthFix'></image>
+      <text>暂无数据</text>
+    </view>
     <block wx:for="{{carSellList}}">
       <view class='blockInfo'>
         <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">
@@ -147,6 +151,10 @@
   </view>
   <!-- 我的砍价=========================================================================== -->
   <view class="carInfoList" wx:if="{{state == 1}}">
+  <view class="noCont" wx:if="{{carBuyList.length==0}}">
+      <image src="../../images/404.png" mode='widthFix'></image>
+      <text>暂无数据</text>
+    </view>
    <block wx:for="{{carBuyList}}">
       <view class='blockInfo'>
         <view class="carInfoItem" bindtap='nav_to_car_detail' data-id="{{item.id}}" data-type="{{item.type}}">

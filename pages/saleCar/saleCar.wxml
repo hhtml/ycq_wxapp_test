@@ -120,7 +120,7 @@
                <picker
                   mode="date"
                   value="{{form.productDate}}"
-                  start="2005-01-01"
+                  start="2000-01-01"
                   end="{{year}}"
                   bindchange="productDateChange"
                   fields="year"
@@ -143,7 +143,8 @@
                <picker
                   mode="date"
                   value="{{form.listingDate}}"
-                  start="2009-09-01"
+                  start="2000-01-01"
+                  end="{{year}}"
                   bindchange="listingDateChange"
                   fields="month"
                 >

@@ -5,5 +5,6 @@
   },
   "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "我的店铺"
+  "navigationBarTitleText": "我的店铺",
+  "navigationStyle": "custom"
 }

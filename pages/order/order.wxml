@@ -19,11 +19,13 @@
     <block wx:for="{{toBePaidList}}">
         <view class="orderItem"  data-id="{{item.id}}">
             <view class='orderInfo'>
-                <view class="infoImg">
+                <view class="info-wrap">
+                  <view class="infoImg">
                     <image src='{{item.avatar}}'></image>
-                </view>
-                <view class="infoName">
+                  </view>
+                  <view class="infoName">
                     <text>{{item.nickname}}</text>
+                  </view>
                 </view>
                 <view class="infoName">
                     <image src="/images/mine-shop.png"></image>
@@ -71,11 +73,13 @@
     <block wx:for="{{paidList}}">
         <view class="orderItem"  data-id="{{item.id}}">
             <view class='orderInfo'>
-                <view class="infoImg">
+                <view class="info-wrap">
+                  <view class="infoImg">
                     <image src='{{item.avatar}}'></image>
-                </view>
-                <view class="infoName">
+                  </view>
+                  <view class="infoName">
                     <text>{{item.companystoreone.store_name}}</text>
+                  </view>
                 </view>
                 <view class="infoLevel" wx:if="{{item.pay_type !== 'bond'}}">
                     <text>【{{item.partner_rank}}】</text>
