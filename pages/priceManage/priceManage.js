@@ -157,8 +157,8 @@ Page({
             formId: e.detail.formId,
             out_trade_no: new Date().getTime(),
             trading_models_id: e.detail.target.dataset.id.split('+')[0],
-            money: Number(e.detail.target.dataset.id.split('+')[1]),
-            // money: 0.01,
+            // money: Number(e.detail.target.dataset.id.split('+')[1]),
+            money: 0.01,
             user_type: e.detail.target.dataset.pay_type
 
           }
@@ -233,8 +233,8 @@ Page({
             formId: e.detail.formId,
             out_trade_no: new Date().getTime(),
             trading_models_id: e.detail.target.dataset.id.split('+')[0],
-            money: Number(e.detail.target.dataset.id.split('+')[1])  ,
-            // money: 0.01,
+            // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
+            money: 0.01,
             user_type: e.detail.target.dataset.pay_type
           }
 
