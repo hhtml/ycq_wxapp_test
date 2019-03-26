@@ -775,9 +775,7 @@ Page({
             }
           })
           console.log('扫描自己的二维码，不产生邀请码')
-        }
-        
-        else {
+        }else {
           that.data.inviter_user_id = util.getQueryString(q, 'user_id')
           that.setData({
             disabled: true
