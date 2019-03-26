@@ -79,6 +79,7 @@ Page({
               factorytime: val.factorytime, //"1970",
               modelsimages: app.globalData.localImgUrl + val.modelsimages, //"/uploads/20190301/d14dab0b1d07e9ee63c1f78201bcd822.jpg",
               shelfismenu: val.shelfismenu, //是否上下架 0-下架 1-上架
+              trading_status: val.trading_status,
               carType: val.type
             }
             carList[index] = obj;
@@ -122,13 +123,12 @@ Page({
       delta: 1
     })
   },
-  //查看车辆详情
-  nav_to_car_detail:function(e){
+  nav_to_car_detail: function(e) {
     console.log(e)
     var carId = e.currentTarget.dataset.id
     var type = 'sell'
     wx.navigateTo({
-      url: '../carDetail/carDetail?carId='+carId+'&type='+type
+      url: '../carDetail/carDetail?carId=' + carId + '&type=' + type
     })
   },
   //车型上架下架

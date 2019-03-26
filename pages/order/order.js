@@ -58,30 +58,33 @@ Page({
 
           if (paid_the_money) {
             paid_the_money.forEach((val, index) => {
-              var obj = {
-                id: val.id,
-                nickname: val.company_store.store_name,
-                avatar: val.user.avatar,
-                certification_fee: val.level.money,
-                can_pay: val.can_pay,
-                companystore_id: val.company_store.id,
-                companystore_level: val.level,
-                companystore_auditstatus: val.company_store.auditstatus,
-                can_upgrade: val.can_upgrade ? val.can_upgrade : '',
-                companystoreone: val.company_store,
-                payment_time: val.time_end,
-                partner_rank: val.level.partner_rank,
-                level_id: val.level.id,
-                pay_type: val.pay_type,
-                models_name: val.models_name,
-                total_fee: val.total_fee
+              if (val.company_store) { 
+                var obj = {
+                  id: val.id,
+                  nickname: val.company_store.store_name,
+                  avatar: val.user.avatar,
+                  certification_fee: val.level.money,
+                  can_pay: val.can_pay,
+                  companystore_id: val.company_store.id,
+                  companystore_level: val.level,
+                  companystore_auditstatus: val.company_store.auditstatus,
+                  can_upgrade: val.can_upgrade ? val.can_upgrade : '',
+                  companystoreone: val.company_store,
+                  payment_time: val.time_end,
+                  partner_rank: val.level.partner_rank,
+                  level_id: val.level.id,
+                  pay_type: val.pay_type,
+                  models_name: val.models_name,
+                  total_fee: val.total_fee
+                }
+                paidList[index] = obj;
               }
-              paidList[index] = obj;
+             
             });
           }
           $this.setData({
             toBePaidList: toBePaidList,
-            paidList:paidList
+            paidList: paidList
           })
         } else {
           wx.showToast({
@@ -154,7 +157,7 @@ Page({
     }
 
     payInfo.out_trade_no = wx.getStorageSync("user_id") + '_' + payInfo.store_id + '_' + payInfo.out_trade_no
-   
+
     $http.post('store_certification_pay/certification_wxPay', payInfo).then(res => {
       var timeStamp = (Date.parse(new Date()) / 1000).toString();
       var pkg = 'prepay_id=' + res.data.prepay_id;
@@ -164,7 +167,7 @@ Page({
       var paySign = util.hexMD5('appId=' + appid + '&nonceStr=' + nonceStr + '&package=' + pkg + '&signType=MD5&timeStamp=' + timeStamp + "&key=" + key).toUpperCase(); //此处用到hexMD5插件
       wx.hideLoading()
       //发起支付
-      
+
       wx.requestPayment({
         'timeStamp': timeStamp,
         'nonceStr': nonceStr,
@@ -218,10 +221,10 @@ Page({
     console.log(e.detail.formId);
 
     console.log(e.detail.value);
-  }, 
+  },
 
   //店铺升级
-  upgradeOrder:function(){
+  upgradeOrder: function() {
     wx.navigateTo({
       url: '../mine/upgrade/upgrade'
     })
