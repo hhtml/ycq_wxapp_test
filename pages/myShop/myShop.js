@@ -92,7 +92,6 @@ Page({
           is_own: data.is_own,
           store_description: data.detail.store_description
         })
-        console.log($this.data.store_description)
       } else {
         // wx.showToast({
         //   title: resObj.msg,

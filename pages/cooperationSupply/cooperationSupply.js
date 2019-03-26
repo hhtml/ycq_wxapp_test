@@ -83,10 +83,11 @@ Page({
           var brandList = data.brand_list;
           var fail_default_value = data.fail_default_value;
           var have_store = data.have_store  //是否开通店铺 1：开通 0：未开通
+          var auditstatus = data.fail_default_value // 店铺申请是否失败
           $this.setData({
             carBrand: data.brand_list
           })
-          if (have_store == 1){ //如果通过分享进来的人是已经申请过店铺的，不能重复申请，跳转首页
+          if (have_store == 1 && !auditstatus){ //如果通过分享进来的人是已经申请过店铺的，不能重复申请，跳转首页
             wx.showModal({
               title: '提示',
               content: '您已经申请过店铺,不能重复申请',

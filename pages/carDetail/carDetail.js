@@ -82,6 +82,22 @@ Page({
       if (resObj.code == 1) {
         var data = resObj.data;
         var himgUrl;
+        var shelfismenu = data.detail.shelfismenu //判断车辆是否上架 1：上架 2：下架
+        if (shelfismenu == 2){
+          wx.showModal({
+            title: '提示',
+            content: '该车辆已下架',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                wx.switchTab({
+                  url: '/pages/index/index'
+                })
+              }
+            }
+          })
+          // return false;
+        }
         if (data.detail.type == 'sell') {
           himgUrl = app.globalData.localImgUrl;
         } else {
