@@ -58,7 +58,7 @@ Page({
             carList.forEach((val, index) => {
               var obj = {
                 id: val.id,
-                imgSrc: app.globalData.localImgUrl + val.modelsimages,
+                imgSrc: app.globalData.imgUrl + val.brand.brand_default_images,
                 name: val.models_name,
                 priceArea: val.guide_price,
                 sale: val.browse_volume,
@@ -75,7 +75,7 @@ Page({
             carList_receive.forEach((val, index) => {
               var obj = {
                 id: val.id,
-                imgSrc: app.globalData.imgUrl + val.modelsimages,
+                imgSrc: app.globalData.imgUrl + val.brand.brand_default_images,
                 name: val.models_name,
                 priceArea: val.guide_price,
                 sale: val.browse_volume,

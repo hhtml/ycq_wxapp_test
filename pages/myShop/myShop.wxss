@@ -270,20 +270,21 @@ page{
 }
 .putAndOff text{
   display:block;
-  width: 90rpx;
+  /* width: 90rpx; */
   height:40rpx;
   line-height: 40rpx;
   text-align: center;
   font-size: 24rpx;
 }
 .putAndOff text{
+  padding:0 10rpx;
   background-color: #fff;
   color: #888;
   border:1rpx solid #888;
   border-radius: 6rpx;
 }
 .putAndOff text:nth-child(1){
-  
+  padding:0 10rpx;
   border-radius: 6rpx;
   margin-left: 20rpx;
 }

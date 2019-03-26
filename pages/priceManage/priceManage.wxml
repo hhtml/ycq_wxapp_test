@@ -80,7 +80,7 @@
             </view>
 
             <!--开始支付-->
-            <view wx:if="{{itemChir.deal_status == 'click_the_deal'  && itemChir.seller_payment_status =='to_be_paid' && itemChir.buyer_payment_status == 'to_be_paid'    }}">
+            <view wx:if="{{itemChir.deal_status == 'click_the_deal'  && itemChir.seller_payment_status =='to_be_paid'   }}">
               <view class="bailMoney-wrap">
                 <view class="bailMoney">交易保证金：￥3000元</view>
                 <view class="status-wrap">
