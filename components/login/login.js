@@ -63,7 +63,6 @@ Component({
               },
               fail: function() {
                 that.showLoginModal();
-
               }
             });
           } else {

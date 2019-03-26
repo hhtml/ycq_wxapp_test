@@ -26,7 +26,6 @@
       <text>{{shop.level_name ? shop.level_name : '未实名认证'}}</text>
       <text wx:if="{{shop.level_id > 1 && is_own == 1}}" bindtap="upgrade_shop">升级</text>
     </view>
-
   </view>
 
   <view class="shopCarType">
@@ -37,14 +36,17 @@
       <text wx:for="{{shop.brands}}" wx:key="{{index}}">{{item}}</text>
     </view>
   </view>
+
   <view class="shopCarType">
     <view class="carTypeTitle">
       <text>店铺介绍</text>
     </view>
     <view class='store_des-wrap'>
-      <view class="store_des1">好</view>
+      <view class="store_des1" wx:if="{{!store_description}}">{{store_description}}</view>
+      <view wx:else class="nonMes">暂无信息</view>
     </view>
   </view>
+
   <view class="shopCarType">
     <view class="carTypeTitle">
       <text>车型列表</text>
@@ -61,14 +63,13 @@
     </view>
   </view> -->
  <!--店铺介绍-->
-  </view>
   <!--店铺特色-->
-  <view class="detailCont">
-    <!-- <view class="detailContItem" wx:if="{{active_tab=='店铺介绍'}}">
+  <!-- <view class="detailCont">
+    <view class="detailContItem" wx:if="{{active_tab=='店铺介绍'}}">
       <text class='store_des' wx:if="{{store_description}}">{{store_description}}</text>
       <text wx:else class="nonMes">暂无信息</text>
-    </view> -->
     </view>
+    </view> -->
     <!--.店铺特色o/-->
     <!--车型列表-->
     <view class="detailContItem" wx:if="{{active_tab=='车型列表'}}">
@@ -79,14 +80,12 @@
               <view class="imgArea">
                 <image src='{{item.modelsimages}}' mode='widthFix'></image>
               </view>
-
             </view>
             <view class="carInfoCont">
               <view class="carInfoContWord">
                 <view class="carName">
                   <text>{{item.models_name}}</text>
                 </view>
-
                 <view class="carInfoRow1">
                   <text>{{item.car_licensetime ? item.car_licensetime+'上牌/' : ''}} {{item.kilometres ? item.kilometres+'/' : ''}}{{item.parkingposition}}</text>
                 </view>
@@ -111,14 +110,9 @@
           </view>
         </block>
       </view>
-
       <text wx:else class="nonMes">暂无车型信息</text>
     </view>
-    <!--.车型列表/-->
-
   </view>
-
-</view>
 <!--.shopInfo/-->
 <view class="bottomArea">
   <!-- <view class="bottomItem" wx:if="{{is_own == 1}}">
