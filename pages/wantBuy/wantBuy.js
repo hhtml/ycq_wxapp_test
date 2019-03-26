@@ -115,7 +115,7 @@ Page({
     })
   },
   //取消订单
-  cancelOrderSell: function (e) {
+  cancelOrder: function (e) {
     console.log(e)
     var that = this
     var quoted_id = e.target.id
@@ -128,7 +128,19 @@ Page({
             $http.post('my/cancellation_of_quotation', {
               quoted_id: quoted_id
             }).then(res => {
-              that.request_want_list();
+              if(res.data.data.code==1){
+                wx.showToast({
+                  title: res.data.data.msg,
+                  image: 'success'
+                });
+                that.request_want_list(); 
+              }
+              else{
+                wx.showToast({
+                  title: res.data.data.msg,
+                  image: '../../images/warn.png'
+                });
+              }
             })
           } else if (res.cancel) {
             console.log('用户点击取消')

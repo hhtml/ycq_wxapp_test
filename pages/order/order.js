@@ -63,7 +63,7 @@ Page({
                   id: val.id,
                   nickname: val.company_store.store_name,
                   avatar: val.user.avatar,
-                  certification_fee: val.level.money,
+                  certification_fee: val.level?val.level.money:'',
                   can_pay: val.can_pay,
                   companystore_id: val.company_store.id,
                   companystore_level: val.level,
@@ -71,8 +71,8 @@ Page({
                   can_upgrade: val.can_upgrade ? val.can_upgrade : '',
                   companystoreone: val.company_store,
                   payment_time: val.time_end,
-                  partner_rank: val.level.partner_rank,
-                  level_id: val.level.id,
+                  partner_rank: val.level ? val.level.partner_rank:'',
+                  level_id: val.level ? val.level.id:'',
                   pay_type: val.pay_type,
                   models_name: val.models_name,
                   total_fee: val.total_fee
@@ -95,7 +95,7 @@ Page({
         }
       }).catch(err => {
         //异常回调
-        console.log('请求失败', err);
+        console.log('异常回调', err);
       });
 
   },

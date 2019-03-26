@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "home": "/components/home/home"
+  },
   "navigationBarTitleText": "订单",
   "backgroundColor": "#ffffff"
 }

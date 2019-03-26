@@ -104,7 +104,6 @@ Page({
           }
           if (store_level_list) {
             store_level_list.forEach((val, index) => {
-              if (val.condition == 'visible') {
                 var obj = {
                   id: val.id,
                   partner_rank: val.partner_rank,
@@ -113,7 +112,6 @@ Page({
                   checked: false
                 }
                 partnerList.push(obj);
-              }
             });
           }
           if (brandList) {

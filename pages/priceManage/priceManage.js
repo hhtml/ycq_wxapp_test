@@ -118,29 +118,6 @@ Page({
     })
   },
 
-  //取消卖车订单
-  cancelOrderSell: function(e) {
-    console.log(e)
-    var that = this
-    var quoted_id = e.target.id
-      wx.showModal({
-        title: '提示',
-        content: '确定要取消订单吗？',
-        success(res) {
-          if (res.confirm) {
-            console.log('用户点击确定')
-            $http.post('my/cancellation_of_quotation', {
-              quoted_id: quoted_id
-            }).then(res => {
-              that.request_price_list();
-            })
-          } else if (res.cancel) {
-            console.log('用户点击取消')
-          }
-        }
-      })
-  },
-
   //支付保证金，收到砍价
   payMargin: function(e) {
     // wx.showLoading({
@@ -378,24 +355,10 @@ Page({
   },
 
 
-  //取消买车订单
-  cancelOrderBuy: function(e) {
-    wx.showLoading({
-      title: '加载中',
-    })
-    console.log(e)
+  //取消订单
+  cancelOrder: function(e) {
     var that = this
-    var cancel_order = e.target.id.split('+')[0]
-    var quoted_id = e.target.id.split('+')[1]
-    if (cancel_order == 0) {
-      wx.hideLoading();
-      wx.showToast({
-        title: '不能取消订单',
-        image: '../../images/warn.png',
-        duration: 500
-      })
-    } else {
-      wx.hideLoading();
+    var quoted_id = e.target.id
       wx.showModal({
         title: '提示',
         content: '确定要取消订单吗？',
@@ -405,15 +368,25 @@ Page({
             $http.post('my/cancellation_of_quotation', {
               quoted_id: quoted_id
             }).then(res => {
-              console.log(res)
-              that.request_price_list();
+              if (res.data.data.code == 1) {
+                wx.showToast({
+                  title: res.data.data.msg,
+                  image: 'success'
+                });
+                that.request_price_list();
+              }
+              else {
+                wx.showToast({
+                  title: res.data.data.msg,
+                  image: '../../images/warn.png'
+                });
+              }
             })
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
         }
       })
-    }
   },
 
   /**

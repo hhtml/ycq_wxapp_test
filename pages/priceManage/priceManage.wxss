@@ -324,7 +324,7 @@ button::after {
 .payMoneySuccess {
   font-size: 24rpx;
   border-radius: 10rpx;
-  padding: 16rpx 50rpx;
+  padding: 12rpx 20rpx;
   color: #fff;
   background-color: green;
   margin-left: 40rpx;

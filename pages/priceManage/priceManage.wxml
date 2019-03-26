@@ -84,7 +84,7 @@
               <view class="bailMoney-wrap">
                 <view class="bailMoney">交易保证金：￥3000元</view>
                 <view class="status-wrap">
-                  <view class="cancelOrder" id="{{itemChir.id}}" bindtap='cancelOrderSell'>取消订单</view>
+                  <view class="cancelOrder" id="{{itemChir.id}}" bindtap='cancelOrder'>取消订单</view>
                   <form bindsubmit='payMargin' bindreset='' report-submit>
                     <button form-type="submit" class="payMoney" data-pay_type="seller" data-id="{{item.id}}+{{itemChir.bond}}">支付</button>
                   </form>
@@ -221,7 +221,7 @@
               <view class="bailMoney-wrap">
                 <view class="bailMoney">交易保证金：￥3000元</view>
                 <view class="status-wrap">
-                  <view class="cancelOrder" id="{{itemChir.id}}" bindtap='cancelOrderSell'>取消订单</view>
+                  <view class="cancelOrder" id="{{itemChir.id}}" bindtap='cancelOrder'>取消订单</view>
                   <form bindsubmit='payMarginMy' bindreset='' report-submit>
                     <button form-type="submit" class="payMoney" data-pay_type="seller" data-id="{{item.id}}+{{itemChir.bond}}">支付</button>
                   </form>
