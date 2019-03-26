@@ -34,14 +34,12 @@
           <view class="carInfoContWord">
             <view class="carName">
               <text>{{item.name}}</text>
-            </view>
-
+            </view> 
             <view class="carInfoRow1">
-              <text>{{item.time ? item.time+'上牌/' : ''}} {{item.miles ? item.miles+'/' : ''}}万公里{{item.addr}}</text>
-            </view>
-
+              <text> {{item.addr}}</text>
+            </view> 
             <view class="carInfoRow2">
-              <text>心里价:{{item.priceArea}}万</text>
+              <text>您的求购价:{{item.priceArea}}万</text>
               <text>浏览量:{{item.sale}}</text>
             </view>
           </view>

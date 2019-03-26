@@ -54,7 +54,7 @@
   color: #ef4631;
 }
 .selectItem-wrap{
-  margin-top:64rpx;
+  margin-top:86rpx;
 }
 .carInfoList{
   padding: 0 24rpx;
