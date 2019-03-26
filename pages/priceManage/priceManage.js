@@ -122,15 +122,7 @@ Page({
   cancelOrderSell: function(e) {
     console.log(e)
     var that = this
-    var cancel_order = e.target.id.split('+')[0]
-    var quoted_id = e.target.id.split('+')[1]
-    if (cancel_order == 0) {
-      wx.showToast({
-        title: '不能取消订单',
-        image: '../../images/warn.png',
-        duration: 500
-      })
-    } else {
+    var quoted_id = e.target.id
       wx.showModal({
         title: '提示',
         content: '确定要取消订单吗？',
@@ -140,7 +132,6 @@ Page({
             $http.post('my/cancellation_of_quotation', {
               quoted_id: quoted_id
             }).then(res => {
-              console.log(res)
               that.request_price_list();
             })
           } else if (res.cancel) {
@@ -148,7 +139,6 @@ Page({
           }
         }
       })
-    }
   },
 
   //支付保证金，收到砍价
@@ -167,8 +157,8 @@ Page({
             formId: e.detail.formId,
             out_trade_no: new Date().getTime(),
             trading_models_id: e.detail.target.dataset.id.split('+')[0],
-            // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
-            money: 0.01,
+            money: Number(e.detail.target.dataset.id.split('+')[1]),
+            // money: 0.01,
             user_type: e.detail.target.dataset.pay_type
 
           }
@@ -243,8 +233,8 @@ Page({
             formId: e.detail.formId,
             out_trade_no: new Date().getTime(),
             trading_models_id: e.detail.target.dataset.id.split('+')[0],
-            // money: Number(e.detail.target.dataset.id.split('+')[1])  ,
-            money: 0.01,
+            money: Number(e.detail.target.dataset.id.split('+')[1])  ,
+            // money: 0.01,
             user_type: e.detail.target.dataset.pay_type
           }
 

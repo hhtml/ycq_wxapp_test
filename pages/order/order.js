@@ -146,8 +146,8 @@ Page({
       title: '加载中',
     })
     var $this = this;
-    // var money = e.target.id.split('+')[0]
-    var money = 0.01;
+    var money = e.target.id.split('+')[0]
+    // var money = 0.01;
     var store_id = e.target.id.split('+')[1]
     var payInfo = {
       formId: e.detail.formId,

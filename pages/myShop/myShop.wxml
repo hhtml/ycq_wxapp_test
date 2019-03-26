@@ -42,7 +42,7 @@
       <text>店铺介绍</text>
     </view>
     <view class='store_des-wrap'>
-      <view class="store_des1" wx:if="{{!store_description}}">{{store_description}}</view>
+      <view class="store_des1" wx:if="{{store_description}}">{{store_description}}</view>
       <view wx:else class="nonMes">暂无信息</view>
     </view>
   </view>
@@ -52,6 +52,7 @@
       <text>车型列表</text>
     </view>
   </view>
+
   <!-- <view class='detailTitle'>
     <view class="detailTitleItem {{active_tab=='店铺介绍' ?' detailActiveItem':''}} " bindtap="change_tab" data-title="店铺介绍">
       <text>店铺介绍</text>
@@ -62,7 +63,7 @@
       <text></text>
     </view>
   </view> -->
- <!--店铺介绍-->
+
   <!--店铺特色-->
   <!-- <view class="detailCont">
     <view class="detailContItem" wx:if="{{active_tab=='店铺介绍'}}">
@@ -70,7 +71,7 @@
       <text wx:else class="nonMes">暂无信息</text>
     </view>
     </view> -->
-    <!--.店铺特色o/-->
+
     <!--车型列表-->
     <view class="detailContItem" wx:if="{{active_tab=='车型列表'}}">
       <view class="carInfoList1" wx:if="{{carInfoList.length != 0}}">
