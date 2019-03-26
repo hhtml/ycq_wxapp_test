@@ -1,5 +1,4 @@
 //app.js
-var $http = require('./utils/http.js');
 App({
   onLaunch: function (options) {
     // 展示本地存储能力
